@@ -1,5 +1,7 @@
-import os, urllib.request, tempfile, zipfile, libWiiPy, shutil, json
+import os, urllib.request, tempfile, zipfile, libWiiPy, shutil, json, certifi, ssl
 from .enums import *
+
+context = ssl.create_default_context(cafile=certifi.where())
 
 patcher_url = "https://patcher.wiilink24.com"
 temp_dir = os.path.join(tempfile.gettempdir(), "WiiLinkPatcher")
@@ -23,7 +25,7 @@ def connection_test():
                        "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36")
 
     try:
-        patcher_response = urllib.request.urlopen(patcher_request).read()
+        patcher_response = urllib.request.urlopen(patcher_request, context=context).read()
     except Exception as e:
         print(f"Connection test failed! {e}")
         return False
@@ -40,7 +42,7 @@ Received: {patcher_response}""")
     nus_request.add_header("User-Agent", "wii libnup/1.0")
 
     try:
-        nus_response = urllib.request.urlopen(nus_request).read()
+        nus_response = urllib.request.urlopen(nus_request, context=context).read()
     except Exception as e:
         print(f"Connection test failed! {e}")
         return False
@@ -85,7 +87,7 @@ def download_file(url: str, destination: str = None):
     request.add_header("User-Agent",
                        "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36")
     try:
-        file = urllib.request.urlopen(request).read()
+        file = urllib.request.urlopen(request, context=context).read()
         if destination is not None:
             open(destination, "wb").write(file)
         else:
