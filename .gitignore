@@ -1,0 +1,9 @@
+WiiLink/
+*.bin
+*.qm
+WiiLinkPatcherGUI.build/
+WiiLinkPatcherGUI.dist/
+WiiLinkPatcherGUI.onefile-build/
+.venv/
+__pycache__/
+.idea/

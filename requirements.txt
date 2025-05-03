@@ -1,0 +1,5 @@
+libWiiPy
+PySide6
+tomlkit
+nuitka
+bsdiff4

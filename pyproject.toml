@@ -1,0 +1,11 @@
+[project]
+name = "WiiLinkPatcherGUI"
+
+[tool.pyside6-project]
+files = [
+    "WiiLinkPatcherGUI.py",
+    "./setup/express.py",
+    "./setup/custom.py",
+    "./setup/extras.py",
+    # Example language file: "./translations/translation_XX.ts"
+]
