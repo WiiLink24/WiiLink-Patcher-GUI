@@ -55,9 +55,9 @@ def patch_channel(channel_name: str, channel_title: str, title_id: str,
                 output_wad = os.path.join("WiiLink", "WAD", f"{channel_title} (WiiLink).wad")
         case ChannelTypes.WFC:
             if region is not None:
-                output_wad = os.path.join("WiiLink", "WAD", f"{channel_title} [{region.name}] ({wfc_network}).wad")
+                output_wad = os.path.join("WiiLink", "WAD", f"{channel_title} [{region.name}] ({wfc_network.name}).wad")
             else:
-                output_wad = os.path.join("WiiLink", "WAD", f"{channel_title} ({wfc_network}).wad")
+                output_wad = os.path.join("WiiLink", "WAD", f"{channel_title} ({wfc_network.name}).wad")
         case _:
             output_wad = os.path.join("WiiLink", "WAD", f"{channel_title}.wad")
 
@@ -367,4 +367,4 @@ def wiispeak_patch(region: Regions, network: WFCNetworks):
 
     channel_id = title_ids[region]
 
-    patch_channel("ws", "Wii Speak Channel", channel_id, patches, ChannelTypes.WFC, wfc_network=network)
+    patch_channel("ws", "Wii Speak Channel", channel_id, patches, ChannelTypes.WFC, region=region, wfc_network=network)
