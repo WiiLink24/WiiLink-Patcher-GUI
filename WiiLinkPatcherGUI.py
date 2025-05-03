@@ -271,7 +271,7 @@ def main():
     language = QLocale.languageToCode(QLocale.system().language())
     supported_languages = download_translation_dict()
 
-    if not supported_languages:
+    if supported_languages is False:
         popup = QMessageBox()
         popup.setWindowTitle("WiiLink Patcher")
         popup.setWindowIcon(icon)
@@ -279,8 +279,8 @@ def main():
         popup.setIcon(QMessageBox.Icon.Warning)
         popup.exec()
     else:
-        if language in supported_languages.keys():
-            if not download_translation(language):
+        if language in supported_languages:
+            if download_translation(language) is False:
                 popup = QMessageBox()
                 popup.setWindowTitle("WiiLink Patcher")
                 popup.setWindowIcon(icon)
