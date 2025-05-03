@@ -185,7 +185,6 @@ class PatchingComplete(QWizardPage):
 
         match setup_type:
             case SetupTypes.Extras:
-                print(ExtraPatchingPage.platform)
                 if ExtraPatchingPage.platform != Platforms.Dolphin:
                     open_guide = QPushButton(self.tr("Open the WAD installation guide in your web browser"))
                     self.layout.addWidget(open_guide)
