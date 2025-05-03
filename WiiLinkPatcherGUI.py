@@ -34,7 +34,7 @@ from setup.express import ExpressRegion, ExpressRegionalChannels, ExpressRegiona
     ExpressRegionalChannelLanguage, ExpressDemaeConfiguration, ExpressPlatformConfiguration, ExpressPatchingPage
 from setup.extras import ExtrasSystemChannelRestorer, MinimalExtraChannels, FullExtraChannels, \
     ExtrasPlatformConfiguration, ExtraPatchingPage
-from setup.download import connection_test
+from setup.download import connection_test, download_translation_dict, download_translation
 
 patcher_url = "https://patcher.wiilink24.com"
 temp_dir = pathlib.Path(tempfile.gettempdir()).joinpath("WiiLinkPatcher")
@@ -267,6 +267,26 @@ def main():
         popup.setIcon(QMessageBox.Icon.Critical)
         popup.exec()
         exit()
+    
+    language = QLocale.languageToCode(QLocale.system().language())
+    supported_languages = download_translation_dict()
+
+    if not supported_languages:
+        popup = QMessageBox()
+        popup.setWindowTitle("WiiLink Patcher")
+        popup.setWindowIcon(icon)
+        popup.setText("The patcher failed to download the list of languages. Therefore, it will run in English.")
+        popup.setIcon(QMessageBox.Icon.Warning)
+        popup.exec()
+    else:
+        if language in supported_languages.keys():
+            if not download_translation(language):
+                popup = QMessageBox()
+                popup.setWindowTitle("WiiLink Patcher")
+                popup.setWindowIcon(icon)
+                popup.setText("The patcher failed to download your language. Therefore, it will run in English.")
+                popup.setIcon(QMessageBox.Icon.Warning)
+                popup.exec()
 
     path = QLibraryInfo.path(QLibraryInfo.LibraryPath.TranslationsPath)
     translator = QTranslator(app)

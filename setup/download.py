@@ -1,4 +1,4 @@
-import os, urllib.request, tempfile, zipfile, libWiiPy, shutil
+import os, urllib.request, tempfile, zipfile, libWiiPy, shutil, json
 from .enums import *
 
 patcher_url = "https://patcher.wiilink24.com"
@@ -46,6 +46,37 @@ Received: {patcher_response}""")
         return False
 
     return True
+
+
+def download_translation(language: str):
+    """Downloads a specified translation file from the server, ready to be loaded into the app."""
+    translation_url = f"{patcher_url}/qt-lang/translation_{language}.qm"
+
+    translation_dir = os.path.join(os.path.dirname(__file__), "translations")
+    os.makedirs(translation_dir, exist_ok=True)
+
+    try:
+        download_file(translation_url, translation_dir)
+    except Exception as e:
+        print(e)
+        return False
+    
+    return True
+
+
+def download_translation_dict():
+    """Downloads and returns a dictionary of available languages from the server."""
+    url = f"{patcher_url}/qt-lang/languages.json"
+
+    try:
+        raw_json = download_file(url)
+    except Exception as e:
+        print(e)
+        return False
+
+    translation_dict = json.loads(raw_json)
+
+    return translation_dict
 
 
 def download_file(url: str, destination: str = None):
