@@ -62,16 +62,13 @@ def patch_channel(channel_name: str, channel_title: str, title_id: str,
             output_wad = os.path.join("WiiLink", "WAD", f"{channel_title}.wad")
 
     if channel_type != ChannelTypes.Regional:
-        files = {
+        additional_files.update({
             ".cert": os.path.join(title_directory, f"{title_id}.cert")
-        }
+        })
 
-        if additional_files is not None:
-            files.update(additional_files)
-
-        for file, destination in files.items():
-            url = f"{file_url}{file}"
-            download_file(url, destination)
+    for file, destination in additional_files.items():
+        url = f"{file_url}{file}"
+        download_file(url, destination)
 
     title = libWiiPy.title.Title()
 
