@@ -12,7 +12,6 @@
 
 # These are standard options that are needed on all platforms.
 # nuitka-project: --plugin-enable=pyside6
-# nuitka-project: --include-data-dir={MAIN_DIRECTORY}/translations=translations
 # nuitka-project: --include-data-dir={MAIN_DIRECTORY}/assets=assets
 
 import os
@@ -26,7 +25,7 @@ import webbrowser
 from PySide6.QtCore import QTranslator, QLocale, QLibraryInfo, QTimer
 from PySide6.QtGui import QIcon
 from PySide6.QtWidgets import QWizard, QApplication, QWizardPage, QVBoxLayout, QRadioButton, QLabel, QButtonGroup, \
-    QPushButton
+    QPushButton, QMessageBox
 
 from setup.custom import CustomWiiConnect24Channels, CustomRegionalChannels, CustomPlatformConfiguration, \
     CustomRegionConfiguration, CustomPatchingPage
@@ -35,6 +34,7 @@ from setup.express import ExpressRegion, ExpressRegionalChannels, ExpressRegiona
     ExpressRegionalChannelLanguage, ExpressDemaeConfiguration, ExpressPlatformConfiguration, ExpressPatchingPage
 from setup.extras import ExtrasSystemChannelRestorer, MinimalExtraChannels, FullExtraChannels, \
     ExtrasPlatformConfiguration, ExtraPatchingPage
+from setup.download import connection_test
 
 patcher_url = "https://patcher.wiilink24.com"
 temp_dir = pathlib.Path(tempfile.gettempdir()).joinpath("WiiLinkPatcher")
@@ -246,16 +246,9 @@ def main():
     if temp_dir.exists():
         shutil.rmtree(temp_dir)
 
-    app = QApplication(sys.argv)
+    connection = connection_test()
 
-    path = QLibraryInfo.path(QLibraryInfo.LibraryPath.TranslationsPath)
-    translator = QTranslator(app)
-    if translator.load(QLocale.system(), 'qtbase', '_', path):
-        app.installTranslator(translator)
-    translator = QTranslator(app)
-    path = os.path.join(os.path.dirname(__file__), "translations")
-    if translator.load(QLocale.system(), 'translation', '_', path):
-        app.installTranslator(translator)
+    app = QApplication(sys.argv)
 
     wizard = QWizard()
     wizard.setWindowTitle(app.tr("WiiLink Patcher"))
@@ -265,6 +258,24 @@ def main():
     logo = icon.pixmap(64, 64)
     wizard.setPixmap(QWizard.WizardPixmap.LogoPixmap, logo)
     app.setWindowIcon(icon)
+
+    if not connection:
+        popup = QMessageBox()
+        popup.setWindowTitle("WiiLink Patcher")
+        popup.setWindowIcon(icon)
+        popup.setText("The patcher failed to connect to the internet, and thus cannot continue.")
+        popup.setIcon(QMessageBox.Icon.Critical)
+        popup.exec()
+        exit()
+
+    path = QLibraryInfo.path(QLibraryInfo.LibraryPath.TranslationsPath)
+    translator = QTranslator(app)
+    if translator.load(QLocale.system(), 'qtbase', '_', path):
+        app.installTranslator(translator)
+    translator = QTranslator(app)
+    path = os.path.join(os.path.dirname(__file__), "translations")
+    if translator.load(QLocale.system(), 'translation', '_', path):
+        app.installTranslator(translator)
 
     wizard.setPage(0, IntroPage())
     wizard.setPage(1, MainMenu())

@@ -13,14 +13,47 @@ https://github.com/NinjaCheetah/WiiPy
 """
 
 
+def connection_test():
+    """Function to ensure the patcher is able to connect to the patcher server and NUS"""
+    patcher_test = f"{patcher_url}/connectiontest.txt"
+    patcher_expected = b"If the patcher can read this, the connection test succeeds.\n"
+
+    patcher_request = urllib.request.Request(patcher_test)
+    patcher_request.add_header("User-Agent",
+                       "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36")
+
+    try:
+        patcher_response = urllib.request.urlopen(patcher_request).read()
+    except Exception as e:
+        print(f"Connection test failed! {e}")
+        return False
+
+    if patcher_response != patcher_expected:
+        print(f"""Unexpected response!
+Expected: {patcher_expected}
+Received: {patcher_response}""")
+        return False
+
+    nus_test = ("http://nus.cdn.shop.wii.com/ccs/download/000100014841564a/tmd")
+
+    nus_request = urllib.request.Request(nus_test)
+    nus_request.add_header("User-Agent", "wii libnup/1.0")
+
+    try:
+        nus_response = urllib.request.urlopen(nus_request).read()
+    except Exception as e:
+        print(f"Connection test failed! {e}")
+        return False
+
+    return True
+
+
 def download_file(url: str, destination: str = None):
     """Simple function to download files from a specified URL to a specified location"""
     request = urllib.request.Request(url)
     request.add_header("User-Agent",
                        "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36")
     try:
-        #with urllib.request.urlopen(request) as response, open(destination, "wb") as output:
-        #output.write(response.read())
         file = urllib.request.urlopen(request).read()
         if destination is not None:
             open(destination, "wb").write(file)
