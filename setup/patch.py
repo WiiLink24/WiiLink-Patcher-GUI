@@ -8,21 +8,11 @@ temp_dir = os.path.join(tempfile.gettempdir(), "WiiLinkPatcher")
 wad_directory = os.path.join("WiiLink", "WAD")
 
 title_directory = os.path.join(temp_dir, "Unpack")
-patched_temp_directory = os.path.join(temp_dir, "Patched_Apps")
-
-"""
-Using code from "commands/title/nus.py" from WiiPy by NinjaCheetah
-https://github.com/NinjaCheetah/WiiPy
-"""
 
 
 def apply_bsdiff_patches(channel_name: str, patch_files: dict[str, int], title: libWiiPy.title.Title):
     """Download and apply bsdiff patches to the app files specified"""
     patch_directory = os.path.join(temp_dir, "Patches")
-
-    # Download patches
-    #for patch in patch_files.keys():
-        #download_patch(channel_name.lower(), patch)
 
     # Apply patches
     for patch, index in patch_files.items():
@@ -51,7 +41,6 @@ def patch_channel(channel_name: str, channel_title: str, title_id: str,
 
     os.makedirs(wad_directory, exist_ok=True)
     os.makedirs(title_directory, exist_ok=True)
-    os.makedirs(patched_temp_directory, exist_ok=True)
 
     match channel_type:
         case ChannelTypes.WiiConnect24:
