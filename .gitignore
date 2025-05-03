@@ -1,5 +1,7 @@
 WiiLink/
 *.bin
+*.exe
+*.app
 *.qm
 WiiLinkPatcherGUI.build/
 WiiLinkPatcherGUI.dist/
