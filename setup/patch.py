@@ -355,7 +355,7 @@ def kirbytv_patch():
 def wiispeak_patch(region: Regions, network: WFCNetworks):
     """Patch the Wii Speak Channel for the specified region and WFC network"""
     patches = {
-        f"WiiSpeak_1_{region}.bsdiff": 1
+        f"WiiSpeak_1_{region.name}.bsdiff": 1
     }
 
     title_ids = {
