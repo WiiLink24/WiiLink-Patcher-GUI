@@ -331,8 +331,8 @@ class ExtraPatchingLogic(QObject):
         patch_functions = {
             "download": lambda: download_osc_app("yawmME"),
             "ws_us": lambda: wiispeak_patch(Regions.USA, WFCNetworks.Wiimmfi),
-            "ws_eu": wiispeak_patch(Regions.PAL, WFCNetworks.Wiimmfi),
-            "ws_jp": wiispeak_patch(Regions.Japan, WFCNetworks.Wiimmfi),
+            "ws_eu": lambda: wiispeak_patch(Regions.PAL, WFCNetworks.Wiimmfi),
+            "ws_jp": lambda: wiispeak_patch(Regions.Japan, WFCNetworks.Wiimmfi),
             "tatc_eu": lambda: download_todaytomorrow(Regions.PAL),
             "tatc_jp": lambda: download_todaytomorrow(Regions.Japan),
             "ic_us": lambda: download_channel("Internet Channel", "0001000148414445", 1024, Regions.USA),
