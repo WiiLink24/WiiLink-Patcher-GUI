@@ -3,3 +3,4 @@ PySide6
 tomlkit
 nuitka
 bsdiff4
+imageio
