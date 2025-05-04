@@ -25,8 +25,8 @@ import webbrowser
 
 from PySide6.QtCore import QTranslator, QLocale, QLibraryInfo, QTimer
 from PySide6.QtGui import QIcon
-from PySide6.QtWidgets import QWizard, QApplication, QWizardPage, QVBoxLayout, QRadioButton, QLabel, QButtonGroup, \
-    QPushButton, QMessageBox
+from PySide6.QtWidgets import QWizard, QApplication, QWizardPage, QVBoxLayout, QRadioButton, QLabel, \
+    QPushButton, QMessageBox, QWidget
 
 from setup.custom import CustomWiiConnect24Channels, CustomRegionalChannels, CustomPlatformConfiguration, \
     CustomRegionConfiguration, CustomPatchingPage
@@ -70,39 +70,36 @@ class MainMenu(QWizardPage):
         self.setSubTitle(self.tr("We recommend choosing 'Express Setup' for first-time users."))
 
         self.options = {
-            "express_setup": self.tr("Express Setup (Recommended)"),
-            "custom_setup": self.tr("Custom Setup (Advanced)"),
-            "extra_channels": self.tr("Extra Channels (Optional)"),
-            "credits": self.tr("Credits")
+            "express_setup": QRadioButton(self.tr("Express Setup (Recommended)")),
+            "custom_setup": QRadioButton(self.tr("Custom Setup (Advanced)")),
+            "extra_channels": QRadioButton(self.tr("Extra Channels (Optional)")),
+            "credits": QPushButton(self.tr("Credits"))
         }
-
-        # Dictionary to hold buttons
-        self.buttons = {}
 
         self.layout = QVBoxLayout()
 
         # Add checkboxes to layout
-        for key, label in self.options.items():
-            button = QRadioButton(label)
+        for button in self.options.values():
             self.layout.addWidget(button)
-            self.buttons[key] = button
             button.clicked.connect(self.completeChanged)
             button.clicked.connect(self.set_setup_type)
+        
+        self.options["credits"].clicked.connect(self.show_credits)
 
         self.setLayout(self.layout)
 
     def set_setup_type(self):
         global setup_type
-        if self.buttons["express_setup"].isChecked():
+        if self.options["express_setup"].isChecked():
             setup_type = SetupTypes.Express
-        elif self.buttons["custom_setup"].isChecked():
+        elif self.options["custom_setup"].isChecked():
             setup_type = SetupTypes.Custom
-        elif self.buttons["extra_channels"].isChecked():
+        elif self.options["extra_channels"].isChecked():
             setup_type = SetupTypes.Extras
 
     def isComplete(self):
         """Enable Next button only if a radio button is selected"""
-        for button in self.buttons.values():
+        for button in self.options.values():
             if button.isChecked():
                 return True
 
@@ -110,47 +107,39 @@ class MainMenu(QWizardPage):
 
     def nextId(self):
         """Determine which page to navigate to based on radio button selection"""
-        if self.buttons["express_setup"].isChecked():
+        if self.options["express_setup"].isChecked():
             return 100  # Start Express Setup
-        elif self.buttons["custom_setup"].isChecked():
+        elif self.options["custom_setup"].isChecked():
             return 200
-        elif self.buttons["extra_channels"].isChecked():
+        elif self.options["extra_channels"].isChecked():
             return 300
-        elif self.buttons["credits"].isChecked():
-            return 2  # Credits screen
         return 0  # Stay on the same page if nothing is selected
+    
+    def show_credits(self):
+        self.credits = Credits()
+        self.credits.show()
 
 
-class CreditsPage(QWizardPage):
+class Credits(QWidget):
     def __init__(self, parent=None):
         super().__init__(parent)
-        self.setTitle(self.tr("Credits"))
-        self.setSubTitle(self.tr("The people who make the WiiLink Patcher possible!"))
-
-        self.sketch = QLabel(self.tr("<a href=https://noahpistilli.ca><b>Sketch</b></a> - WiiLink Project Lead"))
-        self.isla = QLabel(self.tr("<a href=https://islawalker.uk><b>Isla</b></a> - WiiLink Patcher Developer"))
-        self.ninjacheetah = QLabel(self.tr("<a href=https://ninjacheetah.dev><b>NinjaCheetah</b></a> - libWiiPy Developer"))
+        self.setWindowTitle(self.tr("WiiLink Patcher - Credits"))
 
         self.people = {
-            "sketch": self.tr("<a href=https://noahpistilli.ca><b>Sketch</b></a> - WiiLink Project Lead"),
-            "isla": self.tr("<a href=https://islawalker.uk><b>Isla</b></a> - WiiLink Patcher Developer"),
-            "ninjacheetah": self.tr("<a href=https://ninjacheetah.dev><b>NinjaCheetah</b></a> - libWiiPy Developer")
+            "sketch": QLabel(self.tr("<a href=https://noahpistilli.ca><b>Sketch</b></a> - WiiLink Project Lead")),
+            "isla": QLabel(self.tr("<a href=https://islawalker.uk><b>Isla</b></a> - WiiLink Patcher GUI Developer")),
+            "pablo": QLabel(self.tr("<a href=https://github.com/pabloscorner><b>PablosCorner</b></a> - WiiLink Patcher CLI Developer")),
+            "alex": QLabel(self.tr("<a href=https://github.com/humanoidear><b>Alex</b></a> - WiiLink Design Lead")),
+            "ninjacheetah": QLabel(self.tr("<a href=https://ninjacheetah.dev><b>NinjaCheetah</b></a> - libWiiPy Developer"))
         }
-
-        self.credit_dict = {}
 
         self.layout = QVBoxLayout()
 
-        for key, label in self.people.items():
-            credit = QLabel(label)
+        for credit in self.people.values():
             self.layout.addWidget(credit)
             credit.setOpenExternalLinks(True)
-            self.credit_dict[key] = credit
 
         self.setLayout(self.layout)
-
-    def isComplete(self):
-        return False  # Prevent Finish button from appearing on this page
 
 
 class PatchingComplete(QWizardPage):
@@ -299,7 +288,6 @@ def main():
 
     wizard.setPage(0, IntroPage())
     wizard.setPage(1, MainMenu())
-    wizard.setPage(2, CreditsPage())
 
     wizard.setPage(100, ExpressRegion())
     wizard.setPage(101, ExpressRegionalChannels())
