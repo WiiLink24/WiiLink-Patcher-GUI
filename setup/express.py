@@ -1,8 +1,7 @@
-from PySide6.QtCore import QTimer, QObject, Signal, QThread
-from PySide6.QtWidgets import QWizardPage, QLabel, QVBoxLayout, QRadioButton, QButtonGroup, QMessageBox, QProgressBar, QWizard
+from PySide6.QtCore import QTimer, QThread
+from PySide6.QtWidgets import QWizardPage, QLabel, QVBoxLayout, QRadioButton, QButtonGroup, QMessageBox, QProgressBar, QWizard, QWidget
 
-from .download import download_osc_app, download_spd
-from .patch import nc_patch, forecast_patch, news_patch, evc_patch, cmoc_patch, wiiroom_patch,digicam_patch, demae_patch, kirbytv_patch
+from .patch import PatchingWorker
 from .enums import *
 
 
@@ -330,21 +329,78 @@ class ExpressPatchingPage(QWizardPage):
 
         # Start thread to perform patching
         self.logic_thread = QThread()
-        self.logic_worker = ExpressPatchingLogic()
+        self.logic_worker = PatchingWorker()
 
         # Setup variables
         self.logic_worker.platform = self.platform
         self.logic_worker.region = self.region
         self.logic_worker.regional_channels = self.regional_channels
-        self.logic_worker.wii_room_language = self.wii_room_language
-        self.logic_worker.demae_config = self.demae_config
-        self.logic_worker.translated = self.translated
+        self.logic_worker.setup_type = SetupTypes.Express
+
+        match self.region:
+            case Regions.USA:
+                short_region = "us"
+            case Regions.PAL:
+                short_region = "eu"
+            case Regions.Japan:
+                short_region = "jp"
+        
+        match self.wii_room_language:
+            case Languages.Japan:
+                wiiroom_lang = "jp"
+            case Languages.English:
+                wiiroom_lang = "en"
+            case Languages.Spanish:
+                wiiroom_lang = "es"
+            case Languages.French:
+                wiiroom_lang = "fr"
+            case Languages.German:
+                wiiroom_lang = "de"
+            case Languages.Italian:
+                wiiroom_lang = "it"
+            case Languages.Dutch:
+                wiiroom_lang = "nl"
+            case Languages.Portuguese:
+                wiiroom_lang = "ptbr"
+            case Languages.Russian:
+                wiiroom_lang = "ru"
+        
+        if self.translated:
+            regional_lang = "en"
+        else:
+            regional_lang = "jp"
+        
+        match self.demae_config:
+            case DemaeConfigs.Standard:
+                demae = f"food_{regional_lang}"
+            case DemaeConfigs.Dominos:
+                demae = "dominos"
+        
+        selected_channels = [
+            "download",
+            f"nc_{short_region}",
+            f"forecast_{short_region}",
+            f"news_{short_region}",
+            f"evc_{short_region}",
+            f"cmoc_{short_region}"
+        ]
+
+        if self.regional_channels:
+            selected_channels.extend([
+                f"wiiroom_{wiiroom_lang}",
+                f"digicam_{regional_lang}",
+                demae,
+                "ktv"
+            ])
+        
+        self.logic_worker.selected_channels = selected_channels
 
         self.logic_worker.moveToThread(self.logic_thread)
         self.logic_thread.started.connect(self.logic_worker.patching_functions)
 
         self.logic_worker.broadcast_percentage.connect(self.set_percentage)
         self.logic_worker.broadcast_status.connect(self.set_status)
+        self.logic_worker.error.connect(self.handle_error)
 
         self.logic_worker.finished.connect(self.logic_finished)
         self.logic_worker.finished.connect(self.logic_thread.quit)
@@ -386,87 +442,12 @@ class ExpressPatchingPage(QWizardPage):
     def update_status(self):
         """Updates status above progress bar"""
         self.label.setText(self.status)
-
-
-class ExpressPatchingLogic(QObject):
-    platform: Platforms
-    region: Regions
-    regional_channels: bool
-    wii_room_language: Languages
-    demae_config: DemaeConfigs
-    translated: bool
-    is_patching_complete: bool
-    finished = Signal(bool)
-    broadcast_percentage = Signal(int)
-    broadcast_status = Signal(str)
-
-    def patching_functions(self):
-        tasks = ["download", "nc", "forecast", "news", "evc", "cmoc"]
-        if self.regional_channels:
-            tasks.extend(["wii_room", "digicam", "demae", "ktv"])
-
-        percentage_increment = 100 / len(tasks)
-
-        percentage = 0
-
-        self.download_supporting_apps()
-        percentage += percentage_increment
-        self.broadcast_percentage.emit(round(percentage))
-
-        self.broadcast_status.emit(self.tr("Patching Nintendo Channel..."))
-        nc_patch(self.region)
-        percentage += percentage_increment
-        self.broadcast_percentage.emit(round(percentage))
-
-        self.broadcast_status.emit(self.tr("Patching Forecast Channel..."))
-        forecast_patch(self.region, self.platform)
-        percentage += percentage_increment
-        self.broadcast_percentage.emit(round(percentage))
-
-        self.broadcast_status.emit(self.tr("Patching News Channel..."))
-        news_patch(self.region)
-        percentage += percentage_increment
-        self.broadcast_percentage.emit(round(percentage))
-
-        self.broadcast_status.emit(self.tr("Patching Everybody Votes Channel..."))
-        evc_patch(self.region)
-        percentage += percentage_increment
-        self.broadcast_percentage.emit(round(percentage))
-
-        self.broadcast_status.emit(self.tr("Patching Check Mii Out Channel..."))
-        cmoc_patch(self.region)
-        percentage += percentage_increment
-        self.broadcast_percentage.emit(round(percentage))
-
-        if self.regional_channels:
-            self.broadcast_status.emit(self.tr("Patching Wii Room..."))
-            wiiroom_patch(self.wii_room_language)
-            percentage += percentage_increment
-            self.broadcast_percentage.emit(round(percentage))
-
-            self.broadcast_status.emit(self.tr("Patching Photo Prints Channel..."))
-            digicam_patch(self.translated)
-            percentage += percentage_increment
-            self.broadcast_percentage.emit(round(percentage))
-
-            self.broadcast_status.emit(self.tr("Patching Food Channel..."))
-            demae_patch(self.translated, self.demae_config, self.region)
-            percentage += percentage_increment
-            self.broadcast_percentage.emit(round(percentage))
-
-            self.broadcast_status.emit(self.tr("Patching Kirby TV Channel..."))
-            kirbytv_patch()
-            percentage += percentage_increment
-            self.broadcast_percentage.emit(round(percentage))
-
-        self.finished.emit(True)
-
-    def download_supporting_apps(self):
-        if self.platform != Platforms.Dolphin:
-            download_osc_app("yawmME")
-            download_osc_app("sntp")
-
-        if self.regional_channels:
-            download_spd()
-
-        download_osc_app("Mail-Patcher")
+    
+    def handle_error(self, error: str):
+        """Display errors thrown from the patching logic to the user"""
+        QMessageBox.warning(QWidget(),
+                             "WiiLink Patcher - Warning",
+                             f"""An exception was encountered while patching.
+Exception: '{error}'
+Please report this issue in the WiiLink Discord Server (discord.gg/wiilink)."""
+        )

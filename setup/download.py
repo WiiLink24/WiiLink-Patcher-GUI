@@ -82,7 +82,7 @@ def download_translation_dict():
 
 
 def download_file(url: str, destination: str = None):
-    """Simple function to download files from a specified URL to a specified location"""
+    """Simple function to download files from a specified URL to a specified location, or to return the contents of the URL if a location is not specified."""
     request = urllib.request.Request(url)
     request.add_header("User-Agent",
                        "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36")
@@ -98,7 +98,7 @@ File URL: {url}""")
 
 
 def download_osc_app(app_name: str):
-    """Downloads an app from the OSC to WiiLink/apps."""
+    """Downloads an app from the OSC to "WiiLink/apps"."""
     app_path = os.path.join("WiiLink", "apps", app_name)
 
     os.makedirs(app_path, exist_ok=True)
@@ -203,10 +203,8 @@ def download_channel(channel_title: str, title_id: str, version: int = None, reg
         try:
             ticket = libWiiPy.title.download_ticket(title_id)
         except ValueError:
-            # If libWiiPy returns an error, then no ticket is available. Log this, and disable options requiring a
-            # ticket so that they aren't attempted later.
-            print("  - No Ticket is available!")
-            return
+            # If libWiiPy returns an error, then no ticket is available.
+            raise ValueError("No Ticket is available!")
     else:
         ticket = open(os.path.join(title_directory, "tik"), "rb").read()
 

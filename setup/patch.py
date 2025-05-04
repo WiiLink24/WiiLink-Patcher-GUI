@@ -1,7 +1,10 @@
-import libWiiPy, os, tempfile, shutil, bsdiff4
+import libWiiPy, os, tempfile, shutil, bsdiff4, sys
+from PySide6.QtCore import QObject, Signal
+from PySide6.QtWidgets import QMessageBox, QWidget
+
 from .enums import *
 from .download import download_patch, download_file, download_agc, download_osc_app, download_title_contents, \
-    download_channel
+    download_channel, download_spd, download_todaytomorrow
 
 patcher_url = "https://patcher.wiilink24.com"
 temp_dir = os.path.join(tempfile.gettempdir(), "WiiLinkPatcher")
@@ -368,3 +371,134 @@ def wiispeak_patch(region: Regions, network: WFCNetworks):
     channel_id = title_ids[region]
 
     patch_channel("ws", "Wii Speak Channel", channel_id, patches, ChannelTypes.WFC, region=region, wfc_network=network)
+
+class PatchingWorker(QObject):
+    platform: Platforms
+    region: Regions
+    selected_channels: list
+    regional_channels: bool = False
+    setup_type: SetupTypes
+    is_patching_complete: bool
+    finished = Signal(bool)
+    broadcast_percentage = Signal(int)
+    broadcast_status = Signal(str)
+    error = Signal(str)
+
+    def patching_functions(self):
+
+        percentage_increment = 100 / len(self.selected_channels)
+
+        percentage = 0
+
+        patch_functions = {
+            "download": lambda: self.download_supporting_apps(),
+            "forecast_us": lambda: forecast_patch(Regions.USA, self.platform),
+            "forecast_eu": lambda: forecast_patch(Regions.PAL, self.platform),
+            "forecast_jp": lambda: forecast_patch(Regions.Japan, self.platform),
+            "news_us": lambda: news_patch(Regions.USA),
+            "news_eu": lambda: news_patch(Regions.PAL),
+            "news_jp": lambda: news_patch(Regions.Japan),
+            "nc_us": lambda: nc_patch(Regions.USA),
+            "nc_eu": lambda: nc_patch(Regions.PAL),
+            "nc_jp": lambda: nc_patch(Regions.Japan),
+            "evc_us": lambda: evc_patch(Regions.USA),
+            "evc_eu": lambda: evc_patch(Regions.PAL),
+            "evc_jp": lambda: evc_patch(Regions.Japan),
+            "cmoc_us": lambda: cmoc_patch(Regions.USA),
+            "cmoc_eu": lambda: cmoc_patch(Regions.PAL),
+            "cmoc_jp": lambda: cmoc_patch(Regions.Japan),
+            "wiiroom_en": lambda: wiiroom_patch(Languages.English),
+            "wiiroom_es": lambda: wiiroom_patch(Languages.Spanish),
+            "wiiroom_fr": lambda: wiiroom_patch(Languages.French),
+            "wiiroom_de": lambda: wiiroom_patch(Languages.German),
+            "wiiroom_it": lambda: wiiroom_patch(Languages.Italian),
+            "wiiroom_nl": lambda: wiiroom_patch(Languages.Dutch),
+            "wiiroom_ptbr": lambda: wiiroom_patch(Languages.Portuguese),
+            "wiiroom_ru": lambda: wiiroom_patch(Languages.Russian),
+            "wiiroom_jp": lambda: wiiroom_patch(Languages.Japan),
+            "digicam_en": lambda: digicam_patch(True),
+            "digicam_jp": lambda: digicam_patch(False),
+            "food_en": lambda: demae_patch(True, DemaeConfigs.Standard, self.region),
+            "food_jp": lambda: demae_patch(False, DemaeConfigs.Standard, self.region),
+            "dominos": lambda: demae_patch(True, DemaeConfigs.Dominos, self.region),
+            "ktv": lambda: kirbytv_patch(),
+            "ws_us": lambda: wiispeak_patch(Regions.USA, WFCNetworks.Wiimmfi),
+            "ws_eu": lambda: wiispeak_patch(Regions.PAL, WFCNetworks.Wiimmfi),
+            "ws_jp": lambda: wiispeak_patch(Regions.Japan, WFCNetworks.Wiimmfi),
+            "tatc_eu": lambda: download_todaytomorrow(Regions.PAL),
+            "tatc_jp": lambda: download_todaytomorrow(Regions.Japan),
+            "ic_us": lambda: download_channel("Internet Channel", "0001000148414445", 1024, Regions.USA),
+            "ic_eu": lambda: download_channel("Internet Channel", "0001000148414450", 1024, Regions.PAL),
+            "ic_jp": lambda: download_channel("Internet Channel", "000100014841444a", 1024, Regions.Japan)
+        }
+
+        patch_status = {
+            "download": self.tr("Downloading files..."),
+            "forecast_us": self.tr("Patching Forecast Channel (USA)..."),
+            "forecast_eu": self.tr("Patching Forecast Channel (PAL)..."),
+            "forecast_jp": self.tr("Patching Forecast Channel (Japan)..."),
+            "news_us": self.tr("Patching News Channel (USA)..."),
+            "news_eu": self.tr("Patching News Channel (PAL)..."),
+            "news_jp": self.tr("Patching News Channel (Japan)..."),
+            "nc_us": self.tr("Patching Nintendo Channel (USA)..."),
+            "nc_eu": self.tr("Patching Nintendo Channel (PAL)..."),
+            "nc_jp": self.tr("Patching Nintendo Channel (Japan)..."),
+            "evc_us": self.tr("Patching Everybody Votes Channel (USA)..."),
+            "evc_eu": self.tr("Patching Everybody Votes Channel (PAL)..."),
+            "evc_jp": self.tr("Patching Everybody Votes Channel (Japan)..."),
+            "cmoc_us": self.tr("Patching Check Mii Out Channel (USA)..."),
+            "cmoc_eu": self.tr("Patching Mii Contest Channel (PAL)..."),
+            "cmoc_jp": self.tr("Patching Mii Contest Channel (Japan)..."),
+            "wiiroom_en": self.tr("Patching Wii Room (English)..."),
+            "wiiroom_es": self.tr("Patching Wii Room (Español)..."),
+            "wiiroom_fr": self.tr("Patching Wii Room (Français)..."),
+            "wiiroom_de": self.tr("Patching Wii Room (Deutsch)..."),
+            "wiiroom_it": self.tr("Patching Wii Room (Italiano)..."),
+            "wiiroom_nl": self.tr("Patching Wii Room (Nederlands)..."),
+            "wiiroom_ptbr": self.tr("Patching Wii Room (Português (Brasil))..."),
+            "wiiroom_ru": self.tr("Patching Wii Room (Русский)..."),
+            "wiiroom_jp": self.tr("Patching Wii Room (Japanese)..."),
+            "digicam_en": self.tr("Patching Photo Prints Channel (English)..."),
+            "digicam_jp": self.tr("Patching Digicam Print Channel (Japanese)..."),
+            "food_en": self.tr("Patching Food Channel (Standard) (English)..."),
+            "food_jp": self.tr("Patching Demae Channel (Standard) (Japanese)..."),
+            "dominos": self.tr("Patching Food Channel (Domino's) (English)..."),
+            "ktv": self.tr("Patching Kirby TV Channel..."),
+            "ws_us": self.tr("Patching Wii Speak Channel (USA)..."),
+            "ws_eu": self.tr("Patching Wii Speak Channel (PAL)..."),
+            "ws_jp": self.tr("Patching Wii Speak Channel (Japan)..."),
+            "tatc_eu": self.tr("Downloading Today and Tomorrow Channel (PAL)..."),
+            "tatc_jp": self.tr("Downloading Today and Tomorrow Channel (Japan)..."),
+            "ic_us": self.tr("Downloading Internet Channel (USA)..."),
+            "ic_eu": self.tr("Downloading Internet Channel (PAL)..."),
+            "ic_jp": self.tr("Downloading Internet Channel (Japan)...")
+        }
+
+        for channel in self.selected_channels:
+            try:
+                self.broadcast_status.emit(patch_status[channel])
+                patch_functions[channel]()
+            except KeyError:
+                print(f"Invalid key: {channel}")
+                self.error.emit(f"Invalid key: {channel}")
+            else:
+                percentage += percentage_increment
+                self.broadcast_percentage.emit(round(percentage))
+
+
+        self.finished.emit(True)
+
+    def download_supporting_apps(self):
+        match self.setup_type:
+            case SetupTypes.Extras:
+                if self.platform != Platforms.Dolphin:
+                    download_osc_app("yawmME")
+            case _:
+                if self.platform != Platforms.Dolphin:
+                    download_osc_app("yawmME")
+                    download_osc_app("sntp")
+
+                if self.regional_channels:
+                    download_spd()
+
+                download_osc_app("Mail-Patcher")

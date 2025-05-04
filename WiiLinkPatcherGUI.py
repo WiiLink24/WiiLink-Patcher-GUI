@@ -249,33 +249,24 @@ def main():
     app.setWindowIcon(icon)
 
     if not connection:
-        popup = QMessageBox()
-        popup.setWindowTitle("WiiLink Patcher")
-        popup.setWindowIcon(icon)
-        popup.setText("The patcher failed to connect to the internet, and thus cannot continue.")
-        popup.setIcon(QMessageBox.Icon.Critical)
-        popup.exec()
-        exit()
+        QMessageBox.critical(QWidget(),
+                             "WiiLink Patcher - Error",
+                             "The patcher failed to connect to the internet, and thus cannot continue.")
+        sys.exit()
     
     language = QLocale.languageToCode(QLocale.system().language())
     supported_languages = download_translation_dict()
 
     if supported_languages is False:
-        popup = QMessageBox()
-        popup.setWindowTitle("WiiLink Patcher")
-        popup.setWindowIcon(icon)
-        popup.setText("The patcher failed to download the list of languages. Therefore, it will run in English.")
-        popup.setIcon(QMessageBox.Icon.Warning)
-        popup.exec()
+        QMessageBox.warning(QWidget(),
+                             "WiiLink Patcher - Warning",
+                             "The patcher failed to download the list of languages. Therefore, it will run in English.")
     else:
         if language in supported_languages:
             if download_translation(language) is False:
-                popup = QMessageBox()
-                popup.setWindowTitle("WiiLink Patcher")
-                popup.setWindowIcon(icon)
-                popup.setText("The patcher failed to download your language. Therefore, it will run in English.")
-                popup.setIcon(QMessageBox.Icon.Warning)
-                popup.exec()
+                QMessageBox.warning(QWidget(),
+                                    "WiiLink Patcher - Warning",
+                                    "The patcher failed to download translations for your language. Therefore, it will run in English")
 
     path = QLibraryInfo.path(QLibraryInfo.LibraryPath.TranslationsPath)
     translator = QTranslator(app)

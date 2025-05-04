@@ -1,8 +1,7 @@
-from PySide6.QtCore import QTimer, QObject, Signal, QThread
-from PySide6.QtWidgets import QWizardPage, QLabel, QVBoxLayout, QRadioButton, QButtonGroup, QProgressBar, QWizard, QCheckBox
+from PySide6.QtCore import QTimer, QThread
+from PySide6.QtWidgets import QWizardPage, QLabel, QVBoxLayout, QRadioButton, QButtonGroup, QProgressBar, QWizard, QCheckBox, QMessageBox, QWidget
 
-from .download import download_osc_app, download_spd
-from .patch import nc_patch, forecast_patch, news_patch, evc_patch, cmoc_patch, wiiroom_patch,digicam_patch, demae_patch, kirbytv_patch
+from .patch import PatchingWorker
 from .enums import *
 
 selected_wc24_channels = []
@@ -244,12 +243,13 @@ class CustomPatchingPage(QWizardPage):
 
         # Start thread to perform patching
         self.logic_thread = QThread()
-        self.logic_worker = CustomPatchingLogic()
+        self.logic_worker = PatchingWorker()
 
     def initializePage(self):
         QTimer.singleShot(0, self.disable_back_button)
 
         # Setup variables
+        self.logic_worker.setup_type = SetupTypes.Custom
         self.logic_worker.platform = self.platform
         self.logic_worker.region = self.region
 
@@ -266,6 +266,7 @@ class CustomPatchingPage(QWizardPage):
 
         self.logic_worker.broadcast_percentage.connect(self.set_percentage)
         self.logic_worker.broadcast_status.connect(self.set_status)
+        self.logic_worker.error.connect(self.handle_error)
 
         self.logic_worker.finished.connect(self.logic_finished)
         self.logic_worker.finished.connect(self.logic_thread.quit)
@@ -307,107 +308,12 @@ class CustomPatchingPage(QWizardPage):
     def update_status(self):
         """Updates status above progress bar"""
         self.label.setText(self.status)
-
-
-class CustomPatchingLogic(QObject):
-    platform: Platforms
-    region: Regions
-    selected_channels: list
-    regional_channels: bool = False
-    is_patching_complete: bool
-    finished = Signal(bool)
-    broadcast_percentage = Signal(int)
-    broadcast_status = Signal(str)
-
-    def patching_functions(self):
-
-        percentage_increment = 100 / len(self.selected_channels)
-
-        percentage = 0
-
-        patch_functions = {
-            "download": lambda: self.download_supporting_apps(),
-            "forecast_us": lambda: forecast_patch(Regions.USA, self.platform),
-            "forecast_eu": lambda: forecast_patch(Regions.PAL, self.platform),
-            "forecast_jp": lambda: forecast_patch(Regions.Japan, self.platform),
-            "news_us": lambda: news_patch(Regions.USA),
-            "news_eu": lambda: news_patch(Regions.PAL),
-            "news_jp": lambda: news_patch(Regions.Japan),
-            "nc_us": lambda: nc_patch(Regions.USA),
-            "nc_eu": lambda: nc_patch(Regions.PAL),
-            "nc_jp": lambda: nc_patch(Regions.Japan),
-            "evc_us": lambda: evc_patch(Regions.USA),
-            "evc_eu": lambda: evc_patch(Regions.PAL),
-            "evc_jp": lambda: evc_patch(Regions.Japan),
-            "cmoc_us": lambda: cmoc_patch(Regions.USA),
-            "cmoc_eu": lambda: cmoc_patch(Regions.PAL),
-            "cmoc_jp": lambda: cmoc_patch(Regions.Japan),
-            "wiiroom_en": lambda: wiiroom_patch(Languages.English),
-            "wiiroom_es": lambda: wiiroom_patch(Languages.Spanish),
-            "wiiroom_fr": lambda: wiiroom_patch(Languages.French),
-            "wiiroom_de": lambda: wiiroom_patch(Languages.German),
-            "wiiroom_it": lambda: wiiroom_patch(Languages.Italian),
-            "wiiroom_nl": lambda: wiiroom_patch(Languages.Dutch),
-            "wiiroom_ptbr": lambda: wiiroom_patch(Languages.Portuguese),
-            "wiiroom_ru": lambda: wiiroom_patch(Languages.Russian),
-            "wiiroom_jp": lambda: wiiroom_patch(Languages.Japan),
-            "digicam_en": lambda: digicam_patch(True),
-            "digicam_jp": lambda: digicam_patch(False),
-            "food_en": lambda: demae_patch(True, DemaeConfigs.Standard, self.region),
-            "food_jp": lambda: demae_patch(False, DemaeConfigs.Standard, self.region),
-            "dominos": lambda: demae_patch(True, DemaeConfigs.Dominos, self.region),
-            "ktv": lambda: kirbytv_patch()
-        }
-
-        patch_status = {
-            "download": self.tr("Downloading files..."),
-            "forecast_us": self.tr("Patching Forecast Channel (USA)..."),
-            "forecast_eu": self.tr("Patching Forecast Channel (PAL)..."),
-            "forecast_jp": self.tr("Patching Forecast Channel (Japan)..."),
-            "news_us": self.tr("Patching News Channel (USA)..."),
-            "news_eu": self.tr("Patching News Channel (PAL)..."),
-            "news_jp": self.tr("Patching News Channel (Japan)..."),
-            "nc_us": self.tr("Patching Nintendo Channel (USA)..."),
-            "nc_eu": self.tr("Patching Nintendo Channel (PAL)..."),
-            "nc_jp": self.tr("Patching Nintendo Channel (Japan)..."),
-            "evc_us": self.tr("Patching Everybody Votes Channel (USA)..."),
-            "evc_eu": self.tr("Patching Everybody Votes Channel (PAL)..."),
-            "evc_jp": self.tr("Patching Everybody Votes Channel (Japan)..."),
-            "cmoc_us": self.tr("Patching Check Mii Out Channel (USA)..."),
-            "cmoc_eu": self.tr("Patching Mii Contest Channel (PAL)..."),
-            "cmoc_jp": self.tr("Patching Mii Contest Channel (Japan)..."),
-            "wiiroom_en": self.tr("Patching Wii Room (English)..."),
-            "wiiroom_es": self.tr("Patching Wii Room (Español)..."),
-            "wiiroom_fr": self.tr("Patching Wii Room (Français)..."),
-            "wiiroom_de": self.tr("Patching Wii Room (Deutsch)..."),
-            "wiiroom_it": self.tr("Patching Wii Room (Italiano)..."),
-            "wiiroom_nl": self.tr("Patching Wii Room (Nederlands)..."),
-            "wiiroom_ptbr": self.tr("Patching Wii Room (Português (Brasil))..."),
-            "wiiroom_ru": self.tr("Patching Wii Room (Русский)..."),
-            "wiiroom_jp": self.tr("Patching Wii Room (Japanese)..."),
-            "digicam_en": self.tr("Patching Photo Prints Channel (English)..."),
-            "digicam_jp": self.tr("Patching Digicam Print Channel (Japanese)..."),
-            "food_en": self.tr("Patching Food Channel (Standard) (English)..."),
-            "food_jp": self.tr("Patching Demae Channel (Standard) (Japanese)..."),
-            "dominos": self.tr("Patching Food Channel (Domino's) (English)..."),
-            "ktv": self.tr("Patching Kirby TV Channel...")
-        }
-
-        for channel in self.selected_channels:
-            self.broadcast_status.emit(patch_status[channel])
-            patch_functions[channel]()
-            percentage += percentage_increment
-            self.broadcast_percentage.emit(round(percentage))
-
-
-        self.finished.emit(True)
-
-    def download_supporting_apps(self):
-        if self.platform != Platforms.Dolphin:
-            download_osc_app("yawmME")
-            download_osc_app("sntp")
-
-        if self.regional_channels:
-            download_spd()
-
-        download_osc_app("Mail-Patcher")
+    
+    def handle_error(self, error: str):
+        """Display errors thrown from the patching logic to the user"""
+        QMessageBox.warning(QWidget(),
+                             "WiiLink Patcher - Warning",
+                             f"""An exception was encountered while patching.
+Exception: '{error}'
+Please report this issue in the WiiLink Discord Server (discord.gg/wiilink)."""
+        )

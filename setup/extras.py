@@ -1,10 +1,9 @@
-from PySide6.QtCore import QTimer, QObject, Signal, QThread
+from PySide6.QtCore import QTimer, QThread
 from PySide6.QtWidgets import QWizardPage, QLabel, QVBoxLayout, QRadioButton, QButtonGroup, QProgressBar, \
-    QWizard, QCheckBox
+    QWizard, QCheckBox, QMessageBox, QWidget
 
-from .download import download_osc_app, download_channel, download_todaytomorrow
 from .enums import *
-from .patch import wiispeak_patch
+from .patch import PatchingWorker
 
 system_channel_restorer = False
 selected_channels = []
@@ -250,13 +249,14 @@ class ExtraPatchingPage(QWizardPage):
 
         # Create thread to perform patching
         self.logic_thread = QThread()
-        self.logic_worker = ExtraPatchingLogic()
+        self.logic_worker = PatchingWorker()
 
     def initializePage(self):
         global selected_channels
         QTimer.singleShot(0, self.disable_back_button)
 
         # Pass variables to instance of logic thread
+        self.logic_worker.setup_type = SetupTypes.Extras
         self.logic_worker.platform = self.platform
 
         if self.platform != Platforms.Dolphin:
@@ -270,6 +270,7 @@ class ExtraPatchingPage(QWizardPage):
         # Connect thread signals
         self.logic_worker.broadcast_percentage.connect(self.set_percentage)
         self.logic_worker.broadcast_status.connect(self.set_status)
+        self.logic_worker.error.connect(self.handle_error)
 
         self.logic_worker.finished.connect(self.logic_finished)
         self.logic_worker.finished.connect(self.logic_thread.quit)
@@ -312,50 +313,12 @@ class ExtraPatchingPage(QWizardPage):
     def update_status(self):
         """Updates status above progress bar"""
         self.label.setText(self.status)
-
-
-class ExtraPatchingLogic(QObject):
-    platform: Platforms
-    selected_channels: list
-    is_patching_complete: bool
-    finished = Signal(bool)
-    broadcast_percentage = Signal(int)
-    broadcast_status = Signal(str)
-
-    def patching_functions(self):
-
-        percentage_increment = 100 / len(self.selected_channels)
-
-        percentage = 0
-
-        patch_functions = {
-            "download": lambda: download_osc_app("yawmME"),
-            "ws_us": lambda: wiispeak_patch(Regions.USA, WFCNetworks.Wiimmfi),
-            "ws_eu": lambda: wiispeak_patch(Regions.PAL, WFCNetworks.Wiimmfi),
-            "ws_jp": lambda: wiispeak_patch(Regions.Japan, WFCNetworks.Wiimmfi),
-            "tatc_eu": lambda: download_todaytomorrow(Regions.PAL),
-            "tatc_jp": lambda: download_todaytomorrow(Regions.Japan),
-            "ic_us": lambda: download_channel("Internet Channel", "0001000148414445", 1024, Regions.USA),
-            "ic_eu": lambda: download_channel("Internet Channel", "0001000148414450", 1024, Regions.PAL),
-            "ic_jp": lambda: download_channel("Internet Channel", "000100014841444a", 1024, Regions.Japan)
-        }
-
-        patch_status = {
-            "download": self.tr("Downloading files..."),
-            "ws_us": self.tr("Patching Wii Speak Channel (USA)..."),
-            "ws_eu": self.tr("Patching Wii Speak Channel (PAL)..."),
-            "ws_jp": self.tr("Patching Wii Speak Channel (Japan)..."),
-            "tatc_eu": self.tr("Downloading Today and Tomorrow Channel (PAL)..."),
-            "tatc_jp": self.tr("Downloading Today and Tomorrow Channel (Japan)..."),
-            "ic_us": self.tr("Downloading Internet Channel (USA)..."),
-            "ic_eu": self.tr("Downloading Internet Channel (PAL)..."),
-            "ic_jp": self.tr("Downloading Internet Channel (Japan)...")
-        }
-
-        for channel in self.selected_channels:
-            self.broadcast_status.emit(patch_status[channel])
-            patch_functions[channel]()
-            percentage += percentage_increment
-            self.broadcast_percentage.emit(round(percentage))
-
-        self.finished.emit(True)
+    
+    def handle_error(self, error: str):
+        """Display errors thrown from the patching logic to the user"""
+        QMessageBox.warning(QWidget(),
+                             "WiiLink Patcher - Warning",
+                             f"""An exception was encountered while patching.
+Exception: '{error}'
+Please report this issue in the WiiLink Discord Server (discord.gg/wiilink)."""
+        )
