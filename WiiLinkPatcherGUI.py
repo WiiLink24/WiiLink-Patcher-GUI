@@ -22,7 +22,7 @@ import sys
 import tempfile
 import webbrowser
 
-from PySide6.QtCore import QTranslator, QLocale, QLibraryInfo, QTimer
+from PySide6.QtCore import QTranslator, QLocale, QLibraryInfo, QTimer, Qt
 from PySide6.QtGui import QIcon
 from PySide6.QtWidgets import QWizard, QApplication, QWizardPage, QVBoxLayout, QRadioButton, QLabel, \
     QPushButton, QMessageBox, QWidget
@@ -72,7 +72,7 @@ class MainMenu(QWizardPage):
             "express_setup": QRadioButton(self.tr("Express Setup (Recommended)")),
             "custom_setup": QRadioButton(self.tr("Custom Setup (Advanced)")),
             "extra_channels": QRadioButton(self.tr("Extra Channels (Optional)")),
-            "credits": QPushButton(self.tr("Credits"))
+            "credits": QPushButton(self.tr("About WiiLink Patcher")),
         }
 
         self.layout = QVBoxLayout()
@@ -125,22 +125,100 @@ class MainMenu(QWizardPage):
 class Credits(QWidget):
     def __init__(self, parent=None):
         super().__init__(parent)
-        self.setWindowTitle(self.tr("WiiLink Patcher - Credits"))
-
+        self.setWindowTitle(self.tr("WiiLink Patcher - About"))
+        self.setMinimumWidth(450)
+        self.setFixedHeight(400)
+        
+        # Set background color to match main app
+        self.setStyleSheet("""
+            Credits {
+                background-color: #222222;
+                color: #ffffff;
+            }
+            QLabel {
+                color: #ffffff;
+            }
+            QLabel[class="title"] {
+                font-size: 20px;
+                font-weight: bold;
+                color: #ffffff;
+            }
+            QLabel[class="version"] {
+                font-size: 13px;
+                color: #aaaaaa;
+            }
+            QLabel[class="copyright"] {
+                font-size: 12px;
+                color: #888888;
+            }
+            QLabel[class="header"] {
+                font-size: 14px;
+                font-weight: bold;
+                color: #1a73e8;
+                border-bottom: 1px solid #444444;
+                padding-bottom: 4px;
+                margin-top: 8px;
+            }
+        """)
+        
+        # Create main layout
+        self.layout = QVBoxLayout()
+        self.layout.setSpacing(4)
+        self.layout.setContentsMargins(30, 20, 30, 20)
+        
+        # Logo
+        logo_label = QLabel()
+        icon = QIcon(os.path.join(os.path.dirname(__file__), "assets", "logo.webp"))
+        logo_pixmap = icon.pixmap(96, 96)
+        logo_label.setPixmap(logo_pixmap)
+        logo_label.setAlignment(Qt.AlignCenter)
+        
+        # Title
+        title_label = QLabel(self.tr("WiiLink Patcher"))
+        title_label.setProperty("class", "title")
+        title_label.setAlignment(Qt.AlignCenter)
+        
+        # Version
+        version_label = QLabel(self.tr("GUI - Version 2.0"))
+        version_label.setProperty("class", "version")
+        version_label.setAlignment(Qt.AlignCenter)
+        
+        # Copyright
+        copyright_label = QLabel(self.tr("© 2020-2025 WiiLink Team. All rights reserved."))
+        copyright_label.setProperty("class", "copyright")
+        copyright_label.setAlignment(Qt.AlignCenter)
+        
+        # Add header section
+        self.layout.addWidget(logo_label)
+        self.layout.addWidget(title_label)
+        self.layout.addWidget(version_label)
+        self.layout.addWidget(copyright_label)
+        self.layout.addSpacing(15)
+        
+        # Team members header
+        team_header = QLabel(self.tr("WiiLink Team"))
+        team_header.setProperty("class", "header")
+        self.layout.addWidget(team_header)
+        self.layout.addSpacing(5)
+        
+        # Team members with roles
         self.people = {
-            "sketch": QLabel(self.tr("<a href=https://noahpistilli.ca><b>Sketch</b></a> - WiiLink Project Lead")),
-            "isla": QLabel(self.tr("<a href=https://islawalker.uk><b>Isla</b></a> - WiiLink Patcher GUI Developer")),
-            "pablo": QLabel(self.tr("<a href=https://github.com/pabloscorner><b>PablosCorner</b></a> - WiiLink Patcher CLI Developer")),
-            "alex": QLabel(self.tr("<a href=https://github.com/humanoidear><b>Alex</b></a> - WiiLink Design Lead")),
-            "ninjacheetah": QLabel(self.tr("<a href=https://ninjacheetah.dev><b>NinjaCheetah</b></a> - libWiiPy Developer"))
+            "sketch": QLabel(self.tr("<a href=https://noahpistilli.ca style='color: #4a86e8; text-decoration: none;'><b>Sketch</b></a> - WiiLink Project Lead")),
+            "isla": QLabel(self.tr("<a href=https://islawalker.uk style='color: #4a86e8; text-decoration: none;'><b>Isla</b></a> - WiiLink Patcher GUI Developer")),
+            "pablo": QLabel(self.tr("<a href=https://github.com/pabloscorner style='color: #4a86e8; text-decoration: none;'><b>PablosCorner</b></a> - WiiLink Patcher CLI Developer")),
+            "alex": QLabel(self.tr("<a href=https://github.com/humanoidear style='color: #4a86e8; text-decoration: none;'><b>Alex</b></a> - WiiLink Design Lead")),
+            "ninjacheetah": QLabel(self.tr("<a href=https://ninjacheetah.dev style='color: #4a86e8; text-decoration: none;'><b>NinjaCheetah</b></a> - libWiiPy Developer"))
         }
 
-        self.layout = QVBoxLayout()
-
+        # Add team members to layout
         for credit in self.people.values():
-            self.layout.addWidget(credit)
             credit.setOpenExternalLinks(True)
-
+            credit.setContentsMargins(15, 0, 0, 0)
+            self.layout.addWidget(credit)
+        
+        # Add spacer at the bottom
+        self.layout.addStretch()
+        
         self.setLayout(self.layout)
 
 
@@ -234,11 +312,186 @@ def main():
     wizard = QWizard()
     wizard.setWindowTitle(app.tr("WiiLink Patcher"))
     wizard.setWizardStyle(QWizard.WizardStyle.ModernStyle)
-
+    wizard.setSubTitleFormat(Qt.RichText)
+    
     icon = QIcon(os.path.join(os.path.dirname(__file__), "assets", "logo.webp"))
+    background = QIcon(os.path.join(os.path.dirname(__file__), "assets", "background.webp"))
     logo = icon.pixmap(64, 64)
+    banner = background.pixmap(700, 120)
     wizard.setPixmap(QWizard.WizardPixmap.LogoPixmap, logo)
+    wizard.setPixmap(QWizard.WizardPixmap.BannerPixmap, banner)
+    
     app.setWindowIcon(icon)
+    
+    # Apply global stylesheet for consistent styling across all pages
+    wizard.setStyleSheet("""
+        QWizard {
+        background-color: #222222;
+    }
+    
+    QWizard QLabel {
+        color: #ffffff;
+    }
+    
+    QLabel[class="QWizardPageTitle"] {
+        background: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #1a73e8, stop:1 #135cb6);
+        color: white;
+        font-size: 18px;
+        font-weight: bold;
+        padding: 8px 10px;
+        border-top-left-radius: 4px;
+        border-top-right-radius: 4px;
+    }
+    
+    QLabel[class="QWizardPageSubTitle"] {
+        background-color: #f0f6ff;
+        color: #1a73e8;
+        font-size: 13px;
+        padding: 6px 10px;
+        border-bottom: 1px solid #c2d7ff;
+    }
+    
+        QRadioButton {
+            background-color: transparent;
+            border: 1px solid rgba(70, 70, 70, 1);
+            border-radius: 8px;
+            padding: 8px 10px;
+            font-size: 13px;
+            font-weight: 500;
+            color: #ffffff;
+        }
+        
+        QRadioButton:hover {
+            background-color: rgba(60, 60, 60, 1);
+            border-color: #4a86e8;
+        }
+        
+        QRadioButton:checked {
+            background-color: rgba(26, 115, 232, 0.08);
+            border: 1px solid #1a73e8;
+            color: #1a73e8;
+        }
+        
+        QRadioButton::indicator {
+            width: 18px;
+            height: 18px;
+            border-radius: 5px;
+            border: 1px solid #5f6368;
+            margin-right: 8px;
+            subcontrol-position: left center;
+        }
+        
+        QRadioButton::indicator:checked {
+            background-color: #1a73e8;
+            border: 1px solid #1a73e8;
+            image: url(assets/rounded_square.svg);
+        }
+        
+        QRadioButton::indicator:hover {
+            border-color: #1a73e8;
+        }
+        
+        QPushButton {
+            background-color: transparent;
+            border: 1px solid rgba(70, 70, 70, 1);
+            border-radius: 8px;
+            padding: 6px 10px;
+            margin: 4px 0px;
+            font-size: 13px;
+            font-weight: 500;
+            color: #ffffff;
+        }
+        
+        QPushButton:hover {
+            background-color: rgba(60, 60, 60, 1);
+            border-color: #4a86e8;
+        }
+        
+        QPushButton:pressed {
+            background-color: rgba(26, 115, 232, 0.15);
+            border: 1px solid #1a73e8;
+        }
+        
+        QPushButton:disabled {
+            background-color: rgba(70, 70, 70, 0.5);
+            border: 1px solid rgba(100, 100, 100, 0.3);
+            color: rgba(255, 255, 255, 0.3);
+        }
+        
+        /* Style for the wizard's next and back buttons with chevrons */
+        QWizard QToolButton {
+            background-color: rgba(50, 50, 50, 1);
+            border: 1px solid rgba(70, 70, 70, 1);
+            border-radius: 4px;
+            padding: 2px;
+            color: #ffffff;
+        }
+        
+        QWizard QToolButton:hover {
+            background-color: rgba(60, 60, 60, 1);
+            border-color: #4a86e8;
+        }
+        
+        QWizard QToolButton:disabled {
+            background-color: rgba(70, 70, 70, 0.5);
+            border: 1px solid rgba(100, 100, 100, 0.3);
+            color: rgba(255, 255, 255, 0.3);
+        }
+        
+        QCheckBox {
+            background-color: transparent;
+            border: 1px solid rgba(70, 70, 70, 1);
+            border-radius: 8px;
+            padding: 8px 10px;
+            font-size: 13px;
+            font-weight: 500;
+            color: #ffffff;
+        }
+        
+        QCheckBox:hover {
+            background-color: rgba(60, 60, 60, 1);
+            border-color: #4a86e8;
+        }
+        
+        QCheckBox:checked {
+            background-color: rgba(26, 115, 232, 0.08);
+            border: 1px solid #1a73e8;
+            color: #1a73e8;
+        }
+        
+        QCheckBox::indicator {
+            width: 18px;
+            height: 18px;
+            border-radius: 4px;
+            border: 1px solid #5f6368;
+            margin-right: 8px;
+            subcontrol-position: left center;
+        }
+        
+        QCheckBox::indicator:checked {
+            background-color: #1a73e8;
+            border: 1px solid #1a73e8;
+            image: url(assets/check.svg);
+        }
+        
+        QCheckBox::indicator:hover {
+            border-color: #1a73e8;
+        }
+        
+        QCheckBox:disabled {
+            background-color: rgba(70, 70, 70, 0.5);
+            border: 1px solid rgba(100, 100, 100, 0.3);
+            color: rgba(255, 255, 255, 0.3);
+        }
+        
+        QCheckBox::indicator:disabled {
+            background-color: rgba(70, 70, 70, 0.5);
+            border: 1px solid rgba(100, 100, 100, 0.3);
+        }
+    """)
+    
+    wizard.setButtonText(QWizard.NextButton, "Next")
+    wizard.setButtonText(QWizard.BackButton, "Back")
 
     if not connection:
         QMessageBox.critical(QWidget(),
