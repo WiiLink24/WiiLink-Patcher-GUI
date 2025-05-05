@@ -127,7 +127,7 @@ class Credits(QWidget):
         super().__init__(parent)
         self.setWindowTitle(self.tr("WiiLink Patcher - About"))
         self.setMinimumWidth(450)
-        self.setFixedHeight(400)
+        self.setFixedHeight(480)
         
         # Set background color to match main app
         self.setStyleSheet("""
@@ -154,10 +154,28 @@ class Credits(QWidget):
             QLabel[class="header"] {
                 font-size: 14px;
                 font-weight: bold;
-                color: #1a73e8;
                 border-bottom: 1px solid #444444;
                 padding-bottom: 4px;
                 margin-top: 8px;
+            }
+            QPushButton {
+                background-color: transparent;
+                border: 1px solid rgba(70, 70, 70, 1);
+                border-radius: 8px;
+                padding: 8px 12px;
+                margin: 4px 0px;
+                font-size: 13px;
+                font-weight: 500;
+                color: #ffffff;
+                text-align: center;
+            }
+            QPushButton:hover {
+                background-color: rgba(60, 60, 60, 1);
+                border-color: #4a86e8;
+            }
+            QPushButton:pressed {
+                background-color: rgba(26, 115, 232, 0.15);
+                border: 1px solid #1a73e8;
             }
         """)
         
@@ -194,6 +212,30 @@ class Credits(QWidget):
         self.layout.addWidget(version_label)
         self.layout.addWidget(copyright_label)
         self.layout.addSpacing(15)
+        
+        # External links layout
+        links_layout = QVBoxLayout()
+        
+        # Website button
+        self.website_button = QPushButton(self.tr("Visit WiiLink Website"))
+        self.website_button.clicked.connect(lambda: webbrowser.open("https://wiilink.ca"))
+        links_layout.addWidget(self.website_button)
+        
+        # GitHub button
+        self.github_button = QPushButton(self.tr("View Project on GitHub"))
+        self.github_button.clicked.connect(lambda: webbrowser.open("https://github.com/WiiLink24"))
+        links_layout.addWidget(self.github_button)
+        
+        # Add the links layout to main layout
+        self.layout.addLayout(links_layout)
+        self.layout.addSpacing(15)
+        
+        # Add a horizontal line
+        line = QLabel()
+        line.setStyleSheet("background-color: #444444; height: 1px;")
+        line.setFixedHeight(1)
+        self.layout.addWidget(line)
+        self.layout.addSpacing(10)
         
         # Team members header
         team_header = QLabel(self.tr("WiiLink Team"))
