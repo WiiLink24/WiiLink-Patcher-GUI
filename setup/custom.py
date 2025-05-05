@@ -1,5 +1,6 @@
 from PySide6.QtCore import QTimer, QThread
 from PySide6.QtWidgets import QWizardPage, QLabel, QVBoxLayout, QRadioButton, QButtonGroup, QProgressBar, QWizard, QCheckBox, QMessageBox, QWidget
+from .newsRenderer import NewsRenderer
 
 from .patch import PatchingWorker
 from .enums import *
@@ -234,12 +235,18 @@ class CustomPatchingPage(QWizardPage):
 
         self.label = QLabel(self.tr("Downloading files..."))
         self.progress_bar = QProgressBar(self)
+        
+        self.news_box = NewsRenderer.createNewsBox(self)
 
         layout = QVBoxLayout()
         layout.addWidget(self.label)
         layout.addWidget(self.progress_bar)
-
+        layout.addSpacing(10)
+        layout.addWidget(self.news_box)
+    
         self.setLayout(layout)
+        
+        QTimer.singleShot(0, lambda: NewsRenderer.getNews(self, self.news_box))
 
         # Start thread to perform patching
         self.logic_thread = QThread()
