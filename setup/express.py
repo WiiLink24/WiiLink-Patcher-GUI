@@ -157,15 +157,15 @@ class ExpressRegionalChannelTranslation(QWizardPage):
 class ExpressRegionalChannelLanguage(QWizardPage):
     language = Languages.Japan
     languages = {
-            Languages.English: "English",
-            Languages.Spanish: "Español",
-            Languages.French: "Français",
-            Languages.German: "Deutsch",
-            Languages.Italian: "Italiano",
-            Languages.Dutch: "Nederlands",
-            Languages.Portuguese: "Português (Brasil)",
-            Languages.Russian: "Русский"
-        }
+        Languages.English: "🇺🇸 English",
+        Languages.Spanish: "🇪🇸 Español",
+        Languages.French: "🇫🇷 Français",
+        Languages.German: "🇩🇪 Deutsch",
+        Languages.Italian: "🇮🇹 Italiano", 
+        Languages.Dutch: "🇳🇱 Nederlands",
+        Languages.Portuguese: "🇧🇷 Português (Brasil)",
+        Languages.Russian: "🇷🇺 Русский"
+    }
 
     def __init__(self, parent=None):
         super().__init__(parent)

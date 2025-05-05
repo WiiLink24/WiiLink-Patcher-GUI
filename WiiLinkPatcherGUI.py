@@ -75,7 +75,13 @@ class MainMenu(QWizardPage):
             "credits": QPushButton(self.tr("About WiiLink Patcher")),
         }
 
+        self.options["express_setup"].setText(self.tr("Express Setup (Recommended)\nThe fastest way to get started with WiiLink"))
+        self.options["custom_setup"].setText(self.tr("Custom Setup (Advanced)\nCustomize your WiiLink installation"))
+        self.options["extra_channels"].setText(self.tr("Extra Channels (Optional)\nAdd additional channels to your Wii"))
+
         self.layout = QVBoxLayout()
+        self.layout.setSpacing(10)
+        self.layout.setContentsMargins(20, 20, 20, 20)
 
         # Add checkboxes to layout
         for button in self.options.values():
@@ -267,30 +273,61 @@ class Credits(QWidget):
 class PatchingComplete(QWizardPage):
     def __init__(self, parent=None):
         super().__init__(parent)
-
+    
         self.setFinalPage(True)
-
         self.completeChanged.emit()
-
-        self.setTitle(self.tr("Patching complete!"))
-        self.setSubTitle(self.tr("Patching has been completed"))
-
-        self.label = QLabel(self.tr("Patching is complete! You can find the relevant files at the following location:\n"
-                                    f"{pathlib.Path(wiilink_dir).resolve()}\n\n"
-                                    "What would you like to do now?"))
-
-        self.label.setWordWrap(True)
-
+    
+        self.setTitle(self.tr("Success!"))
+        self.setSubTitle(self.tr("Everything has been patched successfully"))
+    
+        # Create a container with rounded corners and slightly lighter background
+        self.container = QWidget()
+        self.container.setFixedHeight(400)
+        self.container.setStyleSheet("""
+            background-color: #2a2a2a;
+            border-radius: 12px;
+            padding: 15px;
+        """)
+        
+        # Container layout
+        container_layout = QVBoxLayout(self.container)
+        container_layout.setAlignment(Qt.AlignCenter)
+        container_layout.setContentsMargins(15, 15, 15, 15)
+        container_layout.setSpacing(5)  # Reduced spacing between elements
+        
+        # Party popper emoji
+        emoji_label = QLabel("🎉")
+        emoji_label.setStyleSheet("font-size: 64px; background-color: transparent;")
+        emoji_label.setAlignment(Qt.AlignCenter)
+        
+        # Heading
+        heading = QLabel("<h1>Patching completed!</h1>")
+        heading.setStyleSheet("background-color: transparent; color: white; margin: 0;")
+        heading.setAlignment(Qt.AlignCenter)
+        
+        # Message with file path
+        self.message = QLabel(self.tr(f"<p>You can find the relevant files by clicking the button below. Please open a support ticket on our <a href='https://discord.gg/wiilink' style='color: #4a86e8; text-decoration: none;'>Discord server</a> if you have any issues.</p>"))
+        self.message.setStyleSheet("background-color: transparent; color: white; margin: 0;")
+        self.message.setTextFormat(Qt.RichText)
+        self.message.setWordWrap(True)
+        self.message.setAlignment(Qt.AlignCenter)
+        self.message.setOpenExternalLinks(True)
+    
+        # Open folder button
         self.open_folder = QPushButton(self.tr("Open the 'WiiLink' folder"))
-
-        self.layout = QVBoxLayout()
-        self.layout.addWidget(self.label)
-
-        self.layout.addWidget(self.open_folder)
-
-        self.setLayout(self.layout)
-
         self.open_folder.clicked.connect(self.open_wiilink_folder)
+        
+        # Add widgets to container
+        container_layout.addWidget(emoji_label)
+        container_layout.addWidget(heading)
+        container_layout.addWidget(self.message)
+        container_layout.addSpacing(5)  # Reduced spacing
+        container_layout.addWidget(self.open_folder)
+        
+        # Main layout
+        self.layout = QVBoxLayout()
+        self.layout.addWidget(self.container)
+        self.setLayout(self.layout)
 
     def initializePage(self):
         match PatchingPage.setup_type:
