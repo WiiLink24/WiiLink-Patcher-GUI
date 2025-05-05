@@ -127,7 +127,7 @@ class Credits(QWidget):
         super().__init__(parent)
         self.setWindowTitle(self.tr("WiiLink Patcher - About"))
         self.setMinimumWidth(450)
-        self.setFixedHeight(480)
+        self.setFixedHeight(500)
         
         # Set background color to match main app
         self.setStyleSheet("""
