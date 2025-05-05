@@ -165,6 +165,9 @@ class CustomPlatformConfiguration(QWizardPage):
             self.buttons[key] = button
             button.clicked.connect(self.completeChanged.emit)
 
+        # Select the first option
+        next(iter(self.buttons.values())).setChecked(True)
+
         # Set layout
         self.setLayout(self.layout)
 
@@ -205,6 +208,9 @@ class CustomRegionConfiguration(QWizardPage):
             self.layout.addWidget(button)
             self.buttons[key] = button
             button.clicked.connect(self.completeChanged.emit)
+
+        # Select the first option
+        next(iter(self.buttons.values())).setChecked(True)
 
         # Set layout
         self.setLayout(self.layout)

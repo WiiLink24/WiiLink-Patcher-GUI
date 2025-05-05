@@ -32,6 +32,8 @@ Use of System Channel Restorer requires an internet connection on your console."
         self.layout.addWidget(self.yes)
         self.layout.addWidget(self.no)
 
+        self.yes.setChecked(True)
+
         self.setLayout(self.layout)
 
         self.yes.clicked.connect(self.completeChanged)
@@ -223,6 +225,9 @@ class ExtrasPlatformConfiguration(QWizardPage):
             self.buttons[key] = button
             button.clicked.connect(self.completeChanged.emit)
 
+        # Select the first option
+        next(iter(self.buttons.values())).setChecked(True)
+
         # Set layout
         self.setLayout(self.layout)
 
@@ -263,6 +268,9 @@ class ExtrasRegionConfiguration(QWizardPage):
             self.layout.addWidget(button)
             self.buttons[key] = button
             button.clicked.connect(self.completeChanged.emit)
+
+        # Select the first option
+        next(iter(self.buttons.values())).setChecked(True)
 
         # Set layout
         self.setLayout(self.layout)

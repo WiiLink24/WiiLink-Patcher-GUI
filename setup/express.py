@@ -18,45 +18,48 @@ class ExpressRegion(QWizardPage):
 
         self.label = QLabel(self.tr("For the WiiConnect24 services, which region would you like to install?"))
 
-        self.USA = QRadioButton(self.tr("North America (NTSC-U)"))
-        self.PAL = QRadioButton(self.tr("Europe (PAL)"))
-        self.Japan = QRadioButton(self.tr("Japan (NTSC-J)"))
+        self.regions = {
+            Regions.USA: self.tr("North America (NTSC-U)"),
+            Regions.PAL: self.tr("Europe (PAL)"),
+            Regions.Japan: self.tr("Japan (NTSC-J)")
+        }
 
-        self.regions = [self.USA, self.PAL, self.Japan]
+        # Layout
+        self.layout = QVBoxLayout()
 
-        # Group radio buttons
-        self.buttonGroup = QButtonGroup(self)
-        for region in self.regions:
-            self.buttonGroup.addButton(region)
+        self.layout.addWidget(self.label)
 
-        layout = QVBoxLayout()
-        layout.addWidget(self.label)
+        # Dictionary to hold buttons
+        self.buttons = {}
 
-        # Add widgets to layout
-        for button in self.regions:
-            layout.addWidget(button)
+        # Add buttons to layout
+        for key, label in self.regions.items():
+            button = QRadioButton(label)
+            self.layout.addWidget(button)
+            self.buttons[key] = button
+            button.clicked.connect(self.completeChanged.emit)
 
-        self.setLayout(layout)
+        # Select the first option
+        next(iter(self.buttons.values())).setChecked(True)
 
-        for button in self.regions:
-            button.toggled.connect(lambda: self.completeChanged.emit())
+        # Set layout
+        self.setLayout(self.layout)
 
     def isComplete(self):
-        """Enable Next button only if a radio button is selected"""
         global region
 
-        if self.USA.isChecked():
-            PatchingPage.region = Regions.USA
-            region = "us"
-            return True
-        elif self.PAL.isChecked():
-            PatchingPage.region = Regions.PAL
-            region = "eu"
-            return True
-        elif self.Japan.isChecked():
-            PatchingPage.region = Regions.Japan
-            region = "jp"
-            return True
+        for key, button in self.buttons.items():
+            if button.isChecked():
+                PatchingPage.region = key
+                match key:
+                    case Regions.USA:
+                        region = "us"
+                    case Regions.PAL:
+                        region = "eu"
+                    case Regions.Japan:
+                        region = "jp"
+                return True
+
         return False
 
 
@@ -78,14 +81,14 @@ Services that would be installed:
         self.Yes = QRadioButton(self.tr("Yes"))
         self.No = QRadioButton(self.tr("No"))
 
-        self.buttonGroup = QButtonGroup(self)
-        self.buttonGroup.addButton(self.Yes)
-        self.buttonGroup.addButton(self.No)
-
         layout = QVBoxLayout()
+
         layout.addWidget(self.label)
+
         layout.addWidget(self.Yes)
         layout.addWidget(self.No)
+
+        self.Yes.setChecked(True)
 
         self.setLayout(layout)
 
@@ -122,19 +125,19 @@ class ExpressRegionalChannelTranslation(QWizardPage):
         self.Translated = QRadioButton(self.tr("Translated (eg. English, French, etc.)"))
         self.Japanese = QRadioButton(self.tr("Japanese"))
 
-        self.buttonGroup = QButtonGroup(self)
-        self.buttonGroup.addButton(self.Translated)
-        self.buttonGroup.addButton(self.Japanese)
-
         layout = QVBoxLayout()
+
         layout.addWidget(self.label)
+
         layout.addWidget(self.Translated)
         layout.addWidget(self.Japanese)
 
+        self.Translated.setChecked(True)
+
         self.setLayout(layout)
 
-        self.Translated.toggled.connect(lambda: self.completeChanged.emit())
-        self.Japanese.toggled.connect(lambda: self.completeChanged.emit())
+        self.Translated.clicked.connect(self.completeChanged.emit)
+        self.Japanese.clicked.connect(self.completeChanged.emit)
 
     def isComplete(self):
         global regional_lang
@@ -188,6 +191,9 @@ class ExpressRegionalChannelLanguage(QWizardPage):
             self.layout.addWidget(button)
             self.buttons[key] = button
             button.clicked.connect(self.completeChanged.emit)
+
+        # Select the first option
+        next(iter(self.buttons.values())).setChecked(True)
 
         # Set layout
         self.setLayout(self.layout)
@@ -246,31 +252,38 @@ class ExpressDemaeConfiguration(QWizardPage):
 
         self.label = QLabel(self.tr("Which version of the <b>Food Channel</b> would you like to install?"))
 
-        self.Standard = QRadioButton(self.tr("Standard (Fake Ordering)"))
-        self.Dominos = QRadioButton(self.tr("Domino's (US and Canada only)"))
+        self.demae_configs = {
+            DemaeConfigs.Standard: self.tr("Standard (Fake Ordering)"),
+            DemaeConfigs.Dominos: self.tr("Domino's (US and Canada only)")
+        }
 
-        self.buttonGroup = QButtonGroup(self)
-        self.buttonGroup.addButton(self.Standard)
-        self.buttonGroup.addButton(self.Dominos)
+        self.layout = QVBoxLayout()
 
-        layout = QVBoxLayout()
-        layout.addWidget(self.label)
-        layout.addWidget(self.Standard)
-        layout.addWidget(self.Dominos)
+        self.layout.addWidget(self.label)
 
-        self.setLayout(layout)
+        # Dictionary to hold buttons
+        self.buttons = {}
 
-        self.Standard.toggled.connect(lambda: self.completeChanged.emit())
-        self.Dominos.toggled.connect(lambda: self.completeChanged.emit())
+        # Add buttons to layout
+        for key, label in self.demae_configs.items():
+            button = QRadioButton(label)
+            self.layout.addWidget(button)
+            self.buttons[key] = button
+            button.clicked.connect(self.completeChanged.emit)
+
+        # Select the first option
+        next(iter(self.buttons.values())).setChecked(True)
+
+        self.setLayout(self.layout)
 
     def isComplete(self):
         global demae
         global regional_lang
 
-        if self.Standard.isChecked():
+        if self.buttons[DemaeConfigs.Standard].isChecked():
             demae = f"food_{regional_lang}"
             return True
-        elif self.Dominos.isChecked():
+        elif self.buttons[DemaeConfigs.Dominos].isChecked():
             demae = "dominos"
             return True
         return False
@@ -284,39 +297,41 @@ class ExpressPlatformConfiguration(QWizardPage):
 
         self.label = QLabel(self.tr("Which platform will you be installing WiiLink onto?"))
 
-        self.Wii = QRadioButton(self.tr("Wii"))
-        self.vWii = QRadioButton(self.tr("vWii (Wii U)"))
-        self.Dolphin = QRadioButton(self.tr("Dolphin Emulator"))
+        self.platforms = {
+            Platforms.Wii: "Wii",
+            Platforms.vWii: "vWii (Wii U)",
+            Platforms.Dolphin: self.tr("Dolphin Emulator")
+        }
 
-        self.buttonGroup = QButtonGroup(self)
-        self.buttonGroup.addButton(self.Wii)
-        self.buttonGroup.addButton(self.vWii)
-        self.buttonGroup.addButton(self.Dolphin)
+        # Layout
+        self.layout = QVBoxLayout()
 
-        layout = QVBoxLayout()
-        layout.addWidget(self.label)
-        layout.addWidget(self.Wii)
-        layout.addWidget(self.vWii)
-        layout.addWidget(self.Dolphin)
+        self.layout.addWidget(self.label)
 
-        self.setLayout(layout)
+        # Dictionary to hold buttons
+        self.buttons = {}
 
-        self.Wii.clicked.connect(self.completeChanged.emit)
-        self.vWii.clicked.connect(self.completeChanged.emit)
-        self.Dolphin.clicked.connect(self.completeChanged.emit)
+        # Add buttons to layout
+        for key, label in self.platforms.items():
+            button = QRadioButton(label)
+            self.layout.addWidget(button)
+            self.buttons[key] = button
+            button.clicked.connect(self.completeChanged.emit)
+
+        # Select the first option
+        next(iter(self.buttons.values())).setChecked(True)
+
+        # Set layout
+        self.setLayout(self.layout)
 
     def isComplete(self):
-        if self.Wii.isChecked():
-            PatchingPage.platform = Platforms.Wii
-            return True
-        elif self.vWii.isChecked():
-            PatchingPage.platform = Platforms.vWii
-            return True
-        elif self.Dolphin.isChecked():
-            PatchingPage.platform = Platforms.Dolphin
-            return True
+        for key, button in self.buttons.items():
+            if button.isChecked():
+                PatchingPage.platform = key
+                return True
+
         return False
-    
+
     def validatePage(self):
         global regional_lang
         global wiiroom_lang
@@ -340,11 +355,11 @@ class ExpressPlatformConfiguration(QWizardPage):
                 demae,
                 "ktv"
             ])
-        
+
         PatchingPage.regional_channels = regional_channels
         PatchingPage.selected_channels = selected_channels
 
         return True
-    
+
     def nextId(self):
         return 10
