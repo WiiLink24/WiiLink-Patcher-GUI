@@ -265,7 +265,7 @@ class ExpressDemaeConfiguration(QWizardPage):
         global regional_lang
 
         if self.Standard.isChecked():
-            demae = f"demae_{regional_lang}"
+            demae = f"food_{regional_lang}"
             return True
         elif self.Dominos.isChecked():
             demae = "dominos"
