@@ -73,11 +73,11 @@ class NewsRenderer:
             padding: 10px;
             font-size: 12px;
         """)
-        news_box.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Minimum)
+        news_box.setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
         news_box.adjustSize()
         news_box.setText("Loading latest news...")
-        news_box.setAlignment(Qt.AlignLeft)
-        news_box.setTextFormat(Qt.RichText)
+        news_box.setAlignment(Qt.AlignmentFlag.AlignLeft)
+        news_box.setTextFormat(Qt.TextFormat.RichText)
         news_box.setOpenExternalLinks(True)
         
         return news_box

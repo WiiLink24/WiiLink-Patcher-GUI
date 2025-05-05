@@ -86,7 +86,7 @@ class MainMenu(QWizardPage):
         # Add checkboxes to layout
         for button in self.options.values():
             self.layout.addWidget(button)
-            button.clicked.connect(self.completeChanged)
+            button.clicked.connect(self.completeChanged.emit)
 
         # Select the first option        
         next(iter(self.options.values())).setChecked(True)
@@ -123,9 +123,10 @@ class MainMenu(QWizardPage):
             return 300
         return 0  # Stay on the same page if nothing is selected
     
-    def show_credits(self):
-        self.credits = Credits()
-        self.credits.show()
+    @staticmethod
+    def show_credits():
+        credits_window = Credits()
+        credits_window.show()
 
 
 class Credits(QWidget):
@@ -195,22 +196,22 @@ class Credits(QWidget):
         icon = QIcon(os.path.join(os.path.dirname(__file__), "assets", "logo.webp"))
         logo_pixmap = icon.pixmap(96, 96)
         logo_label.setPixmap(logo_pixmap)
-        logo_label.setAlignment(Qt.AlignCenter)
+        logo_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
         
         # Title
         title_label = QLabel(self.tr("WiiLink Patcher"))
         title_label.setProperty("class", "title")
-        title_label.setAlignment(Qt.AlignCenter)
+        title_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
         
         # Version
         version_label = QLabel(self.tr("GUI - Version 2.0"))
         version_label.setProperty("class", "version")
-        version_label.setAlignment(Qt.AlignCenter)
+        version_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
         
         # Copyright
         copyright_label = QLabel(self.tr("© 2020-2025 WiiLink Team. All rights reserved."))
         copyright_label.setProperty("class", "copyright")
-        copyright_label.setAlignment(Qt.AlignCenter)
+        copyright_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
         
         # Add header section
         self.layout.addWidget(logo_label)
@@ -291,26 +292,26 @@ class PatchingComplete(QWizardPage):
         
         # Container layout
         container_layout = QVBoxLayout(self.container)
-        container_layout.setAlignment(Qt.AlignCenter)
+        container_layout.setAlignment(Qt.AlignmentFlag.AlignCenter)
         container_layout.setContentsMargins(15, 15, 15, 15)
         container_layout.setSpacing(5)  # Reduced spacing between elements
         
         # Party popper emoji
         emoji_label = QLabel("🎉")
         emoji_label.setStyleSheet("font-size: 64px; background-color: transparent;")
-        emoji_label.setAlignment(Qt.AlignCenter)
+        emoji_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
         
         # Heading
         heading = QLabel("<h1>Patching completed!</h1>")
         heading.setStyleSheet("background-color: transparent; color: white; margin: 0;")
-        heading.setAlignment(Qt.AlignCenter)
+        heading.setAlignment(Qt.AlignmentFlag.AlignCenter)
         
         # Message with file path
         self.message = QLabel(self.tr(f"<p>You can find the relevant files by clicking the button below. Please open a support ticket on our <a href='https://discord.gg/wiilink' style='color: #4a86e8; text-decoration: none;'>Discord server</a> if you have any issues.</p>"))
         self.message.setStyleSheet("background-color: transparent; color: white; margin: 0;")
-        self.message.setTextFormat(Qt.RichText)
+        self.message.setTextFormat(Qt.TextFormat.RichText)
         self.message.setWordWrap(True)
-        self.message.setAlignment(Qt.AlignCenter)
+        self.message.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self.message.setOpenExternalLinks(True)
     
         # Open folder button
@@ -391,7 +392,7 @@ def main():
     wizard = QWizard()
     wizard.setWindowTitle(app.tr("WiiLink Patcher"))
     wizard.setWizardStyle(QWizard.WizardStyle.ModernStyle)
-    wizard.setSubTitleFormat(Qt.RichText)
+    wizard.setSubTitleFormat(Qt.TextFormat.RichText)
     
     icon = QIcon(os.path.join(os.path.dirname(__file__), "assets", "logo.webp"))
     background = QIcon(os.path.join(os.path.dirname(__file__), "assets", "background.webp"))
@@ -569,8 +570,8 @@ def main():
         }
     """)
     
-    wizard.setButtonText(QWizard.NextButton, "Next")
-    wizard.setButtonText(QWizard.BackButton, "Back")
+    wizard.setButtonText(QWizard.WizardButton.NextButton, "Next")
+    wizard.setButtonText(QWizard.WizardButton.BackButton, "Back")
 
     if connection != "success":
         match connection:

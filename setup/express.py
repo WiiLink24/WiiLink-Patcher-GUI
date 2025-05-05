@@ -228,7 +228,7 @@ class ExpressRegionalChannelLanguage(QWizardPage):
         return False
 
     def russian_notice(self):
-        if self.Russian.isChecked:
+        if self.buttons[Languages.Russian].isChecked:
             QMessageBox.warning(self,
                                 self.tr("Russian notice for Wii Room"),
                                 self.tr("""You have selected the Russian translation for Wii Room
