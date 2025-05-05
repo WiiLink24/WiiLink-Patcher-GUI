@@ -221,6 +221,9 @@ class ExpressRegionalChannelLanguage(QWizardPage):
         elif self.buttons[Languages.Russian].isChecked():
             wiiroom_lang = "ru"
             return True
+        elif self.buttons[Languages.Japan].isChecked():
+            wiiroom_lang = "jp"
+            return True
         
         return False
 
