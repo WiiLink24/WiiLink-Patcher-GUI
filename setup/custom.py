@@ -1,12 +1,8 @@
-from PySide6.QtCore import QTimer, QThread
-from PySide6.QtWidgets import QWizardPage, QLabel, QVBoxLayout, QRadioButton, QButtonGroup, QProgressBar, QWizard, QCheckBox, QMessageBox, QWidget
-from .newsRenderer import NewsRenderer
-
-from .patch import PatchingWorker
+from PySide6.QtWidgets import QWizardPage, QLabel, QVBoxLayout, QRadioButton, QWizard, QCheckBox
+from .patch import PatchingPage
 from .enums import *
 
 selected_wc24_channels = []
-selected_regional_channels = []
 
 
 class CustomWiiConnect24Channels(QWizardPage):
@@ -97,6 +93,8 @@ class CustomRegionalChannels(QWizardPage):
         # Layout
         self.layout = QVBoxLayout()
 
+        self.layout.addWidget(self.label)
+
         # Dictionary to hold checkboxes
         self.checkboxes = {}
 
@@ -111,7 +109,7 @@ class CustomRegionalChannels(QWizardPage):
         self.setLayout(self.layout)
 
     def validatePage(self):
-        global selected_regional_channels
+        global selected_wc24_channels
 
         self.local_selected_channels = [
             key for key, checkbox in self.checkboxes.items() if checkbox.isChecked()
@@ -119,6 +117,11 @@ class CustomRegionalChannels(QWizardPage):
         selected_regional_channels = []
         for item in self.local_selected_channels:
             selected_regional_channels.append(item)
+
+        if len(selected_regional_channels) > 0:
+            PatchingPage.regional_channels = True
+        
+        PatchingPage.selected_channels = selected_wc24_channels + selected_regional_channels
 
         return True
 
@@ -141,37 +144,36 @@ class CustomPlatformConfiguration(QWizardPage):
 
         self.label = QLabel(self.tr("Which platform will you be installing WiiLink onto?"))
 
-        self.Wii = QRadioButton(self.tr("Wii"))
-        self.vWii = QRadioButton(self.tr("vWii (Wii U)"))
-        self.Dolphin = QRadioButton(self.tr("Dolphin Emulator"))
+        self.platforms = {
+            Platforms.Wii: "Wii",
+            Platforms.vWii: "vWii (Wii U)",
+            Platforms.Dolphin: self.tr("Dolphin Emulator")
+        }
 
-        self.buttonGroup = QButtonGroup(self)
-        self.buttonGroup.addButton(self.Wii)
-        self.buttonGroup.addButton(self.vWii)
-        self.buttonGroup.addButton(self.Dolphin)
+        # Layout
+        self.layout = QVBoxLayout()
 
-        layout = QVBoxLayout()
-        layout.addWidget(self.label)
-        layout.addWidget(self.Wii)
-        layout.addWidget(self.vWii)
-        layout.addWidget(self.Dolphin)
+        self.layout.addWidget(self.label)
 
-        self.setLayout(layout)
+        # Dictionary to hold buttons
+        self.buttons = {}
 
-        self.Wii.clicked.connect(self.completeChanged.emit)
-        self.vWii.clicked.connect(self.completeChanged.emit)
-        self.Dolphin.clicked.connect(self.completeChanged.emit)
+        # Add buttons to layout
+        for key, label in self.platforms.items():
+            button = QRadioButton(label)
+            self.layout.addWidget(button)
+            self.buttons[key] = button
+            button.clicked.connect(self.completeChanged.emit)
+
+        # Set layout
+        self.setLayout(self.layout)
 
     def isComplete(self):
-        if self.Wii.isChecked():
-            CustomPatchingPage.platform = Platforms.Wii
-            return True
-        elif self.vWii.isChecked():
-            CustomPatchingPage.platform = Platforms.vWii
-            return True
-        elif self.Dolphin.isChecked():
-            CustomPatchingPage.platform = Platforms.Dolphin
-            return True
+        for key, button in self.buttons.items():
+            if button.isChecked():
+                PatchingPage.platform = key
+                return True
+
         return False
 
 
@@ -183,144 +185,37 @@ class CustomRegionConfiguration(QWizardPage):
 
         self.label = QLabel(self.tr("Which region is your console?"))
 
-        self.USA = QRadioButton(self.tr("North America (NTSC-U)"))
-        self.PAL = QRadioButton(self.tr("Europe (PAL)"))
-        self.Japan = QRadioButton(self.tr("Japan (NTSC-J)"))
+        self.regions = {
+            Regions.USA: self.tr("North America (NTSC-U)"),
+            Regions.PAL: self.tr("Europe (PAL)"),
+            Regions.Japan: self.tr("Japan (NTSC-J)")
+        }
 
-        self.buttonGroup = QButtonGroup(self)
-        self.buttonGroup.addButton(self.USA)
-        self.buttonGroup.addButton(self.PAL)
-        self.buttonGroup.addButton(self.Japan)
+        # Layout
+        self.layout = QVBoxLayout()
 
-        layout = QVBoxLayout()
-        layout.addWidget(self.label)
-        layout.addWidget(self.USA)
-        layout.addWidget(self.PAL)
-        layout.addWidget(self.Japan)
+        self.layout.addWidget(self.label)
 
-        self.setLayout(layout)
+        # Dictionary to hold buttons
+        self.buttons = {}
 
-        self.USA.clicked.connect(self.completeChanged.emit)
-        self.PAL.clicked.connect(self.completeChanged.emit)
-        self.Japan.clicked.connect(self.completeChanged.emit)
+        # Add buttons to layout
+        for key, label in self.regions.items():
+            button = QRadioButton(label)
+            self.layout.addWidget(button)
+            self.buttons[key] = button
+            button.clicked.connect(self.completeChanged.emit)
+
+        # Set layout
+        self.setLayout(self.layout)
 
     def isComplete(self):
-        if self.USA.isChecked():
-            CustomPatchingPage.region = Regions.USA
-            return True
-        elif self.PAL.isChecked():
-            CustomPatchingPage.region = Regions.PAL
-            return True
-        elif self.Japan.isChecked():
-            CustomPatchingPage.region = Regions.Japan
-            return True
+        for key, button in self.buttons.items():
+            if button.isChecked():
+                PatchingPage.region = key
+                return True
+
         return False
-
-
-class CustomPatchingPage(QWizardPage):
-    platform: Platforms
-    region: Regions
-    selected_channels: list
-    regional_channels: bool = False
-
-    patching_complete = False
-    percentage: int
-    status: str
-
-    def __init__(self, parent=None):
-        super().__init__(parent)
-
-        self.setTitle(self.tr("Patching in progress"))
-        self.setSubTitle(self.tr("Please wait while the patcher works its magic!"))
-
-        self.label = QLabel(self.tr("Downloading files..."))
-        self.progress_bar = QProgressBar(self)
-        
-        self.news_box = NewsRenderer.createNewsBox(self)
-
-        layout = QVBoxLayout()
-        layout.addWidget(self.label)
-        layout.addWidget(self.progress_bar)
-        layout.addSpacing(10)
-        layout.addWidget(self.news_box)
     
-        self.setLayout(layout)
-        
-        QTimer.singleShot(0, lambda: NewsRenderer.getNews(self, self.news_box))
-
-        # Start thread to perform patching
-        self.logic_thread = QThread()
-        self.logic_worker = PatchingWorker()
-
-    def initializePage(self):
-        QTimer.singleShot(0, self.disable_back_button)
-
-        # Setup variables
-        self.logic_worker.setup_type = SetupTypes.Custom
-        self.logic_worker.platform = self.platform
-        self.logic_worker.region = self.region
-
-        global selected_wc24_channels
-        global selected_regional_channels
-
-        if len(selected_regional_channels) > 0:
-            self.logic_worker.regional_channels = True
-
-        self.logic_worker.selected_channels = ["download"] + selected_wc24_channels + selected_regional_channels
-
-        self.logic_worker.moveToThread(self.logic_thread)
-        self.logic_thread.started.connect(self.logic_worker.patching_functions)
-
-        self.logic_worker.broadcast_percentage.connect(self.set_percentage)
-        self.logic_worker.broadcast_status.connect(self.set_status)
-        self.logic_worker.error.connect(self.handle_error)
-
-        self.logic_worker.finished.connect(self.logic_finished)
-        self.logic_worker.finished.connect(self.logic_thread.quit)
-        self.logic_thread.finished.connect(self.logic_worker.deleteLater)
-        self.logic_thread.finished.connect(self.logic_thread.deleteLater)
-
-        self.logic_thread.start()
-
-    def isComplete(self):
-        return self.patching_complete
-
-    def disable_back_button(self):
-        self.wizard().button(QWizard.WizardButton.BackButton).setEnabled(False)
-
-    def logic_finished(self):
-        self.patching_complete = True
-        self.completeChanged.emit()
-        QTimer.singleShot(0, self.wizard().next)
-
     def nextId(self):
-        return 1000
-
-    def set_percentage(self, percentage: int):
-        """Sets percentage in variable then runs separate function to update progress bar,
-        so a QTimer can be used to allow the UI to refresh"""
-        self.percentage = percentage
-        QTimer.singleShot(0, self.update_percentage)
-
-    def update_percentage(self):
-        """Updates percentage in progress bar"""
-        self.progress_bar.setValue(self.percentage)
-
-    def set_status(self, status: str):
-        """Sets status in variable then runs separate function to update the label,
-        so a QTimer can be used to allow the UI to refresh"""
-        self.status = status
-        QTimer.singleShot(0, self.update_status)
-
-    def update_status(self):
-        """Updates status above progress bar"""
-        self.label.setText(self.status)
-    
-    def handle_error(self, error: str):
-        """Display errors thrown from the patching logic to the user"""
-        QMessageBox.warning(QWidget(),
-                             "WiiLink Patcher - Warning",
-                             f"""An exception was encountered while patching.
-Exception: '{error}'
-Please report this issue in the WiiLink Discord Server (discord.gg/wiilink)."""
-        )
+        return 10

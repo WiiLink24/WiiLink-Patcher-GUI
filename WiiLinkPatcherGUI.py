@@ -29,18 +29,18 @@ from PySide6.QtWidgets import QWizard, QApplication, QWizardPage, QVBoxLayout, Q
     QPushButton, QMessageBox, QWidget
 
 from setup.custom import CustomWiiConnect24Channels, CustomRegionalChannels, CustomPlatformConfiguration, \
-    CustomRegionConfiguration, CustomPatchingPage
+    CustomRegionConfiguration
 from setup.enums import Platforms, SetupTypes
 from setup.express import ExpressRegion, ExpressRegionalChannels, ExpressRegionalChannelTranslation, \
-    ExpressRegionalChannelLanguage, ExpressDemaeConfiguration, ExpressPlatformConfiguration, ExpressPatchingPage
+    ExpressRegionalChannelLanguage, ExpressDemaeConfiguration, ExpressPlatformConfiguration
 from setup.extras import ExtrasSystemChannelRestorer, MinimalExtraChannels, FullExtraChannels, \
-    ExtrasPlatformConfiguration, ExtraPatchingPage
+    ExtrasPlatformConfiguration, ExtrasRegionConfiguration
 from setup.download import connection_test, download_translation_dict, download_translation
+from setup.patch import PatchingPage
 
 patcher_url = "https://patcher.wiilink24.com"
 temp_dir = pathlib.Path(tempfile.gettempdir()).joinpath("WiiLinkPatcher")
 wiilink_dir = pathlib.Path().joinpath("WiiLink")
-setup_type = SetupTypes.Express
 
 
 class IntroPage(QWizardPage):
@@ -82,20 +82,23 @@ class MainMenu(QWizardPage):
         for button in self.options.values():
             self.layout.addWidget(button)
             button.clicked.connect(self.completeChanged)
-            button.clicked.connect(self.set_setup_type)
+
+        # Select the first option        
+        next(iter(self.options.values())).setChecked(True)
         
         self.options["credits"].clicked.connect(self.show_credits)
 
         self.setLayout(self.layout)
 
-    def set_setup_type(self):
-        global setup_type
+    def validatePage(self):
         if self.options["express_setup"].isChecked():
-            setup_type = SetupTypes.Express
+            PatchingPage.setup_type = SetupTypes.Express
         elif self.options["custom_setup"].isChecked():
-            setup_type = SetupTypes.Custom
+            PatchingPage.setup_type = SetupTypes.Custom
         elif self.options["extra_channels"].isChecked():
-            setup_type = SetupTypes.Extras
+            PatchingPage.setup_type = SetupTypes.Extras
+        
+        return True
 
     def isComplete(self):
         """Enable Next button only if a radio button is selected"""
@@ -171,11 +174,9 @@ class PatchingComplete(QWizardPage):
         self.open_folder.clicked.connect(self.open_wiilink_folder)
 
     def initializePage(self):
-        global setup_type
-
-        match setup_type:
+        match PatchingPage.setup_type:
             case SetupTypes.Extras:
-                if ExtraPatchingPage.platform != Platforms.Dolphin:
+                if PatchingPage.platform != Platforms.Dolphin:
                     open_guide = QPushButton(self.tr("Open the WAD installation guide in your web browser"))
                     self.layout.addWidget(open_guide)
                     open_guide.clicked.connect(self.open_guide_link)
@@ -192,25 +193,17 @@ class PatchingComplete(QWizardPage):
     def open_guide_link():
 
         guide_url = "https://wiilink.ca/guide"
-        match setup_type:
-            case SetupTypes.Express:
-                match ExpressPatchingPage.platform:
-                    case Platforms.Wii:
-                        guide_url = f"{guide_url}/wii/#section-ii---installing-wads-and-patching-wii-mail"
-                    case Platforms.vWii:
-                        guide_url = f"{guide_url}/vwii/#section-iii---installing-wads-and-patching-wii-mail"
-                    case Platforms.Dolphin:
-                        guide_url = f"{guide_url}/dolphin/#section-ii---installing-wads"
-            case SetupTypes.Custom:
-                match CustomPatchingPage.platform:
-                    case Platforms.Wii:
-                        guide_url = f"{guide_url}/wii/#section-ii---installing-wads-and-patching-wii-mail"
-                    case Platforms.vWii:
-                        guide_url = f"{guide_url}/vwii/#section-iii---installing-wads-and-patching-wii-mail"
-                    case Platforms.Dolphin:
-                        guide_url = f"{guide_url}/dolphin/#section-ii---installing-wads"
+        match PatchingPage.setup_type:
             case SetupTypes.Extras:
                 guide_url = "https://wii.hacks.guide/yawmme"
+            case _:
+                match PatchingPage.platform:
+                    case Platforms.Wii:
+                        guide_url = f"{guide_url}/wii/#section-ii---installing-wads-and-patching-wii-mail"
+                    case Platforms.vWii:
+                        guide_url = f"{guide_url}/vwii/#section-iii---installing-wads-and-patching-wii-mail"
+                    case Platforms.Dolphin:
+                        guide_url = f"{guide_url}/dolphin/#section-ii---installing-wads"
 
         webbrowser.open(guide_url)
 
@@ -280,25 +273,25 @@ def main():
     wizard.setPage(0, IntroPage())
     wizard.setPage(1, MainMenu())
 
+    wizard.setPage(10, PatchingPage())
+
     wizard.setPage(100, ExpressRegion())
     wizard.setPage(101, ExpressRegionalChannels())
     wizard.setPage(102, ExpressRegionalChannelTranslation())
     wizard.setPage(103, ExpressRegionalChannelLanguage())
     wizard.setPage(104, ExpressDemaeConfiguration())
     wizard.setPage(105, ExpressPlatformConfiguration())
-    wizard.setPage(106, ExpressPatchingPage())
 
     wizard.setPage(200, CustomWiiConnect24Channels())
     wizard.setPage(201, CustomRegionalChannels())
     wizard.setPage(202, CustomPlatformConfiguration())
     wizard.setPage(203, CustomRegionConfiguration())
-    wizard.setPage(204, CustomPatchingPage())
 
     wizard.setPage(300, ExtrasSystemChannelRestorer())
     wizard.setPage(301, MinimalExtraChannels())
     wizard.setPage(302, FullExtraChannels())
     wizard.setPage(303, ExtrasPlatformConfiguration())
-    wizard.setPage(304, ExtraPatchingPage())
+    wizard.setPage(304, ExtrasRegionConfiguration())
 
     wizard.setPage(1000, PatchingComplete())
 

@@ -1,9 +1,13 @@
-from PySide6.QtCore import QTimer, QThread
-from PySide6.QtWidgets import QWizardPage, QLabel, QVBoxLayout, QRadioButton, QButtonGroup, QMessageBox, QProgressBar, QWizard, QWidget
-from .newsRenderer import NewsRenderer
+from PySide6.QtWidgets import QWizardPage, QLabel, QVBoxLayout, QRadioButton, QButtonGroup, QMessageBox
 
-from .patch import PatchingWorker
+from .patch import PatchingPage
 from .enums import *
+
+regional_channels = False
+regional_lang = ""
+wiiroom_lang = ""
+demae = ""
+region = ""
 
 
 class ExpressRegion(QWizardPage):
@@ -39,14 +43,19 @@ class ExpressRegion(QWizardPage):
 
     def isComplete(self):
         """Enable Next button only if a radio button is selected"""
+        global region
+
         if self.USA.isChecked():
-            ExpressPatchingPage.region = Regions.USA
+            PatchingPage.region = Regions.USA
+            region = "us"
             return True
         elif self.PAL.isChecked():
-            ExpressPatchingPage.region = Regions.PAL
+            PatchingPage.region = Regions.PAL
+            region = "eu"
             return True
         elif self.Japan.isChecked():
-            ExpressPatchingPage.region = Regions.Japan
+            PatchingPage.region = Regions.Japan
+            region = "jp"
             return True
         return False
 
@@ -84,12 +93,12 @@ Services that would be installed:
         self.No.toggled.connect(lambda: self.completeChanged.emit())
 
     def isComplete(self):
+        global regional_channels
         if self.Yes.isChecked():
-            ExpressPatchingPage.regional_channels = True
+            regional_channels = True
             return True
         elif self.No.isChecked():
-            ExpressPatchingPage.regional_channels = False
-            ExpressPatchingPage.wii_room_language = Languages.Japan
+            regional_channels = False
             return True
         return False
 
@@ -128,11 +137,12 @@ class ExpressRegionalChannelTranslation(QWizardPage):
         self.Japanese.toggled.connect(lambda: self.completeChanged.emit())
 
     def isComplete(self):
+        global regional_lang
         if self.Translated.isChecked():
-            ExpressPatchingPage.translated = True
+            regional_lang = "en"
             return True
         elif self.Japanese.isChecked():
-            ExpressPatchingPage.translated = False
+            regional_lang = "jp"
             return True
         return False
 
@@ -146,6 +156,16 @@ class ExpressRegionalChannelTranslation(QWizardPage):
 
 class ExpressRegionalChannelLanguage(QWizardPage):
     language = Languages.Japan
+    languages = {
+            Languages.English: "English",
+            Languages.Spanish: "Español",
+            Languages.French: "Français",
+            Languages.German: "Deutsch",
+            Languages.Italian: "Italiano",
+            Languages.Dutch: "Nederlands",
+            Languages.Portuguese: "Português (Brasil)",
+            Languages.Russian: "Русский"
+        }
 
     def __init__(self, parent=None):
         super().__init__(parent)
@@ -154,60 +174,54 @@ class ExpressRegionalChannelLanguage(QWizardPage):
 
         self.label = QLabel(self.tr("What language would you like <b>Wii Room</b> to be in?"))
 
-        self.English = QRadioButton(self.tr("English"))
-        self.Spanish = QRadioButton(self.tr("Español"))
-        self.French = QRadioButton(self.tr("Français"))
-        self.German = QRadioButton(self.tr("Deutsch"))
-        self.Italian = QRadioButton(self.tr("Italiano"))
-        self.Dutch = QRadioButton(self.tr("Nederlands"))
-        self.Portuguese = QRadioButton(self.tr("Português (Brasil)"))
-        self.Russian = QRadioButton(self.tr("Русский"))
+        # Layout
+        self.layout = QVBoxLayout()
 
-        self.languages = [self.English, self.Spanish, self.French, self.German, self.Italian, self.Dutch,
-                          self.Portuguese, self.Russian]
+        self.layout.addWidget(self.label)
 
-        self.buttonGroup = QButtonGroup(self)
-        for button in self.languages:
-            self.buttonGroup.addButton(button)
+        # Dictionary to hold buttons
+        self.buttons = {}
 
-        layout = QVBoxLayout()
-        layout.addWidget(self.label)
-        for button in self.languages:
-            layout.addWidget(button)
+        # Add buttons to layout
+        for key, label in self.languages.items():
+            button = QRadioButton(label)
+            self.layout.addWidget(button)
+            self.buttons[key] = button
+            button.clicked.connect(self.completeChanged.emit)
 
-        self.setLayout(layout)
+        # Set layout
+        self.setLayout(self.layout)
 
-        for button in self.languages:
-            button.toggled.connect(lambda: self.completeChanged.emit())
-
-        self.Russian.clicked.connect(lambda: self.russian_notice())
+        self.buttons[Languages.Russian].clicked.connect(self.russian_notice)
 
     def isComplete(self):
         """Enable Next button only if a radio button is selected"""
-        if self.English.isChecked():
-            ExpressPatchingPage.wii_room_language = Languages.English
+        global wiiroom_lang
+        if self.buttons[Languages.English].isChecked():
+            wiiroom_lang = "en"
             return True
-        elif self.Spanish.isChecked():
-            ExpressPatchingPage.wii_room_language = Languages.Spanish
+        elif self.buttons[Languages.Spanish].isChecked():
+            wiiroom_lang = "es"
             return True
-        elif self.French.isChecked():
-            ExpressPatchingPage.wii_room_language = Languages.French
+        elif self.buttons[Languages.French].isChecked():
+            wiiroom_lang = "fr"
             return True
-        elif self.German.isChecked():
-            ExpressPatchingPage.wii_room_language = Languages.German
+        elif self.buttons[Languages.German].isChecked():
+            wiiroom_lang = "de"
             return True
-        elif self.Italian.isChecked():
-            ExpressPatchingPage.wii_room_language = Languages.Italian
+        elif self.buttons[Languages.Italian].isChecked():
+            wiiroom_lang = "it"
             return True
-        elif self.Dutch.isChecked():
-            ExpressPatchingPage.wii_room_language = Languages.Dutch
+        elif self.buttons[Languages.Dutch].isChecked():
+            wiiroom_lang = "nl"
             return True
-        elif self.Portuguese.isChecked():
-            ExpressPatchingPage.wii_room_language = Languages.Portuguese
+        elif self.buttons[Languages.Portuguese].isChecked():
+            wiiroom_lang = "ptbr"
             return True
-        elif self.Russian.isChecked():
-            ExpressPatchingPage.wii_room_language = Languages.Russian
+        elif self.buttons[Languages.Russian].isChecked():
+            wiiroom_lang = "ru"
             return True
+        
         return False
 
     def russian_notice(self):
@@ -247,11 +261,14 @@ class ExpressDemaeConfiguration(QWizardPage):
         self.Dominos.toggled.connect(lambda: self.completeChanged.emit())
 
     def isComplete(self):
+        global demae
+        global regional_lang
+
         if self.Standard.isChecked():
-            ExpressPatchingPage.demae_config = DemaeConfigs.Standard
+            demae = f"demae_{regional_lang}"
             return True
         elif self.Dominos.isChecked():
-            ExpressPatchingPage.demae_config = DemaeConfigs.Dominos
+            demae = "dominos"
             return True
         return False
 
@@ -281,119 +298,39 @@ class ExpressPlatformConfiguration(QWizardPage):
 
         self.setLayout(layout)
 
-        self.Wii.toggled.connect(lambda: self.completeChanged.emit())
-        self.vWii.toggled.connect(lambda: self.completeChanged.emit())
-        self.Dolphin.toggled.connect(lambda: self.completeChanged.emit())
+        self.Wii.clicked.connect(self.completeChanged.emit)
+        self.vWii.clicked.connect(self.completeChanged.emit)
+        self.Dolphin.clicked.connect(self.completeChanged.emit)
 
     def isComplete(self):
         if self.Wii.isChecked():
-            ExpressPatchingPage.platform = Platforms.Wii
+            PatchingPage.platform = Platforms.Wii
             return True
         elif self.vWii.isChecked():
-            ExpressPatchingPage.platform = Platforms.vWii
+            PatchingPage.platform = Platforms.vWii
             return True
         elif self.Dolphin.isChecked():
-            ExpressPatchingPage.platform = Platforms.Dolphin
+            PatchingPage.platform = Platforms.Dolphin
             return True
         return False
-
-
-class ExpressPatchingPage(QWizardPage):
-    platform: Platforms
-    region: Regions
-    regional_channels: bool
-    wii_room_language = Languages.Japan
-    demae_config: DemaeConfigs = DemaeConfigs.Standard
-    translated: bool = False
-
-    patching_complete = False
-    percentage: int
-    status: str
-
-    def __init__(self, parent=None):
-        super().__init__(parent)
     
-        self.setTitle(self.tr("Patching in progress"))
-        self.setSubTitle(self.tr("Please wait while the patcher works its magic!"))
-    
-        self.label = QLabel(self.tr("Downloading files..."))
-        self.progress_bar = QProgressBar(self)
-    
-        self.news_box = NewsRenderer.createNewsBox(self)
-    
-        layout = QVBoxLayout()
-        layout.addWidget(self.label)
-        layout.addWidget(self.progress_bar)
-        layout.addSpacing(10)
-        layout.addWidget(self.news_box)
-    
-        self.setLayout(layout)
-        
-        QTimer.singleShot(0, lambda: NewsRenderer.getNews(self, self.news_box))
+    def validatePage(self):
+        global regional_lang
+        global wiiroom_lang
+        global demae
+        global regional_channels
+        global region
 
-
-    def initializePage(self):
-        QTimer.singleShot(0, self.disable_back_button)
-
-        # Start thread to perform patching
-        self.logic_thread = QThread()
-        self.logic_worker = PatchingWorker()
-
-        # Setup variables
-        self.logic_worker.platform = self.platform
-        self.logic_worker.region = self.region
-        self.logic_worker.regional_channels = self.regional_channels
-        self.logic_worker.setup_type = SetupTypes.Express
-
-        match self.region:
-            case Regions.USA:
-                short_region = "us"
-            case Regions.PAL:
-                short_region = "eu"
-            case Regions.Japan:
-                short_region = "jp"
-        
-        match self.wii_room_language:
-            case Languages.Japan:
-                wiiroom_lang = "jp"
-            case Languages.English:
-                wiiroom_lang = "en"
-            case Languages.Spanish:
-                wiiroom_lang = "es"
-            case Languages.French:
-                wiiroom_lang = "fr"
-            case Languages.German:
-                wiiroom_lang = "de"
-            case Languages.Italian:
-                wiiroom_lang = "it"
-            case Languages.Dutch:
-                wiiroom_lang = "nl"
-            case Languages.Portuguese:
-                wiiroom_lang = "ptbr"
-            case Languages.Russian:
-                wiiroom_lang = "ru"
-        
-        if self.translated:
-            regional_lang = "en"
-        else:
-            regional_lang = "jp"
-        
-        match self.demae_config:
-            case DemaeConfigs.Standard:
-                demae = f"food_{regional_lang}"
-            case DemaeConfigs.Dominos:
-                demae = "dominos"
-        
         selected_channels = [
             "download",
-            f"nc_{short_region}",
-            f"forecast_{short_region}",
-            f"news_{short_region}",
-            f"evc_{short_region}",
-            f"cmoc_{short_region}"
+            f"nc_{region}",
+            f"forecast_{region}",
+            f"news_{region}",
+            f"evc_{region}",
+            f"cmoc_{region}"
         ]
 
-        if self.regional_channels:
+        if regional_channels:
             selected_channels.extend([
                 f"wiiroom_{wiiroom_lang}",
                 f"digicam_{regional_lang}",
@@ -401,61 +338,10 @@ class ExpressPatchingPage(QWizardPage):
                 "ktv"
             ])
         
-        self.logic_worker.selected_channels = selected_channels
+        PatchingPage.regional_channels = regional_channels
+        PatchingPage.selected_channels = selected_channels
 
-        self.logic_worker.moveToThread(self.logic_thread)
-        self.logic_thread.started.connect(self.logic_worker.patching_functions)
-
-        self.logic_worker.broadcast_percentage.connect(self.set_percentage)
-        self.logic_worker.broadcast_status.connect(self.set_status)
-        self.logic_worker.error.connect(self.handle_error)
-
-        self.logic_worker.finished.connect(self.logic_finished)
-        self.logic_worker.finished.connect(self.logic_thread.quit)
-        self.logic_thread.finished.connect(self.logic_worker.deleteLater)
-        self.logic_thread.finished.connect(self.logic_thread.deleteLater)
-
-        self.logic_thread.start()
-
-    def isComplete(self):
-        return self.patching_complete
-
-    def disable_back_button(self):
-        self.wizard().button(QWizard.WizardButton.BackButton).setEnabled(False)
-
-    def logic_finished(self):
-        self.patching_complete = True
-        self.completeChanged.emit()
-        QTimer.singleShot(0, self.wizard().next)
-
-    def nextId(self):
-        return 1000
-
-    def set_percentage(self, percentage: int):
-        """Sets percentage in variable then runs separate function to update progress bar,
-        so a QTimer can be used to allow the UI to refresh"""
-        self.percentage = percentage
-        QTimer.singleShot(0, self.update_percentage)
-
-    def update_percentage(self):
-        """Updates percentage in progress bar"""
-        self.progress_bar.setValue(self.percentage)
-
-    def set_status(self, status: str):
-        """Sets status in variable then runs separate function to update the label,
-        so a QTimer can be used to allow the UI to refresh"""
-        self.status = status
-        QTimer.singleShot(0, self.update_status)
-
-    def update_status(self):
-        """Updates status above progress bar"""
-        self.label.setText(self.status)
+        return True
     
-    def handle_error(self, error: str):
-        """Display errors thrown from the patching logic to the user"""
-        QMessageBox.warning(QWidget(),
-                             "WiiLink Patcher - Warning",
-                             f"""An exception was encountered while patching.
-Exception: '{error}'
-Please report this issue in the WiiLink Discord Server (discord.gg/wiilink)."""
-        )
+    def nextId(self):
+        return 10

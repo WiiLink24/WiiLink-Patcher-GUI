@@ -1,10 +1,11 @@
-import libWiiPy, os, tempfile, shutil, bsdiff4, sys
-from PySide6.QtCore import QObject, Signal
-from PySide6.QtWidgets import QMessageBox, QWidget
+import libWiiPy, os, tempfile, shutil, bsdiff4
+from PySide6.QtCore import QObject, Signal, QTimer, QThread
+from PySide6.QtWidgets import QMessageBox, QWidget, QWizardPage, QLabel, QProgressBar, QVBoxLayout, QWizard
 
 from .enums import *
 from .download import download_patch, download_file, download_agc, download_osc_app, download_title_contents, \
     download_channel, download_spd, download_todaytomorrow
+from .newsRenderer import NewsRenderer
 
 patcher_url = "https://patcher.wiilink24.com"
 temp_dir = os.path.join(tempfile.gettempdir(), "WiiLinkPatcher")
@@ -372,12 +373,118 @@ def wiispeak_patch(region: Regions, network: WFCNetworks):
 
     patch_channel("ws", "Wii Speak Channel", channel_id, patches, ChannelTypes.WFC, region=region, wfc_network=network)
 
+
+class PatchingPage(QWizardPage):
+    platform: Platforms
+    region: Regions
+    selected_channels: list
+    regional_channels: bool = False
+    setup_type: SetupTypes
+
+    patching_complete = False
+    percentage: int
+    status: str
+
+    def __init__(self, parent=None):
+        super().__init__(parent)
+
+        self.setTitle(self.tr("Patching in progress"))
+        self.setSubTitle(self.tr("Please wait while the patcher works its magic!"))
+
+        self.label = QLabel(self.tr("Downloading files..."))
+        self.progress_bar = QProgressBar(self)
+        
+        self.news_box = NewsRenderer.createNewsBox(self)
+
+        layout = QVBoxLayout()
+        layout.addWidget(self.label)
+        layout.addWidget(self.progress_bar)
+        layout.addSpacing(10)
+        layout.addWidget(self.news_box)
+    
+        self.setLayout(layout)
+        
+        QTimer.singleShot(0, lambda: NewsRenderer.getNews(self, self.news_box))
+
+        # Start thread to perform patching
+        self.logic_thread = QThread()
+        self.logic_worker = PatchingWorker()
+
+    def initializePage(self):
+        QTimer.singleShot(0, self.disable_back_button)
+
+        # Setup variables
+        self.logic_worker.setup_type = self.setup_type
+        self.logic_worker.platform = self.platform
+        self.logic_worker.region = self.region
+        self.logic_worker.regional_channels = self.regional_channels
+        self.logic_worker.selected_channels = ["download"] + self.selected_channels
+
+        self.logic_worker.moveToThread(self.logic_thread)
+        self.logic_thread.started.connect(self.logic_worker.patching_functions)
+
+        self.logic_worker.broadcast_percentage.connect(self.set_percentage)
+        self.logic_worker.broadcast_status.connect(self.set_status)
+        self.logic_worker.error.connect(self.handle_error)
+
+        self.logic_worker.finished.connect(self.logic_finished)
+        self.logic_worker.finished.connect(self.logic_thread.quit)
+        self.logic_thread.finished.connect(self.logic_worker.deleteLater)
+        self.logic_thread.finished.connect(self.logic_thread.deleteLater)
+
+        self.logic_thread.start()
+
+    def isComplete(self):
+        return self.patching_complete
+
+    def disable_back_button(self):
+        self.wizard().button(QWizard.WizardButton.BackButton).setEnabled(False)
+
+    def logic_finished(self):
+        self.patching_complete = True
+        self.completeChanged.emit()
+        QTimer.singleShot(0, self.wizard().next)
+
+    def nextId(self):
+        return 1000
+
+    def set_percentage(self, percentage: int):
+        """Sets percentage in variable then runs separate function to update progress bar,
+        so a QTimer can be used to allow the UI to refresh"""
+        self.percentage = percentage
+        QTimer.singleShot(0, self.update_percentage)
+
+    def update_percentage(self):
+        """Updates percentage in progress bar"""
+        self.progress_bar.setValue(self.percentage)
+
+    def set_status(self, status: str):
+        """Sets status in variable then runs separate function to update the label,
+        so a QTimer can be used to allow the UI to refresh"""
+        self.status = status
+        QTimer.singleShot(0, self.update_status)
+
+    def update_status(self):
+        """Updates status above progress bar"""
+        self.label.setText(self.status)
+    
+    def handle_error(self, error: str):
+        """Display errors thrown from the patching logic to the user"""
+        QMessageBox.warning(QWidget(),
+                             "WiiLink Patcher - Warning",
+                             f"""An exception was encountered while patching.
+Exception: '{error}'
+Please report this issue in the WiiLink Discord Server (discord.gg/wiilink)."""
+        )
+
+
 class PatchingWorker(QObject):
     platform: Platforms
     region: Regions
     selected_channels: list
     regional_channels: bool = False
     setup_type: SetupTypes
+
     is_patching_complete: bool
     finished = Signal(bool)
     broadcast_percentage = Signal(int)
@@ -392,6 +499,7 @@ class PatchingWorker(QObject):
 
         patch_functions = {
             "download": lambda: self.download_supporting_apps(),
+            "scr": lambda: download_osc_app("system-channel-restorer"),
             "forecast_us": lambda: forecast_patch(Regions.USA, self.platform),
             "forecast_eu": lambda: forecast_patch(Regions.PAL, self.platform),
             "forecast_jp": lambda: forecast_patch(Regions.Japan, self.platform),
@@ -434,6 +542,7 @@ class PatchingWorker(QObject):
 
         patch_status = {
             "download": self.tr("Downloading files..."),
+            "scr": self.tr("Downloading System Channel Restorer..."),
             "forecast_us": self.tr("Patching Forecast Channel (USA)..."),
             "forecast_eu": self.tr("Patching Forecast Channel (PAL)..."),
             "forecast_jp": self.tr("Patching Forecast Channel (Japan)..."),

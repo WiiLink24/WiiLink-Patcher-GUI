@@ -1,4 +1,4 @@
-from PySide6.QtCore import QThread, Qt, QObject, Signal, QTimer
+from PySide6.QtCore import QThread, Qt, QObject, Signal
 from PySide6.QtWidgets import QLabel, QSizePolicy
 import requests
 import xml.etree.ElementTree as ET
