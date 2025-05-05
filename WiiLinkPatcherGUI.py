@@ -65,6 +65,9 @@ Press 'Next' to get started!"""))
 class MainMenu(QWizardPage):
     def __init__(self, parent=None):
         super().__init__(parent)
+
+        self.about_window = About()
+
         self.setTitle(self.tr("Choose what you'd like to do!"))
         self.setSubTitle(self.tr("We recommend choosing 'Express Setup' for first-time users."))
 
@@ -72,7 +75,7 @@ class MainMenu(QWizardPage):
             "express_setup": QRadioButton(self.tr("Express Setup (Recommended)")),
             "custom_setup": QRadioButton(self.tr("Custom Setup (Advanced)")),
             "extra_channels": QRadioButton(self.tr("Extra Channels (Optional)")),
-            "credits": QPushButton(self.tr("About WiiLink Patcher")),
+            "about": QPushButton(self.tr("About WiiLink Patcher")),
         }
 
         self.options["express_setup"].setText(self.tr("Express Setup (Recommended)\nThe fastest way to get started with WiiLink"))
@@ -91,7 +94,7 @@ class MainMenu(QWizardPage):
         # Select the first option        
         next(iter(self.options.values())).setChecked(True)
         
-        self.options["credits"].clicked.connect(self.show_credits)
+        self.options["about"].clicked.connect(self.show_about)
 
         self.setLayout(self.layout)
 
@@ -123,13 +126,11 @@ class MainMenu(QWizardPage):
             return 300
         return 0  # Stay on the same page if nothing is selected
     
-    @staticmethod
-    def show_credits():
-        credits_window = Credits()
-        credits_window.show()
+    def show_about(self):
+        self.about_window.show()
 
 
-class Credits(QWidget):
+class About(QWidget):
     def __init__(self, parent=None):
         super().__init__(parent)
         self.setWindowTitle(self.tr("WiiLink Patcher - About"))
