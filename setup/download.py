@@ -19,7 +19,7 @@ def connection_test():
     patcher_expected = b"If the patcher can read this, the connection test succeeds.\n"
 
     try:
-        patcher_response = requests.get(url=patcher_test).content
+        patcher_response = requests.get(url=patcher_test, timeout=10).content
     except Exception as e:
         print(f"""Connection test failed!
 {e}""")
@@ -31,10 +31,10 @@ Expected: {patcher_expected}
 Received: {patcher_response}""")
         return False
 
-    nus_test = ("http://nus.cdn.shop.wii.com/ccs/download/000100014841564a/tmd")
+    nus_test = "http://nus.cdn.shop.wii.com/ccs/download/000100014841564a/tmd"
 
     try:
-        nus_request = requests.get(url=nus_test, headers={'User-Agent': 'wii libnup/1.0'})
+        nus_request = requests.get(url=nus_test, headers={'User-Agent': 'wii libnup/1.0'}, timeout=10)
     except Exception as e:
         print(f"""Connection test failed!
 {e}""")
