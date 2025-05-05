@@ -5,7 +5,7 @@ param(
 
 $buildProject = {
     Write-Host "Building WiiLink Patcher GUI..."
-    pyside6-project build
+    pyside6-project build pyproject.toml
     python -m nuitka --show-progress --assume-yes-for-downloads WiiLinkPatcherGUI.py
 }
 

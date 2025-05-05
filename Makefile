@@ -2,7 +2,7 @@ CC=python -m nuitka
 ARCH_FLAGS?=
 
 all:
-	pyside6-project build
+	pyside6-project build pyproject.toml
 	$(CC) --show-progress --assume-yes-for-downloads WiiLinkPatcherGUI.py $(ARCH_FLAGS) -o WiiLinkPatcherGUI
 
 clean:
