@@ -23,13 +23,13 @@ def connection_test():
     except Exception as e:
         print(f"""Connection test failed!
 {e}""")
-        return False
+        return "fail-patcher"
 
     if patcher_response != patcher_expected:
         print(f"""Unexpected response!
 Expected: {patcher_expected}
 Received: {patcher_response}""")
-        return False
+        return "fail-patcher"
 
     nus_test = "http://nus.cdn.shop.wii.com/ccs/download/000100014841564a/tmd"
 
@@ -38,9 +38,9 @@ Received: {patcher_response}""")
     except Exception as e:
         print(f"""Connection test failed!
 {e}""")
-        return False
+        return "fail-nus"
 
-    return True
+    return "success"
 
 
 def download_translation(language: str):

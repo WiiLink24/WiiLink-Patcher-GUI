@@ -535,10 +535,17 @@ def main():
     wizard.setButtonText(QWizard.NextButton, "Next")
     wizard.setButtonText(QWizard.BackButton, "Back")
 
-    if not connection:
+    if connection != "success":
+        match connection:
+            case "fail-nus":
+                error_message = "The patcher failed to connect to Nintendo's update servers."
+            case "fail-patcher":
+                error_message = "The patcher failed to connect to WiiLink's servers."
+            case _:
+                error_message = "The patcher failed to connect to the internet."
         QMessageBox.critical(QWidget(),
                              "WiiLink Patcher - Error",
-                             "The patcher failed to connect to the internet, and thus cannot continue.")
+                             error_message)
         sys.exit()
     
     language = QLocale.languageToCode(QLocale.system().language())
