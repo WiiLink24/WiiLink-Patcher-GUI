@@ -12,7 +12,6 @@
 
 # These are standard options that are needed on all platforms.
 # nuitka-project: --plugin-enable=pyside6
-# nuitka-project: --include-package="certifi"
 # nuitka-project: --include-data-dir={MAIN_DIRECTORY}/assets=assets
 
 import os

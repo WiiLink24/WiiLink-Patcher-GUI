@@ -1,7 +1,5 @@
-import os, urllib.request, tempfile, zipfile, libWiiPy, shutil, json, certifi, ssl
+import os, requests, tempfile, zipfile, libWiiPy, shutil, json
 from .enums import *
-
-context = ssl.create_default_context(cafile=certifi.where())
 
 patcher_url = "https://patcher.wiilink24.com"
 temp_dir = os.path.join(tempfile.gettempdir(), "WiiLinkPatcher")
@@ -20,14 +18,11 @@ def connection_test():
     patcher_test = f"{patcher_url}/connectiontest.txt"
     patcher_expected = b"If the patcher can read this, the connection test succeeds.\n"
 
-    patcher_request = urllib.request.Request(patcher_test)
-    patcher_request.add_header("User-Agent",
-                       "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36")
-
     try:
-        patcher_response = urllib.request.urlopen(patcher_request, context=context).read()
+        patcher_response = requests.get(url=patcher_test).content
     except Exception as e:
-        print(f"Connection test failed! {e}")
+        print(f"""Connection test failed!
+{e}""")
         return False
 
     if patcher_response != patcher_expected:
@@ -38,13 +33,11 @@ Received: {patcher_response}""")
 
     nus_test = ("http://nus.cdn.shop.wii.com/ccs/download/000100014841564a/tmd")
 
-    nus_request = urllib.request.Request(nus_test)
-    nus_request.add_header("User-Agent", "wii libnup/1.0")
-
     try:
-        nus_response = urllib.request.urlopen(nus_request, context=context).read()
+        nus_request = requests.get(url=nus_test, headers={'User-Agent': 'wii libnup/1.0'})
     except Exception as e:
-        print(f"Connection test failed! {e}")
+        print(f"""Connection test failed!
+{e}""")
         return False
 
     return True
@@ -83,11 +76,8 @@ def download_translation_dict():
 
 def download_file(url: str, destination: str = None):
     """Simple function to download files from a specified URL to a specified location, or to return the contents of the URL if a location is not specified."""
-    request = urllib.request.Request(url)
-    request.add_header("User-Agent",
-                       "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36")
     try:
-        file = urllib.request.urlopen(request, context=context).read()
+        file = requests.get(url=url).content
         if destination is not None:
             open(destination, "wb").write(file)
         else:
