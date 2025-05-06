@@ -13,6 +13,7 @@
 # These are standard options that are needed on all platforms.
 # nuitka-project: --plugin-enable=pyside6
 # nuitka-project: --include-data-dir={MAIN_DIRECTORY}/assets=assets
+# nuitka-project: --include-data-file={MAIN_DIRECTORY}/style.qss=style.qss
 
 import os
 import pathlib
@@ -138,54 +139,8 @@ class About(QWidget):
         self.setFixedHeight(500)
         
         # Set background color to match main app
-        self.setStyleSheet("""
-            Credits {
-                background-color: #222222;
-                color: #ffffff;
-            }
-            QLabel {
-                color: #ffffff;
-            }
-            QLabel[class="title"] {
-                font-size: 20px;
-                font-weight: bold;
-                color: #ffffff;
-            }
-            QLabel[class="version"] {
-                font-size: 13px;
-                color: #aaaaaa;
-            }
-            QLabel[class="copyright"] {
-                font-size: 12px;
-                color: #888888;
-            }
-            QLabel[class="header"] {
-                font-size: 14px;
-                font-weight: bold;
-                border-bottom: 1px solid #444444;
-                padding-bottom: 4px;
-                margin-top: 8px;
-            }
-            QPushButton {
-                background-color: transparent;
-                border: 1px solid rgba(70, 70, 70, 1);
-                border-radius: 8px;
-                padding: 8px 12px;
-                margin: 4px 0px;
-                font-size: 13px;
-                font-weight: 500;
-                color: #ffffff;
-                text-align: center;
-            }
-            QPushButton:hover {
-                background-color: rgba(60, 60, 60, 1);
-                border-color: #4a86e8;
-            }
-            QPushButton:pressed {
-                background-color: rgba(26, 115, 232, 0.15);
-                border: 1px solid #1a73e8;
-            }
-        """)
+        stylesheet = open(os.path.join(os.path.dirname(__file__), "style.qss"), "r").read()
+        self.setStyleSheet(stylesheet)
         
         # Create main layout
         self.layout = QVBoxLayout()
@@ -405,171 +360,9 @@ def main():
     app.setWindowIcon(icon)
     
     # Apply global stylesheet for consistent styling across all pages
-    wizard.setStyleSheet("""
-        QWizard {
-        background-color: #222222;
-    }
-    
-    QWizard QLabel {
-        color: #ffffff;
-    }
-    
-    QLabel[class="QWizardPageTitle"] {
-        background: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #1a73e8, stop:1 #135cb6);
-        color: white;
-        font-size: 18px;
-        font-weight: bold;
-        padding: 8px 10px;
-        border-top-left-radius: 4px;
-        border-top-right-radius: 4px;
-    }
-    
-    QLabel[class="QWizardPageSubTitle"] {
-        background-color: #f0f6ff;
-        color: #1a73e8;
-        font-size: 13px;
-        padding: 6px 10px;
-        border-bottom: 1px solid #c2d7ff;
-    }
-    
-        QRadioButton {
-            background-color: transparent;
-            border: 1px solid rgba(70, 70, 70, 1);
-            border-radius: 8px;
-            padding: 8px 10px;
-            font-size: 13px;
-            font-weight: 500;
-            color: #ffffff;
-        }
-        
-        QRadioButton:hover {
-            background-color: rgba(60, 60, 60, 1);
-            border-color: #4a86e8;
-        }
-        
-        QRadioButton:checked {
-            background-color: rgba(26, 115, 232, 0.08);
-            border: 1px solid #1a73e8;
-            color: #1a73e8;
-        }
-        
-        QRadioButton::indicator {
-            width: 18px;
-            height: 18px;
-            border-radius: 5px;
-            border: 1px solid #5f6368;
-            margin-right: 8px;
-            subcontrol-position: left center;
-        }
-        
-        QRadioButton::indicator:checked {
-            background-color: #1a73e8;
-            border: 1px solid #1a73e8;
-            image: url(assets/rounded_square.svg);
-        }
-        
-        QRadioButton::indicator:hover {
-            border-color: #1a73e8;
-        }
-        
-        QPushButton {
-            background-color: transparent;
-            border: 1px solid rgba(70, 70, 70, 1);
-            border-radius: 8px;
-            padding: 6px 10px;
-            margin: 4px 0px;
-            font-size: 13px;
-            font-weight: 500;
-            color: #ffffff;
-        }
-        
-        QPushButton:hover {
-            background-color: rgba(60, 60, 60, 1);
-            border-color: #4a86e8;
-        }
-        
-        QPushButton:pressed {
-            background-color: rgba(26, 115, 232, 0.15);
-            border: 1px solid #1a73e8;
-        }
-        
-        QPushButton:disabled {
-            background-color: rgba(70, 70, 70, 0.5);
-            border: 1px solid rgba(100, 100, 100, 0.3);
-            color: rgba(255, 255, 255, 0.3);
-        }
-        
-        /* Style for the wizard's next and back buttons with chevrons */
-        QWizard QToolButton {
-            background-color: rgba(50, 50, 50, 1);
-            border: 1px solid rgba(70, 70, 70, 1);
-            border-radius: 4px;
-            padding: 2px;
-            color: #ffffff;
-        }
-        
-        QWizard QToolButton:hover {
-            background-color: rgba(60, 60, 60, 1);
-            border-color: #4a86e8;
-        }
-        
-        QWizard QToolButton:disabled {
-            background-color: rgba(70, 70, 70, 0.5);
-            border: 1px solid rgba(100, 100, 100, 0.3);
-            color: rgba(255, 255, 255, 0.3);
-        }
-        
-        QCheckBox {
-            background-color: transparent;
-            border: 1px solid rgba(70, 70, 70, 1);
-            border-radius: 8px;
-            padding: 8px 10px;
-            font-size: 13px;
-            font-weight: 500;
-            color: #ffffff;
-        }
-        
-        QCheckBox:hover {
-            background-color: rgba(60, 60, 60, 1);
-            border-color: #4a86e8;
-        }
-        
-        QCheckBox:checked {
-            background-color: rgba(26, 115, 232, 0.08);
-            border: 1px solid #1a73e8;
-            color: #1a73e8;
-        }
-        
-        QCheckBox::indicator {
-            width: 18px;
-            height: 18px;
-            border-radius: 4px;
-            border: 1px solid #5f6368;
-            margin-right: 8px;
-            subcontrol-position: left center;
-        }
-        
-        QCheckBox::indicator:checked {
-            background-color: #1a73e8;
-            border: 1px solid #1a73e8;
-            image: url(assets/check.svg);
-        }
-        
-        QCheckBox::indicator:hover {
-            border-color: #1a73e8;
-        }
-        
-        QCheckBox:disabled {
-            background-color: rgba(70, 70, 70, 0.5);
-            border: 1px solid rgba(100, 100, 100, 0.3);
-            color: rgba(255, 255, 255, 0.3);
-        }
-        
-        QCheckBox::indicator:disabled {
-            background-color: rgba(70, 70, 70, 0.5);
-            border: 1px solid rgba(100, 100, 100, 0.3);
-        }
-    """)
+    stylesheet = open(os.path.join(os.path.dirname(__file__), "style.qss"), "r").read()
+    stylesheet = stylesheet.replace("assets", os.path.join(os.path.dirname(__file__), "assets"))
+    wizard.setStyleSheet(stylesheet)
     
     wizard.setButtonText(QWizard.WizardButton.NextButton, "Next")
     wizard.setButtonText(QWizard.WizardButton.BackButton, "Back")
