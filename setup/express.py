@@ -158,16 +158,15 @@ class ExpressRegionalChannelTranslation(QWizardPage):
 
 
 class ExpressRegionalChannelLanguage(QWizardPage):
-    language = Languages.Japan
     languages = {
-        Languages.English: "🇺🇸 English",
-        Languages.Spanish: "🇪🇸 Español",
-        Languages.French: "🇫🇷 Français",
-        Languages.German: "🇩🇪 Deutsch",
-        Languages.Italian: "🇮🇹 Italiano", 
-        Languages.Dutch: "🇳🇱 Nederlands",
-        Languages.Portuguese: "🇧🇷 Português (Brasil)",
-        Languages.Russian: "🇷🇺 Русский"
+        "en": "🇺🇸 English",
+        "es": "🇪🇸 Español",
+        "fr": "🇫🇷 Français",
+        "de": "🇩🇪 Deutsch",
+        "it": "🇮🇹 Italiano", 
+        "nl": "🇳🇱 Nederlands",
+        "ptbr": "🇧🇷 Português (Brasil)",
+        "ru": "🇷🇺 Русский"
     }
 
     def __init__(self, parent=None):
@@ -203,33 +202,11 @@ class ExpressRegionalChannelLanguage(QWizardPage):
     def isComplete(self):
         """Enable Next button only if a radio button is selected"""
         global wiiroom_lang
-        if self.buttons[Languages.English].isChecked():
-            wiiroom_lang = "en"
-            return True
-        elif self.buttons[Languages.Spanish].isChecked():
-            wiiroom_lang = "es"
-            return True
-        elif self.buttons[Languages.French].isChecked():
-            wiiroom_lang = "fr"
-            return True
-        elif self.buttons[Languages.German].isChecked():
-            wiiroom_lang = "de"
-            return True
-        elif self.buttons[Languages.Italian].isChecked():
-            wiiroom_lang = "it"
-            return True
-        elif self.buttons[Languages.Dutch].isChecked():
-            wiiroom_lang = "nl"
-            return True
-        elif self.buttons[Languages.Portuguese].isChecked():
-            wiiroom_lang = "ptbr"
-            return True
-        elif self.buttons[Languages.Russian].isChecked():
-            wiiroom_lang = "ru"
-            return True
-        elif self.buttons[Languages.Japan].isChecked():
-            wiiroom_lang = "jp"
-            return True
+
+        for key, button in self.buttons.items():
+            if button.isChecked:
+                wiiroom_lang = key
+                return True
         
         return False
 
