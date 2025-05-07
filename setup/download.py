@@ -18,14 +18,17 @@ def connection_test():
     patcher_test = f"{patcher_url}/connectiontest.txt"
     patcher_expected = b"If the patcher can read this, the connection test succeeds.\n"
 
-    try:
-        patcher_response = requests.get(url=patcher_test, timeout=10).content
-    except Exception as e:
+    patcher_response = requests.get(url=patcher_test, timeout=10)
+
+    if patcher_response.status_code != 200:
         print(f"""Connection test failed!
-{e}""")
+Got HTTP code {patcher_response.status_code}.
+URL: {patcher_test}""")
         return "fail-patcher"
 
-    if patcher_response != patcher_expected:
+    patcher_content = patcher_response.content
+
+    if patcher_content != patcher_expected:
         print(f"""Unexpected response!
 Expected: {patcher_expected}
 Received: {patcher_response}""")
@@ -33,11 +36,11 @@ Received: {patcher_response}""")
 
     nus_test = "http://nus.cdn.shop.wii.com/ccs/download/000100014841564a/tmd"
 
-    try:
-        nus_request = requests.get(url=nus_test, headers={'User-Agent': 'wii libnup/1.0'}, timeout=10)
-    except Exception as e:
+    nus_request = requests.get(url=nus_test, headers={'User-Agent': 'wii libnup/1.0'}, timeout=10)
+    if nus_request.status_code != 200:
         print(f"""Connection test failed!
-{e}""")
+Got HTTP code {nus_request.status_code}.
+URL: {nus_test}""")
         return "fail-nus"
 
     return "success"
@@ -76,15 +79,19 @@ def download_translation_dict():
 
 def download_file(url: str, destination: str = None):
     """Simple function to download files from a specified URL to a specified location, or to return the contents of the URL if a location is not specified."""
-    try:
-        file = requests.get(url=url).content
+    response = requests.get(url=url)
+    if response.status_code != 200:
+        print(f"""Received HTTP status code {response.status_code}!
+File URL: {url}""")
+        raise ValueError(f"""Received HTTP status code {response.status_code}!
+File URL: {url}""")
+    else:
+        file = response.content
         if destination is not None:
             open(destination, "wb").write(file)
         else:
             return file
-    except Exception as e:
-        raise ValueError(f"""An exception occurred! {e}
-File URL: {url}""")
+
 
 
 def download_osc_app(app_name: str):
@@ -150,7 +157,9 @@ def download_patch(folder: str, patch_name: str):
     """Downloads a patch from the WiiLink Patcher server."""
     patch_url = f"{patcher_url}/bsdiff/{folder}/{patch_name}"
 
-    return download_file(patch_url)
+    patch = download_file(patch_url)
+
+    return patch
 
 
 def download_channel(channel_title: str, title_id: str, version: int = None, region: Regions = None,

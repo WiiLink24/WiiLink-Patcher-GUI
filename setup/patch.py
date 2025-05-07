@@ -1,6 +1,6 @@
 import libWiiPy, os, tempfile, shutil, bsdiff4
 from PySide6.QtCore import QObject, Signal, QTimer, QThread
-from PySide6.QtWidgets import QMessageBox, QWidget, QWizardPage, QLabel, QProgressBar, QVBoxLayout, QWizard
+from PySide6.QtWidgets import QMessageBox, QWizardPage, QLabel, QProgressBar, QVBoxLayout, QWizard
 
 from .enums import *
 from .download import download_patch, download_file, download_agc, download_osc_app, download_title_contents, \
@@ -23,13 +23,28 @@ def apply_bsdiff_patches(channel_name: str, patch_files: dict[str, int], title: 
         print(f" - Patching content {index + 1}...")
 
         print("   - Downloading patch...")
-        patch_binary = download_patch(channel_name.lower(), patch)
-        print("      - Done!")
+
+        try:
+            patch_binary = download_patch(channel_name.lower(), patch)
+        except Exception as e:
+            print("      - Failed!")
+            raise ValueError(e)
+        else:
+            print("      - Done!")
+
         stock_content = title.get_content_by_index(index)
+
         print("   - Applying patch...")
-        patched_content = bsdiff4.patch(stock_content, patch_binary)
+
+        try:
+            patched_content = bsdiff4.patch(stock_content, patch_binary)
+        except Exception as e:
+            print("      - Failed!")
+            raise ValueError(e)
+        else:
+            print("      - Done!")
+
         title.set_content(patched_content, index)
-        print("      - Done!")
 
     # Delete temporary directory, ready for next channel to be patched
     shutil.rmtree(temp_dir)
@@ -384,6 +399,7 @@ class PatchingPage(QWizardPage):
     patching_complete = False
     percentage: int
     status: str
+    error = ""
 
     def __init__(self, parent=None):
         super().__init__(parent)
@@ -470,10 +486,15 @@ class PatchingPage(QWizardPage):
     
     def handle_error(self, error: str):
         """Display errors thrown from the patching logic to the user"""
-        QMessageBox.warning(QWidget(),
-                             "WiiLink Patcher - Warning",
-                             f"""An exception was encountered while patching.
-Exception: '{error}'
+        self.error = error
+
+        QMessageBox.warning(self,
+                            "WiiLink Patcher - Warning",
+                            f"""An exception was encountered while patching.
+
+Exception:
+{error}
+
 Please report this issue in the WiiLink Discord Server (discord.gg/wiilink)."""
         )
 
@@ -590,7 +611,9 @@ class PatchingWorker(QObject):
             except KeyError:
                 print(f"Invalid key: {channel}")
                 self.error.emit(f"Invalid key: {channel}")
-            else:
+            except Exception as e:
+                self.error.emit(f"{e}")
+            finally:
                 percentage += percentage_increment
                 self.broadcast_percentage.emit(round(percentage))
 
