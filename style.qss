@@ -190,3 +190,30 @@ QLabel[class="QWizardPageSubTitle"] {
         background-color: rgba(70, 70, 70, 0.5);
         border: 1px solid rgba(100, 100, 100, 0.3);
     }
+
+    QProgressBar {
+        border: none;
+        background-color: rgba(120, 120, 120, 0.2);
+        border-radius: 4px;
+        text-align: center;
+        color: transparent;
+        height: 3px;
+    }
+    
+    QProgressBar::chunk {
+        background-color:rgb(35, 92, 179);
+        border-radius: 4px;
+    }
+    
+    QProgressBar::chunk:indeterminate {
+        width: 20%;
+        margin: 0px;
+        background-color: rgb(35, 92, 179);
+        border-radius: 4px;
+        animation: indeterminate 1.5s infinite ease-in-out;
+    }
+    
+    @keyframes indeterminate {
+        0% { margin-left: -20%; }
+        100% { margin-left: 120%; }
+    }
