@@ -35,12 +35,13 @@ from setup.express import ExpressRegion, ExpressRegionalChannels, ExpressRegiona
     ExpressRegionalChannelLanguage, ExpressDemaeConfiguration, ExpressPlatformConfiguration
 from setup.extras import ExtrasSystemChannelRestorer, MinimalExtraChannels, FullExtraChannels, \
     ExtrasPlatformConfiguration, ExtrasRegionConfiguration
-from setup.download import connection_test, download_translation_dict, download_translation
+from setup.download import connection_test, download_translation_dict, download_translation, get_latest_version
 from setup.patch import PatchingPage
 
 patcher_url = "https://patcher.wiilink24.com"
 temp_dir = pathlib.Path(tempfile.gettempdir()).joinpath("WiiLinkPatcher")
 wiilink_dir = pathlib.Path().joinpath("WiiLink")
+patcher_version = "1.0"
 
 
 class IntroPage(QWizardPage):
@@ -160,7 +161,9 @@ class About(QWidget):
         title_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
         
         # Version
-        version_label = QLabel(self.tr("GUI - Version 2.0"))
+        global patcher_version
+
+        version_label = QLabel(self.tr(f"GUI - Version {patcher_version}"))
         version_label.setProperty("class", "version")
         version_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
         
@@ -381,10 +384,31 @@ def main():
 
 Exception:
 {connection}"""
+
         QMessageBox.critical(QWidget(),
                              "WiiLink Patcher - Error",
                              error_message)
         sys.exit()
+
+    try:
+        latest_version = get_latest_version()
+    except Exception as e:
+        QMessageBox.warning(QWidget(),
+                            "WiiLink Patcher - Warning",
+                            f"""Unable to check for updates!
+Exception:
+{e}""")
+    else:
+        if latest_version != patcher_version:
+            update = QMessageBox.question(QWidget(),
+                                    "WiiLink Patcher - Update",
+                                    f"""An update has been detected for the patcher, would you like to download it?
+
+Your version: {patcher_version}
+Latest version: {latest_version}""")
+            if update == QMessageBox.StandardButton.Yes:
+                webbrowser.open("https://github.com/WiiLink24/WiiLink-Patcher-GUI/releases/latest")
+                sys.exit()
     
     language = QLocale.languageToCode(QLocale.system().language())
     supported_languages = download_translation_dict()

@@ -45,6 +45,14 @@ URL: {nus_test}""")
 
     return "success"
 
+def get_latest_version():
+    version_url = f"{patcher_url}/gui-version.txt"
+
+    latest_version = download_file(version_url).rstrip()
+    latest_version_string = latest_version.decode()
+
+    return latest_version_string
+
 
 def download_translation(language: str):
     """Downloads a specified translation file from the server, ready to be loaded into the app."""
