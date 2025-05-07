@@ -10,6 +10,10 @@ You can download the latest release from the [Releases Page](https://github.com/
 To contribute translations, refer to [this](TRANSLATING.md).
 
 ## Compiling
+To compile the patcher, you will first need to install a few dependencies:
+> - [Python](https://python.org) (the patcher has only been tested on Python 3.12+)
+> - [Git](https://git-scm.com) (optional but highly recommended)
+
 - Clone the repository to your computer
 ```
 git clone https://github.com/WiiLink24/WiiLink-Patcher-GUI
@@ -44,4 +48,4 @@ make all
 ```
 
 ## Special thanks
-Special thanks to @NinjaCheetah for all his help with this project, and his work on libWiiPy.
+Special thanks to [@NinjaCheetah](https://github.com/NinjaCheetah) for all his help with this project, and his work on libWiiPy.

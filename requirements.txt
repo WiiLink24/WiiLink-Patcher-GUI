@@ -4,3 +4,4 @@ tomlkit
 nuitka
 bsdiff4
 imageio
+requests

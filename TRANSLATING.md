@@ -5,10 +5,14 @@ To translate the patcher, you'll need some things installed on your PC first:
 - [Git](https://git-scm.org)
 - [Python](https://python.org)
 
-### Step 1: Cloning the repository
-First, you'll want to clone and enter this repository:
+### Step 1: Forking and cloning the repository
+First, you'll want to fork, clone and enter this repository.
+
+Follow [this link](https://github.com/WiiLink24/WiiLink-Patcher-GUI/fork) to fork the repo to your GitHub account, then run the following commands to clone and enter your fork:
 ```
-git clone https://github.com/WiiLink24/WiiLink-Patcher-GUI
+# If you named your fork something other than WiiLink-Patcher-GUI, make sure to swap out the repository name in these commands.
+
+git clone https://github.com/<your username>/WiiLink-Patcher-GUI
 cd WiiLink-Patcher-GUI/
 ```
 After this, create a venv and activate it:
@@ -39,4 +43,4 @@ python update_translations.py
 Launch Qt Linguist, navigate to the `.ts` file for your language in the `translations` folder, and translate the strings!
 
 ### Step 5: Pushing
-Finally, create a fork of this repository and push your changes to it. Then, open a pull request in this repository to add your language!
+Finally, commit and push your changes to your fork. Then, open a pull request in this repository to add your language!
