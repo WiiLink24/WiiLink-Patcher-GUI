@@ -197,7 +197,7 @@ class ExpressRegionalChannelLanguage(QWizardPage):
         # Set layout
         self.setLayout(self.layout)
 
-        self.buttons[Languages.Russian].clicked.connect(self.russian_notice)
+        self.buttons["ru"].clicked.connect(self.russian_notice)
 
     def isComplete(self):
         """Enable Next button only if a radio button is selected"""
@@ -211,7 +211,7 @@ class ExpressRegionalChannelLanguage(QWizardPage):
         return False
 
     def russian_notice(self):
-        if self.buttons[Languages.Russian].isChecked:
+        if self.buttons["ru"].isChecked:
             QMessageBox.warning(self,
                                 self.tr("Russian notice for Wii Room"),
                                 self.tr("""You have selected the Russian translation for Wii Room
