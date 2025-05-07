@@ -341,8 +341,6 @@ def main():
     if temp_dir.exists():
         shutil.rmtree(temp_dir)
 
-    connection = connection_test()
-
     app = QApplication(sys.argv)
 
     wizard = QWizard()
@@ -367,6 +365,11 @@ def main():
     wizard.setButtonText(QWizard.WizardButton.NextButton, "Next")
     wizard.setButtonText(QWizard.WizardButton.BackButton, "Back")
 
+    try:
+        connection = connection_test()
+    except Exception as e:
+        connection = e
+
     if connection != "success":
         match connection:
             case "fail-nus":
@@ -374,7 +377,10 @@ def main():
             case "fail-patcher":
                 error_message = "The patcher failed to connect to WiiLink's servers."
             case _:
-                error_message = "The patcher failed to connect to the internet."
+                error_message = f"""The patcher failed to connect to the internet.
+
+Exception:
+{connection}"""
         QMessageBox.critical(QWidget(),
                              "WiiLink Patcher - Error",
                              error_message)
