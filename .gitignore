@@ -1,11 +1,23 @@
+# Directories made by patcher
 WiiLink/
+WiiLink.bak*/
+
+# Executables by Nuitka
 *.bin
 *.exe
 *.app
+
+# Compiled translations
 *.qm
+
+# Nuitka build directories
 WiiLinkPatcherGUI.build/
 WiiLinkPatcherGUI.dist/
 WiiLinkPatcherGUI.onefile-build/
+
+# Python directories
 .venv/
 __pycache__/
+
+# Jetbrains IDE settings
 .idea/
