@@ -1,4 +1,6 @@
+import os
 from PySide6.QtWidgets import QWizardPage, QLabel, QVBoxLayout, QRadioButton, QWizard, QCheckBox
+
 from .patch import PatchingPage
 from .enums import *
 
@@ -224,4 +226,7 @@ class CustomRegionConfiguration(QWizardPage):
         return False
     
     def nextId(self):
-        return 10
+        if os.path.exists("WiiLink"):
+            return 10
+
+        return 11

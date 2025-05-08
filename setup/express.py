@@ -1,3 +1,5 @@
+import os.path
+
 from PySide6.QtWidgets import QWizardPage, QLabel, QVBoxLayout, QRadioButton, QButtonGroup, QMessageBox
 
 from .patch import PatchingPage
@@ -339,4 +341,7 @@ class ExpressPlatformConfiguration(QWizardPage):
         return True
 
     def nextId(self):
-        return 10
+        if os.path.exists("WiiLink"):
+            return 10
+
+        return 11

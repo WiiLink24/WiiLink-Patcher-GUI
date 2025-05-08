@@ -230,6 +230,70 @@ class About(QWidget):
         self.setLayout(self.layout)
 
 
+class WiiLinkFolderDetected(QWizardPage):
+    def __init__(self, parent=None):
+        super().__init__(parent)
+
+        self.about_window = About()
+
+        self.setTitle(self.tr("WiiLink folder detected!"))
+        self.setSubTitle(self.tr("A directory called 'WiiLink' has been found in the current directory."))
+
+        self.label = QLabel(self.tr("""The patcher has detected a directory called 'WiiLink' in your current directory.
+The patcher uses the 'WiiLink' directory to store its files, therefore this
+directory causes a conflict.
+
+What would you like to do?"""))
+
+        self.options = {
+            "rename": QRadioButton(self.tr("Rename the existing 'WiiLink' directory to 'WiiLink.bak'\n(Recommended)")),
+            "delete": QRadioButton(self.tr("Delete the existing 'WiiLink' directory")),
+            "leave": QRadioButton(self.tr("Leave the existing 'WiiLink' directory as-is\nNOT RECOMMENDED"))
+        }
+
+        self.layout = QVBoxLayout()
+        self.layout.setSpacing(10)
+        self.layout.setContentsMargins(20, 20, 20, 20)
+
+        self.layout.addWidget(self.label)
+
+        # Add radio buttons to layout
+        for button in self.options.values():
+            self.layout.addWidget(button)
+            button.clicked.connect(self.completeChanged.emit)
+
+        # Select the first option
+        next(iter(self.options.values())).setChecked(True)
+
+        self.setLayout(self.layout)
+
+    def validatePage(self):
+        if self.options["rename"].isChecked():
+            try:
+                os.rename("WiiLink", "WiiLink.bak")
+            except (OSError, FileExistsError):
+                i = 1
+                while True:
+                    try:
+                        os.rename("WiiLink", f"WiiLink.bak ({i})")
+                    except (OSError, FileExistsError):
+                        i += 1
+                        continue
+                    else:
+                        break
+        elif self.options["delete"].isChecked():
+            shutil.rmtree("WiiLink")
+        return True
+
+    def isComplete(self):
+        """Enable Next button only if a radio button is selected"""
+        for button in self.options.values():
+            if button.isChecked():
+                return True
+
+        return False
+
+
 class PatchingComplete(QWizardPage):
     def __init__(self, parent=None):
         super().__init__(parent)
@@ -436,7 +500,8 @@ Latest version: {latest_version}""")
     wizard.setPage(0, IntroPage())
     wizard.setPage(1, MainMenu())
 
-    wizard.setPage(10, PatchingPage())
+    wizard.setPage(10, WiiLinkFolderDetected())
+    wizard.setPage(11, PatchingPage())
 
     wizard.setPage(100, ExpressRegion())
     wizard.setPage(101, ExpressRegionalChannels())

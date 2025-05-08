@@ -1,3 +1,4 @@
+import os
 from PySide6.QtWidgets import QWizardPage, QLabel, QVBoxLayout, QRadioButton, QCheckBox
 
 from .enums import *
@@ -284,4 +285,7 @@ class ExtrasRegionConfiguration(QWizardPage):
         return False
     
     def nextId(self):
-        return 10
+        if os.path.exists("WiiLink"):
+            return 10
+
+        return 11
