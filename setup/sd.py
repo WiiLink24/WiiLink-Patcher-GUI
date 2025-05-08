@@ -54,11 +54,25 @@ class AskSD(QWizardPage):
 
         self.setLayout(self.layout)
 
+        QTimer.singleShot(0, self.disable_back_button)
+
     def isComplete(self):
+        QTimer.singleShot(0, self.disable_back_button)
         if self.yes.isChecked() or self.no.isChecked():
             return True
 
         return False
+
+    def nextId(self):
+        if self.yes.isChecked():
+            return 13
+        elif self.no.isChecked():
+            return 1000
+
+        return 0
+
+    def disable_back_button(self):
+        self.wizard().button(QWizard.WizardButton.BackButton).setEnabled(False)
 
 
 class SelectSD(QWizardPage):
