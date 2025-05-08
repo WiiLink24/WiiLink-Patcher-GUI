@@ -1,6 +1,13 @@
 import os.path
 
-from PySide6.QtWidgets import QWizardPage, QLabel, QVBoxLayout, QRadioButton, QButtonGroup, QMessageBox
+from PySide6.QtWidgets import (
+    QWizardPage,
+    QLabel,
+    QVBoxLayout,
+    QRadioButton,
+    QButtonGroup,
+    QMessageBox,
+)
 
 from .patch import PatchingPage
 from .enums import *
@@ -18,12 +25,16 @@ class ExpressRegion(QWizardPage):
         self.setTitle(self.tr("Step 1: Express Setup"))
         self.setSubTitle(self.tr("Choose your region for WiiConnect24 services."))
 
-        self.label = QLabel(self.tr("For the WiiConnect24 services, which region would you like to install?"))
+        self.label = QLabel(
+            self.tr(
+                "For the WiiConnect24 services, which region would you like to install?"
+            )
+        )
 
         self.regions = {
             Regions.USA: self.tr("North America (NTSC-U)"),
             Regions.PAL: self.tr("Europe (PAL)"),
-            Regions.Japan: self.tr("Japan (NTSC-J)")
+            Regions.Japan: self.tr("Japan (NTSC-J)"),
         }
 
         # Layout
@@ -69,16 +80,22 @@ class ExpressRegionalChannels(QWizardPage):
     def __init__(self, parent=None):
         super().__init__(parent)
         self.setTitle(self.tr("Step 2: Express Setup"))
-        self.setSubTitle(self.tr("Choose if you'd like to install additional regional channels."))
+        self.setSubTitle(
+            self.tr("Choose if you'd like to install additional regional channels.")
+        )
 
-        self.label = QLabel(self.tr("""Would you like to install WiiLink's regional channel services?
+        self.label = QLabel(
+            self.tr(
+                """Would you like to install WiiLink's regional channel services?
 
 Services that would be installed:
 
 - Wii Room (Wii no Ma)
 - Photo Prints Channel (Digicam Print Channel)
 - Food Channel (Demae Channel)
-- Kirby TV Channel"""))
+- Kirby TV Channel"""
+            )
+        )
 
         self.Yes = QRadioButton(self.tr("Yes"))
         self.No = QRadioButton(self.tr("No"))
@@ -119,12 +136,21 @@ class ExpressRegionalChannelTranslation(QWizardPage):
     def __init__(self, parent=None):
         super().__init__(parent)
         self.setTitle(self.tr("Step 2A: Express Setup"))
-        self.setSubTitle(self.tr("Choose if you'd like translations for WiiLink's regional channels."))
+        self.setSubTitle(
+            self.tr(
+                "Choose if you'd like translations for WiiLink's regional channels."
+            )
+        )
 
-        self.label = QLabel(self.tr(
-            "Would you like <b>Wii Room</b>, <b>Photo Prints Channel</b>, and the <b>Food Channel</b> to be translated?"))
+        self.label = QLabel(
+            self.tr(
+                "Would you like <b>Wii Room</b>, <b>Photo Prints Channel</b>, and the <b>Food Channel</b> to be translated?"
+            )
+        )
 
-        self.Translated = QRadioButton(self.tr("Translated (eg. English, French, etc.)"))
+        self.Translated = QRadioButton(
+            self.tr("Translated (eg. English, French, etc.)")
+        )
         self.Japanese = QRadioButton(self.tr("Japanese"))
 
         layout = QVBoxLayout()
@@ -165,10 +191,10 @@ class ExpressRegionalChannelLanguage(QWizardPage):
         "es": "🇪🇸 Español",
         "fr": "🇫🇷 Français",
         "de": "🇩🇪 Deutsch",
-        "it": "🇮🇹 Italiano", 
+        "it": "🇮🇹 Italiano",
         "nl": "🇳🇱 Nederlands",
         "ptbr": "🇧🇷 Português (Brasil)",
-        "ru": "🇷🇺 Русский"
+        "ru": "🇷🇺 Русский",
     }
 
     def __init__(self, parent=None):
@@ -176,7 +202,9 @@ class ExpressRegionalChannelLanguage(QWizardPage):
         self.setTitle(self.tr("Step 2B: Express Setup"))
         self.setSubTitle(self.tr("Choose the language for Wii Room."))
 
-        self.label = QLabel(self.tr("What language would you like <b>Wii Room</b> to be in?"))
+        self.label = QLabel(
+            self.tr("What language would you like <b>Wii Room</b> to be in?")
+        )
 
         # Layout
         self.layout = QVBoxLayout()
@@ -209,18 +237,21 @@ class ExpressRegionalChannelLanguage(QWizardPage):
             if button.isChecked:
                 wiiroom_lang = key
                 return True
-        
+
         return False
 
     def russian_notice(self):
         if self.buttons["ru"].isChecked:
-            QMessageBox.warning(self,
-                                self.tr("Russian notice for Wii Room"),
-                                self.tr("""You have selected the Russian translation for Wii Room
+            QMessageBox.warning(
+                self,
+                self.tr("Russian notice for Wii Room"),
+                self.tr(
+                    """You have selected the Russian translation for Wii Room
 Proper functionality is not guaranteed for systems without the Russian Wii Menu.
 Follow the installation guide at https://wii.zazios.ru/rus_menu if you have not already done so.
-(The guide is only available in Russian for now)""")
-                                )
+(The guide is only available in Russian for now)"""
+                ),
+            )
 
 
 class ExpressDemaeConfiguration(QWizardPage):
@@ -229,11 +260,15 @@ class ExpressDemaeConfiguration(QWizardPage):
         self.setTitle(self.tr("Step 2C: Express Setup"))
         self.setSubTitle(self.tr("Choose Food Channel version."))
 
-        self.label = QLabel(self.tr("Which version of the <b>Food Channel</b> would you like to install?"))
+        self.label = QLabel(
+            self.tr(
+                "Which version of the <b>Food Channel</b> would you like to install?"
+            )
+        )
 
         self.demae_configs = {
             DemaeConfigs.Standard: self.tr("Standard (Fake Ordering)"),
-            DemaeConfigs.Dominos: self.tr("Domino's (US and Canada only)")
+            DemaeConfigs.Dominos: self.tr("Domino's (US and Canada only)"),
         }
 
         self.layout = QVBoxLayout()
@@ -274,12 +309,14 @@ class ExpressPlatformConfiguration(QWizardPage):
         self.setTitle(self.tr("Step 3: Express Setup"))
         self.setSubTitle(self.tr("Choose console platform."))
 
-        self.label = QLabel(self.tr("Which platform will you be installing WiiLink onto?"))
+        self.label = QLabel(
+            self.tr("Which platform will you be installing WiiLink onto?")
+        )
 
         self.platforms = {
             Platforms.Wii: "Wii",
             Platforms.vWii: "vWii (Wii U)",
-            Platforms.Dolphin: self.tr("Dolphin Emulator")
+            Platforms.Dolphin: self.tr("Dolphin Emulator"),
         }
 
         # Layout
@@ -324,16 +361,13 @@ class ExpressPlatformConfiguration(QWizardPage):
             f"forecast_{region}",
             f"news_{region}",
             f"evc_{region}",
-            f"cmoc_{region}"
+            f"cmoc_{region}",
         ]
 
         if regional_channels:
-            selected_channels.extend([
-                f"wiiroom_{wiiroom_lang}",
-                f"digicam_{regional_lang}",
-                demae,
-                "ktv"
-            ])
+            selected_channels.extend(
+                [f"wiiroom_{wiiroom_lang}", f"digicam_{regional_lang}", demae, "ktv"]
+            )
 
         PatchingPage.regional_channels = regional_channels
         PatchingPage.selected_channels = selected_channels

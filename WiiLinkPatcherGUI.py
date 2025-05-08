@@ -25,17 +25,46 @@ import webbrowser
 
 from PySide6.QtCore import QTranslator, QLocale, QLibraryInfo, QTimer, Qt
 from PySide6.QtGui import QIcon
-from PySide6.QtWidgets import QWizard, QApplication, QWizardPage, QVBoxLayout, QRadioButton, QLabel, \
-    QPushButton, QMessageBox, QWidget
+from PySide6.QtWidgets import (
+    QWizard,
+    QApplication,
+    QWizardPage,
+    QVBoxLayout,
+    QRadioButton,
+    QLabel,
+    QPushButton,
+    QMessageBox,
+    QWidget,
+)
 
-from setup.custom import CustomWiiConnect24Channels, CustomRegionalChannels, CustomPlatformConfiguration, \
-    CustomRegionConfiguration
+from setup.custom import (
+    CustomWiiConnect24Channels,
+    CustomRegionalChannels,
+    CustomPlatformConfiguration,
+    CustomRegionConfiguration,
+)
 from setup.enums import Platforms, SetupTypes
-from setup.express import ExpressRegion, ExpressRegionalChannels, ExpressRegionalChannelTranslation, \
-    ExpressRegionalChannelLanguage, ExpressDemaeConfiguration, ExpressPlatformConfiguration
-from setup.extras import ExtrasSystemChannelRestorer, MinimalExtraChannels, FullExtraChannels, \
-    ExtrasPlatformConfiguration, ExtrasRegionConfiguration
-from setup.download import connection_test, download_translation_dict, download_translation, get_latest_version
+from setup.express import (
+    ExpressRegion,
+    ExpressRegionalChannels,
+    ExpressRegionalChannelTranslation,
+    ExpressRegionalChannelLanguage,
+    ExpressDemaeConfiguration,
+    ExpressPlatformConfiguration,
+)
+from setup.extras import (
+    ExtrasSystemChannelRestorer,
+    MinimalExtraChannels,
+    FullExtraChannels,
+    ExtrasPlatformConfiguration,
+    ExtrasRegionConfiguration,
+)
+from setup.download import (
+    connection_test,
+    download_translation_dict,
+    download_translation,
+    get_latest_version,
+)
 from setup.patch import PatchingPage
 from setup.sd import AskSD, SelectSD, WADCleanup, FileCopying
 
@@ -49,13 +78,21 @@ class IntroPage(QWizardPage):
     def __init__(self, parent=None):
         super().__init__(parent)
         self.setTitle(self.tr("Welcome to the WiiLink Patcher!"))
-        self.setSubTitle(self.tr("This tool will walk you through downloading the necessary files to install WiiLink."))
+        self.setSubTitle(
+            self.tr(
+                "This tool will walk you through downloading the necessary files to install WiiLink."
+            )
+        )
 
-        self.label = QLabel(self.tr("""Welcome to the WiiLink Patcher!
+        self.label = QLabel(
+            self.tr(
+                """Welcome to the WiiLink Patcher!
                             
 With this tool, you'll be able to get patched files to install WiiLink in no time!
 
-Press 'Next' to get started!"""))
+Press 'Next' to get started!"""
+            )
+        )
         self.label.setWordWrap(True)
 
         self.layout = QVBoxLayout()
@@ -72,7 +109,9 @@ class MainMenu(QWizardPage):
         self.about_window = About()
 
         self.setTitle(self.tr("Choose what you'd like to do!"))
-        self.setSubTitle(self.tr("We recommend choosing 'Express Setup' for first-time users."))
+        self.setSubTitle(
+            self.tr("We recommend choosing 'Express Setup' for first-time users.")
+        )
 
         self.options = {
             "express_setup": QRadioButton(self.tr("Express Setup (Recommended)")),
@@ -81,9 +120,17 @@ class MainMenu(QWizardPage):
             "about": QPushButton(self.tr("About WiiLink Patcher")),
         }
 
-        self.options["express_setup"].setText(self.tr("Express Setup (Recommended)\nThe fastest way to get started with WiiLink"))
-        self.options["custom_setup"].setText(self.tr("Custom Setup (Advanced)\nCustomize your WiiLink installation"))
-        self.options["extra_channels"].setText(self.tr("Extra Channels (Optional)\nAdd additional channels to your Wii"))
+        self.options["express_setup"].setText(
+            self.tr(
+                "Express Setup (Recommended)\nThe fastest way to get started with WiiLink"
+            )
+        )
+        self.options["custom_setup"].setText(
+            self.tr("Custom Setup (Advanced)\nCustomize your WiiLink installation")
+        )
+        self.options["extra_channels"].setText(
+            self.tr("Extra Channels (Optional)\nAdd additional channels to your Wii")
+        )
 
         self.layout = QVBoxLayout()
         self.layout.setSpacing(10)
@@ -94,9 +141,9 @@ class MainMenu(QWizardPage):
             self.layout.addWidget(button)
             button.clicked.connect(self.completeChanged.emit)
 
-        # Select the first option        
+        # Select the first option
         next(iter(self.options.values())).setChecked(True)
-        
+
         self.options["about"].clicked.connect(self.show_about)
 
         self.setLayout(self.layout)
@@ -108,7 +155,7 @@ class MainMenu(QWizardPage):
             PatchingPage.setup_type = SetupTypes.Custom
         elif self.options["extra_channels"].isChecked():
             PatchingPage.setup_type = SetupTypes.Extras
-        
+
         return True
 
     def isComplete(self):
@@ -128,7 +175,7 @@ class MainMenu(QWizardPage):
         elif self.options["extra_channels"].isChecked():
             return 300
         return 0  # Stay on the same page if nothing is selected
-    
+
     def show_about(self):
         self.about_window.show()
 
@@ -139,84 +186,112 @@ class About(QWidget):
         self.setWindowTitle(self.tr("WiiLink Patcher - About"))
         self.setFixedWidth(450)
         self.setFixedHeight(500)
-        
+
         # Set background color to match main app
-        stylesheet = open(os.path.join(os.path.dirname(__file__), "style.qss"), "r").read()
+        stylesheet = open(
+            os.path.join(os.path.dirname(__file__), "style.qss"), "r"
+        ).read()
         self.setStyleSheet(stylesheet)
-        
+
         # Create main layout
         self.layout = QVBoxLayout()
         self.layout.setSpacing(4)
         self.layout.setContentsMargins(30, 20, 30, 20)
-        
+
         # Logo
         logo_label = QLabel()
         icon = QIcon(os.path.join(os.path.dirname(__file__), "assets", "logo.webp"))
         logo_pixmap = icon.pixmap(96, 96)
         logo_label.setPixmap(logo_pixmap)
         logo_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
-        
+
         # Title
         title_label = QLabel(self.tr("WiiLink Patcher"))
         title_label.setProperty("class", "title")
         title_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
-        
+
         # Version
         global patcher_version
 
         version_label = QLabel(self.tr(f"GUI - Version {patcher_version}"))
         version_label.setProperty("class", "version")
         version_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
-        
+
         # Copyright
-        copyright_label = QLabel(self.tr("© 2020-2025 WiiLink Team. All rights reserved."))
+        copyright_label = QLabel(
+            self.tr("© 2020-2025 WiiLink Team. All rights reserved.")
+        )
         copyright_label.setProperty("class", "copyright")
         copyright_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
-        
+
         # Add header section
         self.layout.addWidget(logo_label)
         self.layout.addWidget(title_label)
         self.layout.addWidget(version_label)
         self.layout.addWidget(copyright_label)
         self.layout.addSpacing(15)
-        
+
         # External links layout
         links_layout = QVBoxLayout()
-        
+
         # Website button
         self.website_button = QPushButton(self.tr("Visit WiiLink Website"))
-        self.website_button.clicked.connect(lambda: webbrowser.open("https://wiilink.ca"))
+        self.website_button.clicked.connect(
+            lambda: webbrowser.open("https://wiilink.ca")
+        )
         links_layout.addWidget(self.website_button)
-        
+
         # GitHub button
         self.github_button = QPushButton(self.tr("View Project on GitHub"))
-        self.github_button.clicked.connect(lambda: webbrowser.open("https://github.com/WiiLink24"))
+        self.github_button.clicked.connect(
+            lambda: webbrowser.open("https://github.com/WiiLink24")
+        )
         links_layout.addWidget(self.github_button)
-        
+
         # Add the links layout to main layout
         self.layout.addLayout(links_layout)
         self.layout.addSpacing(15)
-        
+
         # Add a horizontal line
         line = QLabel()
         line.setStyleSheet("background-color: #444444; height: 1px;")
         line.setFixedHeight(1)
         self.layout.addWidget(line)
         self.layout.addSpacing(10)
-        
+
         # Team members header
         team_header = QLabel(self.tr("WiiLink Team"))
         team_header.setProperty("class", "header")
         self.layout.addWidget(team_header)
         self.layout.addSpacing(5)
-        
+
         # Team members with roles
         self.people = {
-            "sketch": QLabel(self.tr("<a href=https://noahpistilli.ca style='color: #4a86e8; text-decoration: none;'><b>Sketch</b></a> - WiiLink Project Lead")),
-            "isla": QLabel(self.tr("<a href=https://islawalker.uk style='color: #4a86e8; text-decoration: none;'><b>Isla</b></a> - WiiLink Patcher GUI Developer")),
-            "pablo": QLabel(self.tr("<a href=https://github.com/pabloscorner style='color: #4a86e8; text-decoration: none;'><b>PablosCorner</b></a> - WiiLink Patcher CLI Developer")),
-            "alex": QLabel(self.tr("<a href=https://github.com/humanoidear style='color: #4a86e8; text-decoration: none;'><b>Alex</b></a> - WiiLink Design Lead")),
-            "ninjacheetah": QLabel(self.tr("<a href=https://ninjacheetah.dev style='color: #4a86e8; text-decoration: none;'><b>NinjaCheetah</b></a> - libWiiPy Developer"))
+            "sketch": QLabel(
+                self.tr(
+                    "<a href=https://noahpistilli.ca style='color: #4a86e8; text-decoration: none;'><b>Sketch</b></a> - WiiLink Project Lead"
+                )
+            ),
+            "isla": QLabel(
+                self.tr(
+                    "<a href=https://islawalker.uk style='color: #4a86e8; text-decoration: none;'><b>Isla</b></a> - WiiLink Patcher GUI Developer"
+                )
+            ),
+            "pablo": QLabel(
+                self.tr(
+                    "<a href=https://github.com/pabloscorner style='color: #4a86e8; text-decoration: none;'><b>PablosCorner</b></a> - WiiLink Patcher CLI Developer"
+                )
+            ),
+            "alex": QLabel(
+                self.tr(
+                    "<a href=https://github.com/humanoidear style='color: #4a86e8; text-decoration: none;'><b>Alex</b></a> - WiiLink Design Lead"
+                )
+            ),
+            "ninjacheetah": QLabel(
+                self.tr(
+                    "<a href=https://ninjacheetah.dev style='color: #4a86e8; text-decoration: none;'><b>NinjaCheetah</b></a> - libWiiPy Developer"
+                )
+            ),
         }
 
         # Add team members to layout
@@ -224,10 +299,10 @@ class About(QWidget):
             credit.setOpenExternalLinks(True)
             credit.setContentsMargins(15, 0, 0, 0)
             self.layout.addWidget(credit)
-        
+
         # Add spacer at the bottom
         self.layout.addStretch()
-        
+
         self.setLayout(self.layout)
 
 
@@ -236,18 +311,32 @@ class WiiLinkFolderDetected(QWizardPage):
         super().__init__(parent)
 
         self.setTitle(self.tr("WiiLink folder detected!"))
-        self.setSubTitle(self.tr("A directory called 'WiiLink' has been found in the current directory."))
+        self.setSubTitle(
+            self.tr(
+                "A directory called 'WiiLink' has been found in the current directory."
+            )
+        )
 
-        self.label = QLabel(self.tr("""The patcher has detected a directory called 'WiiLink' in your current directory.
+        self.label = QLabel(
+            self.tr(
+                """The patcher has detected a directory called 'WiiLink' in your current directory.
 The patcher uses the 'WiiLink' directory to store its files, therefore this
 directory causes a conflict.
 
-What would you like to do?"""))
+What would you like to do?"""
+            )
+        )
 
         self.options = {
-            "rename": QRadioButton(self.tr("Rename the existing 'WiiLink' directory to 'WiiLink.bak'\n(Recommended)")),
+            "rename": QRadioButton(
+                self.tr(
+                    "Rename the existing 'WiiLink' directory to 'WiiLink.bak'\n(Recommended)"
+                )
+            ),
             "delete": QRadioButton(self.tr("Delete the existing 'WiiLink' directory")),
-            "leave": QRadioButton(self.tr("Leave the existing 'WiiLink' directory as-is\nNOT RECOMMENDED"))
+            "leave": QRadioButton(
+                self.tr("Leave the existing 'WiiLink' directory as-is\nNOT RECOMMENDED")
+            ),
         }
 
         self.layout = QVBoxLayout()
@@ -296,57 +385,65 @@ What would you like to do?"""))
 class PatchingComplete(QWizardPage):
     def __init__(self, parent=None):
         super().__init__(parent)
-    
+
         self.setFinalPage(True)
         self.completeChanged.emit()
-    
+
         self.setTitle(self.tr("Success!"))
         self.setSubTitle(self.tr("Everything has been patched successfully"))
-    
+
         # Create a container with rounded corners and slightly lighter background
         self.container = QWidget()
         self.container.setFixedHeight(400)
-        self.container.setStyleSheet("""
+        self.container.setStyleSheet(
+            """
             background-color: #2a2a2a;
             border-radius: 12px;
             padding: 15px;
-        """)
-        
+        """
+        )
+
         # Container layout
         container_layout = QVBoxLayout(self.container)
         container_layout.setAlignment(Qt.AlignmentFlag.AlignCenter)
         container_layout.setContentsMargins(15, 15, 15, 15)
         container_layout.setSpacing(5)  # Reduced spacing between elements
-        
+
         # Party popper emoji
         emoji_label = QLabel("🎉")
         emoji_label.setStyleSheet("font-size: 64px; background-color: transparent;")
         emoji_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
-        
+
         # Heading
         heading = QLabel("<h1>Patching completed!</h1>")
         heading.setStyleSheet("background-color: transparent; color: white; margin: 0;")
         heading.setAlignment(Qt.AlignmentFlag.AlignCenter)
-        
+
         # Message with file path
-        self.message = QLabel(self.tr(f"<p>You can find the relevant files by clicking the button below. Please open a support ticket on our <a href='https://discord.gg/wiilink' style='color: #4a86e8; text-decoration: none;'>Discord server</a> if you have any issues.</p>"))
-        self.message.setStyleSheet("background-color: transparent; color: white; margin: 0;")
+        self.message = QLabel(
+            self.tr(
+                f"<p>You can find the relevant files by clicking the button below. Please open a support ticket on our <a href='https://discord.gg/wiilink' style='color: #4a86e8; text-decoration: none;'>Discord server</a> if you have any issues.</p>"
+            )
+        )
+        self.message.setStyleSheet(
+            "background-color: transparent; color: white; margin: 0;"
+        )
         self.message.setTextFormat(Qt.TextFormat.RichText)
         self.message.setWordWrap(True)
         self.message.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self.message.setOpenExternalLinks(True)
-    
+
         # Open folder button
         self.open_folder = QPushButton(self.tr("Open the 'WiiLink' folder"))
         self.open_folder.clicked.connect(self.open_wiilink_folder)
-        
+
         # Add widgets to container
         container_layout.addWidget(emoji_label)
         container_layout.addWidget(heading)
         container_layout.addWidget(self.message)
         container_layout.addSpacing(5)  # Reduced spacing
         container_layout.addWidget(self.open_folder)
-        
+
         # Main layout
         self.layout = QVBoxLayout()
         self.layout.addWidget(self.container)
@@ -356,11 +453,15 @@ class PatchingComplete(QWizardPage):
         match PatchingPage.setup_type:
             case SetupTypes.Extras:
                 if PatchingPage.platform != Platforms.Dolphin:
-                    open_guide = QPushButton(self.tr("Open the WAD installation guide in your web browser"))
+                    open_guide = QPushButton(
+                        self.tr("Open the WAD installation guide in your web browser")
+                    )
                     self.layout.addWidget(open_guide)
                     open_guide.clicked.connect(self.open_guide_link)
             case _:
-                open_guide = QPushButton(self.tr("Open the WiiLink installation guide in your web browser"))
+                open_guide = QPushButton(
+                    self.tr("Open the WiiLink installation guide in your web browser")
+                )
                 self.layout.addWidget(open_guide)
                 open_guide.clicked.connect(self.open_guide_link)
 
@@ -413,21 +514,25 @@ def main():
     wizard.setWindowTitle(app.tr("WiiLink Patcher"))
     wizard.setWizardStyle(QWizard.WizardStyle.ModernStyle)
     wizard.setSubTitleFormat(Qt.TextFormat.RichText)
-    
+
     icon = QIcon(os.path.join(os.path.dirname(__file__), "assets", "logo.webp"))
-    background = QIcon(os.path.join(os.path.dirname(__file__), "assets", "background.webp"))
+    background = QIcon(
+        os.path.join(os.path.dirname(__file__), "assets", "background.webp")
+    )
     logo = icon.pixmap(64, 64)
     banner = background.pixmap(700, 120)
     wizard.setPixmap(QWizard.WizardPixmap.LogoPixmap, logo)
     wizard.setPixmap(QWizard.WizardPixmap.BannerPixmap, banner)
-    
+
     app.setWindowIcon(icon)
-    
+
     # Apply global stylesheet for consistent styling across all pages
     stylesheet = open(os.path.join(os.path.dirname(__file__), "style.qss"), "r").read()
-    stylesheet = stylesheet.replace("assets", os.path.join(os.path.dirname(__file__), "assets"))
+    stylesheet = stylesheet.replace(
+        "assets", os.path.join(os.path.dirname(__file__), "assets")
+    )
     wizard.setStyleSheet(stylesheet)
-    
+
     wizard.setButtonText(QWizard.WizardButton.NextButton, "Next")
     wizard.setButtonText(QWizard.WizardButton.BackButton, "Back")
 
@@ -439,7 +544,9 @@ def main():
     if connection != "success":
         match connection:
             case "fail-nus":
-                error_message = "The patcher failed to connect to Nintendo's update servers."
+                error_message = (
+                    "The patcher failed to connect to Nintendo's update servers."
+                )
             case "fail-patcher":
                 error_message = "The patcher failed to connect to WiiLink's servers."
             case _:
@@ -448,52 +555,60 @@ def main():
 Exception:
 {connection}"""
 
-        QMessageBox.critical(QWidget(),
-                             "WiiLink Patcher - Error",
-                             error_message)
+        QMessageBox.critical(QWidget(), "WiiLink Patcher - Error", error_message)
         sys.exit()
 
     try:
         latest_version = get_latest_version()
     except Exception as e:
-        QMessageBox.warning(QWidget(),
-                            "WiiLink Patcher - Warning",
-                            f"""Unable to check for updates!
+        QMessageBox.warning(
+            QWidget(),
+            "WiiLink Patcher - Warning",
+            f"""Unable to check for updates!
 Exception:
-{e}""")
+{e}""",
+        )
     else:
         if latest_version != patcher_version:
-            update = QMessageBox.question(QWidget(),
-                                    "WiiLink Patcher - Update",
-                                    f"""An update has been detected for the patcher, would you like to download it?
+            update = QMessageBox.question(
+                QWidget(),
+                "WiiLink Patcher - Update",
+                f"""An update has been detected for the patcher, would you like to download it?
 
 Your version: {patcher_version}
-Latest version: {latest_version}""")
+Latest version: {latest_version}""",
+            )
             if update == QMessageBox.StandardButton.Yes:
-                webbrowser.open("https://github.com/WiiLink24/WiiLink-Patcher-GUI/releases/latest")
+                webbrowser.open(
+                    "https://github.com/WiiLink24/WiiLink-Patcher-GUI/releases/latest"
+                )
                 sys.exit()
-    
+
     language = QLocale.languageToCode(QLocale.system().language())
     supported_languages = download_translation_dict()
 
     if supported_languages is False:
-        QMessageBox.warning(QWidget(),
-                             "WiiLink Patcher - Warning",
-                             "The patcher failed to download the list of languages. Therefore, it will run in English.")
+        QMessageBox.warning(
+            QWidget(),
+            "WiiLink Patcher - Warning",
+            "The patcher failed to download the list of languages. Therefore, it will run in English.",
+        )
     else:
         if language in supported_languages:
             if download_translation(language) is False:
-                QMessageBox.warning(QWidget(),
-                                    "WiiLink Patcher - Warning",
-                                    "The patcher failed to download translations for your language. Therefore, it will run in English")
+                QMessageBox.warning(
+                    QWidget(),
+                    "WiiLink Patcher - Warning",
+                    "The patcher failed to download translations for your language. Therefore, it will run in English",
+                )
 
     path = QLibraryInfo.path(QLibraryInfo.LibraryPath.TranslationsPath)
     translator = QTranslator(app)
-    if translator.load(QLocale.system(), 'qtbase', '_', path):
+    if translator.load(QLocale.system(), "qtbase", "_", path):
         app.installTranslator(translator)
     translator = QTranslator(app)
     path = os.path.join(os.path.dirname(__file__), "translations")
-    if translator.load(QLocale.system(), 'translation', '_', path):
+    if translator.load(QLocale.system(), "translation", "_", path):
         app.installTranslator(translator)
 
     wizard.setPage(0, IntroPage())

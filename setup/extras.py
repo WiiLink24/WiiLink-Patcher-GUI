@@ -14,11 +14,19 @@ class ExtrasSystemChannelRestorer(QWizardPage):
     def __init__(self, parent=None):
         super().__init__(parent)
         self.setTitle(self.tr("Step 1: Extras Setup"))
-        self.setSubTitle(self.tr("Decide if you'd like to download System Channel Restorer"))
+        self.setSubTitle(
+            self.tr("Decide if you'd like to download System Channel Restorer")
+        )
 
-        self.label = QLabel(self.tr("<b>Would you like to download System Channel Restorer?</b>"))
-        self.explanation = QLabel(self.tr("""System Channel Restorer is a homebrew application that allows for installation of Photo Channel 1.1 and the Internet Channel.
-Use of System Channel Restorer requires an internet connection on your console."""))
+        self.label = QLabel(
+            self.tr("<b>Would you like to download System Channel Restorer?</b>")
+        )
+        self.explanation = QLabel(
+            self.tr(
+                """System Channel Restorer is a homebrew application that allows for installation of Photo Channel 1.1 and the Internet Channel.
+Use of System Channel Restorer requires an internet connection on your console."""
+            )
+        )
         self.explanation.setWordWrap(True)
 
         self.yes = QRadioButton(self.tr("Yes, download System Channel Restorer"))
@@ -67,7 +75,9 @@ class MinimalExtraChannels(QWizardPage):
         self.setTitle(self.tr("Step 2: Extras Setup"))
         self.setSubTitle(self.tr("Select the extra channels you want to install"))
 
-        label = QLabel(self.tr("Select the channels you'd like to install from the list below:"))
+        label = QLabel(
+            self.tr("Select the channels you'd like to install from the list below:")
+        )
 
         layout = QVBoxLayout()
 
@@ -79,7 +89,7 @@ class MinimalExtraChannels(QWizardPage):
             "ws_eu": "Wii Speak Channel (PAL)",
             "ws_jp": "Wii Speak Channel (Japan)",
             "tatc_eu": "Today and Tomorrow Channel (PAL)",
-            "tatc_jp": "Today and Tomorrow Channel (Japan)"
+            "tatc_jp": "Today and Tomorrow Channel (Japan)",
         }
 
         # Dictionary to hold checkboxes
@@ -106,7 +116,7 @@ class MinimalExtraChannels(QWizardPage):
         selected_channels = []
         for item in self.local_selected_channels:
             selected_channels.append(item)
-        
+
         if system_channel_restorer:
             PatchingPage.selected_channels = ["scr"] + selected_channels
         else:
@@ -135,7 +145,9 @@ class FullExtraChannels(QWizardPage):
         self.setTitle(self.tr("Step 2: Extras Setup"))
         self.setSubTitle(self.tr("Select the extra channels you want to install"))
 
-        label = QLabel(self.tr("Select the channels you'd like to install from the list below:"))
+        label = QLabel(
+            self.tr("Select the channels you'd like to install from the list below:")
+        )
 
         layout = QVBoxLayout()
 
@@ -150,7 +162,7 @@ class FullExtraChannels(QWizardPage):
             "tatc_jp": "Today and Tomorrow Channel (Japan)",
             "ic_us": "Internet Channel (USA)",
             "ic_eu": "Internet Channel (PAL)",
-            "ic_jp": "Internet Channel (Japan)"
+            "ic_jp": "Internet Channel (Japan)",
         }
 
         # Dictionary to hold checkboxes
@@ -177,7 +189,7 @@ class FullExtraChannels(QWizardPage):
         selected_channels = []
         for item in self.local_selected_channels:
             selected_channels.append(item)
-        
+
         if system_channel_restorer:
             PatchingPage.selected_channels = ["scr"] + selected_channels
         else:
@@ -203,12 +215,14 @@ class ExtrasPlatformConfiguration(QWizardPage):
         self.setTitle(self.tr("Step 3: Extras Setup"))
         self.setSubTitle(self.tr("Choose console platform."))
 
-        self.label = QLabel(self.tr("Which platform will you be installing the channels onto?"))
+        self.label = QLabel(
+            self.tr("Which platform will you be installing the channels onto?")
+        )
 
         self.platforms = {
             Platforms.Wii: "Wii",
             Platforms.vWii: "vWii (Wii U)",
-            Platforms.Dolphin: self.tr("Dolphin Emulator")
+            Platforms.Dolphin: self.tr("Dolphin Emulator"),
         }
 
         # Layout
@@ -252,7 +266,7 @@ class ExtrasRegionConfiguration(QWizardPage):
         self.regions = {
             Regions.USA: self.tr("North America (NTSC-U)"),
             Regions.PAL: self.tr("Europe (PAL)"),
-            Regions.Japan: self.tr("Japan (NTSC-J)")
+            Regions.Japan: self.tr("Japan (NTSC-J)"),
         }
 
         # Layout
@@ -283,7 +297,7 @@ class ExtrasRegionConfiguration(QWizardPage):
                 return True
 
         return False
-    
+
     def nextId(self):
         if os.path.exists("WiiLink"):
             return 10

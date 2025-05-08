@@ -2,8 +2,19 @@ import os
 import psutil
 import shutil
 
-from PySide6.QtWidgets import  QVBoxLayout, QLabel, QComboBox, QCheckBox, QPushButton, QHBoxLayout, QWizard, \
-    QWizardPage, QRadioButton, QMessageBox, QProgressBar
+from PySide6.QtWidgets import (
+    QVBoxLayout,
+    QLabel,
+    QComboBox,
+    QCheckBox,
+    QPushButton,
+    QHBoxLayout,
+    QWizard,
+    QWizardPage,
+    QRadioButton,
+    QMessageBox,
+    QProgressBar,
+)
 from PySide6.QtCore import QTimer, QThread, QObject, Signal
 
 from .newsRenderer import NewsRenderer
@@ -19,7 +30,7 @@ def get_devices(removable_only=True):
             continue
         try:
             capacity = psutil.disk_usage(part.mountpoint).total
-            capacity_gb = capacity / (1024 ** 3)
+            capacity_gb = capacity / (1024**3)
             label = f"{part.mountpoint} - {capacity_gb:.2f} GB"
             devices.update({label: part.mountpoint})
         except PermissionError:
@@ -32,9 +43,17 @@ class AskSD(QWizardPage):
         super().__init__()
 
         self.setTitle(self.tr("File copying"))
-        self.setSubTitle(self.tr("Decide if you'd like the patcher to copy its files to an external storage device."))
+        self.setSubTitle(
+            self.tr(
+                "Decide if you'd like the patcher to copy its files to an external storage device."
+            )
+        )
 
-        self.label = QLabel(self.tr("Would you like the patcher to automatically copy its patched files to your SD card / USB drive?"))
+        self.label = QLabel(
+            self.tr(
+                "Would you like the patcher to automatically copy its patched files to your SD card / USB drive?"
+            )
+        )
         self.label.setWordWrap(True)
 
         self.yes = QRadioButton(self.tr("Yes"))
@@ -134,7 +153,9 @@ class SelectSD(QWizardPage):
 
         # Find existing WAD folder, regardless of case
         for folder in os.listdir(selected_device):
-            if folder.upper() == 'WAD' and os.path.isdir(os.path.join(selected_device, folder)):
+            if folder.upper() == "WAD" and os.path.isdir(
+                os.path.join(selected_device, folder)
+            ):
                 sd_wad_path = folder
                 return 14
 
@@ -158,16 +179,26 @@ class WADCleanup(QWizardPage):
         self.layout.setSpacing(10)
         self.layout.setContentsMargins(20, 20, 20, 20)
 
-        self.label = QLabel(self.tr("""The patcher has detected a directory called 'WAD' on your selected storage device.
+        self.label = QLabel(
+            self.tr(
+                """The patcher has detected a directory called 'WAD' on your selected storage device.
 The 'WAD' directory is used to store channels you install on your Wii, therefore this directory causes a conflict.
 
-What would you like to do?"""))
+What would you like to do?"""
+            )
+        )
         self.label.setWordWrap(True)
 
         self.options = {
-            "rename": QRadioButton(self.tr("Rename the existing 'WAD' directory to 'WAD.bak'\n(Recommended)")),
+            "rename": QRadioButton(
+                self.tr(
+                    "Rename the existing 'WAD' directory to 'WAD.bak'\n(Recommended)"
+                )
+            ),
             "delete": QRadioButton(self.tr("Delete the existing 'WAD' directory")),
-            "leave": QRadioButton(self.tr("Leave the existing 'WAD' directory as-is\nNOT RECOMMENDED"))
+            "leave": QRadioButton(
+                self.tr("Leave the existing 'WAD' directory as-is\nNOT RECOMMENDED")
+            ),
         }
 
         self.layout.addWidget(self.label)
@@ -194,7 +225,9 @@ What would you like to do?"""))
                 i = 1
                 while True:
                     try:
-                        os.rename(sd_wad_directory, os.path.join(sd_path, f"WAD.bak ({i})"))
+                        os.rename(
+                            sd_wad_directory, os.path.join(sd_path, f"WAD.bak ({i})")
+                        )
                     except (OSError, FileExistsError):
                         i += 1
                         continue
@@ -215,6 +248,7 @@ What would you like to do?"""))
                 return True
 
         return False
+
 
 class FileCopying(QWizardPage):
     copying_complete: bool = False
@@ -276,14 +310,15 @@ class FileCopying(QWizardPage):
 
     def handle_error(self, error: str):
         """Display errors thrown from the patching logic to the user"""
-        QMessageBox.warning(self,
-                            "WiiLink Patcher - Warning",
-                            f"""An exception was encountered while copying files.
+        QMessageBox.warning(
+            self,
+            "WiiLink Patcher - Warning",
+            f"""An exception was encountered while copying files.
 
 Exception:
 {error}
 
-Please report this issue in the WiiLink Discord Server (discord.gg/wiilink)."""
+Please report this issue in the WiiLink Discord Server (discord.gg/wiilink).""",
         )
 
 
@@ -298,12 +333,22 @@ class CopyFiles(QObject):
         # Find existing apps folder, regardless of case
         sd_apps_path = "apps"
         for folder in os.listdir(sd_path):
-            if folder.lower() == 'apps' and os.path.isdir(os.path.join(sd_path, folder)):
+            if folder.lower() == "apps" and os.path.isdir(
+                os.path.join(sd_path, folder)
+            ):
                 sd_apps_path = folder
 
         try:
-            shutil.copytree(os.path.join("WiiLink", "apps"), os.path.join(sd_path, sd_apps_path), dirs_exist_ok=True)
-            shutil.copytree(os.path.join("WiiLink", "WAD"), os.path.join(sd_path, sd_wad_path), dirs_exist_ok=True)
+            shutil.copytree(
+                os.path.join("WiiLink", "apps"),
+                os.path.join(sd_path, sd_apps_path),
+                dirs_exist_ok=True,
+            )
+            shutil.copytree(
+                os.path.join("WiiLink", "WAD"),
+                os.path.join(sd_path, sd_wad_path),
+                dirs_exist_ok=True,
+            )
         except Exception as e:
             self.error.emit(f"{e}")
 

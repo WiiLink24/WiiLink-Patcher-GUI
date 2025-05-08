@@ -1,10 +1,25 @@
 import libWiiPy, os, tempfile, shutil, bsdiff4
 from PySide6.QtCore import QObject, Signal, QTimer, QThread
-from PySide6.QtWidgets import QMessageBox, QWizardPage, QLabel, QProgressBar, QVBoxLayout, QWizard
+from PySide6.QtWidgets import (
+    QMessageBox,
+    QWizardPage,
+    QLabel,
+    QProgressBar,
+    QVBoxLayout,
+    QWizard,
+)
 
 from .enums import *
-from .download import download_patch, download_file, download_agc, download_osc_app, download_title_contents, \
-    download_channel, download_spd, download_todaytomorrow
+from .download import (
+    download_patch,
+    download_file,
+    download_agc,
+    download_osc_app,
+    download_title_contents,
+    download_channel,
+    download_spd,
+    download_todaytomorrow,
+)
 from .newsRenderer import NewsRenderer
 
 patcher_url = "https://patcher.wiilink24.com"
@@ -14,7 +29,9 @@ wad_directory = os.path.join("WiiLink", "WAD")
 title_directory = os.path.join(temp_dir, "Unpack")
 
 
-def apply_bsdiff_patches(channel_name: str, patch_files: dict[str, int], title: libWiiPy.title.Title):
+def apply_bsdiff_patches(
+    channel_name: str, patch_files: dict[str, int], title: libWiiPy.title.Title
+):
     """Download and apply bsdiff patches to the app files specified"""
     patch_directory = os.path.join(temp_dir, "Patches")
 
@@ -52,9 +69,18 @@ def apply_bsdiff_patches(channel_name: str, patch_files: dict[str, int], title: 
     return title
 
 
-def patch_channel(channel_name: str, channel_title: str, title_id: str,
-                  patch_files: dict[str, int], channel_type: ChannelTypes, version: int = None, region: Regions = None,
-                  language: Languages = None, additional_files: dict[str, str] = None, wfc_network: WFCNetworks = None):
+def patch_channel(
+    channel_name: str,
+    channel_title: str,
+    title_id: str,
+    patch_files: dict[str, int],
+    channel_type: ChannelTypes,
+    version: int = None,
+    region: Regions = None,
+    language: Languages = None,
+    additional_files: dict[str, str] = None,
+    wfc_network: WFCNetworks = None,
+):
     print(f"Patching {channel_title}:")
     file_url = f"{patcher_url}/{channel_name.lower()}/{title_id}"
 
@@ -64,27 +90,41 @@ def patch_channel(channel_name: str, channel_title: str, title_id: str,
     match channel_type:
         case ChannelTypes.WiiConnect24:
             if region is not None:
-                output_wad = os.path.join("WiiLink", "WAD", f"{channel_title} [{region.name}] (WiiLink).wad")
+                output_wad = os.path.join(
+                    "WiiLink", "WAD", f"{channel_title} [{region.name}] (WiiLink).wad"
+                )
             else:
-                output_wad = os.path.join("WiiLink", "WAD", f"{channel_title} (WiiLink).wad")
+                output_wad = os.path.join(
+                    "WiiLink", "WAD", f"{channel_title} (WiiLink).wad"
+                )
         case ChannelTypes.Regional:
             if language is not None:
-                output_wad = os.path.join("WiiLink", "WAD", f"{channel_title} [{language.name}] (WiiLink).wad")
+                output_wad = os.path.join(
+                    "WiiLink", "WAD", f"{channel_title} [{language.name}] (WiiLink).wad"
+                )
             else:
-                output_wad = os.path.join("WiiLink", "WAD", f"{channel_title} (WiiLink).wad")
+                output_wad = os.path.join(
+                    "WiiLink", "WAD", f"{channel_title} (WiiLink).wad"
+                )
         case ChannelTypes.WFC:
             if region is not None:
-                output_wad = os.path.join("WiiLink", "WAD", f"{channel_title} [{region.name}] ({wfc_network.name}).wad")
+                output_wad = os.path.join(
+                    "WiiLink",
+                    "WAD",
+                    f"{channel_title} [{region.name}] ({wfc_network.name}).wad",
+                )
             else:
-                output_wad = os.path.join("WiiLink", "WAD", f"{channel_title} ({wfc_network.name}).wad")
+                output_wad = os.path.join(
+                    "WiiLink", "WAD", f"{channel_title} ({wfc_network.name}).wad"
+                )
         case _:
             output_wad = os.path.join("WiiLink", "WAD", f"{channel_title}.wad")
 
     if additional_files is not None:
         if channel_type == ChannelTypes.WiiConnect24:
-            additional_files.update({
-                ".cert": os.path.join(title_directory, f"{title_id}.cert")
-            })
+            additional_files.update(
+                {".cert": os.path.join(title_directory, f"{title_id}.cert")}
+            )
 
         for file, destination in additional_files.items():
             url = f"{file_url}{file}"
@@ -129,21 +169,27 @@ def nc_patch(region: Regions):
     region_data = {
         Regions.USA: ["0001000148415445", "Nintendo Channel"],
         Regions.PAL: ["0001000148415450", "Nintendo Channel"],
-        Regions.Japan: ["000100014841544a", "Minna no Nintendo Channel"]
+        Regions.Japan: ["000100014841544a", "Minna no Nintendo Channel"],
     }
 
     channel_id = region_data[region][0]
     channel_title = region_data[region][1]
 
-    patches = {
-        f"NC_1_{region.name}.bsdiff": 1
-    }
+    patches = {f"NC_1_{region.name}.bsdiff": 1}
 
-    additional_files = {
-        ".tik": os.path.join(title_directory, "tik")
-    }
+    additional_files = {".tik": os.path.join(title_directory, "tik")}
 
-    patch_channel("nc", channel_title, channel_id, patches, ChannelTypes.WiiConnect24, 1792, region, None, additional_files)
+    patch_channel(
+        "nc",
+        channel_title,
+        channel_id,
+        patches,
+        ChannelTypes.WiiConnect24,
+        1792,
+        region,
+        None,
+        additional_files,
+    )
 
 
 def forecast_patch(region: Regions, platform: Platforms):
@@ -151,7 +197,7 @@ def forecast_patch(region: Regions, platform: Platforms):
     title_ids = {
         Regions.USA: "0001000248414645",
         Regions.PAL: "0001000248414650",
-        Regions.Japan: "000100024841464a"
+        Regions.Japan: "000100024841464a",
     }
 
     channel_id = title_ids[region]
@@ -164,7 +210,15 @@ def forecast_patch(region: Regions, platform: Platforms):
     # Download AnyGlobe Changer to allow setting custom regions
     download_agc(platform)
 
-    patch_channel("forecast", "Forecast Channel", channel_id, patches, ChannelTypes.WiiConnect24, 7, region)
+    patch_channel(
+        "forecast",
+        "Forecast Channel",
+        channel_id,
+        patches,
+        ChannelTypes.WiiConnect24,
+        7,
+        region,
+    )
 
 
 def news_patch(region: Regions):
@@ -172,16 +226,22 @@ def news_patch(region: Regions):
     title_ids = {
         Regions.USA: "0001000248414745",
         Regions.PAL: "0001000248414750",
-        Regions.Japan: "000100024841474a"
+        Regions.Japan: "000100024841474a",
     }
 
     channel_id = title_ids[region]
 
-    patches = {
-        "News_1.bsdiff": 1
-    }
+    patches = {"News_1.bsdiff": 1}
 
-    patch_channel("news", "News Channel", channel_id, patches, ChannelTypes.WiiConnect24, 7, region)
+    patch_channel(
+        "news",
+        "News Channel",
+        channel_id,
+        patches,
+        ChannelTypes.WiiConnect24,
+        7,
+        region,
+    )
 
 
 def evc_patch(region: Regions):
@@ -194,15 +254,21 @@ def evc_patch(region: Regions):
 
     channel_id = title_ids[region]
 
-    patches = {
-        f"EVC_1_{region.name}.bsdiff": 1
-    }
+    patches = {f"EVC_1_{region.name}.bsdiff": 1}
 
-    additional_files = {
-        ".tik": os.path.join(title_directory, "tik")
-    }
+    additional_files = {".tik": os.path.join(title_directory, "tik")}
 
-    patch_channel("evc", "Everybody Votes Channel", channel_id, patches, ChannelTypes.WiiConnect24, 512, region, None, additional_files)
+    patch_channel(
+        "evc",
+        "Everybody Votes Channel",
+        channel_id,
+        patches,
+        ChannelTypes.WiiConnect24,
+        512,
+        region,
+        None,
+        additional_files,
+    )
 
     regsel_patch(region)
 
@@ -212,16 +278,22 @@ def regsel_patch(region: Regions):
     title_ids = {
         Regions.USA: "0001000848414c45",
         Regions.PAL: "0001000848414c50",
-        Regions.Japan: "0001000848414c4a"
+        Regions.Japan: "0001000848414c4a",
     }
 
     channel_id = title_ids[region]
 
-    patches = {
-        "RegSel_1.bsdiff": 1
-    }
+    patches = {"RegSel_1.bsdiff": 1}
 
-    patch_channel("regsel", "Region Select", channel_id, patches, ChannelTypes.WiiConnect24, 2, region)
+    patch_channel(
+        "regsel",
+        "Region Select",
+        channel_id,
+        patches,
+        ChannelTypes.WiiConnect24,
+        2,
+        region,
+    )
 
 
 def cmoc_patch(region: Regions):
@@ -229,60 +301,70 @@ def cmoc_patch(region: Regions):
     region_data = {
         Regions.USA: ["0001000148415045", "Check Mii Out Channel"],
         Regions.PAL: ["0001000148415050", "Mii Contest Channel"],
-        Regions.Japan: ["000100014841504a", "Mii Contest Channel"]
+        Regions.Japan: ["000100014841504a", "Mii Contest Channel"],
     }
 
     channel_id = region_data[region][0]
     channel_title = region_data[region][1]
 
-    patches = {
-        f"CMOC_1_{region.name}.bsdiff": 1
-    }
+    patches = {f"CMOC_1_{region.name}.bsdiff": 1}
 
-    additional_files = {
-        ".tik": os.path.join(title_directory, "tik")
-    }
+    additional_files = {".tik": os.path.join(title_directory, "tik")}
 
-    patch_channel("cmoc", channel_title, channel_id, patches, ChannelTypes.WiiConnect24, 512, region, additional_files=additional_files)
+    patch_channel(
+        "cmoc",
+        channel_title,
+        channel_id,
+        patches,
+        ChannelTypes.WiiConnect24,
+        512,
+        region,
+        additional_files=additional_files,
+    )
 
 
 def wiiroom_patch(language: Languages):
     """Patch Wii Room for the specified language"""
-    patches = {
-        f"WiinoMa_2_{language.name}.bsdiff": 2
-    }
+    patches = {f"WiinoMa_2_{language.name}.bsdiff": 2}
 
     if language == Languages.Russian:
-        patches.update({
-            "WiinoMa_1_Russian.bsdiff": 1,
-            "WiinoMa_3_Russian.bsdiff": 3,
-            "WiinoMa_4_Russian.bsdiff": 4,
-            "WiinoMa_9_Russian.bsdiff": 9,
-            "WiinoMa_C_Russian.bsdiff": 12,
-            "WiinoMa_D_Russian.bsdiff": 13,
-            "WiinoMa_E_Russian.bsdiff": 14
-        })
+        patches.update(
+            {
+                "WiinoMa_1_Russian.bsdiff": 1,
+                "WiinoMa_3_Russian.bsdiff": 3,
+                "WiinoMa_4_Russian.bsdiff": 4,
+                "WiinoMa_9_Russian.bsdiff": 9,
+                "WiinoMa_C_Russian.bsdiff": 12,
+                "WiinoMa_D_Russian.bsdiff": 13,
+                "WiinoMa_E_Russian.bsdiff": 14,
+            }
+        )
     elif language == Languages.Portuguese:
-        patches.update({
-            "WiinoMa_1_Portuguese.bsdiff": 1,
-            "WiinoMa_3_Portuguese.bsdiff": 3,
-            "WiinoMa_4_Portuguese.bsdiff": 4,
-            "WiinoMa_D_Portuguese.bsdiff": 13
-        })
+        patches.update(
+            {
+                "WiinoMa_1_Portuguese.bsdiff": 1,
+                "WiinoMa_3_Portuguese.bsdiff": 3,
+                "WiinoMa_4_Portuguese.bsdiff": 4,
+                "WiinoMa_D_Portuguese.bsdiff": 13,
+            }
+        )
     else:
-        patches.update({
-            "WiinoMa_1_Universal.bsdiff": 1
-        })
+        patches.update({"WiinoMa_1_Universal.bsdiff": 1})
 
     if language == Languages.Japan:
         channel_title = "Wii no Ma"
     else:
         channel_title = "Wii Room"
-        patches.update({
-            "WiinoMa_0_Universal.bsdiff": 0
-        })
+        patches.update({"WiinoMa_0_Universal.bsdiff": 0})
 
-    patch_channel("WiinoMa", channel_title, "000100014843494a", patches, ChannelTypes.Regional, language=language)
+    patch_channel(
+        "WiinoMa",
+        channel_title,
+        "000100014843494a",
+        patches,
+        ChannelTypes.Regional,
+        language=language,
+    )
 
 
 def digicam_patch(translated: bool):
@@ -293,16 +375,21 @@ def digicam_patch(translated: bool):
         patches = {
             "Digicam_0_English.bsdiff": 0,
             "Digicam_1_English.bsdiff": 1,
-            "Digicam_2_English.bsdiff": 2
+            "Digicam_2_English.bsdiff": 2,
         }
     else:
         language = Languages.Japan
         channel_title = "Digicam Print Channel"
-        patches = {
-            "Digicam_1_Japan.bsdiff": 1
-        }
+        patches = {"Digicam_1_Japan.bsdiff": 1}
 
-    patch_channel("Digicam", channel_title, "000100014843444a", patches, ChannelTypes.Regional, language=language)
+    patch_channel(
+        "Digicam",
+        channel_title,
+        "000100014843444a",
+        patches,
+        ChannelTypes.Regional,
+        language=language,
+    )
 
 
 def demae_patch(translated: bool, demae_version: DemaeConfigs, region: Regions):
@@ -316,12 +403,10 @@ def demae_patch(translated: bool, demae_version: DemaeConfigs, region: Regions):
                 patches = {
                     "Demae_0_English.bsdiff": 0,
                     "Demae_1_English.bsdiff": 1,
-                    "Demae_2_English.bsdiff": 2
+                    "Demae_2_English.bsdiff": 2,
                 }
             else:
-                patches = {
-                    "Demae_1_Japan.bsdiff": 1
-                }
+                patches = {"Demae_1_Japan.bsdiff": 1}
 
             channel_name = "Demae"
 
@@ -329,13 +414,13 @@ def demae_patch(translated: bool, demae_version: DemaeConfigs, region: Regions):
             patches = {
                 "Dominos_0.bsdiff": 0,
                 "Dominos_1.bsdiff": 1,
-                "Dominos_2.bsdiff": 2
+                "Dominos_2.bsdiff": 2,
             }
 
             ic_ids = {
                 Regions.USA: "0001000148414445",
                 Regions.PAL: "0001000148414450",
-                Regions.Japan: "000100014841444a"
+                Regions.Japan: "000100014841444a",
             }
 
             ic_id = ic_ids[region]
@@ -355,28 +440,38 @@ def demae_patch(translated: bool, demae_version: DemaeConfigs, region: Regions):
         channel_title = "Demae Channel"
         language = Languages.Japan
 
-    patch_channel(channel_name, f"{channel_title} ({demae_version.name})", "000100014843484a", patches, ChannelTypes.Regional, language=language)
-
+    patch_channel(
+        channel_name,
+        f"{channel_title} ({demae_version.name})",
+        "000100014843484a",
+        patches,
+        ChannelTypes.Regional,
+        language=language,
+    )
 
 
 def kirbytv_patch():
     """Patch the Kirby TV Channel"""
-    patches = {
-        "ktv_2.bsdiff": 2
-    }
+    patches = {"ktv_2.bsdiff": 2}
 
     additional_files = {
         ".tmd": os.path.join(title_directory, f"tmd.257"),
-        ".tik": os.path.join(title_directory, "tik")
+        ".tik": os.path.join(title_directory, "tik"),
     }
 
-    patch_channel("ktv", "Kirby TV Channel", "0001000148434d50", patches, ChannelTypes.Regional, additional_files=additional_files)
+    patch_channel(
+        "ktv",
+        "Kirby TV Channel",
+        "0001000148434d50",
+        patches,
+        ChannelTypes.Regional,
+        additional_files=additional_files,
+    )
+
 
 def wiispeak_patch(region: Regions, network: WFCNetworks):
     """Patch the Wii Speak Channel for the specified region and WFC network"""
-    patches = {
-        f"WiiSpeak_1_{region.name}.bsdiff": 1
-    }
+    patches = {f"WiiSpeak_1_{region.name}.bsdiff": 1}
 
     title_ids = {
         Regions.USA: "0001000148434645",
@@ -386,7 +481,15 @@ def wiispeak_patch(region: Regions, network: WFCNetworks):
 
     channel_id = title_ids[region]
 
-    patch_channel("ws", "Wii Speak Channel", channel_id, patches, ChannelTypes.WFC, region=region, wfc_network=network)
+    patch_channel(
+        "ws",
+        "Wii Speak Channel",
+        channel_id,
+        patches,
+        ChannelTypes.WFC,
+        region=region,
+        wfc_network=network,
+    )
 
 
 class PatchingPage(QWizardPage):
@@ -409,7 +512,7 @@ class PatchingPage(QWizardPage):
 
         self.label = QLabel(self.tr("Downloading files..."))
         self.progress_bar = QProgressBar(self)
-        
+
         self.news_box = NewsRenderer.createNewsBox(self)
 
         layout = QVBoxLayout()
@@ -417,9 +520,9 @@ class PatchingPage(QWizardPage):
         layout.addWidget(self.progress_bar)
         layout.addSpacing(10)
         layout.addWidget(self.news_box)
-    
+
         self.setLayout(layout)
-        
+
         QTimer.singleShot(0, lambda: NewsRenderer.getNews(self, self.news_box))
 
         # Start thread to perform patching
@@ -486,19 +589,20 @@ class PatchingPage(QWizardPage):
     def update_status(self):
         """Updates status above progress bar"""
         self.label.setText(self.status)
-    
+
     def handle_error(self, error: str):
         """Display errors thrown from the patching logic to the user"""
         self.error = error
 
-        QMessageBox.warning(self,
-                            "WiiLink Patcher - Warning",
-                            f"""An exception was encountered while patching.
+        QMessageBox.warning(
+            self,
+            "WiiLink Patcher - Warning",
+            f"""An exception was encountered while patching.
 
 Exception:
 {error}
 
-Please report this issue in the WiiLink Discord Server (discord.gg/wiilink)."""
+Please report this issue in the WiiLink Discord Server (discord.gg/wiilink).""",
         )
 
 
@@ -559,9 +663,15 @@ class PatchingWorker(QObject):
             "ws_jp": lambda: wiispeak_patch(Regions.Japan, WFCNetworks.Wiimmfi),
             "tatc_eu": lambda: download_todaytomorrow(Regions.PAL),
             "tatc_jp": lambda: download_todaytomorrow(Regions.Japan),
-            "ic_us": lambda: download_channel("Internet Channel", "0001000148414445", 1024, Regions.USA),
-            "ic_eu": lambda: download_channel("Internet Channel", "0001000148414450", 1024, Regions.PAL),
-            "ic_jp": lambda: download_channel("Internet Channel", "000100014841444a", 1024, Regions.Japan)
+            "ic_us": lambda: download_channel(
+                "Internet Channel", "0001000148414445", 1024, Regions.USA
+            ),
+            "ic_eu": lambda: download_channel(
+                "Internet Channel", "0001000148414450", 1024, Regions.PAL
+            ),
+            "ic_jp": lambda: download_channel(
+                "Internet Channel", "000100014841444a", 1024, Regions.Japan
+            ),
         }
 
         patch_status = {
@@ -604,7 +714,7 @@ class PatchingWorker(QObject):
             "tatc_jp": self.tr("Downloading Today and Tomorrow Channel (Japan)..."),
             "ic_us": self.tr("Downloading Internet Channel (USA)..."),
             "ic_eu": self.tr("Downloading Internet Channel (PAL)..."),
-            "ic_jp": self.tr("Downloading Internet Channel (Japan)...")
+            "ic_jp": self.tr("Downloading Internet Channel (Japan)..."),
         }
 
         for channel in self.selected_channels:
@@ -619,7 +729,6 @@ class PatchingWorker(QObject):
             finally:
                 percentage += percentage_increment
                 self.broadcast_percentage.emit(round(percentage))
-
 
         self.finished.emit(True)
 

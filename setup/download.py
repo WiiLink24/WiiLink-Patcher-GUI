@@ -21,29 +21,38 @@ def connection_test():
     patcher_response = requests.get(url=patcher_test, timeout=10)
 
     if patcher_response.status_code != 200:
-        print(f"""Connection test failed!
+        print(
+            f"""Connection test failed!
 Got HTTP code {patcher_response.status_code}.
-URL: {patcher_test}""")
+URL: {patcher_test}"""
+        )
         return "fail-patcher"
 
     patcher_content = patcher_response.content
 
     if patcher_content != patcher_expected:
-        print(f"""Unexpected response!
+        print(
+            f"""Unexpected response!
 Expected: {patcher_expected}
-Received: {patcher_response}""")
+Received: {patcher_response}"""
+        )
         return "fail-patcher"
 
     nus_test = "http://nus.cdn.shop.wii.com/ccs/download/000100014841564a/tmd"
 
-    nus_request = requests.get(url=nus_test, headers={'User-Agent': 'wii libnup/1.0'}, timeout=10)
+    nus_request = requests.get(
+        url=nus_test, headers={"User-Agent": "wii libnup/1.0"}, timeout=10
+    )
     if nus_request.status_code != 200:
-        print(f"""Connection test failed!
+        print(
+            f"""Connection test failed!
 Got HTTP code {nus_request.status_code}.
-URL: {nus_test}""")
+URL: {nus_test}"""
+        )
         return "fail-nus"
 
     return "success"
+
 
 def get_latest_version():
     version_url = f"{patcher_url}/gui-version.txt"
@@ -66,7 +75,7 @@ def download_translation(language: str):
     except Exception as e:
         print(e)
         return False
-    
+
     return True
 
 
@@ -89,17 +98,20 @@ def download_file(url: str, destination: str = None):
     """Simple function to download files from a specified URL to a specified location, or to return the contents of the URL if a location is not specified."""
     response = requests.get(url=url)
     if response.status_code != 200:
-        print(f"""Received HTTP status code {response.status_code}!
-File URL: {url}""")
-        raise ValueError(f"""Received HTTP status code {response.status_code}!
-File URL: {url}""")
+        print(
+            f"""Received HTTP status code {response.status_code}!
+File URL: {url}"""
+        )
+        raise ValueError(
+            f"""Received HTTP status code {response.status_code}!
+File URL: {url}"""
+        )
     else:
         file = response.content
         if destination is not None:
             open(destination, "wb").write(file)
         else:
             return file
-
 
 
 def download_osc_app(app_name: str):
@@ -111,16 +123,22 @@ def download_osc_app(app_name: str):
     print(f"Downloading {app_name} from OSC:")
 
     print(" - Downloading boot.dol...")
-    download_file(f"https://hbb1.oscwii.org/unzipped_apps/{app_name}/apps/{app_name}/boot.dol",
-                  os.path.join(app_path, "boot.dol"))
+    download_file(
+        f"https://hbb1.oscwii.org/unzipped_apps/{app_name}/apps/{app_name}/boot.dol",
+        os.path.join(app_path, "boot.dol"),
+    )
     print("   - Done!")
     print(" - Downloading meta.xml...")
-    download_file(f"https://hbb1.oscwii.org/unzipped_apps/{app_name}/apps/{app_name}/meta.xml",
-                  os.path.join(app_path, "meta.xml"))
+    download_file(
+        f"https://hbb1.oscwii.org/unzipped_apps/{app_name}/apps/{app_name}/meta.xml",
+        os.path.join(app_path, "meta.xml"),
+    )
     print("   - Done!")
     print(" - Downloading icon.png...")
-    download_file(f"https://hbb1.oscwii.org/api/v3/contents/{app_name}/icon.png",
-                  os.path.join(app_path, "icon.png"))
+    download_file(
+        f"https://hbb1.oscwii.org/api/v3/contents/{app_name}/icon.png",
+        os.path.join(app_path, "icon.png"),
+    )
     print("   - Done!")
 
 
@@ -138,8 +156,10 @@ def download_agc(platform: Platforms):
 
         print("Downloading AnyGlobe Changer from GitHub:")
         print(" - Downloading release...")
-        download_file("https://github.com/fishguy6564/AnyGlobe-Changer/releases/download/1.0/AnyGlobe.Changer.zip",
-                      agc_dest)
+        download_file(
+            "https://github.com/fishguy6564/AnyGlobe-Changer/releases/download/1.0/AnyGlobe.Changer.zip",
+            agc_dest,
+        )
         print("   - Done!")
         print(" - Extracting release...")
         with zipfile.ZipFile(agc_dest, "r") as agc_zip:
@@ -170,9 +190,14 @@ def download_patch(folder: str, patch_name: str):
     return patch
 
 
-def download_channel(channel_title: str, title_id: str, version: int = None, region: Regions = None,
-                     channel_name: str = None,
-                     additional_files: dict[str, str] = None):
+def download_channel(
+    channel_title: str,
+    title_id: str,
+    version: int = None,
+    region: Regions = None,
+    channel_name: str = None,
+    additional_files: dict[str, str] = None,
+):
     os.makedirs(wad_directory, exist_ok=True)
     os.makedirs(title_directory, exist_ok=True)
 
@@ -249,10 +274,16 @@ def download_title_contents(title: libWiiPy.title.Title, title_id: str):
         content_file_name = hex(title.tmd.content_records[content].content_id)[2:]
         while len(content_file_name) < 8:
             content_file_name = "0" + content_file_name
-        print(f" - Downloading content {content + 1} of {len(title.tmd.content_records)} "
-              f"(Content ID: {title.tmd.content_records[content].content_id}, "
-              f"Size: {title.tmd.content_records[content].content_size} bytes)...")
-        content_list.append(libWiiPy.title.download_content(title_id, title.tmd.content_records[content].content_id))
+        print(
+            f" - Downloading content {content + 1} of {len(title.tmd.content_records)} "
+            f"(Content ID: {title.tmd.content_records[content].content_id}, "
+            f"Size: {title.tmd.content_records[content].content_size} bytes)..."
+        )
+        content_list.append(
+            libWiiPy.title.download_content(
+                title_id, title.tmd.content_records[content].content_id
+            )
+        )
         print("   - Done!")
 
     title.content.content_list = content_list
@@ -263,10 +294,16 @@ def download_title_contents(title: libWiiPy.title.Title, title_id: str):
 def download_todaytomorrow(region: Regions):
     match region:
         case Regions.PAL:
-            additional_files = {
-                ".tik": os.path.join(title_directory, "tik")
-            }
-            download_channel("Today and Tomorrow Channel", "0001000148415650", 512, Regions.PAL, "tatc",
-                             additional_files)
+            additional_files = {".tik": os.path.join(title_directory, "tik")}
+            download_channel(
+                "Today and Tomorrow Channel",
+                "0001000148415650",
+                512,
+                Regions.PAL,
+                "tatc",
+                additional_files,
+            )
         case Regions.Japan:
-            download_channel("Today and Tomorrow Channel", "000100014841564a", 512, Regions.Japan)
+            download_channel(
+                "Today and Tomorrow Channel", "000100014841564a", 512, Regions.Japan
+            )
