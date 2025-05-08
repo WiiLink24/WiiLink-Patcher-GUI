@@ -114,23 +114,21 @@ class MainMenu(QWizardPage):
         )
 
         self.options = {
-            "express_setup": QRadioButton(self.tr("Express Setup (Recommended)")),
-            "custom_setup": QRadioButton(self.tr("Custom Setup (Advanced)")),
-            "extra_channels": QRadioButton(self.tr("Extra Channels (Optional)")),
+            "express_setup": QRadioButton(
+                self.tr(
+                    "Express Setup (Recommended)\nThe fastest way to get started with WiiLink"
+                )
+            ),
+            "custom_setup": QRadioButton(
+                self.tr("Custom Setup (Advanced)\nCustomize your WiiLink installation")
+            ),
+            "extra_channels": QRadioButton(
+                self.tr(
+                    "Extra Channels (Optional)\nAdd additional channels to your Wii"
+                )
+            ),
             "about": QPushButton(self.tr("About WiiLink Patcher")),
         }
-
-        self.options["express_setup"].setText(
-            self.tr(
-                "Express Setup (Recommended)\nThe fastest way to get started with WiiLink"
-            )
-        )
-        self.options["custom_setup"].setText(
-            self.tr("Custom Setup (Advanced)\nCustomize your WiiLink installation")
-        )
-        self.options["extra_channels"].setText(
-            self.tr("Extra Channels (Optional)\nAdd additional channels to your Wii")
-        )
 
         self.layout = QVBoxLayout()
         self.layout.setSpacing(10)
