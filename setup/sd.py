@@ -159,10 +159,10 @@ class WADCleanup(QWizardPage):
         self.layout.setContentsMargins(20, 20, 20, 20)
 
         self.label = QLabel(self.tr("""The patcher has detected a directory called 'WAD' on your selected storage device.
-The 'WAD' directory is used to store channels you install on your Wii,
-therefore this directory causes a conflict.
+The 'WAD' directory is used to store channels you install on your Wii, therefore this directory causes a conflict.
 
 What would you like to do?"""))
+        self.label.setWordWrap(True)
 
         self.options = {
             "rename": QRadioButton(self.tr("Rename the existing 'WAD' directory to 'WAD.bak'\n(Recommended)")),
