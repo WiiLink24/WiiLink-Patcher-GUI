@@ -94,8 +94,8 @@ Services that would be installed:
 
         self.setLayout(layout)
 
-        self.Yes.toggled.connect(lambda: self.completeChanged.emit())
-        self.No.toggled.connect(lambda: self.completeChanged.emit())
+        self.Yes.clicked.connect(self.completeChanged.emit)
+        self.No.clicked.connect(self.completeChanged.emit)
 
     def isComplete(self):
         global regional_channels

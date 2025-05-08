@@ -37,6 +37,7 @@ from setup.extras import ExtrasSystemChannelRestorer, MinimalExtraChannels, Full
     ExtrasPlatformConfiguration, ExtrasRegionConfiguration
 from setup.download import connection_test, download_translation_dict, download_translation, get_latest_version
 from setup.patch import PatchingPage
+from setup.sd import AskSD, SelectSD, WADCleanup, FileCopying
 
 patcher_url = "https://patcher.wiilink24.com"
 temp_dir = pathlib.Path(tempfile.gettempdir()).joinpath("WiiLinkPatcher")
@@ -233,8 +234,6 @@ class About(QWidget):
 class WiiLinkFolderDetected(QWizardPage):
     def __init__(self, parent=None):
         super().__init__(parent)
-
-        self.about_window = About()
 
         self.setTitle(self.tr("WiiLink folder detected!"))
         self.setSubTitle(self.tr("A directory called 'WiiLink' has been found in the current directory."))
@@ -502,6 +501,10 @@ Latest version: {latest_version}""")
 
     wizard.setPage(10, WiiLinkFolderDetected())
     wizard.setPage(11, PatchingPage())
+    wizard.setPage(12, AskSD())
+    wizard.setPage(13, SelectSD())
+    wizard.setPage(14, WADCleanup())
+    wizard.setPage(15, FileCopying())
 
     wizard.setPage(100, ExpressRegion())
     wizard.setPage(101, ExpressRegionalChannels())

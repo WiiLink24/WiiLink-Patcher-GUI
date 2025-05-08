@@ -5,3 +5,4 @@ nuitka~=2.6.0
 bsdiff4
 imageio
 requests
+psutil

@@ -462,6 +462,9 @@ class PatchingPage(QWizardPage):
         QTimer.singleShot(0, self.wizard().next)
 
     def nextId(self):
+        if self.platform != Platforms.Dolphin:
+            return 12
+
         return 1000
 
     def set_percentage(self, percentage: int):
