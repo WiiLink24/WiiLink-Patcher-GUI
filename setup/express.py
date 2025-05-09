@@ -1,4 +1,4 @@
-import os.path
+import pathlib
 
 from PySide6.QtWidgets import (
     QWizardPage,
@@ -356,7 +356,6 @@ class ExpressPlatformConfiguration(QWizardPage):
         global region
 
         selected_channels = [
-            "download",
             f"nc_{region}",
             f"forecast_{region}",
             f"news_{region}",
@@ -375,7 +374,7 @@ class ExpressPlatformConfiguration(QWizardPage):
         return True
 
     def nextId(self):
-        if os.path.exists("WiiLink"):
+        if pathlib.Path().joinpath("WiiLink").exists():
             return 10
 
         return 11

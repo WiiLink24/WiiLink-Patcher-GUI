@@ -1,4 +1,4 @@
-import os
+import pathlib
 from PySide6.QtWidgets import (
     QWizardPage,
     QLabel,
@@ -245,7 +245,7 @@ class CustomRegionConfiguration(QWizardPage):
         return False
 
     def nextId(self):
-        if os.path.exists("WiiLink"):
+        if pathlib.Path().joinpath("WiiLink").exists():
             return 10
 
         return 11

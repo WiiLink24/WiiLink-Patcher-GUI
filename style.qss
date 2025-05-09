@@ -86,7 +86,7 @@ QLabel[class="QWizardPageSubTitle"] {
     QRadioButton::indicator:checked {
         background-color: #1a73e8;
         border: 1px solid #1a73e8;
-        image: url(assets/rounded_square.svg);
+        image: url(%AssetsDir%/rounded_square.svg);
     }
     
     QRadioButton::indicator:hover {
@@ -173,7 +173,7 @@ QLabel[class="QWizardPageSubTitle"] {
     QCheckBox::indicator:checked {
         background-color: #1a73e8;
         border: 1px solid #1a73e8;
-        image: url(assets/check.svg);
+        image: url(%AssetsDir%/check.svg);
     }
     
     QCheckBox::indicator:hover {
@@ -250,13 +250,13 @@ QComboBox::drop-down {
 }
 
 QComboBox::down-arrow {
-    image: url(assets/dropdown_arrow.svg);
+    image: url(%AssetsDir%/dropdown_arrow.svg);
     width: 12px;
     height: 12px;
 }
 
 QComboBox::down-arrow:disabled {
-    image: url(assets/dropdown_arrow_disabled.svg);
+    image: url(%AssetsDir%/dropdown_arrow_disabled.svg);
 }
 
 QComboBox:disabled {

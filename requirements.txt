@@ -6,3 +6,4 @@ bsdiff4
 imageio
 requests
 psutil
+black

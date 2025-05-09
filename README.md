@@ -6,8 +6,20 @@ You can download the latest release from the [Releases Page](https://github.com/
 
 > **NOTE:** In **Windows**, your antivirus may flag the **patcher** as malware. This is a **false positive**, and you can safely ignore it. If you are still unsure, you can inspect the source code, and/or compile it yourself for extra verification. You can also temporarily disable your antivirus to download the patcher, or add an exception for it if you put it in a dedicated folder.
 
+## Troubleshooting
+
+### Linux
+- ```qt.qpa.plugin: Could not load the Qt platform plugin "xcb" in "" even though it was found.```:
+> - This is a common issue on Debian, Ubuntu and their derivatives (i.e. Linux Mint). To resolve this issue, install the `libxcb-cursor-dev` package on your system.
+
 ## Translating
 To contribute translations, refer to [this](TRANSLATING.md).
+
+## Contributing
+We appreciate all contributions to this repository, big and small! If you're contributing to code, make sure to run black before submitting a pull request:
+```
+python -m black .
+```
 
 ## Compiling
 To compile the patcher, you will first need to install a few dependencies:

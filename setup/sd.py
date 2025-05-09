@@ -1,6 +1,7 @@
 import os
 import psutil
 import shutil
+import pathlib
 
 from PySide6.QtWidgets import (
     QVBoxLayout,
@@ -153,8 +154,9 @@ class SelectSD(QWizardPage):
 
         # Find existing WAD folder, regardless of case
         for folder in os.listdir(selected_device):
-            if folder.upper() == "WAD" and os.path.isdir(
-                os.path.join(selected_device, folder)
+            if (
+                folder.upper() == "WAD"
+                and pathlib.Path().joinpath(selected_device, folder).is_dir()
             ):
                 sd_wad_path = folder
                 return 14
@@ -217,16 +219,17 @@ What would you like to do?"""
         global sd_path
         global sd_wad_path
 
-        sd_wad_directory = os.path.join(sd_path, sd_wad_path)
+        sd_wad_directory = pathlib.Path().joinpath(sd_path, sd_wad_path)
         if self.options["rename"].isChecked():
             try:
-                os.rename(sd_wad_directory, os.path.join(sd_path, "WAD.bak"))
+                os.rename(sd_wad_directory, pathlib.Path().joinpath(sd_path, "WAD.bak"))
             except (OSError, FileExistsError):
                 i = 1
                 while True:
                     try:
                         os.rename(
-                            sd_wad_directory, os.path.join(sd_path, f"WAD.bak ({i})")
+                            sd_wad_directory,
+                            pathlib.Path().joinpath(sd_path, f"WAD.bak ({i})"),
                         )
                     except (OSError, FileExistsError):
                         i += 1
@@ -333,20 +336,21 @@ class CopyFiles(QObject):
         # Find existing apps folder, regardless of case
         sd_apps_path = "apps"
         for folder in os.listdir(sd_path):
-            if folder.lower() == "apps" and os.path.isdir(
-                os.path.join(sd_path, folder)
+            if (
+                folder.lower() == "apps"
+                and pathlib.Path().joinpath(sd_path, folder).is_dir()
             ):
                 sd_apps_path = folder
 
         try:
             shutil.copytree(
-                os.path.join("WiiLink", "apps"),
-                os.path.join(sd_path, sd_apps_path),
+                pathlib.Path().joinpath("WiiLink", "apps"),
+                pathlib.Path().joinpath(sd_path, sd_apps_path),
                 dirs_exist_ok=True,
             )
             shutil.copytree(
-                os.path.join("WiiLink", "WAD"),
-                os.path.join(sd_path, sd_wad_path),
+                pathlib.Path().joinpath("WiiLink", "WAD"),
+                pathlib.Path().joinpath(sd_path, sd_wad_path),
                 dirs_exist_ok=True,
             )
         except Exception as e:

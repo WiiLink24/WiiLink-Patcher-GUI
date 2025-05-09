@@ -71,6 +71,7 @@ from setup.sd import AskSD, SelectSD, WADCleanup, FileCopying
 patcher_url = "https://patcher.wiilink24.com"
 temp_dir = pathlib.Path(tempfile.gettempdir()).joinpath("WiiLinkPatcher")
 wiilink_dir = pathlib.Path().joinpath("WiiLink")
+file_path = pathlib.Path(__file__).parent
 patcher_version = "1.0"
 
 
@@ -186,9 +187,10 @@ class About(QWidget):
         self.setFixedHeight(500)
 
         # Set background color to match main app
-        stylesheet = open(
-            os.path.join(os.path.dirname(__file__), "style.qss"), "r"
-        ).read()
+        stylesheet = open(pathlib.Path().joinpath(file_path, "style.qss"), "r").read()
+        stylesheet = stylesheet.replace(
+            "%AssetsDir%", str(pathlib.Path().joinpath(file_path, "assets"))
+        )
         self.setStyleSheet(stylesheet)
 
         # Create main layout
@@ -198,7 +200,7 @@ class About(QWidget):
 
         # Logo
         logo_label = QLabel()
-        icon = QIcon(os.path.join(os.path.dirname(__file__), "assets", "logo.webp"))
+        icon = QIcon(str(pathlib.Path().joinpath(file_path, "assets", "logo.webp")))
         logo_pixmap = icon.pixmap(96, 96)
         logo_label.setPixmap(logo_pixmap)
         logo_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
@@ -513,9 +515,9 @@ def main():
     wizard.setWizardStyle(QWizard.WizardStyle.ModernStyle)
     wizard.setSubTitleFormat(Qt.TextFormat.RichText)
 
-    icon = QIcon(os.path.join(os.path.dirname(__file__), "assets", "logo.webp"))
+    icon = QIcon(str(pathlib.Path().joinpath(file_path, "assets", "logo.webp")))
     background = QIcon(
-        os.path.join(os.path.dirname(__file__), "assets", "background.webp")
+        str(pathlib.Path().joinpath(file_path, "assets", "background.webp"))
     )
     logo = icon.pixmap(64, 64)
     banner = background.pixmap(700, 120)
@@ -525,9 +527,10 @@ def main():
     app.setWindowIcon(icon)
 
     # Apply global stylesheet for consistent styling across all pages
-    stylesheet = open(os.path.join(os.path.dirname(__file__), "style.qss"), "r").read()
+    stylesheet_path = pathlib.Path().joinpath(file_path, "style.qss")
+    stylesheet = open(stylesheet_path, "r").read()
     stylesheet = stylesheet.replace(
-        "assets", os.path.join(os.path.dirname(__file__), "assets")
+        "%AssetsDir%", str(pathlib.Path().joinpath(file_path, "assets"))
     )
     wizard.setStyleSheet(stylesheet)
 
@@ -583,9 +586,10 @@ Latest version: {latest_version}""",
                 sys.exit()
 
     language = QLocale.languageToCode(QLocale.system().language())
-    supported_languages = download_translation_dict()
 
-    if supported_languages is False:
+    try:
+        supported_languages = download_translation_dict()
+    except:
         QMessageBox.warning(
             QWidget(),
             "WiiLink Patcher - Warning",
@@ -593,7 +597,9 @@ Latest version: {latest_version}""",
         )
     else:
         if language in supported_languages:
-            if download_translation(language) is False:
+            try:
+                download_translation(language)
+            except:
                 QMessageBox.warning(
                     QWidget(),
                     "WiiLink Patcher - Warning",
@@ -605,7 +611,7 @@ Latest version: {latest_version}""",
     if translator.load(QLocale.system(), "qtbase", "_", path):
         app.installTranslator(translator)
     translator = QTranslator(app)
-    path = os.path.join(os.path.dirname(__file__), "translations")
+    path = str(pathlib.Path().joinpath(file_path, "translations"))
     if translator.load(QLocale.system(), "translation", "_", path):
         app.installTranslator(translator)
 
