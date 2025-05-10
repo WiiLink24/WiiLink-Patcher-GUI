@@ -135,7 +135,7 @@ def patch_channel(
         output_wad = pathlib.Path().joinpath(wad_directory, f"{channel_title}.wad")
 
     if additional_files is not None:
-        title_directory.mkdir(exist_ok=True)
+        title_directory.mkdir(parents=True)
         for file, destination in additional_files.items():
             url = f"{file_url}{file}"
             download_file(url, destination)
