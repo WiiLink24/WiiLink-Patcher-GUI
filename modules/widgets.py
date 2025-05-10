@@ -7,14 +7,13 @@ class CollapsibleBox(QWidget):
         super().__init__(parent)
 
         self.toggle_button = QToolButton(text=title, checkable=True)
-        self.toggle_button.setStyleSheet("font-weight: bold;")
-        self.toggle_button.setToolButtonStyle(
-            Qt.ToolButtonStyle.ToolButtonTextBesideIcon
-        )
+
+        self.toggle_button.setToolButtonStyle(Qt.ToolButtonStyle.ToolButtonTextBesideIcon)
         self.toggle_button.setArrowType(Qt.ArrowType.RightArrow)
         self.toggle_button.clicked.connect(self.on_toggle)
 
         self.content_area = QFrame()
+        self.toggle_button.setProperty("collapsible", True)
 
         self.content_layout = QVBoxLayout()
         self.content_area.setLayout(self.content_layout)

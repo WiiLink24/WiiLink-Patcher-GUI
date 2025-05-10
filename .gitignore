@@ -21,3 +21,5 @@ __pycache__/
 
 # Jetbrains IDE settings
 .idea/
+
+.vscode/

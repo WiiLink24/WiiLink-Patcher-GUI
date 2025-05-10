@@ -7,6 +7,7 @@ from PySide6.QtWidgets import (
     QCheckBox,
     QScrollArea,
     QWidget,
+    QSizePolicy,
 )
 
 from .patch import PatchingPage
@@ -58,12 +59,17 @@ class CustomWiiConnect24Channels(QWizardPage):
 
         scroll_area = QScrollArea()
         scroll_area.setWidgetResizable(True)
+        scroll_area.setFixedHeight(300)
 
         container = QWidget()
         container_layout = QVBoxLayout(container)
+        container_layout.setContentsMargins(0, 0, 0, 0)
+        container_layout.setSpacing(0)
 
         for category, channels in self.channels.items():
             box = CollapsibleBox(title=category)
+            box.toggle_button.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Fixed)
+            box.toggle_button.setMinimumWidth(0)
             for key, label in channels.items():
                 checkbox = QCheckBox(label)
                 box.content_layout.addWidget(checkbox)
@@ -130,9 +136,13 @@ class CustomRegionalChannels(QWizardPage):
 
         container = QWidget()
         container_layout = QVBoxLayout(container)
+        container_layout.setContentsMargins(0, 0, 0, 0)
 
         for category, channels in self.channels.items():
             box = CollapsibleBox(title=category)
+            box.toggle_button.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Fixed)
+            box.toggle_button.setMinimumWidth(0)
+            box.toggle_button.setMaximumWidth(16777215)  # Max int for width
             for key, label in channels.items():
                 checkbox = QCheckBox(label)
                 box.content_layout.addWidget(checkbox)

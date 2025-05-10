@@ -285,3 +285,54 @@ QComboBox QAbstractItemView::item {
 QComboBox QAbstractItemView::item:hover {
     background-color: rgba(26, 115, 232, 0.3);
 }
+
+QToolButton[collapsible="true"] {
+    background: transparent;
+    border: none;
+    border: 1px solid rgba(70, 70, 70, 1);
+    background-color: rgb(50, 50, 50);
+    font-size: 15px;
+    font-weight: bold;
+    padding: 10px;
+    text-align: center;
+    border-radius: 8px;
+    qproperty-iconSize: 10px 10px;
+    width: 100%;
+    min-width: 0;
+}
+
+QToolButton[collapsible="true"]:hover {
+    border: 1px solid rgba(80, 80, 80, 1);
+    background-color: rgb(60, 60, 60);
+}
+QToolButton[collapsible="true"]:checked {
+    border: 1px solid rgba(80, 80, 80, 1);
+    background-color: rgb(60, 60, 60);
+}
+
+QScrollBar:vertical, QScrollBar:horizontal {
+    background: rgb(30, 30, 30);
+    border-radius: 5px;
+    width: 10px;
+    margin: 0px 0px 0px 0px;
+}
+
+QScrollBar::handle:vertical, QScrollBar::handle:horizontal {
+    background:rgb(88, 88, 88);
+    border: 0px;
+    border-radius: 5px;
+}
+
+QScrollBar::add-line, QScrollBar::sub-line {
+    background: none;
+    border: none;
+}
+
+QScrollBar::add-page, QScrollBar::sub-page {
+    background: none;
+}
+
+QScrollArea { background: transparent; padding:0px; margin:0px; }
+QScrollArea > QWidget > QWidget { background: transparent; padding:0px; margin:0px; }
+QScrollArea > QWidget > QScrollBar { background: palette(base); padding:0px; margin:0px; }
+
