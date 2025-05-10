@@ -8,7 +8,9 @@ class CollapsibleBox(QWidget):
 
         self.toggle_button = QToolButton(text=title, checkable=True)
 
-        self.toggle_button.setToolButtonStyle(Qt.ToolButtonStyle.ToolButtonTextBesideIcon)
+        self.toggle_button.setToolButtonStyle(
+            Qt.ToolButtonStyle.ToolButtonTextBesideIcon
+        )
         self.toggle_button.setArrowType(Qt.ArrowType.RightArrow)
         self.toggle_button.clicked.connect(self.on_toggle)
 
