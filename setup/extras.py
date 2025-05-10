@@ -7,6 +7,7 @@ from PySide6.QtWidgets import (
     QCheckBox,
     QScrollArea,
     QWidget,
+    QSizePolicy,
 )
 
 from .enums import *
@@ -96,11 +97,17 @@ class MinimalExtraChannels(QWizardPage):
 
         container = QWidget()
         container_layout = QVBoxLayout(container)
+        container_layout.setContentsMargins(0, 0, 0, 0)
+        container_layout.setSpacing(0)
 
         self.checkboxes = {}
 
         for category, channels in self.channels.items():
             box = CollapsibleBox(title=category)
+            # Make the toggle button full width
+            box.toggle_button.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Fixed)
+            box.toggle_button.setMinimumWidth(0)
+            box.toggle_button.setMaximumWidth(16777215)
             for key, label in channels.items():
                 checkbox = QCheckBox(label)
                 box.content_layout.addWidget(checkbox)
@@ -174,11 +181,17 @@ class FullExtraChannels(QWizardPage):
 
         container = QWidget()
         container_layout = QVBoxLayout(container)
+        container_layout.setContentsMargins(0, 0, 0, 0)
+        container_layout.setSpacing(0)
 
         self.checkboxes = {}
 
         for category, channels in self.channels.items():
             box = CollapsibleBox(title=category)
+            # Make the toggle button full width
+            box.toggle_button.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Fixed)
+            box.toggle_button.setMinimumWidth(0)
+            box.toggle_button.setMaximumWidth(16777215)
             for key, label in channels.items():
                 checkbox = QCheckBox(label)
                 box.content_layout.addWidget(checkbox)
