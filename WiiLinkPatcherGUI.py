@@ -83,6 +83,7 @@ app = QApplication(sys.argv)
 
 wizard = QWizard()
 
+
 class IntroPage(QWizardPage):
     def __init__(self, parent=None):
         super().__init__(parent)

@@ -3,12 +3,14 @@ from PySide6.QtCore import Qt, Signal
 
 
 class CollapsibleBox(QWidget):
-    def __init__(self, title: str, parent = None):
+    def __init__(self, title: str, parent=None):
         super().__init__(parent)
 
         self.toggle_button = QToolButton(text=title, checkable=True)
         self.toggle_button.setStyleSheet("font-weight: bold;")
-        self.toggle_button.setToolButtonStyle(Qt.ToolButtonStyle.ToolButtonTextBesideIcon)
+        self.toggle_button.setToolButtonStyle(
+            Qt.ToolButtonStyle.ToolButtonTextBesideIcon
+        )
         self.toggle_button.setArrowType(Qt.ArrowType.RightArrow)
         self.toggle_button.clicked.connect(self.on_toggle)
 

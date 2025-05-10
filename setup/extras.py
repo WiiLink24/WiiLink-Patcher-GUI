@@ -1,5 +1,13 @@
 import os
-from PySide6.QtWidgets import QWizardPage, QLabel, QVBoxLayout, QRadioButton, QCheckBox, QScrollArea, QWidget
+from PySide6.QtWidgets import (
+    QWizardPage,
+    QLabel,
+    QVBoxLayout,
+    QRadioButton,
+    QCheckBox,
+    QScrollArea,
+    QWidget,
+)
 
 from .enums import *
 from .patch import PatchingPage
@@ -66,12 +74,12 @@ class MinimalExtraChannels(QWizardPage):
         "Wii Speak Channel": {
             "ws_us": "Wii Speak Channel (USA)",
             "ws_eu": "Wii Speak Channel (PAL)",
-            "ws_jp": "Wii Speak Channel (Japan)"
+            "ws_jp": "Wii Speak Channel (Japan)",
         },
         "Today and Tomorrow Channel": {
             "tatc_eu": "Today and Tomorrow Channel (PAL)",
-            "tatc_jp": "Today and Tomorrow Channel (Japan)"
-        }
+            "tatc_jp": "Today and Tomorrow Channel (Japan)",
+        },
     }
 
     def __init__(self, parent=None):
@@ -137,17 +145,17 @@ class FullExtraChannels(QWizardPage):
         "Wii Speak Channel": {
             "ws_us": "Wii Speak Channel (USA)",
             "ws_eu": "Wii Speak Channel (PAL)",
-            "ws_jp": "Wii Speak Channel (Japan)"
+            "ws_jp": "Wii Speak Channel (Japan)",
         },
         "Today and Tomorrow Channel": {
             "tatc_eu": "Today and Tomorrow Channel (PAL)",
-            "tatc_jp": "Today and Tomorrow Channel (Japan)"
+            "tatc_jp": "Today and Tomorrow Channel (Japan)",
         },
         "Internet Channel": {
             "ic_us": "Internet Channel (USA)",
             "ic_eu": "Internet Channel (PAL)",
-            "ic_jp": "Internet Channel (Japan)"
-        }
+            "ic_jp": "Internet Channel (Japan)",
+        },
     }
     local_selected_channels: list
     checkboxes: dict

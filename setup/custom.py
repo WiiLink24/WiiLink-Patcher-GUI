@@ -7,7 +7,6 @@ from PySide6.QtWidgets import (
     QCheckBox,
     QScrollArea,
     QWidget,
-
 )
 
 from .patch import PatchingPage
@@ -22,28 +21,28 @@ class CustomWiiConnect24Channels(QWizardPage):
         "Forecast Channel": {
             "forecast_us": "Forecast Channel (USA)",
             "forecast_eu": "Forecast Channel (PAL)",
-            "forecast_jp": "Forecast Channel (Japan)"
+            "forecast_jp": "Forecast Channel (Japan)",
         },
         "News Channel": {
             "news_us": "News Channel (USA)",
             "news_eu": "News Channel (PAL)",
-            "news_jp": "News Channel (Japan)"
+            "news_jp": "News Channel (Japan)",
         },
         "Nintendo Channel": {
             "nc_us": "Nintendo Channel (USA)",
             "nc_eu": "Nintendo Channel (PAL)",
-            "nc_jp": "Minna no Nintendo Channel (Japan)"
+            "nc_jp": "Minna no Nintendo Channel (Japan)",
         },
         "Everybody Votes Channel": {
             "evc_us": "Everybody Votes Channel (USA)",
             "evc_eu": "Everybody Votes Channel (PAL)",
-            "evc_jp": "Everybody Votes Channel (Japan)"
+            "evc_jp": "Everybody Votes Channel (Japan)",
         },
         "Check Mii Out Channel": {
             "cmoc_us": "Check Mii Out Channel (USA)",
             "cmoc_eu": "Mii Contest Channel (PAL)",
-            "cmoc_jp": "Mii Contest Channel (Japan)"
-        }
+            "cmoc_jp": "Mii Contest Channel (Japan)",
+        },
     }
 
     def __init__(self, parent=None):
@@ -103,20 +102,18 @@ class CustomRegionalChannels(QWizardPage):
             "wiiroom_nl": "Wii Room (Nederlands)",
             "wiiroom_ptbr": "Wii Room (Português (Brasil))",
             "wiiroom_ru": "Wii Room (Русский)",
-            "wiiroom_jp": "Wii no Ma (Japanese)"
+            "wiiroom_jp": "Wii no Ma (Japanese)",
         },
         "Photo Prints Channel": {
             "digicam_en": "Photo Prints Channel (English)",
-            "digicam_jp": "Digicam Print Channel (Japanese)"
+            "digicam_jp": "Digicam Print Channel (Japanese)",
         },
         "Food Channel": {
             "food_en": "Food Channel (Standard) (English)",
             "food_jp": "Demae Channel (Standard) (Japanese)",
-            "dominos": "Food Channel (Domino's) (English)"
+            "dominos": "Food Channel (Domino's) (English)",
         },
-        "Kirby TV Channel": {
-            "ktv": "Kirby TV Channel"
-        }
+        "Kirby TV Channel": {"ktv": "Kirby TV Channel"},
     }
 
     def __init__(self, parent=None):
