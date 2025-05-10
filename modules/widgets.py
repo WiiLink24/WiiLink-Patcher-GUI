@@ -6,7 +6,7 @@ class CollapsibleBox(QWidget):
     def __init__(self, title: str, parent=None):
         super().__init__(parent)
 
-        self.toggle_button = QToolButton(text=title, checkable=True)
+        self.toggle_button = QToolButton(text=f"  {title}", checkable=True)
 
         self.toggle_button.setToolButtonStyle(
             Qt.ToolButtonStyle.ToolButtonTextBesideIcon

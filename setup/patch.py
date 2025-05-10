@@ -826,7 +826,7 @@ class PatchingWorker(QObject):
                     download_osc_app("yawmME")
                     download_osc_app("sntp")
 
-                if self.regional_channels:
+                if self.regional_channels and self.region != Regions.Japan:
                     download_spd()
 
                 download_osc_app("Mail-Patcher")
