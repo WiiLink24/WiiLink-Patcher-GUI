@@ -75,9 +75,6 @@ def apply_bsdiff_patches(
 
         title.set_content(patched_content, index)
 
-    # Delete temporary directory, ready for next channel to be patched
-    shutil.rmtree(temp_dir)
-
     return title
 
 
@@ -178,6 +175,10 @@ def patch_channel(
         raise ValueError(e)
     else:
         print("   - Done!")
+
+    # Delete temporary directory, ready for next channel to be patched
+    if title_directory.exists() and title_directory.is_dir():
+        shutil.rmtree(title_directory)
 
 
 def nc_patch(region: Regions):

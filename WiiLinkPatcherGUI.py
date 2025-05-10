@@ -22,6 +22,7 @@ import subprocess
 import sys
 import tempfile
 import webbrowser
+import random
 
 from PySide6.QtCore import QTranslator, QLocale, QLibraryInfo, QTimer, Qt
 from PySide6.QtGui import QIcon
@@ -67,6 +68,7 @@ from setup.download import (
 )
 from setup.patch import PatchingPage
 from setup.sd import AskSD, SelectSD, WADCleanup, FileCopying
+from modules.widgets import ClickableLabel
 
 patcher_url = "https://patcher.wiilink24.com"
 temp_dir = pathlib.Path(tempfile.gettempdir()).joinpath("WiiLinkPatcher")
@@ -74,6 +76,12 @@ wiilink_dir = pathlib.Path().joinpath("WiiLink")
 file_path = pathlib.Path(__file__).parent
 patcher_version = "1.0"
 
+pride_flags = pathlib.Path(file_path).joinpath("assets", "pride_banners").iterdir()
+flags_list = list(pride_flags)
+
+app = QApplication(sys.argv)
+
+wizard = QWizard()
 
 class IntroPage(QWizardPage):
     def __init__(self, parent=None):
@@ -180,6 +188,8 @@ class MainMenu(QWizardPage):
 
 
 class About(QWidget):
+    clicks = 0
+
     def __init__(self, parent=None):
         super().__init__(parent)
         self.setWindowTitle(self.tr("WiiLink Patcher - About"))
@@ -199,11 +209,12 @@ class About(QWidget):
         self.layout.setContentsMargins(30, 20, 30, 20)
 
         # Logo
-        logo_label = QLabel()
+        logo_label = ClickableLabel()
         icon = QIcon(str(pathlib.Path().joinpath(file_path, "assets", "logo.webp")))
         logo_pixmap = icon.pixmap(96, 96)
         logo_label.setPixmap(logo_pixmap)
         logo_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        logo_label.clicked.connect(self.pride)
 
         # Title
         title_label = QLabel(self.tr("WiiLink Patcher"))
@@ -304,6 +315,24 @@ class About(QWidget):
         self.layout.addStretch()
 
         self.setLayout(self.layout)
+
+    def pride(self):
+        global wizard
+        global pride_flags
+        global flags_list
+
+        self.clicks += 1
+
+        if self.clicks == 3:
+            print("making it gay :3")
+            self.clicks = 0
+            flag_index = random.randint(0, len(flags_list) - 1)
+            selected_flag = flags_list[flag_index]
+
+            pride = QIcon(str(selected_flag))
+            pride_pixmap = pride.pixmap(700, 120)
+            wizard.setPixmap(QWizard.WizardPixmap.BannerPixmap, pride_pixmap)
+            wizard.setWindowTitle(self.tr("GayLink Patcher"))
 
 
 class WiiLinkFolderDetected(QWizardPage):
@@ -508,9 +537,6 @@ def main():
     if temp_dir.exists():
         shutil.rmtree(temp_dir)
 
-    app = QApplication(sys.argv)
-
-    wizard = QWizard()
     wizard.setWindowTitle(app.tr("WiiLink Patcher"))
     wizard.setWizardStyle(QWizard.WizardStyle.ModernStyle)
     wizard.setSubTitleFormat(Qt.TextFormat.RichText)

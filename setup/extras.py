@@ -1,11 +1,9 @@
 import os
-from PySide6.QtWidgets import QWizardPage, QLabel, QVBoxLayout, QRadioButton, QCheckBox
+from PySide6.QtWidgets import QWizardPage, QLabel, QVBoxLayout, QRadioButton, QCheckBox, QScrollArea, QWidget
 
 from .enums import *
 from .patch import PatchingPage
-
-system_channel_restorer = False
-selected_channels = []
+from modules.widgets import CollapsibleBox
 
 
 class ExtrasSystemChannelRestorer(QWizardPage):
@@ -49,12 +47,9 @@ Use of System Channel Restorer requires an internet connection on your console."
         self.no.clicked.connect(self.completeChanged)
 
     def isComplete(self):
-        global system_channel_restorer
         if self.yes.isChecked():
-            system_channel_restorer = True
             return True
         elif self.no.isChecked():
-            system_channel_restorer = False
             return True
         return False
 
@@ -67,60 +62,62 @@ Use of System Channel Restorer requires an internet connection on your console."
 
 
 class MinimalExtraChannels(QWizardPage):
-    local_selected_channels: list
-    checkboxes: dict
+    channels = {
+        "Wii Speak Channel": {
+            "ws_us": "Wii Speak Channel (USA)",
+            "ws_eu": "Wii Speak Channel (PAL)",
+            "ws_jp": "Wii Speak Channel (Japan)"
+        },
+        "Today and Tomorrow Channel": {
+            "tatc_eu": "Today and Tomorrow Channel (PAL)",
+            "tatc_jp": "Today and Tomorrow Channel (Japan)"
+        }
+    }
 
     def __init__(self, parent=None):
         super().__init__(parent)
         self.setTitle(self.tr("Step 2: Extras Setup"))
         self.setSubTitle(self.tr("Select the extra channels you want to install"))
 
-        label = QLabel(
+        self.label = QLabel(
             self.tr("Select the channels you'd like to install from the list below:")
         )
 
-        layout = QVBoxLayout()
+        scroll_area = QScrollArea()
+        scroll_area.setWidgetResizable(True)
 
-        layout.addWidget(label)
+        container = QWidget()
+        container_layout = QVBoxLayout(container)
 
-        # List of channels
-        channels = {
-            "ws_us": "Wii Speak Channel (USA)",
-            "ws_eu": "Wii Speak Channel (PAL)",
-            "ws_jp": "Wii Speak Channel (Japan)",
-            "tatc_eu": "Today and Tomorrow Channel (PAL)",
-            "tatc_jp": "Today and Tomorrow Channel (Japan)",
-        }
-
-        # Dictionary to hold checkboxes
         self.checkboxes = {}
 
-        # Add checkboxes to layout
-        for key, label in channels.items():
-            checkbox = QCheckBox(label)
-            layout.addWidget(checkbox)
-            self.checkboxes[key] = checkbox
-            checkbox.clicked.connect(self.completeChanged)
+        for category, channels in self.channels.items():
+            box = CollapsibleBox(title=category)
+            for key, label in channels.items():
+                checkbox = QCheckBox(label)
+                box.content_layout.addWidget(checkbox)
+                self.checkboxes[key] = checkbox
+                checkbox.clicked.connect(self.completeChanged.emit)
+            container_layout.addWidget(box)
 
-        # Set layout
+        container_layout.addStretch()
+        scroll_area.setWidget(container)
+
+        layout = QVBoxLayout()
+
+        layout.addWidget(self.label)
+        layout.addWidget(scroll_area)
+
         self.setLayout(layout)
 
     def validatePage(self):
-        global selected_channels
-        global system_channel_restorer
-
-        self.local_selected_channels = [
-            key for key, checkbox in self.checkboxes.items() if checkbox.isChecked()
-        ]
-
         selected_channels = []
-        for item in self.local_selected_channels:
-            selected_channels.append(item)
 
-        if system_channel_restorer:
-            PatchingPage.selected_channels = ["scr"] + selected_channels
-        else:
-            PatchingPage.selected_channels = selected_channels
+        for key, checkbox in self.checkboxes.items():
+            if checkbox.isChecked():
+                selected_channels.append(key)
+
+        PatchingPage.selected_channels = ["scr"] + selected_channels
 
         return True
 
@@ -128,15 +125,30 @@ class MinimalExtraChannels(QWizardPage):
         return 303
 
     def isComplete(self):
-        global selected_channels
-
         for checkbox in self.checkboxes.values():
             if checkbox.isChecked():
                 return True
+
         return False
 
 
 class FullExtraChannels(QWizardPage):
+    channels = {
+        "Wii Speak Channel": {
+            "ws_us": "Wii Speak Channel (USA)",
+            "ws_eu": "Wii Speak Channel (PAL)",
+            "ws_jp": "Wii Speak Channel (Japan)"
+        },
+        "Today and Tomorrow Channel": {
+            "tatc_eu": "Today and Tomorrow Channel (PAL)",
+            "tatc_jp": "Today and Tomorrow Channel (Japan)"
+        },
+        "Internet Channel": {
+            "ic_us": "Internet Channel (USA)",
+            "ic_eu": "Internet Channel (PAL)",
+            "ic_jp": "Internet Channel (Japan)"
+        }
+    }
     local_selected_channels: list
     checkboxes: dict
 
@@ -145,55 +157,45 @@ class FullExtraChannels(QWizardPage):
         self.setTitle(self.tr("Step 2: Extras Setup"))
         self.setSubTitle(self.tr("Select the extra channels you want to install"))
 
-        label = QLabel(
+        self.label = QLabel(
             self.tr("Select the channels you'd like to install from the list below:")
         )
 
-        layout = QVBoxLayout()
+        scroll_area = QScrollArea()
+        scroll_area.setWidgetResizable(True)
 
-        layout.addWidget(label)
+        container = QWidget()
+        container_layout = QVBoxLayout(container)
 
-        # List of channels
-        channels = {
-            "ws_us": "Wii Speak Channel (USA)",
-            "ws_eu": "Wii Speak Channel (PAL)",
-            "ws_jp": "Wii Speak Channel (Japan)",
-            "tatc_eu": "Today and Tomorrow Channel (PAL)",
-            "tatc_jp": "Today and Tomorrow Channel (Japan)",
-            "ic_us": "Internet Channel (USA)",
-            "ic_eu": "Internet Channel (PAL)",
-            "ic_jp": "Internet Channel (Japan)",
-        }
-
-        # Dictionary to hold checkboxes
         self.checkboxes = {}
 
-        # Add checkboxes to layout
-        for key, label in channels.items():
-            checkbox = QCheckBox(label)
-            layout.addWidget(checkbox)
-            self.checkboxes[key] = checkbox
-            checkbox.clicked.connect(self.completeChanged)
+        for category, channels in self.channels.items():
+            box = CollapsibleBox(title=category)
+            for key, label in channels.items():
+                checkbox = QCheckBox(label)
+                box.content_layout.addWidget(checkbox)
+                self.checkboxes[key] = checkbox
+                checkbox.clicked.connect(self.completeChanged.emit)
+            container_layout.addWidget(box)
 
-        # Set layout
+        container_layout.addStretch()
+        scroll_area.setWidget(container)
+
+        layout = QVBoxLayout()
+
+        layout.addWidget(self.label)
+        layout.addWidget(scroll_area)
+
         self.setLayout(layout)
 
     def validatePage(self):
-        global selected_channels
-        global system_channel_restorer
-
-        self.local_selected_channels = [
-            key for key, checkbox in self.checkboxes.items() if checkbox.isChecked()
-        ]
-
         selected_channels = []
-        for item in self.local_selected_channels:
-            selected_channels.append(item)
 
-        if system_channel_restorer:
-            PatchingPage.selected_channels = ["scr"] + selected_channels
-        else:
-            PatchingPage.selected_channels = selected_channels
+        for key, checkbox in self.checkboxes.items():
+            if checkbox.isChecked():
+                selected_channels.append(key)
+
+        PatchingPage.selected_channels = selected_channels
 
         return True
 
@@ -201,11 +203,10 @@ class FullExtraChannels(QWizardPage):
         return 303
 
     def isComplete(self):
-        global selected_channels
-
         for checkbox in self.checkboxes.values():
             if checkbox.isChecked():
                 return True
+
         return False
 
 

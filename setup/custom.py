@@ -4,34 +4,46 @@ from PySide6.QtWidgets import (
     QLabel,
     QVBoxLayout,
     QRadioButton,
-    QWizard,
     QCheckBox,
+    QScrollArea,
+    QWidget,
+
 )
 
 from .patch import PatchingPage
 from .enums import *
+from modules.widgets import CollapsibleBox
 
 selected_wc24_channels = []
 
 
 class CustomWiiConnect24Channels(QWizardPage):
-    local_selected_channels: list
     channels = {
-        "forecast_us": "Forecast Channel (USA)",
-        "forecast_eu": "Forecast Channel (PAL)",
-        "forecast_jp": "Forecast Channel (Japan)",
-        "news_us": "News Channel (USA)",
-        "news_eu": "News Channel (PAL)",
-        "news_jp": "News Channel (Japan)",
-        "nc_us": "Nintendo Channel (USA)",
-        "nc_eu": "Nintendo Channel (PAL)",
-        "nc_jp": "Minna no Nintendo Channel (Japan)",
-        "evc_us": "Everybody Votes Channel (USA)",
-        "evc_eu": "Everybody Votes Channel (PAL)",
-        "evc_jp": "Everybody Votes Channel (Japan)",
-        "cmoc_us": "Check Mii Out Channel (USA)",
-        "cmoc_eu": "Mii Contest Channel (PAL)",
-        "cmoc_jp": "Mii Contest Channel (Japan)",
+        "Forecast Channel": {
+            "forecast_us": "Forecast Channel (USA)",
+            "forecast_eu": "Forecast Channel (PAL)",
+            "forecast_jp": "Forecast Channel (Japan)"
+        },
+        "News Channel": {
+            "news_us": "News Channel (USA)",
+            "news_eu": "News Channel (PAL)",
+            "news_jp": "News Channel (Japan)"
+        },
+        "Nintendo Channel": {
+            "nc_us": "Nintendo Channel (USA)",
+            "nc_eu": "Nintendo Channel (PAL)",
+            "nc_jp": "Minna no Nintendo Channel (Japan)"
+        },
+        "Everybody Votes Channel": {
+            "evc_us": "Everybody Votes Channel (USA)",
+            "evc_eu": "Everybody Votes Channel (PAL)",
+            "evc_jp": "Everybody Votes Channel (Japan)"
+        },
+        "Check Mii Out Channel": {
+            "cmoc_us": "Check Mii Out Channel (USA)",
+            "cmoc_eu": "Mii Contest Channel (PAL)",
+            "cmoc_jp": "Mii Contest Channel (Japan)"
+        }
     }
 
     def __init__(self, parent=None):
@@ -45,57 +57,66 @@ class CustomWiiConnect24Channels(QWizardPage):
             self.tr("Select the channels you'd like to install from the list below:")
         )
 
-        # Layout
-        self.layout = QVBoxLayout()
+        scroll_area = QScrollArea()
+        scroll_area.setWidgetResizable(True)
 
-        self.layout.addWidget(self.label)
+        container = QWidget()
+        container_layout = QVBoxLayout(container)
 
-        # Dictionary to hold checkboxes
-        self.checkboxes = {}
+        for category, channels in self.channels.items():
+            box = CollapsibleBox(title=category)
+            for key, label in channels.items():
+                checkbox = QCheckBox(label)
+                box.content_layout.addWidget(checkbox)
+                self.registerField(key, checkbox)
+            container_layout.addWidget(box)
 
-        # Add checkboxes to layout
-        for key, label in self.channels.items():
-            checkbox = QCheckBox(label)
-            self.layout.addWidget(checkbox)
-            self.checkboxes[key] = checkbox
-            self.registerField(key, checkbox)
+        container_layout.addStretch()
+        scroll_area.setWidget(container)
 
-        # Set layout
-        self.setLayout(self.layout)
+        layout = QVBoxLayout()
 
-    def initializePage(self):
-        self.wizard().button(QWizard.WizardButton.NextButton).clicked.connect(
-            self.save_selected_channels
-        )
+        layout.addWidget(self.label)
+        layout.addWidget(scroll_area)
 
-    def save_selected_channels(self):
+        self.setLayout(layout)
+
+    def validatePage(self):
         global selected_wc24_channels
-        self.local_selected_channels = [
-            key for key, checkbox in self.checkboxes.items() if checkbox.isChecked()
-        ]
-        selected_wc24_channels = []
-        for item in self.local_selected_channels:
-            selected_wc24_channels.append(item)
+
+        for category in self.channels.values():
+            for channel in category.keys():
+                if self.wizard().field(channel):
+                    selected_wc24_channels.append(channel)
+
+        return True
 
 
 class CustomRegionalChannels(QWizardPage):
-    local_selected_channels: list
     channels = {
-        "wiiroom_en": "Wii Room (English)",
-        "wiiroom_es": "Wii Room (Español)",
-        "wiiroom_fr": "Wii Room (Français)",
-        "wiiroom_de": "Wii Room (Deutsch)",
-        "wiiroom_it": "Wii Room (Italiano)",
-        "wiiroom_nl": "Wii Room (Nederlands)",
-        "wiiroom_ptbr": "Wii Room (Português (Brasil))",
-        "wiiroom_ru": "Wii Room (Русский)",
-        "wiiroom_jp": "Wii no Ma (Japanese)",
-        "digicam_en": "Photo Prints Channel (English)",
-        "digicam_jp": "Digicam Print Channel (Japanese)",
-        "food_en": "Food Channel (Standard) (English)",
-        "food_jp": "Demae Channel (Standard) (Japanese)",
-        "dominos": "Food Channel (Domino's) (English)",
-        "ktv": "Kirby TV Channel",
+        "Wii Room": {
+            "wiiroom_en": "Wii Room (English)",
+            "wiiroom_es": "Wii Room (Español)",
+            "wiiroom_fr": "Wii Room (Français)",
+            "wiiroom_de": "Wii Room (Deutsch)",
+            "wiiroom_it": "Wii Room (Italiano)",
+            "wiiroom_nl": "Wii Room (Nederlands)",
+            "wiiroom_ptbr": "Wii Room (Português (Brasil))",
+            "wiiroom_ru": "Wii Room (Русский)",
+            "wiiroom_jp": "Wii no Ma (Japanese)"
+        },
+        "Photo Prints Channel": {
+            "digicam_en": "Photo Prints Channel (English)",
+            "digicam_jp": "Digicam Print Channel (Japanese)"
+        },
+        "Food Channel": {
+            "food_en": "Food Channel (Standard) (English)",
+            "food_jp": "Demae Channel (Standard) (Japanese)",
+            "dominos": "Food Channel (Domino's) (English)"
+        },
+        "Kirby TV Channel": {
+            "ktv": "Kirby TV Channel"
+        }
     }
 
     def __init__(self, parent=None):
@@ -107,33 +128,39 @@ class CustomRegionalChannels(QWizardPage):
             self.tr("Select the channels you'd like to install from the list below:")
         )
 
-        # Layout
-        self.layout = QVBoxLayout()
+        scroll_area = QScrollArea()
+        scroll_area.setWidgetResizable(True)
 
-        self.layout.addWidget(self.label)
+        container = QWidget()
+        container_layout = QVBoxLayout(container)
 
-        # Dictionary to hold checkboxes
-        self.checkboxes = {}
+        for category, channels in self.channels.items():
+            box = CollapsibleBox(title=category)
+            for key, label in channels.items():
+                checkbox = QCheckBox(label)
+                box.content_layout.addWidget(checkbox)
+                self.registerField(key, checkbox)
+                checkbox.clicked.connect(self.completeChanged.emit)
+            container_layout.addWidget(box)
 
-        # Add checkboxes to layout
-        for key, label in self.channels.items():
-            checkbox = QCheckBox(label)
-            self.layout.addWidget(checkbox)
-            self.checkboxes[key] = checkbox
-            checkbox.clicked.connect(self.completeChanged)
+        container_layout.addStretch()
+        scroll_area.setWidget(container)
 
-        # Set layout
-        self.setLayout(self.layout)
+        layout = QVBoxLayout()
+
+        layout.addWidget(self.label)
+        layout.addWidget(scroll_area)
+
+        self.setLayout(layout)
 
     def validatePage(self):
         global selected_wc24_channels
 
-        self.local_selected_channels = [
-            key for key, checkbox in self.checkboxes.items() if checkbox.isChecked()
-        ]
         selected_regional_channels = []
-        for item in self.local_selected_channels:
-            selected_regional_channels.append(item)
+        for category in self.channels.values():
+            for channel in category.keys():
+                if self.wizard().field(channel):
+                    selected_regional_channels.append(channel)
 
         if len(selected_regional_channels) > 0:
             PatchingPage.regional_channels = True
@@ -145,13 +172,16 @@ class CustomRegionalChannels(QWizardPage):
         return True
 
     def isComplete(self):
-        for key in CustomWiiConnect24Channels.channels.keys():
-            if self.wizard().field(key):
-                return True
+        for channel in CustomWiiConnect24Channels.channels.values():
+            for key in channel.keys():
+                if self.wizard().field(key):
+                    return True
 
-        for checkbox in self.checkboxes.values():
-            if checkbox.isChecked():
-                return True
+        for channel in self.channels.values():
+            for key in channel.keys():
+                if self.wizard().field(key):
+                    return True
+
         return False
 
 
