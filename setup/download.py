@@ -339,12 +339,11 @@ def download_channel(
     shutil.rmtree(title_directory)
 
 
-def download_title_contents(title: libWiiPy.title.Title, title_id: str):
+def download_title_contents(title: libWiiPy.title.Title):
     """Download the contents for a title from NUS
 
     Args:
         title: The libWiiPy title to download the contents for
-        title_id: The ID of the title to download contents from NUS
 
     Returns:
         A libWiiPy title, containing the downloaded contents"""
@@ -352,6 +351,7 @@ def download_title_contents(title: libWiiPy.title.Title, title_id: str):
     # Load the content records from the TMD, and begin iterating over the records.
     title.load_content_records()
     content_list = []
+
     for content in range(len(title.tmd.content_records)):
         # Generate the content file name by converting the Content ID to hex and then removing the 0x.
         content_file_name = hex(title.tmd.content_records[content].content_id)[2:]
@@ -364,7 +364,7 @@ def download_title_contents(title: libWiiPy.title.Title, title_id: str):
         )
         content_list.append(
             libWiiPy.title.download_content(
-                title_id, title.tmd.content_records[content].content_id
+                title.tmd.title_id, title.tmd.content_records[content].content_id
             )
         )
         print("   - Done!")
@@ -397,3 +397,25 @@ def download_today_tomorrow(region: Regions):
             download_channel(
                 "Today and Tomorrow Channel", "000100014841564a", 512, Regions.Japan
             )
+
+
+def download_eula(region: Regions):
+    """Download the specified region of the EULA title from NUS
+
+    Args:
+        region: The region of EULA to download
+
+    Returns:
+        None"""
+
+    match region:
+        case Regions.USA:
+            title_id = "0001000848414b45"
+        case Regions.PAL:
+            title_id = "0001000848414b50"
+        case Regions.Japan:
+            title_id = "0001000848414b4a"
+        case _:
+            raise ValueError("Invalid region!")
+
+    download_channel("EULA", title_id, 3, region)

@@ -24,6 +24,7 @@ from .download import (
     download_channel,
     download_spd,
     download_today_tomorrow,
+    download_eula,
 )
 from .newsRenderer import NewsRenderer
 
@@ -825,6 +826,9 @@ class PatchingWorker(QObject):
                 if self.platform != Platforms.Dolphin:
                     download_osc_app("yawmME")
                     download_osc_app("sntp")
+
+                if self.platform == Platforms.vWii:
+                    download_eula(self.region)
 
                 if self.regional_channels and self.region != Regions.Japan:
                     download_spd()
