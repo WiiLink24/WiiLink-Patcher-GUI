@@ -79,10 +79,6 @@ patcher_version = "1.0"
 pride_flags = pathlib.Path(file_path).joinpath("assets", "pride_banners").iterdir()
 flags_list = list(pride_flags)
 
-app = QApplication(sys.argv)
-
-wizard = QWizard()
-
 
 class IntroPage(QWizardPage):
     def __init__(self, parent=None):
@@ -534,36 +530,120 @@ class PatchingComplete(QWizardPage):
         self.wizard().button(QWizard.WizardButton.CancelButton).setEnabled(False)
 
 
-def main():
-    if temp_dir.exists():
-        shutil.rmtree(temp_dir)
+class WiiLinkPatcherGUI(QWizard):
+    def __init__(self, parent=None):
+        super().__init__(parent)
+        self.setWindowTitle(self.tr("WiiLink Patcher"))
+        self.setWizardStyle(QWizard.WizardStyle.ModernStyle)
+        self.setSubTitleFormat(Qt.TextFormat.RichText)
 
-    wizard.setWindowTitle(app.tr("WiiLink Patcher"))
-    wizard.setWizardStyle(QWizard.WizardStyle.ModernStyle)
-    wizard.setSubTitleFormat(Qt.TextFormat.RichText)
+        # Load in icon and banner images
+        icon = QIcon(str(pathlib.Path().joinpath(file_path, "assets", "logo.webp")))
+        background = QIcon(
+            str(pathlib.Path().joinpath(file_path, "assets", "background.webp"))
+        )
+        logo = icon.pixmap(64, 64)
+        banner = background.pixmap(700, 120)
+        self.setPixmap(QWizard.WizardPixmap.LogoPixmap, logo)
+        self.setPixmap(QWizard.WizardPixmap.BannerPixmap, banner)
 
-    icon = QIcon(str(pathlib.Path().joinpath(file_path, "assets", "logo.webp")))
-    background = QIcon(
-        str(pathlib.Path().joinpath(file_path, "assets", "background.webp"))
-    )
-    logo = icon.pixmap(64, 64)
-    banner = background.pixmap(700, 120)
-    wizard.setPixmap(QWizard.WizardPixmap.LogoPixmap, logo)
-    wizard.setPixmap(QWizard.WizardPixmap.BannerPixmap, banner)
+        self.setWindowIcon(icon)
 
-    app.setWindowIcon(icon)
+        # Apply global stylesheet for consistent styling across all pages
+        stylesheet_path = pathlib.Path().joinpath(file_path, "style.qss")
+        stylesheet = open(stylesheet_path, "r").read()
+        stylesheet = stylesheet.replace(
+            "%AssetsDir%", str(pathlib.Path().joinpath(file_path, "assets"))
+        )
+        self.setStyleSheet(stylesheet)
 
-    # Apply global stylesheet for consistent styling across all pages
-    stylesheet_path = pathlib.Path().joinpath(file_path, "style.qss")
-    stylesheet = open(stylesheet_path, "r").read()
-    stylesheet = stylesheet.replace(
-        "%AssetsDir%", str(pathlib.Path().joinpath(file_path, "assets"))
-    )
-    wizard.setStyleSheet(stylesheet)
+        # Override button text to remove chevrons
+        self.setButtonText(QWizard.WizardButton.NextButton, self.tr("Next"))
+        self.setButtonText(QWizard.WizardButton.BackButton, self.tr("Back"))
 
-    wizard.setButtonText(QWizard.WizardButton.NextButton, "Next")
-    wizard.setButtonText(QWizard.WizardButton.BackButton, "Back")
+        # Page setup
+        self.setPage(0, IntroPage())
+        self.setPage(1, MainMenu())
 
+        self.setPage(10, WiiLinkFolderDetected())
+        self.setPage(11, PatchingPage())
+        self.setPage(12, AskSD())
+        self.setPage(13, SelectSD())
+        self.setPage(14, WADCleanup())
+        self.setPage(15, FileCopying())
+
+        self.setPage(100, ExpressRegion())
+        self.setPage(101, ExpressRegionalChannels())
+        self.setPage(102, ExpressRegionalChannelTranslation())
+        self.setPage(103, ExpressRegionalChannelLanguage())
+        self.setPage(104, ExpressDemaeConfiguration())
+        self.setPage(105, ExpressPlatformConfiguration())
+
+        self.setPage(200, CustomWiiConnect24Channels())
+        self.setPage(201, CustomRegionalChannels())
+        self.setPage(202, CustomPlatformConfiguration())
+        self.setPage(203, CustomRegionConfiguration())
+
+        self.setPage(300, ExtrasSystemChannelRestorer())
+        self.setPage(301, MinimalExtraChannels())
+        self.setPage(302, FullExtraChannels())
+        self.setPage(303, ExtrasPlatformConfiguration())
+        self.setPage(304, ExtrasRegionConfiguration())
+
+        self.setPage(1000, PatchingComplete())
+
+        self.setStartId(0)
+
+
+def translation_setup():
+    """Static method to download and load patcher translations for the user's language if they exist
+
+    Returns:
+        None"""
+
+    # Get user's 2-character language code from QLocale
+    language = QLocale.languageToCode(QLocale.system().language())
+
+    # Download dictionary of supported languages
+    try:
+        supported_languages = download_translation_dict()
+    except:
+        QMessageBox.warning(
+            QWidget(),
+            "WiiLink Patcher - Warning",
+            "The patcher failed to download the list of languages. Therefore, it will run in English.",
+        )
+    else:
+        # Download the translation file if there is a translation available for the user's language
+        if language in supported_languages:
+            try:
+                download_translation(language)
+            except Exception as e:
+                QMessageBox.warning(
+                    QWidget(),
+                    "WiiLink Patcher - Warning",
+                    f"""The patcher failed to download translations for your language. Therefore, it will run in English
+
+Exception:
+{e}""",
+                )
+
+    path = QLibraryInfo.path(QLibraryInfo.LibraryPath.TranslationsPath)
+    translator = QTranslator(app)
+
+    if translator.load(QLocale.system(), "qtbase", "_", path):
+        app.installTranslator(translator)
+    translator = QTranslator(app)
+    path = str(pathlib.Path().joinpath(file_path, "translations"))
+    if translator.load(QLocale.system(), "translation", "_", path):
+        app.installTranslator(translator)
+
+
+def check_connection():
+    """Static method to run a connection test and display the results to the user, terminating the patcher if the test is unsuccessful
+
+    Returns:
+        None"""
     try:
         connection = connection_test()
     except Exception as e:
@@ -580,12 +660,18 @@ def main():
             case _:
                 error_message = f"""The patcher failed to connect to the internet.
 
-Exception:
-{connection}"""
+    Exception:
+    {connection}"""
 
         QMessageBox.critical(QWidget(), "WiiLink Patcher - Error", error_message)
         sys.exit()
 
+
+def check_for_updates():
+    """Static method to compare the current patcher version to the latest, and inform the user if they aren't up to date
+
+    Returns:
+        None"""
     try:
         latest_version = get_latest_version()
     except Exception as e:
@@ -593,8 +679,8 @@ Exception:
             QWidget(),
             "WiiLink Patcher - Warning",
             f"""Unable to check for updates!
-Exception:
-{e}""",
+    Exception:
+    {e}""",
         )
     else:
         if latest_version != patcher_version:
@@ -603,8 +689,8 @@ Exception:
                 "WiiLink Patcher - Update",
                 f"""An update has been detected for the patcher, would you like to download it?
 
-Your version: {patcher_version}
-Latest version: {latest_version}""",
+    Your version: {patcher_version}
+    Latest version: {latest_version}""",
             )
             if update == QMessageBox.StandardButton.Yes:
                 webbrowser.open(
@@ -612,72 +698,22 @@ Latest version: {latest_version}""",
                 )
                 sys.exit()
 
-    language = QLocale.languageToCode(QLocale.system().language())
-
-    try:
-        supported_languages = download_translation_dict()
-    except:
-        QMessageBox.warning(
-            QWidget(),
-            "WiiLink Patcher - Warning",
-            "The patcher failed to download the list of languages. Therefore, it will run in English.",
-        )
-    else:
-        if language in supported_languages:
-            try:
-                download_translation(language)
-            except:
-                QMessageBox.warning(
-                    QWidget(),
-                    "WiiLink Patcher - Warning",
-                    "The patcher failed to download translations for your language. Therefore, it will run in English",
-                )
-
-    path = QLibraryInfo.path(QLibraryInfo.LibraryPath.TranslationsPath)
-    translator = QTranslator(app)
-    if translator.load(QLocale.system(), "qtbase", "_", path):
-        app.installTranslator(translator)
-    translator = QTranslator(app)
-    path = str(pathlib.Path().joinpath(file_path, "translations"))
-    if translator.load(QLocale.system(), "translation", "_", path):
-        app.installTranslator(translator)
-
-    wizard.setPage(0, IntroPage())
-    wizard.setPage(1, MainMenu())
-
-    wizard.setPage(10, WiiLinkFolderDetected())
-    wizard.setPage(11, PatchingPage())
-    wizard.setPage(12, AskSD())
-    wizard.setPage(13, SelectSD())
-    wizard.setPage(14, WADCleanup())
-    wizard.setPage(15, FileCopying())
-
-    wizard.setPage(100, ExpressRegion())
-    wizard.setPage(101, ExpressRegionalChannels())
-    wizard.setPage(102, ExpressRegionalChannelTranslation())
-    wizard.setPage(103, ExpressRegionalChannelLanguage())
-    wizard.setPage(104, ExpressDemaeConfiguration())
-    wizard.setPage(105, ExpressPlatformConfiguration())
-
-    wizard.setPage(200, CustomWiiConnect24Channels())
-    wizard.setPage(201, CustomRegionalChannels())
-    wizard.setPage(202, CustomPlatformConfiguration())
-    wizard.setPage(203, CustomRegionConfiguration())
-
-    wizard.setPage(300, ExtrasSystemChannelRestorer())
-    wizard.setPage(301, MinimalExtraChannels())
-    wizard.setPage(302, FullExtraChannels())
-    wizard.setPage(303, ExtrasPlatformConfiguration())
-    wizard.setPage(304, ExtrasRegionConfiguration())
-
-    wizard.setPage(1000, PatchingComplete())
-
-    wizard.setStartId(0)
-
-    wizard.show()
-
-    sys.exit(app.exec())
-
 
 if __name__ == "__main__":
-    main()
+    # Clear previous temporary directory to prevent potential conflicts
+    if temp_dir.exists():
+        shutil.rmtree(temp_dir)
+
+    # Create instance of QApplication and the patcher's QWizard
+    app = QApplication(sys.argv)
+    wizard = WiiLinkPatcherGUI()
+    icon = QIcon(str(pathlib.Path().joinpath(file_path, "assets", "logo.webp")))
+
+    # Check the internet connection, and perform internet-related tasks
+    check_connection()
+    check_for_updates()
+    translation_setup()
+
+    # Start the wizard
+    wizard.show()
+    sys.exit(app.exec())
