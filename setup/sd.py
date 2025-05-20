@@ -25,13 +25,13 @@ from PySide6.QtCore import QTimer, QThread, QObject, Signal
 from .newsRenderer import NewsRenderer
 
 sd_path = ""
-sd_wad_path = ""
+sd_wad_path = "WAD"
 
 
 def get_devices(removable_only=True):
     devices = {}
     for part in psutil.disk_partitions():
-        if removable_only and check_removable(part):
+        if removable_only and not check_removable(part):
             continue
         try:
             capacity = psutil.disk_usage(part.mountpoint).total
@@ -56,9 +56,14 @@ def check_removable(device: psutil._common.sdiskpart):
             return "Removable Media: Yes" in device_info
         case "linux":
             context = pyudev.Context()
-            device_name = os.path.basename(device.device)
 
-            udev_device = pyudev.Devices.from_device_file(context, device_name)
+            udev_partition = pyudev.Devices.from_device_file(context, device.device)
+
+            if udev_partition.device_type != "disk":
+                udev_device = udev_partition.find_parent("block", "disk")
+            else:
+                udev_device = udev_partition
+
             return udev_device.attributes.get("removable") == b"1"
         case _:
             return True
