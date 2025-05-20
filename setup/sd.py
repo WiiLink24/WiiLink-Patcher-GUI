@@ -1,7 +1,11 @@
 import os
+import subprocess
+import sys
 import psutil
 import shutil
 import pathlib
+import ctypes
+import pyudev
 
 from PySide6.QtWidgets import (
     QVBoxLayout,
@@ -27,7 +31,7 @@ sd_wad_path = ""
 def get_devices(removable_only=True):
     devices = {}
     for part in psutil.disk_partitions():
-        if removable_only and "removable" not in part.opts:
+        if removable_only and check_removable(part):
             continue
         try:
             capacity = psutil.disk_usage(part.mountpoint).total
@@ -37,6 +41,27 @@ def get_devices(removable_only=True):
         except PermissionError:
             continue
     return devices
+
+
+def check_removable(device: psutil._common.sdiskpart):
+    match sys.platform:
+        case "win32":
+            path = device.mountpoint
+            device_type = ctypes.windll.kernel32.GetDriveTypeW(ctypes.c_wchar_p(path))
+            return device_type == 2
+        case "darwin":
+            device_info = subprocess.check_output(
+                ["diskutil", "info", device.device], text=True
+            )
+            return "Removable Media: Yes" in device_info
+        case "linux":
+            context = pyudev.Context()
+            device_name = os.path.basename(device.device)
+
+            udev_device = pyudev.Devices.from_device_file(context, device_name)
+            return udev_device.attributes.get("removable") == b"1"
+        case _:
+            return True
 
 
 class AskSD(QWizardPage):

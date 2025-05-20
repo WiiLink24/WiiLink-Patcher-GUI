@@ -515,15 +515,16 @@ class PatchingComplete(QWizardPage):
 
     @staticmethod
     def open_wiilink_folder():
-        if sys.platform == "win32":
-            os.startfile(wiilink_dir)
-        elif sys.platform == "darwin":
-            subprocess.Popen(["open", wiilink_dir])
-        else:
-            try:
-                subprocess.Popen(["xdg-open", wiilink_dir])
-            except OSError:
-                print("Unable to launch file browser with xdg-open!")
+        match sys.platform:
+            case "win32":
+                os.startfile(wiilink_dir)
+            case "darwin":
+                subprocess.Popen(["open", wiilink_dir])
+            case _:
+                try:
+                    subprocess.Popen(["xdg-open", wiilink_dir])
+                except OSError:
+                    print("Unable to launch file browser with xdg-open!")
 
     def disable_buttons(self):
         self.wizard().button(QWizard.WizardButton.BackButton).setEnabled(False)
