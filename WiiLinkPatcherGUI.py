@@ -13,6 +13,7 @@
 # These are standard options that are needed on all platforms.
 # nuitka-project: --plugin-enable=pyside6
 # nuitka-project: --include-data-dir={MAIN_DIRECTORY}/assets=assets
+# nuitka-project: --include-data-dir={MAIN_DIRECTORY}/data=data
 # nuitka-project: --include-data-file={MAIN_DIRECTORY}/style.qss=style.qss
 
 import os
@@ -23,6 +24,7 @@ import sys
 import tempfile
 import webbrowser
 import random
+import json
 
 from PySide6.QtCore import QTranslator, QLocale, QLibraryInfo, QTimer, Qt
 from PySide6.QtGui import QIcon
@@ -54,9 +56,7 @@ from setup.express import (
     ExpressPlatformConfiguration,
 )
 from setup.extras import (
-    ExtrasSystemChannelRestorer,
-    MinimalExtraChannels,
-    FullExtraChannels,
+    ExtrasChannelSelection,
     ExtrasPlatformConfiguration,
     ExtrasRegionConfiguration,
 )
@@ -78,6 +78,9 @@ patcher_version = "1.0"
 
 pride_flags = pathlib.Path(file_path).joinpath("assets", "pride_banners").iterdir()
 flags_list = list(pride_flags)
+
+patches_raw = open(pathlib.Path().joinpath("data", "patches.json"), "r").read()
+patches_json = json.loads(patches_raw)
 
 
 class IntroPage(QWizardPage):
@@ -567,7 +570,7 @@ class WiiLinkPatcherGUI(QWizard):
         self.setPage(1, MainMenu())
 
         self.setPage(10, WiiLinkFolderDetected())
-        self.setPage(11, PatchingPage())
+        self.setPage(11, PatchingPage(patches_json))
         self.setPage(12, AskSD())
         self.setPage(13, SelectSD())
         self.setPage(14, WADCleanup())
@@ -578,18 +581,16 @@ class WiiLinkPatcherGUI(QWizard):
         self.setPage(102, ExpressRegionalChannelTranslation())
         self.setPage(103, ExpressRegionalChannelLanguage())
         self.setPage(104, ExpressDemaeConfiguration())
-        self.setPage(105, ExpressPlatformConfiguration())
+        self.setPage(105, ExpressPlatformConfiguration(patches_json))
 
-        self.setPage(200, CustomWiiConnect24Channels())
-        self.setPage(201, CustomRegionalChannels())
+        self.setPage(200, CustomWiiConnect24Channels(patches_json))
+        self.setPage(201, CustomRegionalChannels(patches_json))
         self.setPage(202, CustomPlatformConfiguration())
         self.setPage(203, CustomRegionConfiguration())
 
-        self.setPage(300, ExtrasSystemChannelRestorer())
-        self.setPage(301, MinimalExtraChannels())
-        self.setPage(302, FullExtraChannels())
-        self.setPage(303, ExtrasPlatformConfiguration())
-        self.setPage(304, ExtrasRegionConfiguration())
+        self.setPage(300, ExtrasChannelSelection(patches_json))
+        self.setPage(301, ExtrasPlatformConfiguration())
+        self.setPage(302, ExtrasRegionConfiguration())
 
         self.setPage(1000, PatchingComplete())
 
@@ -608,11 +609,14 @@ def translation_setup():
     # Download dictionary of supported languages
     try:
         supported_languages = download_translation_dict()
-    except:
+    except Exception as e:
         QMessageBox.warning(
             QWidget(),
             "WiiLink Patcher - Warning",
-            "The patcher failed to download the list of languages. Therefore, it will run in English.",
+            f"""The patcher failed to download the list of languages. Therefore, it will run in English.
+
+Exception:
+{e}""",
         )
     else:
         # Download the translation file if there is a translation available for the user's language

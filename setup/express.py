@@ -13,10 +13,9 @@ from .patch import PatchingPage
 from .enums import *
 
 regional_channels = False
-regional_lang = ""
-wiiroom_lang = ""
+regional_lang = Languages.Japan
+wiiroom_lang = Languages.English
 demae = ""
-region = ""
 
 
 class ExpressRegion(QWizardPage):
@@ -59,18 +58,9 @@ class ExpressRegion(QWizardPage):
         self.setLayout(self.layout)
 
     def isComplete(self):
-        global region
-
         for key, button in self.buttons.items():
             if button.isChecked():
                 PatchingPage.region = key
-                match key:
-                    case Regions.USA:
-                        region = "us"
-                    case Regions.PAL:
-                        region = "eu"
-                    case Regions.Japan:
-                        region = "jp"
                 return True
 
         return False
@@ -169,11 +159,14 @@ class ExpressRegionalChannelTranslation(QWizardPage):
 
     def isComplete(self):
         global regional_lang
+        global wiiroom_lang
+
         if self.Translated.isChecked():
-            regional_lang = "en"
+            regional_lang = Languages.English
             return True
         elif self.Japanese.isChecked():
-            regional_lang = "jp"
+            regional_lang = Languages.Japan
+            wiiroom_lang = Languages.Japan
             return True
         return False
 
@@ -187,14 +180,14 @@ class ExpressRegionalChannelTranslation(QWizardPage):
 
 class ExpressRegionalChannelLanguage(QWizardPage):
     languages = {
-        "en": "🇺🇸 English",
-        "es": "🇪🇸 Español",
-        "fr": "🇫🇷 Français",
-        "de": "🇩🇪 Deutsch",
-        "it": "🇮🇹 Italiano",
-        "nl": "🇳🇱 Nederlands",
-        "ptbr": "🇧🇷 Português (Brasil)",
-        "ru": "🇷🇺 Русский",
+        Languages.English: "🇺🇸 English",
+        Languages.Spanish: "🇪🇸 Español",
+        Languages.French: "🇫🇷 Français",
+        Languages.German: "🇩🇪 Deutsch",
+        Languages.Italian: "🇮🇹 Italiano",
+        Languages.Dutch: "🇳🇱 Nederlands",
+        Languages.Portuguese: "🇧🇷 Português (Brasil)",
+        Languages.Russian: "🇷🇺 Русский",
     }
 
     def __init__(self, parent=None):
@@ -227,7 +220,7 @@ class ExpressRegionalChannelLanguage(QWizardPage):
         # Set layout
         self.setLayout(self.layout)
 
-        self.buttons["ru"].clicked.connect(self.russian_notice)
+        self.buttons[Languages.Russian].clicked.connect(self.russian_notice)
 
     def isComplete(self):
         """Enable Next button only if a radio button is selected"""
@@ -241,17 +234,16 @@ class ExpressRegionalChannelLanguage(QWizardPage):
         return False
 
     def russian_notice(self):
-        if self.buttons["ru"].isChecked:
-            QMessageBox.warning(
-                self,
-                self.tr("Russian notice for Wii Room"),
-                self.tr(
-                    """You have selected the Russian translation for Wii Room
+        QMessageBox.warning(
+            self,
+            self.tr("Russian notice for Wii Room"),
+            self.tr(
+                """You have selected the Russian translation for Wii Room
 Proper functionality is not guaranteed for systems without the Russian Wii Menu.
 Follow the installation guide at https://wii.zazios.ru/rus_menu if you have not already done so.
 (The guide is only available in Russian for now)"""
-                ),
-            )
+            ),
+        )
 
 
 class ExpressDemaeConfiguration(QWizardPage):
@@ -295,16 +287,16 @@ class ExpressDemaeConfiguration(QWizardPage):
         global regional_lang
 
         if self.buttons[DemaeConfigs.Standard].isChecked():
-            demae = f"food_{regional_lang}"
+            demae = f"9_{regional_lang.value + 1}"
             return True
         elif self.buttons[DemaeConfigs.Dominos].isChecked():
-            demae = "dominos"
+            demae = "9_3"
             return True
         return False
 
 
 class ExpressPlatformConfiguration(QWizardPage):
-    def __init__(self, parent=None):
+    def __init__(self, patches_json: dict, parent=None):
         super().__init__(parent)
         self.setTitle(self.tr("Step 3: Express Setup"))
         self.setSubTitle(self.tr("Choose console platform."))
@@ -340,6 +332,8 @@ class ExpressPlatformConfiguration(QWizardPage):
         # Set layout
         self.setLayout(self.layout)
 
+        self.patches_json = patches_json
+
     def isComplete(self):
         for key, button in self.buttons.items():
             if button.isChecked():
@@ -353,19 +347,29 @@ class ExpressPlatformConfiguration(QWizardPage):
         global wiiroom_lang
         global demae
         global regional_channels
-        global region
 
-        selected_channels = [
-            f"nc_{region}",
-            f"forecast_{region}",
-            f"news_{region}",
-            f"evc_{region}",
-            f"cmoc_{region}",
-        ]
+        selected_channels = []
+
+        for category in self.patches_json:
+            if category["type"] == "wc24":
+                selected_channels.append(
+                    f"{category["category_id"]}_{PatchingPage.region.value + 1}"
+                )
+
+        # I am not particularly happy with the solution I have came up with here.
+        # Hardcoding the channels like this isn't ideal, but it's what I've done as the language selection
+        # across regional channels is not consistent at present.
+        #
+        # - Isla
 
         if regional_channels:
             selected_channels.extend(
-                [f"wiiroom_{wiiroom_lang}", f"digicam_{regional_lang}", demae, "ktv"]
+                [
+                    f"7_{wiiroom_lang.value + 1}",
+                    f"8_{regional_lang.value + 1}",
+                    demae,
+                    "10_1",
+                ]
             )
 
         PatchingPage.regional_channels = regional_channels

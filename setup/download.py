@@ -13,8 +13,6 @@ patcher_url = "https://patcher.wiilink24.com"
 temp_dir = pathlib.Path().joinpath(tempfile.gettempdir(), "WiiLinkPatcher")
 wad_directory = pathlib.Path().joinpath("WiiLink", "WAD")
 
-title_directory = pathlib.Path().joinpath(temp_dir, "Unpack")
-
 
 # Using code from "commands/title/nus.py" from WiiPy by NinjaCheetah
 # https://github.com/NinjaCheetah/WiiPy
@@ -230,113 +228,11 @@ def download_patch(folder: str, patch_name: str):
 
     Returns:
         The binary contents of the patch"""
-    patch_url = f"{patcher_url}/bsdiff/{folder}/{patch_name}"
+    patch_url = f"{patcher_url}/bsdiff/{folder}/{patch_name}.bsdiff"
 
     patch = download_file(patch_url)
 
     return patch
-
-
-def download_channel(
-    channel_title: str,
-    title_id: str,
-    version: int = None,
-    region: Regions = None,
-    channel_name: str = None,
-    additional_files: dict[str, pathlib.Path] = None,
-):
-    """Download a stock title from NUS, and write it out to a WAD
-
-    Args:
-        channel_title: The title of the WAD file that will be outputted
-        title_id: The ID of the title to download from NUS
-        version: Optionally, specify the version of the channel to download from NUS
-        region: Optionally, specify the region of the channel to be appended to the file name
-        channel_name: Optionally, specify the directory name of the channel's files on the server
-        additional_files: Optionally, specify additional files that need to be downloaded for the title
-
-    Returns:
-        None"""
-
-    # Announce the title being downloaded, and the version if applicable.
-    if version is not None:
-        print(f"Downloading {channel_title} v{version}:")
-    else:
-        print(f"Downloading the latest version of {channel_title}:")
-
-    os.makedirs(wad_directory, exist_ok=True)
-    os.makedirs(title_directory, exist_ok=True)
-
-    if region is not None:
-        wad_file = pathlib.Path().joinpath(
-            wad_directory, f"{channel_title} [{region.name}].wad"
-        )
-    else:
-        wad_file = pathlib.Path().joinpath(wad_directory, f"{channel_title}.wad")
-
-    # Download the title from the NUS. This is done "manually" (as opposed to using download_title()) so that we can
-    # provide verbose output.
-    title = libWiiPy.title.Title()
-
-    if additional_files is not None:
-        print(" - Downloading additional files...")
-        for file, destination in additional_files.items():
-            file_url = f"{patcher_url}/{channel_name.lower()}/{title_id}{file}"
-            download_file(file_url, destination)
-        print("   - Done!")
-
-    if not pathlib.Path().joinpath(title_directory, f"tmd.{version}").exists():
-        print(" - Downloading TMD...")
-        tmd = libWiiPy.title.download_tmd(title_id, version)
-        print("   - Done!")
-    else:
-        tmd = open(
-            pathlib.Path().joinpath(title_directory, f"tmd.{version}"), "rb"
-        ).read()
-
-    print(" - Parsing TMD...")
-    title.load_tmd(tmd)
-    print("   - Done!")
-
-    if not pathlib.Path().joinpath(title_directory, "tik").exists():
-        # Download the ticket, if we can.
-        print(" - Downloading Ticket...")
-        try:
-            ticket = libWiiPy.title.download_ticket(title_id)
-        except ValueError:
-            # If libWiiPy returns an error, then no ticket is available.
-            raise ValueError("No Ticket is available!")
-        else:
-            print("   - Done!")
-    else:
-        ticket = open(pathlib.Path().joinpath(title_directory, "tik"), "rb").read()
-
-    print(" - Parsing Ticket...")
-    title.load_ticket(ticket)
-    print("   - Done!")
-
-    print(" - Downloading certificate chain...")
-    cert = libWiiPy.title.download_cert_chain()
-    print("   - Done!")
-
-    title.load_cert_chain(cert)
-
-    # Download the channel's contents
-    title = download_title_contents(title, title_id)
-
-    # Pack a WAD and output that.
-    print(" - Packing WAD...")
-
-    try:
-        # Have libWiiPy dump the WAD, and write that data out.
-        open(wad_file, "wb").write(title.dump_wad())
-    except Exception as e:
-        print("   - Failed!")
-        raise ValueError(e)
-    else:
-        print("   - Done!")
-
-    shutil.rmtree(title_directory)
 
 
 def download_title_contents(title: libWiiPy.title.Title):
@@ -372,50 +268,3 @@ def download_title_contents(title: libWiiPy.title.Title):
     title.content.content_list = content_list
 
     return title
-
-
-def download_today_tomorrow(region: Regions):
-    """Download the specified region of the Today and Tomorrow Channel from NUS
-
-    Args:
-        region: The region of the channel to download
-
-    Returns:
-        None"""
-    match region:
-        case Regions.PAL:
-            additional_files = {".tik": pathlib.Path().joinpath(title_directory, "tik")}
-            download_channel(
-                "Today and Tomorrow Channel",
-                "0001000148415650",
-                512,
-                Regions.PAL,
-                "tatc",
-                additional_files,
-            )
-        case Regions.Japan:
-            download_channel(
-                "Today and Tomorrow Channel", "000100014841564a", 512, Regions.Japan
-            )
-
-
-def download_eula(region: Regions):
-    """Download the specified region of the EULA title from NUS
-
-    Args:
-        region: The region of EULA to download
-
-    Returns:
-        None"""
-
-    match region:
-        case Regions.USA:
-            title_id = "0001000848414b45"
-        case Regions.PAL:
-            title_id = "0001000848414b50"
-        case Regions.Japan:
-            title_id = "0001000848414b4a"
-        case _:
-            raise ValueError("Invalid region!")
-
-    download_channel("EULA", title_id, 3, region)
