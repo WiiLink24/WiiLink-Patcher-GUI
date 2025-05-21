@@ -74,7 +74,7 @@ patcher_url = "https://patcher.wiilink24.com"
 temp_dir = pathlib.Path(tempfile.gettempdir()).joinpath("WiiLinkPatcher")
 wiilink_dir = pathlib.Path().joinpath("WiiLink")
 file_path = pathlib.Path(__file__).parent
-patcher_version = "1.0"
+patcher_version = "1.0 RC1"
 
 pride_flags = pathlib.Path(file_path).joinpath("assets", "pride_banners").iterdir()
 flags_list = list(pride_flags)
@@ -716,7 +716,8 @@ if __name__ == "__main__":
 
     # Check the internet connection, and perform internet-related tasks
     check_connection()
-    check_for_updates()
+    if "Nightly" not in patcher_version and "RC" not in patcher_version:
+        check_for_updates()
     translation_setup()
 
     # Start the wizard
