@@ -5,7 +5,6 @@ import psutil
 import shutil
 import pathlib
 import ctypes
-import pyudev
 
 from PySide6.QtWidgets import (
     QVBoxLayout,
@@ -55,6 +54,7 @@ def check_removable(device: psutil._common.sdiskpart):
             )
             return "Removable Media: Yes" in device_info
         case "linux":
+            import pyudev
             context = pyudev.Context()
 
             udev_partition = pyudev.Devices.from_device_file(context, device.device)
