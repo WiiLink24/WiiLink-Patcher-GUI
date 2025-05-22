@@ -294,60 +294,49 @@ class PatchingWorker(QObject):
             try:
                 category_index = int(channel_indexes[0])
                 channel_index = int(channel_indexes[1])
+                channel_category = self.find_category(category_index)
+                channel_to_patch = self.find_channel(channel_category, channel_index)
+
+                if channel_to_patch["patches"]:
+                    self.broadcast_status.emit(
+                        self.tr(f"Patching {channel_to_patch["name"]}...")
+                    )
+                else:
+                    self.broadcast_status.emit(
+                        self.tr(f"Downloading {channel_to_patch["name"]}...")
+                    )
+
+                if channel_category["network"] != "OSC":
+                    patch_channel(channel_to_patch, channel_category["network"])
+
+                if channel_to_patch["additional_apps"]:
+                    for app in channel_to_patch["additional_apps"]:
+                        if app != "agc":
+                            download_osc_app(app)
+                        else:
+                            download_agc(self.platform)
+
+                if channel_to_patch["additional_channels"]:
+                    for additional_channel in channel_to_patch["additional_channels"]:
+                        additional_category_index = additional_channel["category"]
+                        additional_channel_index = additional_channel["channel"]
+                        additional_category = self.find_category(additional_category_index)
+                        additional_channel_dict = self.find_channel(additional_category, additional_channel_index)
+
+                        patch_channel(additional_channel_dict)
             except Exception as e:
                 print(
                     f"""An exception occured!
 
 Exception:
 {e}"""
-                )
-                self.error.emit(f"{e}")
-            else:
-                try:
-                    category = self.patches_json[category_index - 1]
-                    channel = category["channels"][channel_index - 1]
-
-                    if channel["patches"]:
-                        self.broadcast_status.emit(
-                            self.tr(f"Patching {channel["name"]}...")
-                        )
-                    else:
-                        self.broadcast_status.emit(
-                            self.tr(f"Downloading {channel["name"]}...")
-                        )
-
-                    if category["network"] != "OSC":
-                        patch_channel(channel, category["network"])
-
-                    if channel["additional_apps"]:
-                        for app in channel["additional_apps"]:
-                            if app != "agc":
-                                download_osc_app(app)
-                            else:
-                                download_agc(self.platform)
-
-                    if channel["additional_channels"]:
-                        for (
-                            additional_category_index,
-                            additional_channel_index,
-                        ) in channel["additional_channels"].items():
-                            additional_category_index = int(additional_category_index)
-                            additional_channel = self.patches_json[
-                                additional_category_index - 1
-                            ]["channels"][additional_channel_index - 1]
-                            patch_channel(additional_channel, category["network"])
-                except Exception as e:
-                    print(
-                        f"""An exception occured!
-
-Exception:
-{e}"""
                     )
-                    self.error.emit(f"{e}")
-                finally:
-                    percentage += percentage_increment
-                    self.broadcast_percentage.emit(round(percentage))
+                self.error.emit(f"{e}")
+            finally:
+                percentage += percentage_increment
+                self.broadcast_percentage.emit(round(percentage))
 
+        print("Patching complete!")
         self.finished.emit(True)
 
     def download_supporting_apps(self):
@@ -361,10 +350,27 @@ Exception:
                     download_osc_app("sntp")
 
                 if self.platform == Platforms.vWii:
-                    channel = self.patches_json[13]["channels"][self.region.value]
-                    patch_channel(channel)
+                    eula_category = self.find_category(14)
+                    eula_channel = self.find_channel(eula_category, self.region.value)
+
+                    patch_channel(eula_channel)
 
                 if self.regional_channels and self.region != Regions.Japan:
                     download_spd()
 
                 download_osc_app("Mail-Patcher")
+
+    def find_category(self, category_id: int):
+        for category in self.patches_json:
+            if category["category_id"] == category_id:
+                return category
+
+        raise KeyError(f"Category {category_id} does not exist!")
+
+    @staticmethod
+    def find_channel(category: dict, channel_id: int):
+        for channel in category["channels"]:
+            if channel["item_id"] == channel_id:
+                return channel
+
+        raise KeyError(f"Channel {channel_id} does not exist in category {category["category_id"]}!")

@@ -286,7 +286,7 @@ class ExpressDemaeConfiguration(QWizardPage):
         global regional_lang
 
         if self.buttons[DemaeConfigs.Standard].isChecked():
-            demae = f"9_{regional_lang.value + 1}"
+            demae = f"9_{regional_lang.value}"
             return True
         elif self.buttons[DemaeConfigs.Dominos].isChecked():
             demae = "9_3"
@@ -352,7 +352,7 @@ class ExpressPlatformConfiguration(QWizardPage):
         for category in self.patches_json:
             if category["type"] == "wc24":
                 selected_channels.append(
-                    f"{category["category_id"]}_{PatchingPage.region.value + 1}"
+                    f"{category["category_id"]}_{PatchingPage.region.value}"
                 )
 
         # I am not particularly happy with the solution I have came up with here.
@@ -364,8 +364,8 @@ class ExpressPlatformConfiguration(QWizardPage):
         if regional_channels:
             selected_channels.extend(
                 [
-                    f"7_{wiiroom_lang.value + 1}",
-                    f"8_{regional_lang.value + 1}",
+                    f"7_{wiiroom_lang.value}",
+                    f"8_{regional_lang.value}",
                     demae,
                     "10_1",
                 ]

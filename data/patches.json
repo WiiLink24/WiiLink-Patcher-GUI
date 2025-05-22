@@ -169,9 +169,12 @@
         },
         "title_id": "0001000148414a45",
         "additional_apps": null,
-        "additional_channels": {
-          "5": 1
-        },
+        "additional_channels": [
+          {
+            "category": 5,
+            "channel": 1
+          }
+        ],
         "additional_files": [
           "ticket"
         ]
@@ -186,9 +189,12 @@
         },
         "title_id": "0001000148414a50",
         "additional_apps": null,
-        "additional_channels": {
-          "5": 2
-        },
+        "additional_channels": [
+          {
+            "category": 5,
+            "channel": 2
+          }
+        ],
         "additional_files": [
           "ticket"
         ]
@@ -203,9 +209,12 @@
         },
         "title_id": "0001000148414a4a",
         "additional_apps": null,
-        "additional_channels": {
-          "5": 3
-        },
+        "additional_channels": [
+          {
+            "category": 5,
+            "channel": 2
+          }
+        ],
         "additional_files": null
       }
     ]
@@ -552,7 +561,7 @@
       {
         "item_id": 3,
         "latest_version": 512,
-        "patch_folder": "dominos",
+        "patch_folder": "Dominos",
         "name": "Food Channel (Domino's) (English)",
         "patches": {
           "Dominos_0": 0,

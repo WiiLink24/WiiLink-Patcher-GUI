@@ -2,21 +2,21 @@ import enum
 
 
 class Regions(enum.Enum):
-    USA = 0
-    PAL = 1
-    Japan = 2
+    USA = 1
+    PAL = 2
+    Japan = 3
 
 
 class Languages(enum.Enum):
-    Japan = 0
-    English = 1
-    Spanish = 2
-    French = 3
-    German = 4
-    Italian = 5
-    Dutch = 6
-    Portuguese = 7
-    Russian = 8
+    Japan = 1
+    English = 2
+    Spanish = 3
+    French = 4
+    German = 5
+    Italian = 6
+    Dutch = 7
+    Portuguese = 8
+    Russian = 9
 
 
 class DemaeConfigs(enum.Enum):
