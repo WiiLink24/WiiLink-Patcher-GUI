@@ -323,8 +323,12 @@ class PatchingWorker(QObject):
                     for additional_channel in channel_to_patch["additional_channels"]:
                         additional_category_index = additional_channel["category"]
                         additional_channel_index = additional_channel["channel"]
-                        additional_category = self.find_category(additional_category_index)
-                        additional_channel_dict = self.find_channel(additional_category, additional_channel_index)
+                        additional_category = self.find_category(
+                            additional_category_index
+                        )
+                        additional_channel_dict = self.find_channel(
+                            additional_category, additional_channel_index
+                        )
 
                         patch_channel(additional_channel_dict)
             except Exception as e:
@@ -333,7 +337,7 @@ class PatchingWorker(QObject):
 
 Exception:
 {e}"""
-                    )
+                )
                 self.error.emit(f"{e}")
             finally:
                 percentage += percentage_increment
@@ -376,4 +380,6 @@ Exception:
             if channel["item_id"] == channel_id:
                 return channel
 
-        raise KeyError(f"Channel {channel_id} does not exist in category {category["category_id"]}!")
+        raise KeyError(
+            f"Channel {channel_id} does not exist in category {category["category_id"]}!"
+        )
