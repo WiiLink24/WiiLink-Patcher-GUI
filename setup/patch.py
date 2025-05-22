@@ -30,7 +30,7 @@ wad_directory = pathlib.Path().joinpath("WiiLink", "WAD")
 
 
 def apply_bsdiff_patches(
-    channel_name: str, patch_files: dict[str, int], title: libWiiPy.title.Title
+    channel_name: str, patch_files: dict, title: libWiiPy.title.Title
 ):
     """Download and apply bsdiff patches to the app files specified
 
@@ -43,13 +43,16 @@ def apply_bsdiff_patches(
         A libWiiPy title, containing the patched contents in place of the stock ones"""
 
     # Apply patches
-    for patch, index in patch_files.items():
+    for patch in patch_files:
+        index = patch["content_id"]
+        patch_file = patch["patch_name"]
+
         print(f" - Patching content {index + 1}...")
 
         print("   - Downloading patch...")
 
         try:
-            patch_binary = download_patch(channel_name.lower(), patch)
+            patch_binary = download_patch(channel_name.lower(), patch_file)
         except Exception as e:
             print("      - Failed!")
             raise ValueError(e)
