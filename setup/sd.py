@@ -183,14 +183,18 @@ class SelectSD(QWizardPage):
         global sd_wad_path
         selected_device = self.combo.currentData()
 
-        # Find existing WAD folder, regardless of case
-        for folder in os.listdir(selected_device):
-            if (
-                folder.upper() == "WAD"
-                and pathlib.Path().joinpath(selected_device, folder).is_dir()
-            ):
-                sd_wad_path = folder
-                return 14
+        if (
+            pathlib.Path().joinpath("WiiLink", "WAD").exists()
+            and pathlib.Path().joinpath("WiiLink", "WAD").is_dir()
+        ):
+            # Find existing WAD folder, regardless of case
+            for folder in os.listdir(selected_device):
+                if (
+                    folder.upper() == "WAD"
+                    and pathlib.Path(selected_device).joinpath(folder).is_dir()
+                ):
+                    sd_wad_path = folder
+                    return 14
 
         return 15
 
@@ -379,11 +383,15 @@ class CopyFiles(QObject):
                 pathlib.Path().joinpath(sd_path, sd_apps_path),
                 dirs_exist_ok=True,
             )
-            shutil.copytree(
-                pathlib.Path().joinpath("WiiLink", "WAD"),
-                pathlib.Path().joinpath(sd_path, sd_wad_path),
-                dirs_exist_ok=True,
-            )
+            if (
+                pathlib.Path().joinpath("WiiLink", "WAD").exists()
+                and pathlib.Path().joinpath("WiiLink", "WAD").is_dir()
+            ):
+                shutil.copytree(
+                    pathlib.Path().joinpath("WiiLink", "WAD"),
+                    pathlib.Path().joinpath(sd_path, sd_wad_path),
+                    dirs_exist_ok=True,
+                )
         except Exception as e:
             self.error.emit(f"{e}")
 
