@@ -211,7 +211,12 @@ class About(QWidget):
 
         # Logo
         logo_label = ClickableLabel()
-        icon = QIcon(str(pathlib.Path().joinpath(file_path, "assets", "logo.webp")))
+        icon = QIcon(
+            pathlib.Path()
+            .joinpath(file_path, "assets", "logo.webp")
+            .resolve()
+            .as_posix()
+        )
         logo_pixmap = icon.pixmap(96, 96)
         logo_label.setPixmap(logo_pixmap)
         logo_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
@@ -545,9 +550,17 @@ class WiiLinkPatcherGUI(QWizard):
         self.setFixedWidth(550)
 
         # Load in icon and banner images
-        icon = QIcon(str(pathlib.Path().joinpath(file_path, "assets", "logo.webp")))
+        icon = QIcon(
+            pathlib.Path()
+            .joinpath(file_path, "assets", "logo.webp")
+            .resolve()
+            .as_posix()
+        )
         background = QIcon(
-            str(pathlib.Path().joinpath(file_path, "assets", "background.webp"))
+            pathlib.Path()
+            .joinpath(file_path, "assets", "background.webp")
+            .resolve()
+            .as_posix()
         )
         logo = icon.pixmap(64, 64)
         banner = background.pixmap(700, 120)
@@ -648,7 +661,7 @@ class WiiLinkPatcherGUI(QWizard):
         if translator.load(QLocale.system(), "qtbase", "_", path):
             app.installTranslator(translator)
         translator = QTranslator(app)
-        path = str(pathlib.Path().joinpath(file_path, "translations"))
+        path = pathlib.Path().joinpath(file_path, "translations").resolve().as_posix()
         if translator.load(QLocale.system(), "translation", "_", path):
             app.installTranslator(translator)
 
