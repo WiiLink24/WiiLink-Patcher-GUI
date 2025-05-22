@@ -541,6 +541,9 @@ class WiiLinkPatcherGUI(QWizard):
         self.setWizardStyle(QWizard.WizardStyle.ModernStyle)
         self.setSubTitleFormat(Qt.TextFormat.RichText)
 
+        self.setFixedWidth(550)
+        self.setFixedHeight(500)
+
         # Load in icon and banner images
         icon = QIcon(str(pathlib.Path().joinpath(file_path, "assets", "logo.webp")))
         background = QIcon(

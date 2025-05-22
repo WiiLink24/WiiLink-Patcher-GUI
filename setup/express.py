@@ -5,7 +5,6 @@ from PySide6.QtWidgets import (
     QLabel,
     QVBoxLayout,
     QRadioButton,
-    QButtonGroup,
     QMessageBox,
 )
 
