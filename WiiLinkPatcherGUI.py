@@ -79,7 +79,7 @@ patcher_version = "1.0 RC1"
 pride_flags = pathlib.Path(file_path).joinpath("assets", "pride_banners").iterdir()
 flags_list = list(pride_flags)
 
-patches_raw = open(pathlib.Path().joinpath("data", "patches.json"), "r").read()
+patches_raw = open(pathlib.Path(file_path).joinpath("data", "patches.json"), "r").read()
 patches_json = json.loads(patches_raw)
 
 
