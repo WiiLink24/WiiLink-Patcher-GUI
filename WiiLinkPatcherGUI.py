@@ -199,7 +199,8 @@ class About(QWidget):
         # Set background color to match main app
         stylesheet = open(pathlib.Path().joinpath(file_path, "style.qss"), "r").read()
         stylesheet = stylesheet.replace(
-            "%AssetsDir%", pathlib.Path(file_path).joinpath("assets").resolve().as_posix()
+            "%AssetsDir%",
+            pathlib.Path(file_path).joinpath("assets").resolve().as_posix(),
         )
         self.setStyleSheet(stylesheet)
 
@@ -559,7 +560,8 @@ class WiiLinkPatcherGUI(QWizard):
         stylesheet_path = pathlib.Path().joinpath(file_path, "style.qss")
         stylesheet = open(stylesheet_path, "r").read()
         stylesheet = stylesheet.replace(
-            "%AssetsDir%", pathlib.Path(file_path).joinpath("assets").resolve().as_posix()
+            "%AssetsDir%",
+            pathlib.Path(file_path).joinpath("assets").resolve().as_posix(),
         )
         self.setStyleSheet(stylesheet)
 
