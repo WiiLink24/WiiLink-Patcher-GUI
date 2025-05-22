@@ -336,3 +336,6 @@ QScrollArea { background: transparent; padding:0px; margin:0px; }
 QScrollArea > QWidget > QWidget { background: transparent; padding:0px; margin:0px; }
 QScrollArea > QWidget > QScrollBar { background: palette(base); padding:0px; margin:0px; }
 
+QMessageBox {
+    background-color: #222222;
+}

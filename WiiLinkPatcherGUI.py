@@ -596,112 +596,117 @@ class WiiLinkPatcherGUI(QWizard):
 
         self.setStartId(0)
 
+        # Check the internet connection, and perform internet-related tasks
+        self.check_connection()
+        if "Nightly" not in patcher_version and "RC" not in patcher_version:
+            self.check_for_updates()
+        self.translation_setup()
 
-def translation_setup():
-    """Static method to download and load patcher translations for the user's language if they exist
+    def translation_setup(self):
+        """Static method to download and load patcher translations for the user's language if they exist
 
-    Returns:
-        None"""
+        Returns:
+            None"""
 
-    # Get user's 2-character language code from QLocale
-    language = QLocale.languageToCode(QLocale.system().language())
+        # Get user's 2-character language code from QLocale
+        language = QLocale.languageToCode(QLocale.system().language())
 
-    # Download dictionary of supported languages
-    try:
-        supported_languages = download_translation_dict()
-    except Exception as e:
-        QMessageBox.warning(
-            QWidget(),
-            "WiiLink Patcher - Warning",
-            f"""The patcher failed to download the list of languages. Therefore, it will run in English.
+        # Download dictionary of supported languages
+        try:
+            supported_languages = download_translation_dict()
+        except Exception as e:
+            QMessageBox.warning(
+                self,
+                "WiiLink Patcher - Warning",
+                f"""The patcher failed to download the list of languages. Therefore, it will run in English.
 
-Exception:
-{e}""",
-        )
-    else:
-        # Download the translation file if there is a translation available for the user's language
-        if language in supported_languages:
-            try:
-                download_translation(language)
-            except Exception as e:
-                QMessageBox.warning(
-                    QWidget(),
-                    "WiiLink Patcher - Warning",
-                    f"""The patcher failed to download translations for your language. Therefore, it will run in English
-
-Exception:
-{e}""",
-                )
-
-    path = QLibraryInfo.path(QLibraryInfo.LibraryPath.TranslationsPath)
-    translator = QTranslator(app)
-
-    if translator.load(QLocale.system(), "qtbase", "_", path):
-        app.installTranslator(translator)
-    translator = QTranslator(app)
-    path = str(pathlib.Path().joinpath(file_path, "translations"))
-    if translator.load(QLocale.system(), "translation", "_", path):
-        app.installTranslator(translator)
-
-
-def check_connection():
-    """Static method to run a connection test and display the results to the user, terminating the patcher if the test is unsuccessful
-
-    Returns:
-        None"""
-    try:
-        connection = connection_test()
-    except Exception as e:
-        connection = e
-
-    if connection != "success":
-        match connection:
-            case "fail-nus":
-                error_message = (
-                    "The patcher failed to connect to Nintendo's update servers."
-                )
-            case "fail-patcher":
-                error_message = "The patcher failed to connect to WiiLink's servers."
-            case _:
-                error_message = f"""The patcher failed to connect to the internet.
-
-    Exception:
-    {connection}"""
-
-        QMessageBox.critical(QWidget(), "WiiLink Patcher - Error", error_message)
-        sys.exit()
-
-
-def check_for_updates():
-    """Static method to compare the current patcher version to the latest, and inform the user if they aren't up to date
-
-    Returns:
-        None"""
-    try:
-        latest_version = get_latest_version()
-    except Exception as e:
-        QMessageBox.warning(
-            QWidget(),
-            "WiiLink Patcher - Warning",
-            f"""Unable to check for updates!
     Exception:
     {e}""",
-        )
-    else:
-        if latest_version != patcher_version:
-            update = QMessageBox.question(
-                QWidget(),
-                "WiiLink Patcher - Update",
-                f"""An update has been detected for the patcher, would you like to download it?
-
-    Your version: {patcher_version}
-    Latest version: {latest_version}""",
             )
-            if update == QMessageBox.StandardButton.Yes:
-                webbrowser.open(
-                    "https://github.com/WiiLink24/WiiLink-Patcher-GUI/releases/latest"
+        else:
+            # Download the translation file if there is a translation available for the user's language
+            if language in supported_languages:
+                try:
+                    download_translation(language)
+                except Exception as e:
+                    QMessageBox.warning(
+                        self,
+                        "WiiLink Patcher - Warning",
+                        f"""The patcher failed to download translations for your language. Therefore, it will run in English
+
+    Exception:
+    {e}""",
+                    )
+
+        path = QLibraryInfo.path(QLibraryInfo.LibraryPath.TranslationsPath)
+        translator = QTranslator(app)
+
+        if translator.load(QLocale.system(), "qtbase", "_", path):
+            app.installTranslator(translator)
+        translator = QTranslator(app)
+        path = str(pathlib.Path().joinpath(file_path, "translations"))
+        if translator.load(QLocale.system(), "translation", "_", path):
+            app.installTranslator(translator)
+
+    def check_connection(self):
+        """Static method to run a connection test and display the results to the user, terminating the patcher if the test is unsuccessful
+
+        Returns:
+            None"""
+        try:
+            connection = connection_test()
+        except Exception as e:
+            connection = e
+
+        if connection != "success":
+            match connection:
+                case "fail-nus":
+                    error_message = (
+                        "The patcher failed to connect to Nintendo's update servers."
+                    )
+                case "fail-patcher":
+                    error_message = (
+                        "The patcher failed to connect to WiiLink's servers."
+                    )
+                case _:
+                    error_message = f"""The patcher failed to connect to the internet.
+
+        Exception:
+        {connection}"""
+
+            QMessageBox.critical(self, "WiiLink Patcher - Error", error_message)
+            sys.exit()
+
+    def check_for_updates(self):
+        """Static method to compare the current patcher version to the latest, and inform the user if they aren't up to date
+
+        Returns:
+            None"""
+        try:
+            latest_version = get_latest_version()
+        except Exception as e:
+            QMessageBox.warning(
+                QWidget(),
+                "WiiLink Patcher - Warning",
+                f"""Unable to check for updates!
+        Exception:
+        {e}""",
+            )
+        else:
+            if latest_version != patcher_version:
+                update = QMessageBox.question(
+                    self,
+                    "WiiLink Patcher - Update",
+                    f"""An update has been detected for the patcher, would you like to download it?
+
+        Your version: {patcher_version}
+        Latest version: {latest_version}""",
                 )
-                sys.exit()
+                if update == QMessageBox.StandardButton.Yes:
+                    webbrowser.open(
+                        "https://github.com/WiiLink24/WiiLink-Patcher-GUI/releases/latest"
+                    )
+                    sys.exit()
 
 
 if __name__ == "__main__":
@@ -712,13 +717,6 @@ if __name__ == "__main__":
     # Create instance of QApplication and the patcher's QWizard
     app = QApplication(sys.argv)
     wizard = WiiLinkPatcherGUI()
-    icon = QIcon(str(pathlib.Path().joinpath(file_path, "assets", "logo.webp")))
-
-    # Check the internet connection, and perform internet-related tasks
-    check_connection()
-    if "Nightly" not in patcher_version and "RC" not in patcher_version:
-        check_for_updates()
-    translation_setup()
 
     # Start the wizard
     wizard.show()

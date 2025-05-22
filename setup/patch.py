@@ -303,6 +303,7 @@ Exception:
                 )
                 self.error.emit(f"{e}")
             else:
+                self.error.emit("penis")
                 try:
                     category = self.patches_json[category_index - 1]
                     channel = category["channels"][channel_index - 1]
