@@ -214,7 +214,10 @@ def download_spd():
 
     print("Downloading WiiLink Address Settings:")
     download_file(
-        spd_url, pathlib.Path().joinpath(wad_directory, "INSTALL ME - WiiLink Address Settings.wad")
+        spd_url,
+        pathlib.Path().joinpath(
+            wad_directory, "INSTALL ME - WiiLink Address Settings.wad"
+        ),
     )
     print(" - Done!")
 
