@@ -43,10 +43,10 @@
           }
         ],
         "title_id": "0001000248414650",
-        "additional_apps": null,
-        "additional_channels": [
+        "additional_apps": [
           "agc"
         ],
+        "additional_channels": null,
         "additional_files": null
       },
       {
