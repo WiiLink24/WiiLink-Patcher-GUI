@@ -74,7 +74,7 @@ patcher_url = "https://patcher.wiilink24.com"
 temp_dir = pathlib.Path(tempfile.gettempdir()).joinpath("WiiLinkPatcher")
 wiilink_dir = pathlib.Path().joinpath("WiiLink")
 file_path = pathlib.Path(__file__).parent
-patcher_version = "1.0 RC1"
+patcher_version = "1.0 RC2"
 
 pride_flags = pathlib.Path(file_path).joinpath("assets", "pride_banners").iterdir()
 flags_list = list(pride_flags)
