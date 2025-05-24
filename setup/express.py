@@ -226,7 +226,7 @@ class ExpressRegionalChannelLanguage(QWizardPage):
         global wiiroom_lang
 
         for key, button in self.buttons.items():
-            if button.isChecked:
+            if button.isChecked():
                 wiiroom_lang = key
                 return True
 
