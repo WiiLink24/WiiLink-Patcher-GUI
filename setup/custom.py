@@ -8,6 +8,7 @@ from PySide6.QtWidgets import (
     QScrollArea,
     QWidget,
     QSizePolicy,
+    QMessageBox,
 )
 
 from .patch import PatchingPage
@@ -122,6 +123,8 @@ class CustomRegionalChannels(QWizardPage):
                 checkbox.clicked.connect(self.completeChanged.emit)
             container_layout.addWidget(box)
 
+        self.checkboxes["7_9"].clicked.connect(self.russian_notice)
+
         container_layout.addStretch()
         scroll_area.setWidget(container)
 
@@ -131,6 +134,16 @@ class CustomRegionalChannels(QWizardPage):
         layout.addWidget(scroll_area)
 
         self.setLayout(layout)
+
+    def russian_notice(self):
+        if self.checkboxes["7_9"].isChecked():
+            QMessageBox.warning(
+                self,
+                self.tr("Russian notice for Wii Room"),
+                self.tr(
+                    "You have selected the Russian translation for Wii Room<br>Proper functionality is not guaranteed for systems without the Russian Wii Menu.<br>Follow the installation guide at <a href='https://wii.zazios.ru/rus_menu'>https://wii.zazios.ru/rus_menu</a> if you have not already done so.<br>(The guide is only available in Russian for now)"
+                ),
+            )
 
     def validatePage(self):
         global selected_wc24_channels
