@@ -351,12 +351,7 @@ class FileCopying(QWizardPage):
         QMessageBox.warning(
             self,
             "WiiLink Patcher - Warning",
-            f"""An exception was encountered while copying files.
-
-Exception:
-{error}
-
-Please report this issue in the WiiLink Discord Server (discord.gg/wiilink).""",
+            f"An exception was encountered while copying files.<br><br>Exception:<br>{error}<br><br>Please report this issue in the WiiLink Discord Server (<a href='https://discord.gg/wiilink'>discord.gg/wiilink</a>).",
         )
 
 

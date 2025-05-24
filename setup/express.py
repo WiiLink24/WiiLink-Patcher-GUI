@@ -237,10 +237,7 @@ class ExpressRegionalChannelLanguage(QWizardPage):
             self,
             self.tr("Russian notice for Wii Room"),
             self.tr(
-                """You have selected the Russian translation for Wii Room
-Proper functionality is not guaranteed for systems without the Russian Wii Menu.
-Follow the installation guide at https://wii.zazios.ru/rus_menu if you have not already done so.
-(The guide is only available in Russian for now)"""
+                "You have selected the Russian translation for Wii Room<br>Proper functionality is not guaranteed for systems without the Russian Wii Menu.<br>Follow the installation guide at <a href='https://wii.zazios.ru/rus_menu'>https://wii.zazios.ru/rus_menu</a> if you have not already done so.<br>(The guide is only available in Russian for now)"
             ),
         )
 

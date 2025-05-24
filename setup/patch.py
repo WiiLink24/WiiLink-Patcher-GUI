@@ -3,7 +3,7 @@ import libWiiPy
 import tempfile
 import bsdiff4
 
-from PySide6.QtCore import QObject, Signal, QTimer, QThread
+from PySide6.QtCore import QObject, Signal, QTimer, QThread, Qt
 from PySide6.QtWidgets import (
     QMessageBox,
     QWizardPage,
@@ -160,7 +160,6 @@ class PatchingPage(QWizardPage):
     patching_complete = False
     percentage: int
     status: str
-    error = ""
 
     def __init__(self, patches_json: dict, parent=None):
         super().__init__(parent)
@@ -253,17 +252,11 @@ class PatchingPage(QWizardPage):
 
     def handle_error(self, error: str):
         """Display errors thrown from the patching logic to the user"""
-        self.error = error
 
         QMessageBox.warning(
             self,
             "WiiLink Patcher - Warning",
-            f"""An exception was encountered while patching.
-
-Exception:
-{error}
-
-Please report this issue in the WiiLink Discord Server (discord.gg/wiilink).""",
+            f"An exception was encountered while patching.<br><br>Exception:<br>{error}<br><br>Please report this issue in the WiiLink Discord Server (<a href='https://discord.gg/wiilink'>discord.gg/wiilink</a>).",
         )
 
 
@@ -295,6 +288,7 @@ class PatchingWorker(QObject):
         for channel_key in self.selected_channels:
             channel_indexes = channel_key.split("_")
             try:
+                raise ValueError("penis 2")
                 category_index = int(channel_indexes[0])
                 channel_index = int(channel_indexes[1])
                 channel_category = self.find_category(category_index)
