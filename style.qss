@@ -344,3 +344,13 @@ QTextEdit {
     background-color: #111111;
     color: #FFFFFF;
 }
+
+QTextEdit#console {
+    background-color: #1a1a1a;
+    color: #e0e0e0;
+    border: 1px solid #444444;
+    border-radius: 6px;
+    padding: 8px;
+    font-family: "Courier New", monospace;
+    font-size: 13px;
+}

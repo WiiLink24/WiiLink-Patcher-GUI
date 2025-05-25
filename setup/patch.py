@@ -14,8 +14,9 @@ from PySide6.QtWidgets import (
     QVBoxLayout,
     QWizard,
     QTextEdit,
-    QPushButton,
 )
+
+from PySide6.QtGui import QFont
 
 from modules.widgets import ConsoleOutput
 from .enums import *
@@ -186,17 +187,25 @@ class PatchingPage(QWizardPage):
         self.console = QTextEdit()
         self.console.setReadOnly(True)
         self.console.setHidden(True)
-
+        self.console.setObjectName("console")
+        
         # Redirect outputs to the console
         sys.stdout = ConsoleOutput(self.console, sys.__stdout__)
         sys.stderr = ConsoleOutput(self.console, sys.__stderr__)
 
         layout.addWidget(self.console)
 
-        self.toggle_console_button = QPushButton(self.tr("Toggle Console"))
-        self.toggle_console_button.clicked.connect(self.toggle_console)
+        self.toggle_console_label = QLabel(self.tr("Show Details"))
 
-        layout.addWidget(self.toggle_console_button)
+        font = QFont()
+        font.setUnderline(True)
+        self.toggle_console_label.setFont(font)
+        self.toggle_console_label.setAlignment(Qt.AlignLeft)
+        self.toggle_console_label.setStyleSheet("color: #606060; cursor: pointer;")
+
+        self.toggle_console_label.mousePressEvent = self.toggle_console
+
+        layout.addWidget(self.toggle_console_label)
 
         self.setLayout(layout)
 
@@ -279,9 +288,16 @@ class PatchingPage(QWizardPage):
             f"An exception was encountered while patching.<br><br>Exception:<br>{error}<br><br>Please report this issue in the WiiLink Discord Server (<a href='https://discord.gg/wiilink'>discord.gg/wiilink</a>).",
         )
 
-    def toggle_console(self):
-        self.console.setHidden(self.console.isVisible())
-        self.news_box.setHidden(self.news_box.isVisible())
+    def toggle_console(self, event=None):
+        is_visible = self.console.isVisible()
+        self.console.setHidden(is_visible)
+        self.news_box.setHidden(not is_visible)
+
+        # Change the label text based on the current state
+        if is_visible:
+            self.toggle_console_label.setText(self.tr("Show Details"))
+        else:
+            self.toggle_console_label.setText(self.tr("Hide Details"))
 
 
 class PatchingWorker(QObject):
