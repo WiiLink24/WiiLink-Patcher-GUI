@@ -339,3 +339,8 @@ QScrollArea > QWidget > QScrollBar { background: palette(base); padding:0px; mar
 QMessageBox {
     background-color: #222222;
 }
+
+QTextEdit {
+    background-color: #111111;
+    color: #FFFFFF;
+}

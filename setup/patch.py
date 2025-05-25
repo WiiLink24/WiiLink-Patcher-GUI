@@ -1,4 +1,6 @@
 import pathlib
+import sys
+
 import libWiiPy
 import tempfile
 import bsdiff4
@@ -11,8 +13,11 @@ from PySide6.QtWidgets import (
     QProgressBar,
     QVBoxLayout,
     QWizard,
+    QTextEdit,
+    QPushButton,
 )
 
+from modules.widgets import ConsoleOutput
 from .enums import *
 from .download import (
     download_patch,
@@ -178,6 +183,21 @@ class PatchingPage(QWizardPage):
         layout.addSpacing(10)
         layout.addWidget(self.news_box)
 
+        self.console = QTextEdit()
+        self.console.setReadOnly(True)
+        self.console.setHidden(True)
+
+        # Redirect outputs to the console
+        sys.stdout = ConsoleOutput(self.console, sys.__stdout__)
+        sys.stderr = ConsoleOutput(self.console, sys.__stderr__)
+
+        layout.addWidget(self.console)
+
+        self.toggle_console_button = QPushButton(self.tr("Toggle Console"))
+        self.toggle_console_button.clicked.connect(self.toggle_console)
+
+        layout.addWidget(self.toggle_console_button)
+
         self.setLayout(layout)
 
         QTimer.singleShot(0, lambda: NewsRenderer.getNews(self, self.news_box))
@@ -259,6 +279,10 @@ class PatchingPage(QWizardPage):
             f"An exception was encountered while patching.<br><br>Exception:<br>{error}<br><br>Please report this issue in the WiiLink Discord Server (<a href='https://discord.gg/wiilink'>discord.gg/wiilink</a>).",
         )
 
+    def toggle_console(self):
+        self.console.setHidden(self.console.isVisible())
+        self.news_box.setHidden(self.news_box.isVisible())
+
 
 class PatchingWorker(QObject):
     platform: Platforms
@@ -288,7 +312,6 @@ class PatchingWorker(QObject):
         for channel_key in self.selected_channels:
             channel_indexes = channel_key.split("_")
             try:
-                raise ValueError("penis 2")
                 category_index = int(channel_indexes[0])
                 channel_index = int(channel_indexes[1])
                 channel_category = self.find_category(category_index)

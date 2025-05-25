@@ -1,5 +1,15 @@
-from PySide6.QtWidgets import QWidget, QToolButton, QFrame, QVBoxLayout, QLabel
-from PySide6.QtCore import Qt, Signal
+import sys
+
+from PySide6.QtWidgets import (
+    QWidget,
+    QToolButton,
+    QFrame,
+    QVBoxLayout,
+    QLabel,
+    QTextEdit,
+)
+from PySide6.QtCore import Qt, Signal, QObject
+from PySide6.QtGui import QTextCursor
 
 
 class CollapsibleBox(QWidget):
@@ -45,3 +55,30 @@ class ClickableLabel(QLabel):
     def mousePressEvent(self, event):
         if event.button() == Qt.MouseButton.LeftButton:
             self.clicked.emit()
+
+
+class ConsoleOutput(QObject):
+    new_text = Signal(str)
+
+    def __init__(self, text_edit: QTextEdit, console: sys):
+        super().__init__()
+        self.text_edit = text_edit
+        self.console = console
+
+        # We use a signal here because it otherwise crashes when
+        # the text comes from a QThread for some reason
+        self.new_text.connect(self._append_text)
+
+    def write(self, message):
+        self.console.write(message)
+        self.console.flush()
+        self.new_text.emit(message)
+
+    def flush(self):
+        pass
+
+    def _append_text(self, message):
+        cursor = self.text_edit.textCursor()
+        cursor.movePosition(QTextCursor.MoveOperation.End)
+        cursor.insertText(message)
+        self.text_edit.setTextCursor(cursor)
