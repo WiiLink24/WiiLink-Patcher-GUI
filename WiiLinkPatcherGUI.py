@@ -9,7 +9,7 @@
 #    nuitka-project: --windows-console-mode=disable
 # nuitka-project-if: {OS} in ("Linux", "FreeBSD", "OpenBSD"):
 #    nuitka-project: --onefile
-
+import datetime
 # These are standard options that are needed on all platforms.
 # nuitka-project: --plugin-enable=pyside6
 # nuitka-project: --include-data-dir={MAIN_DIRECTORY}/assets=assets
@@ -556,12 +556,20 @@ class WiiLinkPatcherGUI(QWizard):
             .resolve()
             .as_posix()
         )
-        background = QIcon(
-            pathlib.Path()
-            .joinpath(file_path, "assets", "background.webp")
-            .resolve()
-            .as_posix()
-        )
+
+        match datetime.datetime.now().month:
+            case 6:
+                flag_index = random.randint(0, len(flags_list) - 1)
+                selected_flag = flags_list[flag_index]
+                background = QIcon(selected_flag.resolve().as_posix())
+            case _:
+                background = QIcon(
+                    pathlib.Path()
+                    .joinpath(file_path, "assets", "background.webp")
+                    .resolve()
+                    .as_posix()
+                )
+
         logo = icon.pixmap(64, 64)
         banner = background.pixmap(700, 120)
         self.setPixmap(QWizard.WizardPixmap.LogoPixmap, logo)
