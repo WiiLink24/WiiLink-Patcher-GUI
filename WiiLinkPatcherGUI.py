@@ -9,7 +9,7 @@
 #    nuitka-project: --windows-console-mode=disable
 # nuitka-project-if: {OS} in ("Linux", "FreeBSD", "OpenBSD"):
 #    nuitka-project: --onefile
-import datetime
+
 # These are standard options that are needed on all platforms.
 # nuitka-project: --plugin-enable=pyside6
 # nuitka-project: --include-data-dir={MAIN_DIRECTORY}/assets=assets
@@ -25,6 +25,7 @@ import tempfile
 import webbrowser
 import random
 import json
+import datetime
 
 from PySide6.QtCore import QTranslator, QLocale, QLibraryInfo, QTimer, Qt
 from PySide6.QtGui import QIcon
@@ -548,6 +549,7 @@ class WiiLinkPatcherGUI(QWizard):
         self.setSubTitleFormat(Qt.TextFormat.RichText)
 
         self.setFixedWidth(550)
+        self.setMaximumHeight(625)
 
         # Load in icon and banner images
         icon = QIcon(
