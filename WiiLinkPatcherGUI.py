@@ -70,7 +70,7 @@ from setup.download import (
 from setup.patch import PatchingPage
 from setup.sd import AskSD, SelectSD, WADCleanup, FileCopying
 from modules.widgets import ClickableLabel
-from modules.consts import temp_dir, file_path, wiilink_dir
+from modules.consts import temp_dir, file_path, wiilink_dir, patcher_version
 
 
 class IntroPage(QWizardPage):
@@ -218,8 +218,6 @@ class About(QWidget):
         title_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
         # Version
-        global patcher_version
-
         version_label = QLabel(self.tr(f"GUI - Version {patcher_version}"))
         version_label.setProperty("class", "version")
         version_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
