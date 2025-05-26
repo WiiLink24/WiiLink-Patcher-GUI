@@ -24,7 +24,7 @@ from .download import (
     download_patch,
     download_file,
     download_agc,
-    download_osc_app,
+    DownloadOSCApp,
     download_title_contents,
     download_spd,
 )
@@ -162,6 +162,7 @@ class PatchingPage(QWizardPage):
     selected_channels: list
     regional_channels: bool = False
     setup_type: SetupTypes
+    osc_enabled: bool = True
 
     patching_complete = False
     percentage: int
@@ -306,7 +307,7 @@ class PatchingWorker(QObject):
     platform: Platforms
     region: Regions
     selected_channels: list
-    regional_channels: bool = False
+    regional_channels: bool
     setup_type: SetupTypes
 
     patches_json: dict
@@ -350,7 +351,7 @@ class PatchingWorker(QObject):
                 if channel_to_patch["additional_apps"]:
                     for app in channel_to_patch["additional_apps"]:
                         if app != "agc":
-                            download_osc_app(app)
+                            DownloadOSCApp(app)
                         else:
                             download_agc(self.platform)
 
@@ -385,11 +386,11 @@ Exception:
         match self.setup_type:
             case SetupTypes.Extras:
                 if self.platform != Platforms.Dolphin:
-                    download_osc_app("yawmME")
+                    DownloadOSCApp("yawmME")
             case _:
                 if self.platform != Platforms.Dolphin:
-                    download_osc_app("yawmME")
-                    download_osc_app("sntp")
+                    DownloadOSCApp("yawmME")
+                    DownloadOSCApp("sntp")
 
                 if self.platform == Platforms.vWii:
                     eula_category = self.find_category(14)
@@ -400,7 +401,7 @@ Exception:
                 if self.regional_channels and self.region != Regions.Japan:
                     download_spd()
 
-                download_osc_app("Mail-Patcher")
+                DownloadOSCApp("Mail-Patcher")
 
     def find_category(self, category_id: int):
         for category in self.patches_json:

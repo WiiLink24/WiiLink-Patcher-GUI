@@ -66,6 +66,7 @@ from setup.download import (
     download_translation_dict,
     download_translation,
     get_latest_version,
+    DownloadOSCApp,
 )
 from setup.patch import PatchingPage
 from setup.sd import AskSD, SelectSD, WADCleanup, FileCopying
@@ -688,6 +689,9 @@ class WiiLinkPatcherGUI(QWizard):
             connection = e
 
         if connection != "success":
+            error_message = None
+            osc_exception = False
+
             match connection:
                 case "fail-nus":
                     error_message = (
@@ -697,14 +701,31 @@ class WiiLinkPatcherGUI(QWizard):
                     error_message = (
                         "The patcher failed to connect to WiiLink's servers."
                     )
+                case "fail-osc":
+                    # OSC is a special case here, as the patcher can run without it
+                    osc_exception = True
                 case _:
                     error_message = f"""The patcher failed to connect to the internet.
 
-        Exception:
-        {connection}"""
+Exception:
+{connection}"""
 
-            QMessageBox.critical(self, "WiiLink Patcher - Error", error_message)
-            sys.exit()
+            if error_message:
+                QMessageBox.critical(self, "WiiLink Patcher - Error", error_message)
+                sys.exit()
+
+            if osc_exception:
+                continue_patcher = QMessageBox.warning(
+                    self,
+                    "WiiLink Patcher - Warning",
+                    "The patcher failed to connect to OSC's servers, meaning it cannot automatically download homebrew apps. However, it can still function without OSC. Would you like to continue?",
+                    buttons=QMessageBox.StandardButton.Yes
+                    | QMessageBox.StandardButton.No,
+                )
+                if continue_patcher == QMessageBox.StandardButton.Yes:
+                    DownloadOSCApp.osc_enabled = False
+                else:
+                    sys.exit()
 
     def check_for_updates(self):
         """Static method to compare the current patcher version to the latest, and inform the user if they aren't up to date

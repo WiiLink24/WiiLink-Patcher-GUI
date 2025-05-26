@@ -373,11 +373,15 @@ class CopyFiles(QObject):
                 sd_apps_path = folder
 
         try:
-            shutil.copytree(
-                pathlib.Path().joinpath("WiiLink", "apps"),
-                pathlib.Path().joinpath(sd_path, sd_apps_path),
-                dirs_exist_ok=True,
-            )
+            if (
+                pathlib.Path().joinpath("WiiLink", "apps").exists()
+                and pathlib.Path().joinpath("WiiLink", "apps").is_dir()
+            ):
+                shutil.copytree(
+                    pathlib.Path().joinpath("WiiLink", "apps"),
+                    pathlib.Path().joinpath(sd_path, sd_apps_path),
+                    dirs_exist_ok=True,
+                )
             if (
                 pathlib.Path().joinpath("WiiLink", "WAD").exists()
                 and pathlib.Path().joinpath("WiiLink", "WAD").is_dir()

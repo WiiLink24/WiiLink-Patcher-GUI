@@ -13,6 +13,8 @@ patcher_url = "https://patcher.wiilink24.com"
 temp_dir = pathlib.Path().joinpath(tempfile.gettempdir(), "WiiLinkPatcher")
 wad_directory = pathlib.Path().joinpath("WiiLink", "WAD")
 
+osc_enabled = True
+
 
 # Using code from "commands/title/nus.py" from WiiPy by NinjaCheetah
 # https://github.com/NinjaCheetah/WiiPy
@@ -27,9 +29,11 @@ def connection_test():
         "fail-patcher" - The patcher failed to connect to patcher.wiilink24.com
 
         "fail-nus" - The patcher failed to connect to NUS"""
+    print("Testing internet connection:")
     patcher_test = f"{patcher_url}/connectiontest.txt"
     patcher_expected = b"If the patcher can read this, the connection test succeeds.\n"
 
+    print(" - Checking connection to patcher server...")
     patcher_response = requests.get(url=patcher_test, timeout=10)
 
     if patcher_response.status_code != 200:
@@ -50,8 +54,11 @@ Received: {patcher_response}"""
         )
         return "fail-patcher"
 
+    print("   - Success!")
+
     nus_test = "http://nus.cdn.shop.wii.com/ccs/download/000100014841564a/tmd"
 
+    print(" - Checking connection to NUS...")
     nus_request = requests.get(
         url=nus_test, headers={"User-Agent": "wii libnup/1.0"}, timeout=10
     )
@@ -63,6 +70,32 @@ URL: {nus_test}"""
         )
         return "fail-nus"
 
+    print("   - Success!")
+
+    osc_test = "https://hbb1.oscwii.org/api/v4/information"
+
+    print(" - Checking connection to OSC...")
+    try:
+        osc_request = requests.get(osc_test, timeout=10)
+    except Exception as e:
+        print(
+            f"""An exception occurred while connecting to OSC!
+
+Exception:
+{e}"""
+        )
+        return "fail-osc"
+
+    if osc_request.status_code != 200:
+        print(
+            f"""Connection test failed!
+Got HTTP code {osc_request.status_code}.
+URL: {osc_test}"""
+        )
+        return "fail-osc"
+
+    print("   - Success!")
+
     return "success"
 
 
@@ -71,7 +104,9 @@ def get_latest_version() -> str:
 
     Returns:
         The latest tag from the GitHub API"""
-    api_url = "https://api.github.com/repos/WiiLink24/WiiLink-Patcher-GUI/releases/latest"
+    api_url = (
+        "https://api.github.com/repos/WiiLink24/WiiLink-Patcher-GUI/releases/latest"
+    )
 
     api_response_raw = download_file(api_url)
     api_response = json.loads(api_response_raw)
@@ -139,38 +174,46 @@ File URL: {url}"""
             return file
 
 
-def download_osc_app(app_name: str):
-    """Downloads an app from the OSC to 'WiiLink/apps'
+class DownloadOSCApp:
+    osc_enabled: bool = True
 
-    Args:
-        app_name: The name of the app on OSC to download
+    def __init__(self, app_name: str):
+        """Downloads an app from the OSC to 'WiiLink/apps'
 
-    Returns:
-        None"""
-    app_path = pathlib.Path().joinpath("WiiLink", "apps", app_name)
+        Args:
+            app_name: The name of the app on OSC to download
 
-    os.makedirs(app_path, exist_ok=True)
+        Returns:
+            None"""
 
-    print(f"Downloading {app_name} from OSC:")
+        if not self.osc_enabled:
+            print(f"Downloading {app_name} skipped - OSC downloading is disabled!")
+            return
 
-    print(" - Downloading boot.dol...")
-    download_file(
-        f"https://hbb1.oscwii.org/unzipped_apps/{app_name}/apps/{app_name}/boot.dol",
-        pathlib.Path().joinpath(app_path, "boot.dol"),
-    )
-    print("   - Done!")
-    print(" - Downloading meta.xml...")
-    download_file(
-        f"https://hbb1.oscwii.org/unzipped_apps/{app_name}/apps/{app_name}/meta.xml",
-        pathlib.Path().joinpath(app_path, "meta.xml"),
-    )
-    print("   - Done!")
-    print(" - Downloading icon.png...")
-    download_file(
-        f"https://hbb1.oscwii.org/api/v3/contents/{app_name}/icon.png",
-        pathlib.Path().joinpath(app_path, "icon.png"),
-    )
-    print("   - Done!")
+        app_path = pathlib.Path().joinpath("WiiLink", "apps", app_name)
+
+        os.makedirs(app_path, exist_ok=True)
+
+        print(f"Downloading {app_name} from OSC:")
+
+        print(" - Downloading boot.dol...")
+        download_file(
+            f"https://hbb1.oscwii.org/unzipped_apps/{app_name}/apps/{app_name}/boot.dol",
+            pathlib.Path().joinpath(app_path, "boot.dol"),
+        )
+        print("   - Done!")
+        print(" - Downloading meta.xml...")
+        download_file(
+            f"https://hbb1.oscwii.org/unzipped_apps/{app_name}/apps/{app_name}/meta.xml",
+            pathlib.Path().joinpath(app_path, "meta.xml"),
+        )
+        print("   - Done!")
+        print(" - Downloading icon.png...")
+        download_file(
+            f"https://hbb1.oscwii.org/api/v3/contents/{app_name}/icon.png",
+            pathlib.Path().joinpath(app_path, "icon.png"),
+        )
+        print("   - Done!")
 
 
 def download_agc(platform: Platforms):
@@ -182,7 +225,7 @@ def download_agc(platform: Platforms):
     Returns:
         None"""
     if platform != Platforms.Dolphin:
-        download_osc_app("AnyGlobe_Changer")
+        DownloadOSCApp("AnyGlobe_Changer")
     else:
         # Dolphin users need v1.0 of AnyGlobe Changer, as the latest OSC release doesn't work with Dolphin, for some reason.
         app_path = pathlib.Path().joinpath(temp_dir, "AGC")
