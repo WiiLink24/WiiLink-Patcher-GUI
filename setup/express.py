@@ -28,6 +28,7 @@ class ExpressRegion(QWizardPage):
                 "For the WiiConnect24 services, which region would you like to install?"
             )
         )
+        self.label.setWordWrap(True)
 
         self.regions = {
             Regions.USA: self.tr("North America (NTSC-U)"),
@@ -85,6 +86,7 @@ Services that would be installed:
 - Kirby TV Channel"""
             )
         )
+        self.label.setWordWrap(True)
 
         self.Yes = QRadioButton(self.tr("Yes"))
         self.No = QRadioButton(self.tr("No"))
@@ -136,6 +138,7 @@ class ExpressRegionalChannelTranslation(QWizardPage):
                 "Would you like <b>Wii Room</b>, <b>Photo Prints Channel</b>, and the <b>Food Channel</b> to be translated?"
             )
         )
+        self.label.setWordWrap(True)
 
         self.Translated = QRadioButton(
             self.tr("Translated (eg. English, French, etc.)")
@@ -197,6 +200,7 @@ class ExpressRegionalChannelLanguage(QWizardPage):
         self.label = QLabel(
             self.tr("What language would you like <b>Wii Room</b> to be in?")
         )
+        self.label.setWordWrap(True)
 
         # Layout
         self.layout = QVBoxLayout()
@@ -253,6 +257,7 @@ class ExpressDemaeConfiguration(QWizardPage):
                 "Which version of the <b>Food Channel</b> would you like to install?"
             )
         )
+        self.label.setWordWrap(True)
 
         self.demae_configs = {
             DemaeConfigs.Standard: self.tr("Standard (Fake Ordering)"),
@@ -300,6 +305,7 @@ class ExpressPlatformConfiguration(QWizardPage):
         self.label = QLabel(
             self.tr("Which platform will you be installing WiiLink onto?")
         )
+        self.label.setWordWrap(True)
 
         self.platforms = {
             Platforms.Wii: "Wii",

@@ -174,6 +174,7 @@ class PatchingPage(QWizardPage):
         self.setSubTitle(self.tr("Please wait while the patcher works its magic!"))
 
         self.label = QLabel(self.tr("Downloading files..."))
+        self.label.setWordWrap(True)
         self.progress_bar = QProgressBar(self)
 
         self.news_box = NewsRenderer.createNewsBox(self)

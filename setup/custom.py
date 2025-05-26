@@ -36,6 +36,7 @@ class CustomWiiConnect24Channels(QWizardPage):
         self.label = QLabel(
             self.tr("Select the channels you'd like to install from the list below:")
         )
+        self.label.setWordWrap(True)
 
         scroll_area = QScrollArea()
         scroll_area.setWidgetResizable(True)
@@ -98,6 +99,7 @@ class CustomRegionalChannels(QWizardPage):
         self.label = QLabel(
             self.tr("Select the channels you'd like to install from the list below:")
         )
+        self.label.setWordWrap(True)
 
         scroll_area = QScrollArea()
         scroll_area.setWidgetResizable(True)
@@ -184,6 +186,7 @@ class CustomPlatformConfiguration(QWizardPage):
         self.label = QLabel(
             self.tr("Which platform will you be installing WiiLink onto?")
         )
+        self.label.setWordWrap(True)
 
         self.platforms = {
             Platforms.Wii: "Wii",
@@ -228,6 +231,7 @@ class CustomRegionConfiguration(QWizardPage):
         self.setSubTitle(self.tr("Choose console region"))
 
         self.label = QLabel(self.tr("Which region is your console?"))
+        self.label.setWordWrap(True)
 
         self.regions = {
             Regions.USA: self.tr("North America (NTSC-U)"),
