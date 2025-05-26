@@ -75,7 +75,7 @@ patcher_url = "https://patcher.wiilink24.com"
 temp_dir = pathlib.Path(tempfile.gettempdir()).joinpath("WiiLinkPatcher")
 wiilink_dir = pathlib.Path().joinpath("WiiLink")
 file_path = pathlib.Path(__file__).parent
-patcher_version = "1.0 RC3"
+patcher_version = "1.0 RC4"
 
 pride_flags = pathlib.Path(file_path).joinpath("assets", "pride_banners").iterdir()
 flags_list = list(pride_flags)
@@ -715,21 +715,34 @@ class WiiLinkPatcherGUI(QWizard):
             latest_version = get_latest_version()
         except Exception as e:
             QMessageBox.warning(
-                QWidget(),
+                self,
                 "WiiLink Patcher - Warning",
                 f"""Unable to check for updates!
-        Exception:
-        {e}""",
+
+Exception:
+{e}""",
             )
         else:
-            if latest_version != patcher_version:
+            latest_version_split = latest_version.split(".")
+            patcher_version_split = patcher_version.split(".")
+
+            to_update = False
+
+            for place in range(len(latest_version_split)):
+                if latest_version_split[place] > patcher_version_split[place]:
+                    to_update = True
+                    break
+                elif latest_version_split[place] < patcher_version_split[place]:
+                    break
+
+            if to_update:
                 update = QMessageBox.question(
                     self,
                     "WiiLink Patcher - Update",
                     f"""An update has been detected for the patcher, would you like to download it?
 
-        Your version: {patcher_version}
-        Latest version: {latest_version}""",
+Your version: {patcher_version}
+Latest version: {latest_version}""",
                 )
                 if update == QMessageBox.StandardButton.Yes:
                     webbrowser.open(

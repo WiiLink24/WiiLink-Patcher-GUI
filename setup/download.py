@@ -66,17 +66,19 @@ URL: {nus_test}"""
     return "success"
 
 
-def get_latest_version():
-    """Downloads a text file containing the latest version of the patcher from the server
+def get_latest_version() -> str:
+    """Gets the tag of the latest stable release from the GitHub API
 
     Returns:
-        A parsed string of the text file"""
-    version_url = f"{patcher_url}/gui-version.txt"
+        The latest tag from the GitHub API"""
+    api_url = "https://api.github.com/repos/WiiLink24/WiiLink-Patcher-GUI/releases/latest"
 
-    latest_version = download_file(version_url).rstrip()
-    latest_version_string = latest_version.decode()
+    api_response_raw = download_file(api_url)
+    api_response = json.loads(api_response_raw)
 
-    return latest_version_string
+    latest_version = api_response["tag_name"].replace("v", "")
+
+    return latest_version
 
 
 def download_translation(language: str):
