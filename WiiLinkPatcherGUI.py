@@ -21,7 +21,6 @@ import pathlib
 import shutil
 import subprocess
 import sys
-import tempfile
 import webbrowser
 import random
 import json
@@ -71,18 +70,7 @@ from setup.download import (
 from setup.patch import PatchingPage
 from setup.sd import AskSD, SelectSD, WADCleanup, FileCopying
 from modules.widgets import ClickableLabel
-
-patcher_url = "https://patcher.wiilink24.com"
-temp_dir = pathlib.Path(tempfile.gettempdir()).joinpath("WiiLinkPatcher")
-wiilink_dir = pathlib.Path().joinpath("WiiLink")
-file_path = pathlib.Path(__file__).parent
-patcher_version = "1.0 RC4"
-
-pride_flags = pathlib.Path(file_path).joinpath("assets", "pride_banners").iterdir()
-flags_list = list(pride_flags)
-
-patches_raw = open(pathlib.Path(file_path).joinpath("data", "patches.json"), "r").read()
-patches_json = json.loads(patches_raw)
+from modules.consts import temp_dir, file_path, wiilink_dir
 
 
 class IntroPage(QWizardPage):
@@ -328,14 +316,18 @@ class About(QWidget):
 
     def pride(self):
         global wizard
-        global pride_flags
-        global flags_list
 
         self.clicks += 1
 
         if self.clicks == 3:
+            pride_flags = (
+                pathlib.Path(file_path).joinpath("assets", "pride_banners").iterdir()
+            )
+            flags_list = list(pride_flags)
+
             print("making it gay :3")
             self.clicks = 0
+
             flag_index = random.randint(0, len(flags_list) - 1)
             selected_flag = flags_list[flag_index]
 
@@ -564,8 +556,16 @@ class WiiLinkPatcherGUI(QWizard):
 
         match datetime.datetime.now().month:
             case 6:
+                pride_flags = (
+                    pathlib.Path(file_path)
+                    .joinpath("assets", "pride_banners")
+                    .iterdir()
+                )
+                flags_list = list(pride_flags)
+
                 flag_index = random.randint(0, len(flags_list) - 1)
                 selected_flag = flags_list[flag_index]
+
                 background = QIcon(selected_flag.resolve().as_posix())
             case _:
                 background = QIcon(
@@ -594,6 +594,11 @@ class WiiLinkPatcherGUI(QWizard):
         # Override button text to remove chevrons
         self.setButtonText(QWizard.WizardButton.NextButton, self.tr("Next"))
         self.setButtonText(QWizard.WizardButton.BackButton, self.tr("Back"))
+
+        patches_raw = open(
+            pathlib.Path(file_path).joinpath("data", "patches.json"), "r"
+        ).read()
+        patches_json = json.loads(patches_raw)
 
         # Page setup
         self.setPage(0, IntroPage())

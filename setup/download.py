@@ -1,6 +1,5 @@
 import os
 import requests
-import tempfile
 import zipfile
 import libWiiPy
 import shutil
@@ -8,12 +7,7 @@ import json
 import pathlib
 
 from .enums import *
-
-patcher_url = "https://patcher.wiilink24.com"
-temp_dir = pathlib.Path().joinpath(tempfile.gettempdir(), "WiiLinkPatcher")
-wad_directory = pathlib.Path().joinpath("WiiLink", "WAD")
-
-osc_enabled = True
+from modules.consts import patcher_url, wad_directory, temp_dir
 
 
 # Using code from "commands/title/nus.py" from WiiPy by NinjaCheetah

@@ -2,7 +2,6 @@ import pathlib
 import sys
 
 import libWiiPy
-import tempfile
 import bsdiff4
 
 from PySide6.QtCore import QObject, Signal, QTimer, QThread, Qt
@@ -29,10 +28,7 @@ from .download import (
     download_spd,
 )
 from .newsRenderer import NewsRenderer
-
-patcher_url = "https://patcher.wiilink24.com"
-temp_dir = pathlib.Path().joinpath(tempfile.gettempdir(), "WiiLinkPatcher")
-wad_directory = pathlib.Path().joinpath("WiiLink", "WAD")
+from modules.consts import wad_directory, patcher_url
 
 
 def apply_bsdiff_patches(
