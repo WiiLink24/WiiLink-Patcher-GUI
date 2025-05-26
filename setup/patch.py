@@ -201,7 +201,7 @@ class PatchingPage(QWizardPage):
         font.setUnderline(True)
         self.toggle_console_label.setFont(font)
         self.toggle_console_label.setAlignment(Qt.AlignLeft)
-        self.toggle_console_label.setStyleSheet("color: #606060; cursor: pointer;")
+        self.toggle_console_label.setStyleSheet("color: #606060;")
 
         self.toggle_console_label.mousePressEvent = self.toggle_console
 
