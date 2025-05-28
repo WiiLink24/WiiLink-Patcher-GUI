@@ -79,8 +79,6 @@ class ConsoleOutput(QObject):
         if self.console:
             self.console.flush()
 
-        pass
-
     def _append_text(self, message):
         cursor = self.text_edit.textCursor()
         cursor.movePosition(QTextCursor.MoveOperation.End)

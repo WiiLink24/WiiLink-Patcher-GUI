@@ -2,7 +2,7 @@ import pathlib
 import tempfile
 
 patcher_url = "https://patcher.wiilink24.com"
-patcher_version = "1.0 RC4"
+patcher_version = "1.0"
 
 temp_dir = pathlib.Path().joinpath(tempfile.gettempdir(), "WiiLinkPatcher")
 file_path = pathlib.Path(__file__).parents[1]
