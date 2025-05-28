@@ -187,10 +187,6 @@ class PatchingPage(QWizardPage):
         self.console.setHidden(True)
         self.console.setObjectName("console")
 
-        # Redirect outputs to the console
-        sys.stdout = ConsoleOutput(self.console, sys.__stdout__)
-        sys.stderr = ConsoleOutput(self.console, sys.__stderr__)
-
         layout.addWidget(self.console)
 
         self.toggle_console_label = QLabel(self.tr("Show Details"))
@@ -218,6 +214,10 @@ class PatchingPage(QWizardPage):
 
     def initializePage(self):
         QTimer.singleShot(0, self.disable_back_button)
+
+        # Redirect outputs to the console
+        sys.stdout = ConsoleOutput(self.console, sys.__stdout__)
+        sys.stderr = ConsoleOutput(self.console, sys.__stderr__)
 
         # Setup variables
         self.logic_worker.setup_type = self.setup_type
@@ -249,6 +249,11 @@ class PatchingPage(QWizardPage):
 
     def logic_finished(self):
         self.patching_complete = True
+
+        # Remove output redirects
+        sys.stdout = sys.__stdout__
+        sys.stderr = sys.__stderr__
+
         self.completeChanged.emit()
         QTimer.singleShot(0, self.wizard().next)
 
