@@ -70,8 +70,9 @@ class ConsoleOutput(QObject):
         self.new_text.connect(self._append_text)
 
     def write(self, message):
-        self.console.write(message)
-        self.console.flush()
+        if self.console:
+            self.console.write(message)
+            self.console.flush()
         self.new_text.emit(message)
 
     def flush(self):
