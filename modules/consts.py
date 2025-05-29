@@ -9,4 +9,4 @@ file_path = pathlib.Path(__file__).parents[1]
 
 wiilink_dir = pathlib.Path().joinpath("WiiLink")
 
-wad_directory = wiilink_dir.joinpath("WiiLink", "WAD")
+wad_directory = wiilink_dir.joinpath("WAD")
