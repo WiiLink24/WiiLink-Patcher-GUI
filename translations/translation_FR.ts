@@ -6,42 +6,42 @@
     <message>
         <location filename="../WiiLinkPatcherGUI.py" line="185"/>
         <source>WiiLink Patcher - About</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">WiiLink Patcher - À propos</translation>
     </message>
     <message>
         <location filename="../WiiLinkPatcherGUI.py" line="216"/>
         <source>WiiLink Patcher</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">WiiLink Patcher</translation>
     </message>
     <message>
         <location filename="../WiiLinkPatcherGUI.py" line="221"/>
         <source>GUI - Version {patcher_version}</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">Interface Graphique - Version {patcher_version}</translation>
     </message>
     <message>
         <location filename="../WiiLinkPatcherGUI.py" line="230"/>
         <source>© 2020-{datetime.datetime.now().year} WiiLink Team. All rights reserved.</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">2020-{datetime.datetime.now().year} L'équipe WiiLink. Tous les drois réservé.</translation>
     </message>
     <message>
         <location filename="../WiiLinkPatcherGUI.py" line="245"/>
         <source>Visit WiiLink Website</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">Visiter le site de WiiLink</translation>
     </message>
     <message>
         <location filename="../WiiLinkPatcherGUI.py" line="252"/>
         <source>View Project on GitHub</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">Voir le projet sur GitHub</translation>
     </message>
     <message>
         <location filename="../WiiLinkPatcherGUI.py" line="270"/>
         <source>WiiLink Team</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">L'équipe WiiLink</translation>
     </message>
     <message>
         <location filename="../WiiLinkPatcherGUI.py" line="281"/>
         <source>&lt;a href=https://noahpistilli.ca style=&apos;color: #4a86e8; text-decoration: none;&apos;&gt;&lt;b&gt;Sketch&lt;/b&gt;&lt;/a&gt; - WiiLink Project Lead</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">&lt;a href=https://noahpistilli.ca style=&apos;color: #4a86e8; text-decoration: none;&apos;&gt;&lt;b&gt;Sketch&lt;/b&gt;&lt;/a&gt; - L'équipe maître de WiiLink</translation>
     </message>
     <message>
         <location filename="../WiiLinkPatcherGUI.py" line="286"/>
