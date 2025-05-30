@@ -6,67 +6,67 @@
     <message>
         <location filename="../WiiLinkPatcherGUI.py" line="185"/>
         <source>WiiLink Patcher - About</source>
-        <translation type="finished">WiiLink Patcher - À propos</translation>
+        <translation>WiiLink Patcher - À propos</translation>
     </message>
     <message>
         <location filename="../WiiLinkPatcherGUI.py" line="216"/>
         <source>WiiLink Patcher</source>
-        <translation type="finished">WiiLink Patcher</translation>
+        <translation>WiiLink Patcher</translation>
     </message>
     <message>
         <location filename="../WiiLinkPatcherGUI.py" line="221"/>
         <source>GUI - Version {patcher_version}</source>
-        <translation type="finished">Interface Graphique - Version {patcher_version}</translation>
+        <translation>Interface Graphique - Version {patcher_version}</translation>
     </message>
     <message>
         <location filename="../WiiLinkPatcherGUI.py" line="230"/>
         <source>© 2020-{datetime.datetime.now().year} WiiLink Team. All rights reserved.</source>
-        <translation type="finished">2020-{datetime.datetime.now().year} L'équipe WiiLink. Tous les drois réservé.</translation>
+        <translation>2020-{datetime.datetime.now().year} L&apos;équipe WiiLink. Tous les drois réservé.</translation>
     </message>
     <message>
         <location filename="../WiiLinkPatcherGUI.py" line="245"/>
         <source>Visit WiiLink Website</source>
-        <translation type="finished">Visiter le site de WiiLink</translation>
+        <translation>Visiter le site de WiiLink</translation>
     </message>
     <message>
         <location filename="../WiiLinkPatcherGUI.py" line="252"/>
         <source>View Project on GitHub</source>
-        <translation type="finished">Voir le projet sur GitHub</translation>
+        <translation>Voir le projet sur GitHub</translation>
     </message>
     <message>
         <location filename="../WiiLinkPatcherGUI.py" line="270"/>
         <source>WiiLink Team</source>
-        <translation type="finished">L'équipe WiiLink</translation>
+        <translation>L&apos;équipe WiiLink</translation>
     </message>
     <message>
         <location filename="../WiiLinkPatcherGUI.py" line="281"/>
         <source>&lt;a href=https://noahpistilli.ca style=&apos;color: #4a86e8; text-decoration: none;&apos;&gt;&lt;b&gt;Sketch&lt;/b&gt;&lt;/a&gt; - WiiLink Project Lead</source>
-        <translation type="finished">&lt;a href=https://noahpistilli.ca style=&apos;color: #4a86e8; text-decoration: none;&apos;&gt;&lt;b&gt;Sketch&lt;/b&gt;&lt;/a&gt; - L'équipe maître de WiiLink</translation>
+        <translation>&lt;a href=https://noahpistilli.ca style=&apos;color: #4a86e8; text-decoration: none;&apos;&gt;&lt;b&gt;Sketch&lt;/b&gt;&lt;/a&gt; - L&apos;équipe maître de WiiLink</translation>
     </message>
     <message>
         <location filename="../WiiLinkPatcherGUI.py" line="286"/>
         <source>&lt;a href=https://islawalker.uk style=&apos;color: #4a86e8; text-decoration: none;&apos;&gt;&lt;b&gt;Isla&lt;/b&gt;&lt;/a&gt; - WiiLink Patcher GUI Developer</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../WiiLinkPatcherGUI.py" line="291"/>
         <source>&lt;a href=https://github.com/pabloscorner style=&apos;color: #4a86e8; text-decoration: none;&apos;&gt;&lt;b&gt;PablosCorner&lt;/b&gt;&lt;/a&gt; - WiiLink Patcher CLI Developer</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../WiiLinkPatcherGUI.py" line="296"/>
         <source>&lt;a href=https://github.com/humanoidear style=&apos;color: #4a86e8; text-decoration: none;&apos;&gt;&lt;b&gt;Alex&lt;/b&gt;&lt;/a&gt; - WiiLink Design Lead</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../WiiLinkPatcherGUI.py" line="301"/>
         <source>&lt;a href=https://ninjacheetah.dev style=&apos;color: #4a86e8; text-decoration: none;&apos;&gt;&lt;b&gt;NinjaCheetah&lt;/b&gt;&lt;/a&gt; - libWiiPy Developer</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../WiiLinkPatcherGUI.py" line="335"/>
         <source>GayLink Patcher</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -74,27 +74,29 @@
     <message>
         <location filename="../setup/sd.py" line="77"/>
         <source>File copying</source>
-        <translation type="unfinished"></translation>
+        <translation>Copie des fichiers</translation>
     </message>
     <message>
         <location filename="../setup/sd.py" line="82"/>
         <source>Decide if you&apos;d like the patcher to copy its files to an external storage device.</source>
-        <translation type="unfinished"></translation>
+        <translatorcomment>it is correct, i just assumed that user will always copy files to an SD Card</translatorcomment>
+        <translation>Décide si le patcher copy ses fichiers vers un volume externe.</translation>
     </message>
     <message>
         <location filename="../setup/sd.py" line="88"/>
         <source>Would you like the patcher to automatically copy its patched files to your SD card / USB drive?</source>
-        <translation type="unfinished"></translation>
+        <translatorcomment>it is correct, i just assumed that user will always copy files to an SD Card</translatorcomment>
+        <translation>Voulez-vous que le WiiLink Patcher copie ses fichiers vers votre Carte SD ?</translation>
     </message>
     <message>
         <location filename="../setup/sd.py" line="91"/>
         <source>Yes</source>
-        <translation type="unfinished"></translation>
+        <translation>Oui</translation>
     </message>
     <message>
         <location filename="../setup/sd.py" line="92"/>
         <source>No</source>
-        <translation type="unfinished"></translation>
+        <translation>Non</translation>
     </message>
 </context>
 <context>
@@ -102,22 +104,22 @@
     <message>
         <location filename="../setup/custom.py" line="183"/>
         <source>Step 3: Custom Setup</source>
-        <translation type="unfinished"></translation>
+        <translation>Étape 3 : Configuration Personalisée</translation>
     </message>
     <message>
         <location filename="../setup/custom.py" line="184"/>
         <source>Choose console platform</source>
-        <translation type="unfinished"></translation>
+        <translation>Choisir la platforme</translation>
     </message>
     <message>
         <location filename="../setup/custom.py" line="188"/>
         <source>Which platform will you be installing WiiLink onto?</source>
-        <translation type="unfinished"></translation>
+        <translation>Sur quelle platforme allez vous installer WiiLink ?</translation>
     </message>
     <message>
         <location filename="../setup/custom.py" line="194"/>
         <source>Dolphin Emulator</source>
-        <translation type="unfinished"></translation>
+        <translation>Émulateur Dolphin</translation>
     </message>
 </context>
 <context>
@@ -125,32 +127,32 @@
     <message>
         <location filename="../setup/custom.py" line="230"/>
         <source>Step 4: Custom Setup</source>
-        <translation type="unfinished"></translation>
+        <translation>Étape 4 : Configuration Personalisée</translation>
     </message>
     <message>
         <location filename="../setup/custom.py" line="231"/>
         <source>Choose console region</source>
-        <translation type="unfinished"></translation>
+        <translation>Choisir la region de la console</translation>
     </message>
     <message>
         <location filename="../setup/custom.py" line="233"/>
         <source>Which region is your console?</source>
-        <translation type="unfinished"></translation>
+        <translation>Dans quelle région est votre console ?</translation>
     </message>
     <message>
         <location filename="../setup/custom.py" line="237"/>
         <source>North America (NTSC-U)</source>
-        <translation type="unfinished"></translation>
+        <translation>Amérique du nord (NTSC-U)</translation>
     </message>
     <message>
         <location filename="../setup/custom.py" line="238"/>
         <source>Europe (PAL)</source>
-        <translation type="unfinished"></translation>
+        <translation>Europe (PAL)</translation>
     </message>
     <message>
         <location filename="../setup/custom.py" line="239"/>
         <source>Japan (NTSC-J)</source>
-        <translation type="unfinished"></translation>
+        <translation>Japon (NTSC-J)</translation>
     </message>
 </context>
 <context>
@@ -158,27 +160,27 @@
     <message>
         <location filename="../setup/custom.py" line="96"/>
         <source>Step 2: Custom Setup</source>
-        <translation type="unfinished"></translation>
+        <translation>Étape 2: Configuration Personalisée</translation>
     </message>
     <message>
         <location filename="../setup/custom.py" line="97"/>
         <source>Select the regional channels you want to install</source>
-        <translation type="unfinished"></translation>
+        <translation>Séléctionnez les chaînes régionaux que vous voulez installer</translation>
     </message>
     <message>
         <location filename="../setup/custom.py" line="101"/>
         <source>Select the channels you&apos;d like to install from the list below:</source>
-        <translation type="unfinished"></translation>
+        <translation>Séléctionez les chaînes régionaux que vous souhaitez installer depuis la liste si-dessous :</translation>
     </message>
     <message>
         <location filename="../setup/custom.py" line="144"/>
         <source>Russian notice for Wii Room</source>
-        <translation type="unfinished"></translation>
+        <translation>Note pour les utilisateurs Russe pour Wii Room</translation>
     </message>
     <message>
         <location filename="../setup/custom.py" line="147"/>
         <source>You have selected the Russian translation for Wii Room&lt;br&gt;Proper functionality is not guaranteed for systems without the Russian Wii Menu.&lt;br&gt;Follow the installation guide at &lt;a href=&apos;https://wii.zazios.ru/rus_menu&apos;&gt;https://wii.zazios.ru/rus_menu&lt;/a&gt; if you have not already done so.&lt;br&gt;(The guide is only available in Russian for now)</source>
-        <translation type="unfinished"></translation>
+        <translation>Vous avez séléctionner la traduction Russe pour Wii Room &lt;br&gt;Les fonctionnalités ne sont pas garanties pour les systèmes sans le Menu Wii Russe. &lt;br&gt; Suivez le guide d&apos;installation à &lt;a href=&apos;https://wii.zazios.ru/rus_menu&apos;&gt;https://wii.zazios.ru/rus_menu&lt;/a&gt; si vous ne l&apos;avez pas déjà fait..&lt;br&gt;(Le guide est pour le moment uniquement disponible en Russe.)</translation>
     </message>
 </context>
 <context>
@@ -186,17 +188,17 @@
     <message>
         <location filename="../setup/custom.py" line="31"/>
         <source>Step 1: Custom Setup</source>
-        <translation type="unfinished"></translation>
+        <translation>Étape 1 : Configuration Personnalisée</translation>
     </message>
     <message>
         <location filename="../setup/custom.py" line="34"/>
         <source>Select the WiiConnect24 channels you want to install</source>
-        <translation type="unfinished"></translation>
+        <translation>Séléctionnez les chaînes WiiConnect24 que vous souhaitez installer</translation>
     </message>
     <message>
         <location filename="../setup/custom.py" line="38"/>
         <source>Select the channels you&apos;d like to install from the list below:</source>
-        <translation type="unfinished"></translation>
+        <translation>Séléctionnez les chaînes que vous souhaitez installer depuis la liste si-contre:</translation>
     </message>
 </context>
 <context>
@@ -204,27 +206,28 @@
     <message>
         <location filename="../setup/express.py" line="252"/>
         <source>Step 2C: Express Setup</source>
-        <translation type="unfinished"></translation>
+        <translation>Étape 2C : Configuration Express</translation>
     </message>
     <message>
         <location filename="../setup/express.py" line="253"/>
         <source>Choose Food Channel version.</source>
-        <translation type="unfinished"></translation>
+        <translatorcomment>in french, food is &quot;Nourriture&quot; so idk how that will sound so i&apos;m just using the japanese name (Damae)</translatorcomment>
+        <translation>Choissisez la version de la Chaîne Damae (Food Channel).</translation>
     </message>
     <message>
         <location filename="../setup/express.py" line="259"/>
         <source>Which version of the &lt;b&gt;Food Channel&lt;/b&gt; would you like to install?</source>
-        <translation type="unfinished"></translation>
+        <translation>Quel version de la &lt;b&gt;Chaîne Damae (Food Channel)&lt;/b&gt; voulez vous installer ?</translation>
     </message>
     <message>
         <location filename="../setup/express.py" line="263"/>
         <source>Standard (Fake Ordering)</source>
-        <translation type="unfinished"></translation>
+        <translation>Standard (Fausses commandes)</translation>
     </message>
     <message>
         <location filename="../setup/express.py" line="264"/>
         <source>Domino&apos;s (US and Canada only)</source>
-        <translation type="unfinished"></translation>
+        <translation>Domino&apos;s (Amérique du Nord uniquement [États-Unis et Canada])</translation>
     </message>
 </context>
 <context>
@@ -232,22 +235,22 @@
     <message>
         <location filename="../setup/express.py" line="302"/>
         <source>Step 3: Express Setup</source>
-        <translation type="unfinished"></translation>
+        <translation>Étape 3 : Configuration Express</translation>
     </message>
     <message>
         <location filename="../setup/express.py" line="303"/>
         <source>Choose console platform.</source>
-        <translation type="unfinished"></translation>
+        <translation>Choissisez une platforme.</translation>
     </message>
     <message>
         <location filename="../setup/express.py" line="307"/>
         <source>Which platform will you be installing WiiLink onto?</source>
-        <translation type="unfinished"></translation>
+        <translation>Sur quelle platforme allez vous installer WiiLink ?</translation>
     </message>
     <message>
         <location filename="../setup/express.py" line="313"/>
         <source>Dolphin Emulator</source>
-        <translation type="unfinished"></translation>
+        <translation>Émulateur Dolphin</translation>
     </message>
 </context>
 <context>
