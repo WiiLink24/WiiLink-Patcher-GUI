@@ -10,4 +10,5 @@ files = [
     "./setup/patch.py",
     "./setup/sd.py",
     # Example language file: "./translations/translation_XX.ts"
+    "./translations/translation_FR.ts"
 ]
