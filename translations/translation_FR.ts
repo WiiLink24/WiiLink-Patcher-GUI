@@ -80,7 +80,7 @@
         <location filename="../setup/sd.py" line="82"/>
         <source>Decide if you&apos;d like the patcher to copy its files to an external storage device.</source>
         <translatorcomment>decides if the patcher copies its files to an external volume / partition</translatorcomment>
-        <translation>Décidez si le patcher copy ses fichiers vers un volume externe / partition externe.</translation>
+        <translation>Décidez si le patcher copy ses fichiers vers un volume externe.</translation>
     </message>
     <message>
         <location filename="../setup/sd.py" line="88"/>
