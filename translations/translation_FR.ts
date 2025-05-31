@@ -79,14 +79,14 @@
     <message>
         <location filename="../setup/sd.py" line="82"/>
         <source>Decide if you&apos;d like the patcher to copy its files to an external storage device.</source>
-        <translatorcomment>it is correct, i just assumed that user will always copy files to an SD Card</translatorcomment>
-        <translation>Décidez si le patcher copy ses fichiers vers un volume externe.</translation>
+        <translatorcomment>decides if the patcher copies its files to an external volume / partition</translatorcomment>
+        <translation>Décidez si le patcher copy ses fichiers vers un volume externe / partition externe.</translation>
     </message>
     <message>
         <location filename="../setup/sd.py" line="88"/>
         <source>Would you like the patcher to automatically copy its patched files to your SD card / USB drive?</source>
         <translatorcomment>it is correct, i just assumed that user will always copy files to an SD Card</translatorcomment>
-        <translation>Voulez-vous que le WiiLink Patcher copie ses fichiers vers votre Carte SD ?</translation>
+        <translation>Voulez-vous que le WiiLink Patcher copie ses fichiers vers votre Carte SD / Clé USB ?</translation>
     </message>
     <message>
         <location filename="../setup/sd.py" line="91"/>
@@ -227,7 +227,7 @@
     <message>
         <location filename="../setup/express.py" line="264"/>
         <source>Domino&apos;s (US and Canada only)</source>
-        <translation>Domino&apos;s (Amérique du Nord uniquement [États-Unis et Canada])</translation>
+        <translation>Domino&apos;s (États-Unis et Canada)</translation>
     </message>
 </context>
 <context>
