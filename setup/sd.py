@@ -43,31 +43,36 @@ def get_devices(removable_only=True):
 
 
 def check_removable(device: psutil._common.sdiskpart):
-    match sys.platform:
-        case "win32":
-            path = device.mountpoint
-            device_type = ctypes.windll.kernel32.GetDriveTypeW(ctypes.c_wchar_p(path))
-            return device_type == 2
-        case "darwin":
-            device_info = subprocess.check_output(
-                ["diskutil", "info", device.device], text=True
-            )
-            return "Removable Media: Yes" in device_info
-        case "linux":
-            import pyudev
+    try:
+        match sys.platform:
+            case "win32":
+                path = device.mountpoint
+                device_type = ctypes.windll.kernel32.GetDriveTypeW(
+                    ctypes.c_wchar_p(path)
+                )
+                return device_type == 2
+            case "darwin":
+                device_info = subprocess.check_output(
+                    ["diskutil", "info", device.device], text=True
+                )
+                return "Removable Media: Yes" in device_info
+            case "linux":
+                import pyudev
 
-            context = pyudev.Context()
+                context = pyudev.Context()
 
-            udev_partition = pyudev.Devices.from_device_file(context, device.device)
+                udev_partition = pyudev.Devices.from_device_file(context, device.device)
 
-            if udev_partition.device_type != "disk":
-                udev_device = udev_partition.find_parent("block", "disk")
-            else:
-                udev_device = udev_partition
+                if udev_partition.device_type != "disk":
+                    udev_device = udev_partition.find_parent("block", "disk")
+                else:
+                    udev_device = udev_partition
 
-            return udev_device.attributes.get("removable") == b"1"
-        case _:
-            return True
+                return udev_device.attributes.get("removable") == b"1"
+            case _:
+                return True
+    except:
+        return False
 
 
 class AskSD(QWizardPage):
