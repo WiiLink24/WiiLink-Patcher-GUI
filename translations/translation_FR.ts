@@ -21,7 +21,7 @@
     <message>
         <location filename="../WiiLinkPatcherGUI.py" line="230"/>
         <source>© 2020-{datetime.datetime.now().year} WiiLink Team. All rights reserved.</source>
-        <translation>2020-{datetime.datetime.now().year} L&apos;équipe WiiLink. Tous les drois réservé.</translation>
+        <translation>2020-{datetime.datetime.now().year} L&apos;équipe WiiLink. Tous les droits réservé.</translation>
     </message>
     <message>
         <location filename="../WiiLinkPatcherGUI.py" line="245"/>
@@ -66,7 +66,8 @@
     <message>
         <location filename="../WiiLinkPatcherGUI.py" line="335"/>
         <source>GayLink Patcher</source>
-        <translation></translation>
+        <translatorcomment>sorry it&apos;s me crashing out, you can delete that line heh</translatorcomment>
+        <translation>JE VEUX ME SUICIDER PTN J&apos;EN AI MARRE BORDEL DE MERDE</translation>
     </message>
 </context>
 <context>
@@ -80,7 +81,7 @@
         <location filename="../setup/sd.py" line="82"/>
         <source>Decide if you&apos;d like the patcher to copy its files to an external storage device.</source>
         <translatorcomment>it is correct, i just assumed that user will always copy files to an SD Card</translatorcomment>
-        <translation>Décide si le patcher copy ses fichiers vers un volume externe.</translation>
+        <translation>Décidez si le patcher copy ses fichiers vers un volume externe.</translation>
     </message>
     <message>
         <location filename="../setup/sd.py" line="88"/>
@@ -109,7 +110,7 @@
     <message>
         <location filename="../setup/custom.py" line="184"/>
         <source>Choose console platform</source>
-        <translation>Choisir la platforme</translation>
+        <translation>Choisissez la platforme</translation>
     </message>
     <message>
         <location filename="../setup/custom.py" line="188"/>
@@ -132,7 +133,7 @@
     <message>
         <location filename="../setup/custom.py" line="231"/>
         <source>Choose console region</source>
-        <translation>Choisir la region de la console</translation>
+        <translation>Choisissez la région de la console</translation>
     </message>
     <message>
         <location filename="../setup/custom.py" line="233"/>
@@ -165,7 +166,7 @@
     <message>
         <location filename="../setup/custom.py" line="97"/>
         <source>Select the regional channels you want to install</source>
-        <translation>Séléctionnez les chaînes régionaux que vous voulez installer</translation>
+        <translation>Séléctionez les chaînes régionaux que vous voulez installer</translation>
     </message>
     <message>
         <location filename="../setup/custom.py" line="101"/>
@@ -212,7 +213,7 @@
         <location filename="../setup/express.py" line="253"/>
         <source>Choose Food Channel version.</source>
         <translatorcomment>in french, food is &quot;Nourriture&quot; so idk how that will sound so i&apos;m just using the japanese name (Damae)</translatorcomment>
-        <translation>Choissisez la version de la Chaîne Damae (Food Channel).</translation>
+        <translation>Choisissez la version de la Chaîne Damae (Food Channel).</translation>
     </message>
     <message>
         <location filename="../setup/express.py" line="259"/>
@@ -240,7 +241,7 @@
     <message>
         <location filename="../setup/express.py" line="303"/>
         <source>Choose console platform.</source>
-        <translation>Choissisez une platforme.</translation>
+        <translation>Choisissez une platforme.</translation>
     </message>
     <message>
         <location filename="../setup/express.py" line="307"/>
@@ -258,32 +259,32 @@
     <message>
         <location filename="../setup/express.py" line="23"/>
         <source>Step 1: Express Setup</source>
-        <translation type="unfinished"></translation>
+        <translation>Étape 1 : Configuration Express</translation>
     </message>
     <message>
         <location filename="../setup/express.py" line="24"/>
         <source>Choose your region for WiiConnect24 services.</source>
-        <translation type="unfinished"></translation>
+        <translation>Choissez votre région pour utiliser les services de WiiConnect24.</translation>
     </message>
     <message>
         <location filename="../setup/express.py" line="30"/>
         <source>For the WiiConnect24 services, which region would you like to install?</source>
-        <translation type="unfinished"></translation>
+        <translation>Pour les services WiiConnect24, quelle région voulez-vous installer ?</translation>
     </message>
     <message>
         <location filename="../setup/express.py" line="34"/>
         <source>North America (NTSC-U)</source>
-        <translation type="unfinished"></translation>
+        <translation>Amérique du Nord (NTSC-U)</translation>
     </message>
     <message>
         <location filename="../setup/express.py" line="35"/>
         <source>Europe (PAL)</source>
-        <translation type="unfinished"></translation>
+        <translation>Europe (PAL)</translation>
     </message>
     <message>
         <location filename="../setup/express.py" line="36"/>
         <source>Japan (NTSC-J)</source>
-        <translation type="unfinished"></translation>
+        <translation>Japon (NTSC-J)</translation>
     </message>
 </context>
 <context>
@@ -291,27 +292,27 @@
     <message>
         <location filename="../setup/express.py" line="197"/>
         <source>Step 2B: Express Setup</source>
-        <translation type="unfinished"></translation>
+        <translation>Étape 2B : Configuration Express</translation>
     </message>
     <message>
         <location filename="../setup/express.py" line="198"/>
         <source>Choose the language for Wii Room.</source>
-        <translation type="unfinished"></translation>
+        <translation>Choisissez la langue pour Wii Room.</translation>
     </message>
     <message>
         <location filename="../setup/express.py" line="202"/>
         <source>What language would you like &lt;b&gt;Wii Room&lt;/b&gt; to be in?</source>
-        <translation type="unfinished"></translation>
+        <translation>Dans quelle langue voulez-vous que &lt;b&gt;Wii Room&lt;/b&gt; sois ?</translation>
     </message>
     <message>
         <location filename="../setup/express.py" line="242"/>
         <source>Russian notice for Wii Room</source>
-        <translation type="unfinished"></translation>
+        <translation>Note pour les utilisateurs Russe pour Wii Room</translation>
     </message>
     <message>
         <location filename="../setup/express.py" line="245"/>
         <source>You have selected the Russian translation for Wii Room&lt;br&gt;Proper functionality is not guaranteed for systems without the Russian Wii Menu.&lt;br&gt;Follow the installation guide at &lt;a href=&apos;https://wii.zazios.ru/rus_menu&apos;&gt;https://wii.zazios.ru/rus_menu&lt;/a&gt; if you have not already done so.&lt;br&gt;(The guide is only available in Russian for now)</source>
-        <translation type="unfinished"></translation>
+        <translation>Vous avez séléctionner la traduction Russe pour Wii Room &lt;br&gt;Les fonctionnalités ne sont pas garanties pour les systèmes sans le Menu Wii Russe. &lt;br&gt; Suivez le guide d&apos;installation à &lt;a href=&apos;https://wii.zazios.ru/rus_menu&apos;&gt;https://wii.zazios.ru/rus_menu&lt;/a&gt; si vous ne l&apos;avez pas déjà fait..&lt;br&gt;(Le guide est pour le moment uniquement disponible en Russe.)</translation>
     </message>
 </context>
 <context>
@@ -319,27 +320,27 @@
     <message>
         <location filename="../setup/express.py" line="129"/>
         <source>Step 2A: Express Setup</source>
-        <translation type="unfinished"></translation>
+        <translation>Étape 2A : Configuration Express</translation>
     </message>
     <message>
         <location filename="../setup/express.py" line="134"/>
         <source>Choose if you&apos;d like translations for WiiLink&apos;s regional channels.</source>
-        <translation type="unfinished"></translation>
+        <translation>Choisissez si vous voulez les traductions pour les chaînes régionaux de WiiLink.</translation>
     </message>
     <message>
         <location filename="../setup/express.py" line="140"/>
         <source>Would you like &lt;b&gt;Wii Room&lt;/b&gt;, &lt;b&gt;Photo Prints Channel&lt;/b&gt;, and the &lt;b&gt;Food Channel&lt;/b&gt; to be translated?</source>
-        <translation type="unfinished"></translation>
+        <translation>Voulez vous &lt;b&gt;Wii Room&lt;/b&gt;, &lt;b&gt;la Chaîne d&apos;Impressions de Photos (Photo Prints Channel)&lt;/b&gt;, et la &lt;b&gt;Chaîne Damae (Food Channel)&lt;/b&gt; être traduites ?</translation>
     </message>
     <message>
         <location filename="../setup/express.py" line="145"/>
         <source>Translated (eg. English, French, etc.)</source>
-        <translation type="unfinished"></translation>
+        <translation>Traduit (exemple: Anglais, Français, etc...)</translation>
     </message>
     <message>
         <location filename="../setup/express.py" line="146"/>
         <source>Japanese</source>
-        <translation type="unfinished"></translation>
+        <translation>Japonais</translation>
     </message>
 </context>
 <context>
@@ -347,12 +348,12 @@
     <message>
         <location filename="../setup/express.py" line="72"/>
         <source>Step 2: Express Setup</source>
-        <translation type="unfinished"></translation>
+        <translation>Étape 2 : Configuration Express</translation>
     </message>
     <message>
         <location filename="../setup/express.py" line="75"/>
         <source>Choose if you&apos;d like to install additional regional channels.</source>
-        <translation type="unfinished"></translation>
+        <translation>Choisissez si vous voulez les chaînes additionnelles régionaux.</translation>
     </message>
     <message>
         <location filename="../setup/express.py" line="88"/>
@@ -364,7 +365,12 @@ Services that would be installed:
 - Photo Prints Channel (Digicam Print Channel)
 - Food Channel (Demae Channel)
 - Kirby TV Channel</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Voulez vous installer les chaînes régionaux des services de WiiLink ?
+
+Services qui seraient installés :
+
+- Wii Room (Wii no Ma)
+- Chaîne d&apos;Impressions de Photos (Photo Prints Channel / Digicam Print Channel)</translation>
     </message>
     <message>
         <location filename="../setup/express.py" line="91"/>
