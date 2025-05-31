@@ -752,12 +752,15 @@ Exception:
 
             to_update = False
 
-            for place in range(len(latest_version_split)):
-                if latest_version_split[place] > patcher_version_split[place]:
-                    to_update = True
-                    break
-                elif latest_version_split[place] < patcher_version_split[place]:
-                    break
+            if len(latest_version_split) == len(patcher_version_split):
+                for place in range(len(latest_version_split)):
+                    if latest_version_split[place] > patcher_version_split[place]:
+                        to_update = True
+                        break
+                    elif latest_version_split[place] < patcher_version_split[place]:
+                        break
+            else:
+                to_update = True
 
             if to_update:
                 update = QMessageBox.question(
