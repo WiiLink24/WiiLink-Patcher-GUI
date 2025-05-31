@@ -681,12 +681,12 @@ PAS RECOMMANDÉ</translation>
     <message>
         <location filename="../WiiLinkPatcherGUI.py" line="342"/>
         <source>WiiLink folder detected!</source>
-        <translation type="unfinished"></translation>
+        <translation>Un dossier WiiLink a été détecté !</translation>
     </message>
     <message>
         <location filename="../WiiLinkPatcherGUI.py" line="347"/>
         <source>A directory called &apos;WiiLink&apos; has been found in the current directory.</source>
-        <translation type="unfinished"></translation>
+        <translation>Un dossier nommé &quot;WiiLink&quot; à été trouvé dans le dossier actuel.</translation>
     </message>
     <message>
         <location filename="../WiiLinkPatcherGUI.py" line="357"/>
@@ -695,24 +695,30 @@ The patcher uses the &apos;WiiLink&apos; directory to store its files, therefore
 directory causes a conflict.
 
 What would you like to do?</source>
-        <translation type="unfinished"></translation>
+        <translation>Le WiiLink Patcher à détecté un dossier nommé &quot;WiiLink&quot; dans votre dossier actuel.
+Le patcher utilise le dossier &quot;WiiLink&quot; pour sauvegarder ses fichiers, donc
+ceci cause un conflit.
+
+Que souhaitez vous faire ?</translation>
     </message>
     <message>
         <location filename="../WiiLinkPatcherGUI.py" line="364"/>
         <source>Rename the existing &apos;WiiLink&apos; directory to &apos;WiiLink.bak&apos;
 (Recommended)</source>
-        <translation type="unfinished"></translation>
+        <translation>Renommer le dossier &quot;WiiLink&quot; déjà existant à &quot;WiiLink.bak&quot;
+(Recommandé)</translation>
     </message>
     <message>
         <location filename="../WiiLinkPatcherGUI.py" line="365"/>
         <source>Delete the existing &apos;WiiLink&apos; directory</source>
-        <translation type="unfinished"></translation>
+        <translation>Supprimer le dossier &quot;WiiLink&quot; déjà existant</translation>
     </message>
     <message>
         <location filename="../WiiLinkPatcherGUI.py" line="368"/>
         <source>Leave the existing &apos;WiiLink&apos; directory as-is
 NOT RECOMMENDED</source>
-        <translation type="unfinished"></translation>
+        <translation>Laisser le dossier &quot;WiiLink&quot; déjà existant tel quel
+PAS RECOMMANDÉ</translation>
     </message>
 </context>
 <context>
@@ -720,17 +726,17 @@ NOT RECOMMENDED</source>
     <message>
         <location filename="../WiiLinkPatcherGUI.py" line="540"/>
         <source>WiiLink Patcher</source>
-        <translation type="unfinished"></translation>
+        <translation>WiiLink Patcher</translation>
     </message>
     <message>
         <location filename="../WiiLinkPatcherGUI.py" line="593"/>
         <source>Next</source>
-        <translation type="unfinished"></translation>
+        <translation>Suivant</translation>
     </message>
     <message>
         <location filename="../WiiLinkPatcherGUI.py" line="594"/>
         <source>Back</source>
-        <translation type="unfinished"></translation>
+        <translation>Arrière</translation>
     </message>
 </context>
 <context>
@@ -738,7 +744,7 @@ NOT RECOMMENDED</source>
     <message>
         <location filename="../setup/sd.py" line="137"/>
         <source>&lt;b&gt;Select your SD card / USB drive:&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Séléctionnez votre Carte SD / Clé USB :&lt;/b&gt;</translation>
     </message>
 </context>
 </TS>
