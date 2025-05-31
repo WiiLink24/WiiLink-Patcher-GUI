@@ -104,7 +104,8 @@ def patch_channel(channel: dict, network: str = None):
         print(f"Downloading {channel["name"]}:")
         output_wad = pathlib.Path().joinpath(wad_directory, f"{channel["name"]}.wad")
 
-    file_url = f"{patcher_url}/{channel["patch_folder"].lower()}"
+    if channel["patch_folder"]:
+        file_url = f"{patcher_url}/{channel["patch_folder"].lower()}"
 
     title = libWiiPy.title.Title()
 
