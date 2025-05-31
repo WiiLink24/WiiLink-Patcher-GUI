@@ -326,7 +326,16 @@ class PatchingWorker(QObject):
 
         percentage = 0
 
-        self.download_supporting_apps()
+        try:
+            self.download_supporting_apps()
+        except Exception as e:
+            print(
+                f"""An exception occured!
+Exception:
+{e}"""
+            )
+            self.error.emit(f"{e}")
+
         percentage += percentage_increment
         self.broadcast_percentage.emit(round(percentage))
 
