@@ -390,17 +390,17 @@ Services qui seraient installés :
     <message>
         <location filename="../setup/extras.py" line="28"/>
         <source>Step 1: Extras Setup</source>
-        <translation type="unfinished"></translation>
+        <translation>Étape 1 : Configuration Extra</translation>
     </message>
     <message>
         <location filename="../setup/extras.py" line="29"/>
         <source>Select the regional channels you want to install</source>
-        <translation type="unfinished"></translation>
+        <translation>Séléctionnez les chaînes régionnaux que vous souhaitez installer</translation>
     </message>
     <message>
         <location filename="../setup/extras.py" line="33"/>
         <source>Select the channels you&apos;d like to install from the list below:</source>
-        <translation type="unfinished"></translation>
+        <translation>Séléctionnz ls chaînes que vous souhaitez installer depuis la liste ci-dessous:</translation>
     </message>
 </context>
 <context>
@@ -408,22 +408,22 @@ Services qui seraient installés :
     <message>
         <location filename="../setup/extras.py" line="92"/>
         <source>Step 2: Extras Setup</source>
-        <translation type="unfinished"></translation>
+        <translation>Étape 2 : Configuration Extra</translation>
     </message>
     <message>
         <location filename="../setup/extras.py" line="93"/>
         <source>Choose console platform.</source>
-        <translation type="unfinished"></translation>
+        <translation>Choisissez une platforme.</translation>
     </message>
     <message>
         <location filename="../setup/extras.py" line="97"/>
         <source>Which platform will you be installing the channels onto?</source>
-        <translation type="unfinished"></translation>
+        <translation>Sur quelle platforme allez-vous installer les chaînes ?</translation>
     </message>
     <message>
         <location filename="../setup/extras.py" line="103"/>
         <source>Dolphin Emulator</source>
-        <translation type="unfinished"></translation>
+        <translation>Émulateur Dolphin</translation>
     </message>
 </context>
 <context>
