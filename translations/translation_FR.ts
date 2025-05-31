@@ -365,22 +365,24 @@ Services that would be installed:
 - Photo Prints Channel (Digicam Print Channel)
 - Food Channel (Demae Channel)
 - Kirby TV Channel</source>
-        <translation type="unfinished">Voulez vous installer les chaînes régionaux des services de WiiLink ?
+        <translation>Voulez vous installer les chaînes régionaux des services de WiiLink ?
 
 Services qui seraient installés :
 
 - Wii Room (Wii no Ma)
-- Chaîne d&apos;Impressions de Photos (Photo Prints Channel / Digicam Print Channel)</translation>
+- Chaîne d&apos;Impressions de Photos (Photo Prints Channel / Digicam Print Channel)
+- Chaîne Damae (Food Channel)
+- Chaîne TV Kirby</translation>
     </message>
     <message>
         <location filename="../setup/express.py" line="91"/>
         <source>Yes</source>
-        <translation type="unfinished"></translation>
+        <translation>Oui</translation>
     </message>
     <message>
         <location filename="../setup/express.py" line="92"/>
         <source>No</source>
-        <translation type="unfinished"></translation>
+        <translation>Non</translation>
     </message>
 </context>
 <context>
