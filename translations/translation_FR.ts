@@ -211,13 +211,13 @@
     <message>
         <location filename="../setup/express.py" line="253"/>
         <source>Choose Food Channel version.</source>
-        <translatorcomment>in french, food is &quot;Nourriture&quot; so idk how that will sound so i&apos;m just using the japanese name (Damae)</translatorcomment>
-        <translation>Choisissez la version de la Chaîne Damae (Food Channel).</translation>
+        <translatorcomment>in french, food is &quot;Nourriture&quot; so idk how that will sound so i&apos;m just using the japanese name (Demae)</translatorcomment>
+        <translation>Choisissez la version de la Chaîne Demae (Food Channel).</translation>
     </message>
     <message>
         <location filename="../setup/express.py" line="259"/>
         <source>Which version of the &lt;b&gt;Food Channel&lt;/b&gt; would you like to install?</source>
-        <translation>Quel version de la &lt;b&gt;Chaîne Damae (Food Channel)&lt;/b&gt; voulez vous installer ?</translation>
+        <translation>Quel version de la &lt;b&gt;Chaîne Demae (Food Channel)&lt;/b&gt; voulez vous installer ?</translation>
     </message>
     <message>
         <location filename="../setup/express.py" line="263"/>
@@ -329,7 +329,7 @@
     <message>
         <location filename="../setup/express.py" line="140"/>
         <source>Would you like &lt;b&gt;Wii Room&lt;/b&gt;, &lt;b&gt;Photo Prints Channel&lt;/b&gt;, and the &lt;b&gt;Food Channel&lt;/b&gt; to be translated?</source>
-        <translation>Voulez vous &lt;b&gt;Wii Room&lt;/b&gt;, &lt;b&gt;la Chaîne d&apos;Impressions de Photos (Photo Prints Channel)&lt;/b&gt;, et la &lt;b&gt;Chaîne Damae (Food Channel)&lt;/b&gt; être traduites ?</translation>
+        <translation>Voulez vous &lt;b&gt;Wii Room&lt;/b&gt;, &lt;b&gt;la Chaîne d&apos;Impressions de Photos (Photo Prints Channel)&lt;/b&gt;, et la &lt;b&gt;Chaîne Demae (Food Channel)&lt;/b&gt; être traduites ?</translation>
     </message>
     <message>
         <location filename="../setup/express.py" line="145"/>
@@ -370,7 +370,7 @@ Services qui seraient installés :
 
 - Wii Room (Wii no Ma)
 - Chaîne d&apos;Impressions de Photos (Photo Prints Channel / Digicam Print Channel)
-- Chaîne Damae (Food Channel)
+- Chaîne Demae (Food Channel)
 - Chaîne TV Kirby</translation>
     </message>
     <message>
