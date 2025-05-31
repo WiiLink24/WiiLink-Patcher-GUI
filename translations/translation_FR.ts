@@ -66,8 +66,7 @@
     <message>
         <location filename="../WiiLinkPatcherGUI.py" line="335"/>
         <source>GayLink Patcher</source>
-        <translatorcomment>sorry it&apos;s me crashing out, you can delete that line heh</translatorcomment>
-        <translation>JE VEUX ME SUICIDER PTN J&apos;EN AI MARRE BORDEL DE MERDE</translation>
+        <translation>GayLink Patcher</translation>
     </message>
 </context>
 <context>
@@ -431,32 +430,32 @@ Services qui seraient installés :
     <message>
         <location filename="../setup/extras.py" line="139"/>
         <source>Step 3: Extras Setup</source>
-        <translation type="unfinished"></translation>
+        <translation>Étape 3 : Configuration Extra</translation>
     </message>
     <message>
         <location filename="../setup/extras.py" line="140"/>
         <source>Choose console region.</source>
-        <translation type="unfinished"></translation>
+        <translation>Choisissez votre région de console.</translation>
     </message>
     <message>
         <location filename="../setup/extras.py" line="142"/>
         <source>Which region is your console?</source>
-        <translation type="unfinished"></translation>
+        <translation>Sur quelle région est votre console ?</translation>
     </message>
     <message>
         <location filename="../setup/extras.py" line="146"/>
         <source>North America (NTSC-U)</source>
-        <translation type="unfinished"></translation>
+        <translation>Amérique du Nord (NTSC-U)</translation>
     </message>
     <message>
         <location filename="../setup/extras.py" line="147"/>
         <source>Europe (PAL)</source>
-        <translation type="unfinished"></translation>
+        <translation>Europe (PAL)</translation>
     </message>
     <message>
         <location filename="../setup/extras.py" line="148"/>
         <source>Japan (NTSC-J)</source>
-        <translation type="unfinished"></translation>
+        <translation>Japon (NTSC-J)</translation>
     </message>
 </context>
 <context>
@@ -464,17 +463,17 @@ Services qui seraient installés :
     <message>
         <location filename="../setup/sd.py" line="297"/>
         <source>Copying in progress</source>
-        <translation type="unfinished"></translation>
+        <translation>Copie en cours</translation>
     </message>
     <message>
         <location filename="../setup/sd.py" line="298"/>
         <source>Please wait while the patcher copies its files...</source>
-        <translation type="unfinished"></translation>
+        <translation>S&apos;il vous plaît, veuillez patienter pendant que le WiiLink Patcher copie ses fichiers...</translation>
     </message>
     <message>
         <location filename="../setup/sd.py" line="300"/>
         <source>Copying files...</source>
-        <translation type="unfinished"></translation>
+        <translation>Copie des fichiers...</translation>
     </message>
 </context>
 <context>
@@ -482,12 +481,12 @@ Services qui seraient installés :
     <message>
         <location filename="../WiiLinkPatcherGUI.py" line="79"/>
         <source>Welcome to the WiiLink Patcher!</source>
-        <translation type="unfinished"></translation>
+        <translation>Bienvenue sur le WiiLink Patcher !</translation>
     </message>
     <message>
         <location filename="../WiiLinkPatcherGUI.py" line="84"/>
         <source>This tool will walk you through downloading the necessary files to install WiiLink.</source>
-        <translation type="unfinished"></translation>
+        <translation>Cet outil va vous rentrer dans le processus de télécharger les fichiers nécessaires pour installer WiiLink.</translation>
     </message>
     <message>
         <location filename="../WiiLinkPatcherGUI.py" line="94"/>
@@ -496,7 +495,10 @@ Services qui seraient installés :
 With this tool, you&apos;ll be able to get patched files to install WiiLink in no time!
 
 Press &apos;Next&apos; to get started!</source>
-        <translation type="unfinished"></translation>
+        <translation>Bienvenue au WiiLink Patcher !
+                            
+Avec cet outil, vous pouvez obtenir les fichiers patché pour installer WiiLink en un rien de temps !
+Appuyez sur &quot;Prochain&quot; pour commencer !</translation>
     </message>
 </context>
 <context>
@@ -504,35 +506,38 @@ Press &apos;Next&apos; to get started!</source>
     <message>
         <location filename="../WiiLinkPatcherGUI.py" line="110"/>
         <source>Choose what you&apos;d like to do!</source>
-        <translation type="unfinished"></translation>
+        <translation>Choisissez ce que vous souhaitez faire !</translation>
     </message>
     <message>
         <location filename="../WiiLinkPatcherGUI.py" line="113"/>
         <source>We recommend choosing &apos;Express Setup&apos; for first-time users.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nous recommendons de choisir la Configuration Express pour les utilisateurs débutants.</translation>
     </message>
     <message>
         <location filename="../WiiLinkPatcherGUI.py" line="120"/>
         <source>Express Setup (Recommended)
 The fastest way to get started with WiiLink</source>
-        <translation type="unfinished"></translation>
+        <translation>Configuration Express (Recommandé)
+La façon la plus rapide pour aller sur WiiLink</translation>
     </message>
     <message>
         <location filename="../WiiLinkPatcherGUI.py" line="123"/>
         <source>Custom Setup (Advanced)
 Customize your WiiLink installation</source>
-        <translation type="unfinished"></translation>
+        <translation>Configuration Customisée / Configuration Personalisée
+Customisez / Personalisez votre installation WiiLink</translation>
     </message>
     <message>
         <location filename="../WiiLinkPatcherGUI.py" line="128"/>
         <source>Extra Channels (Optional)
 Add additional channels to your Wii</source>
-        <translation type="unfinished"></translation>
+        <translation>Chaînes Extras (Optionnel)
+Ajoutez ds chaînes optionnels à votre Wii</translation>
     </message>
     <message>
         <location filename="../WiiLinkPatcherGUI.py" line="129"/>
         <source>About WiiLink Patcher</source>
-        <translation type="unfinished"></translation>
+        <translation>À propos du WiiLink Patcher</translation>
     </message>
 </context>
 <context>
@@ -540,32 +545,32 @@ Add additional channels to your Wii</source>
     <message>
         <location filename="../WiiLinkPatcherGUI.py" line="421"/>
         <source>Success!</source>
-        <translation type="unfinished"></translation>
+        <translation>Succès !</translation>
     </message>
     <message>
         <location filename="../WiiLinkPatcherGUI.py" line="422"/>
         <source>Everything has been patched successfully</source>
-        <translation type="unfinished"></translation>
+        <translation>Tout a été patché aveec succès</translation>
     </message>
     <message>
         <location filename="../WiiLinkPatcherGUI.py" line="456"/>
         <source>&lt;p&gt;You can find the relevant files by clicking the button below. Please open a support ticket on our &lt;a href=&apos;https://discord.gg/wiilink&apos; style=&apos;color: #4a86e8; text-decoration: none;&apos;&gt;Discord server&lt;/a&gt; if you have any issues.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Vous pouvez trouver les fichiers rélévants en cliquant sur le bouton ci-dessous. Veuillez ouvrir un ticket de support sur notre &lt;a href=&apos;https://discord.gg/wiilink&apos; style=&apos;color: #4a86e8; text-decoration: none;&apos;&gt;Serveur Discord&lt;/a&gt; si vous avez des problèmes.&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../WiiLinkPatcherGUI.py" line="466"/>
         <source>Open the &apos;WiiLink&apos; folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Ouvrir le dossier &quot;WiiLink&quot;</translation>
     </message>
     <message>
         <location filename="../WiiLinkPatcherGUI.py" line="487"/>
         <source>Open the WAD installation guide in your web browser</source>
-        <translation type="unfinished"></translation>
+        <translation>Ouvrir le guide d&apos;installation de WADs dans votre navigateur internet</translation>
     </message>
     <message>
         <location filename="../WiiLinkPatcherGUI.py" line="493"/>
         <source>Open the WiiLink installation guide in your web browser</source>
-        <translation type="unfinished"></translation>
+        <translation>Ouvrir le guide d&apos;installation de WiiLink ddans votre navigateur internet</translation>
     </message>
 </context>
 <context>
@@ -573,28 +578,28 @@ Add additional channels to your Wii</source>
     <message>
         <location filename="../setup/patch.py" line="170"/>
         <source>Patching in progress</source>
-        <translation type="unfinished"></translation>
+        <translation>Correction des WADs en cours</translation>
     </message>
     <message>
         <location filename="../setup/patch.py" line="171"/>
         <source>Please wait while the patcher works its magic!</source>
-        <translation type="unfinished"></translation>
+        <translation>Veuillez patienter pendant que le WiiLink Patcher fais travailler sa magique !</translation>
     </message>
     <message>
         <location filename="../setup/patch.py" line="173"/>
         <source>Downloading files...</source>
-        <translation type="unfinished"></translation>
+        <translation>Téléchargemet des fichiers...</translation>
     </message>
     <message>
         <location filename="../setup/patch.py" line="192"/>
         <location filename="../setup/patch.py" line="302"/>
         <source>Show Details</source>
-        <translation type="unfinished"></translation>
+        <translation>Montrer les détails</translation>
     </message>
     <message>
         <location filename="../setup/patch.py" line="304"/>
         <source>Hide Details</source>
-        <translation type="unfinished"></translation>
+        <translation>Cacher les détails</translation>
     </message>
 </context>
 <context>
@@ -602,12 +607,12 @@ Add additional channels to your Wii</source>
     <message>
         <location filename="../setup/patch.py" line="342"/>
         <source>Patching {channel_to_patch[</source>
-        <translation type="unfinished"></translation>
+        <translation>Correction de la Chaîne {channel_to_patch[</translation>
     </message>
     <message>
         <location filename="../setup/patch.py" line="346"/>
         <source>Downloading {channel_to_patch[</source>
-        <translation type="unfinished"></translation>
+        <translation>Téléchargement de la Chaîne {channel_to_patch[</translation>
     </message>
 </context>
 <context>
@@ -615,17 +620,17 @@ Add additional channels to your Wii</source>
     <message>
         <location filename="../setup/sd.py" line="132"/>
         <source>Copying files: Step 1</source>
-        <translation type="unfinished"></translation>
+        <translation>Copie des fichiers : Étape 1</translation>
     </message>
     <message>
         <location filename="../setup/sd.py" line="133"/>
         <source>Select your storage device.</source>
-        <translation type="unfinished"></translation>
+        <translation>Séléctionnez votre support de stockage.</translation>
     </message>
     <message>
         <location filename="../setup/sd.py" line="153"/>
         <source>Refresh</source>
-        <translation type="unfinished"></translation>
+        <translation>Rafraîchir</translation>
     </message>
 </context>
 <context>
@@ -633,12 +638,12 @@ Add additional channels to your Wii</source>
     <message>
         <location filename="../setup/sd.py" line="212"/>
         <source>Copying files: Step 1A</source>
-        <translation type="unfinished"></translation>
+        <translation>Copie des fichiers : Étape 1A</translation>
     </message>
     <message>
         <location filename="../setup/sd.py" line="213"/>
         <source>Choose what to do with existing WAD folder.</source>
-        <translation type="unfinished"></translation>
+        <translation>Choisir ce qu&apos;il faut faire avec le dossier WAD déjà existant.</translation>
     </message>
     <message>
         <location filename="../setup/sd.py" line="226"/>
@@ -646,24 +651,29 @@ Add additional channels to your Wii</source>
 The &apos;WAD&apos; directory is used to store channels you install on your Wii, therefore this directory causes a conflict.
 
 What would you like to do?</source>
-        <translation type="unfinished"></translation>
+        <translation>Le WiiLink Patcher à détecté un dossier nommé &quot;WAD&quot; sur votre support de stockage séléctionné.
+Le dossier &quot;WAD&quot; est utilisé pour mettre les chaînes que vous devez installer sur votre Wii, cela dis, ce dossier crée un conflit.
+
+Que souhaitez-vous faire ?</translation>
     </message>
     <message>
         <location filename="../setup/sd.py" line="234"/>
         <source>Rename the existing &apos;WAD&apos; directory to &apos;WAD.bak&apos;
 (Recommended)</source>
-        <translation type="unfinished"></translation>
+        <translation>Renommer le dossier&quot;WAD&quot; déjà existant à &quot;WAD.bak&quot;
+(Recommandé)</translation>
     </message>
     <message>
         <location filename="../setup/sd.py" line="235"/>
         <source>Delete the existing &apos;WAD&apos; directory</source>
-        <translation type="unfinished"></translation>
+        <translation>Supprimer le dossier &quot;WAD&quot; déjà existant</translation>
     </message>
     <message>
         <location filename="../setup/sd.py" line="238"/>
         <source>Leave the existing &apos;WAD&apos; directory as-is
 NOT RECOMMENDED</source>
-        <translation type="unfinished"></translation>
+        <translation>Laisser le dossier &quot;WAD&quot; tel quel
+PAS RECOMMANDÉ</translation>
     </message>
 </context>
 <context>
