@@ -537,6 +537,13 @@ class PatchingComplete(QWizardPage):
 class WiiLinkPatcherGUI(QWizard):
     def __init__(self, parent=None):
         super().__init__(parent)
+
+        # Check the internet connection, and perform internet-related tasks
+        self.check_connection()
+        if "Nightly" not in patcher_version and "RC" not in patcher_version:
+            self.check_for_updates()
+        self.translation_setup()
+
         self.setWindowTitle(self.tr("WiiLink Patcher"))
         self.setWizardStyle(QWizard.WizardStyle.ModernStyle)
         self.setSubTitleFormat(Qt.TextFormat.RichText)
@@ -629,12 +636,6 @@ class WiiLinkPatcherGUI(QWizard):
 
         self.setStartId(0)
 
-        # Check the internet connection, and perform internet-related tasks
-        self.check_connection()
-        if "Nightly" not in patcher_version and "RC" not in patcher_version:
-            self.check_for_updates()
-        self.translation_setup()
-
     def translation_setup(self):
         """Static method to download and load patcher translations for the user's language if they exist
 
@@ -673,9 +674,9 @@ class WiiLinkPatcherGUI(QWizard):
 
         path = QLibraryInfo.path(QLibraryInfo.LibraryPath.TranslationsPath)
         translator = QTranslator(app)
-
         if translator.load(QLocale.system(), "qtbase", "_", path):
             app.installTranslator(translator)
+
         translator = QTranslator(app)
         path = pathlib.Path().joinpath(file_path, "translations").resolve().as_posix()
         if translator.load(QLocale.system(), "translation", "_", path):
