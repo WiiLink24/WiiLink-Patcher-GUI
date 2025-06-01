@@ -349,11 +349,11 @@ Exception:
 
                 if channel_to_patch["patches"]:
                     self.broadcast_status.emit(
-                        self.tr(f"Patching {channel_to_patch["name"]}...")
+                        self.tr(f"Patching {channel_to_patch['name']}...")
                     )
                 else:
                     self.broadcast_status.emit(
-                        self.tr(f"Downloading {channel_to_patch["name"]}...")
+                        self.tr(f"Downloading {channel_to_patch['name']}...")
                     )
 
                 if channel_category["network"] != "OSC":

@@ -139,7 +139,7 @@ class SelectSD(QWizardPage):
 
         self.layout = QVBoxLayout()
 
-        self.label = QLabel(self.tr(self.tr("<b>Select your SD card / USB drive:</b>")))
+        self.label = QLabel(self.tr("<b>Select your SD card / USB drive:</b>"))
         self.layout.addWidget(self.label)
 
         self.layout.addSpacing(10)
