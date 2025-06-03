@@ -7,7 +7,13 @@ param(
 $buildProject = {
     Write-Host "Building WiiLink Patcher GUI..."
     pyside6-project build pyproject.toml
-    $argsArray = $additional_args -split " "
+
+    if ($additional_args) {
+        $argsArray = $additional_args -split " "
+    } else {
+        $argsArray = @()
+    }
+
     python -m nuitka --show-progress --assume-yes-for-downloads @argsArray WiiLinkPatcherGUI.py
 }
 
