@@ -1,18 +1,15 @@
 # Default option is to run build, like a Makefile
 param(
     [string]$Task = "build",
-    [string]$additional_args = ""
+    [string]$additional_args = "--standalone"
 )
 
 $buildProject = {
     Write-Host "Building WiiLink Patcher GUI..."
     pyside6-project build pyproject.toml
 
-    if ($additional_args) {
-        $argsArray = $additional_args -split " "
-    } else {
-        $argsArray = @()
-    }
+    $argsArray = $additional_args -split " "
+
 
     python -m nuitka --show-progress --assume-yes-for-downloads @argsArray WiiLinkPatcherGUI.py
 }
