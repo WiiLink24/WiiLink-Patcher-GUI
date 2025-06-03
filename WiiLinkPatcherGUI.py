@@ -537,19 +537,6 @@ class WiiLinkPatcherGUI(QWizard):
     def __init__(self, parent=None):
         super().__init__(parent)
 
-        # Check the internet connection, and perform internet-related tasks
-        self.check_connection()
-        if "Nightly" not in patcher_version and "RC" not in patcher_version:
-            self.check_for_updates()
-        self.translation_setup()
-
-        self.setWindowTitle(self.tr("WiiLink Patcher"))
-        self.setWizardStyle(QWizard.WizardStyle.ModernStyle)
-        self.setSubTitleFormat(Qt.TextFormat.RichText)
-
-        self.setFixedWidth(550)
-        self.setMaximumHeight(625)
-
         # Load in icon and banner images
         icon = QIcon(
             pathlib.Path()
@@ -594,6 +581,19 @@ class WiiLinkPatcherGUI(QWizard):
             pathlib.Path(file_path).joinpath("assets").resolve().as_posix(),
         )
         self.setStyleSheet(stylesheet)
+
+        # Check the internet connection, and perform internet-related tasks
+        self.check_connection()
+        if "Nightly" not in patcher_version and "RC" not in patcher_version:
+            self.check_for_updates()
+        self.translation_setup()
+
+        self.setWindowTitle(self.tr("WiiLink Patcher"))
+        self.setWizardStyle(QWizard.WizardStyle.ModernStyle)
+        self.setSubTitleFormat(Qt.TextFormat.RichText)
+
+        self.setFixedWidth(550)
+        self.setMaximumHeight(625)
 
         # Override button text to remove chevrons
         self.setButtonText(QWizard.WizardButton.NextButton, self.tr("Next"))
