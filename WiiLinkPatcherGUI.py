@@ -4,7 +4,6 @@
 #    nuitka-project: --macos-create-app-bundle
 #    nuitka-project: --macos-app-icon={MAIN_DIRECTORY}/assets/logo.webp
 # nuitka-project-if: {OS} == "Windows":
-#    nuitka-project: --onefile
 #    nuitka-project: --windows-icon-from-ico={MAIN_DIRECTORY}/assets/logo.webp
 #    nuitka-project: --windows-console-mode=disable
 # nuitka-project-if: {OS} in ("Linux", "FreeBSD", "OpenBSD"):

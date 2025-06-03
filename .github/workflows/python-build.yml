@@ -20,10 +20,10 @@ jobs:
       run: |
         sudo apt update && \
         sudo apt install -y ccache patchelf
-    - name: Set up Python 3.12
+    - name: Set up Python 3.13
       uses: actions/setup-python@v5
       with:
-        python-version: "3.12"
+        python-version: "3.13"
     - name: Install Dependencies
       run: |
         python -m pip install --upgrade pip
@@ -51,10 +51,10 @@ jobs:
       run: |
         sudo apt update && \
         sudo apt install -y ccache patchelf
-    - name: Set up Python 3.12
+    - name: Set up Python 3.13
       uses: actions/setup-python@v5
       with:
-        python-version: "3.12"
+        python-version: "3.13"
     - name: Install Dependencies
       run: |
         python -m pip install --upgrade pip
@@ -78,10 +78,10 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-      - name: Set up Python 3.12
+      - name: Set up Python 3.13
         uses: actions/setup-python@v5
         with:
-          python-version: "3.12"
+          python-version: "3.13"
       - name: Install Dependencies
         run: |
           python -m pip install --upgrade pip
@@ -105,10 +105,10 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-      - name: Set up Python 3.12
+      - name: Set up Python 3.13
         uses: actions/setup-python@v5
         with:
-          python-version: "3.12"
+          python-version: "3.13"
       - name: Install Dependencies
         run: |
           python -m pip install --upgrade pip
@@ -126,6 +126,30 @@ jobs:
           path: ~/WiiLinkPatcherGUI.tar
           name: WiiLinkPatcherGUI-macOS-arm64
 
+  build-windows-onefile-x64:
+
+    runs-on: windows-latest
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Enable Developer Command Prompt
+      uses: ilammy/msvc-dev-cmd@v1.13.0
+    - name: Set up Python 3.13
+      uses: actions/setup-python@v5
+      with:
+        python-version: "3.13"
+    - name: Install Dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+    - name: Build Package
+      run: .\Build.ps1 -additional_args "--onefile"
+    - name: Upload Onefile Package
+      uses: actions/upload-artifact@v4
+      with:
+        path: .\WiiLinkPatcherGUI.exe
+        name: WiiLinkPatcherGUI-Windows-onefile-x64
+
   build-windows-x64:
 
     runs-on: windows-latest
@@ -134,10 +158,10 @@ jobs:
     - uses: actions/checkout@v4
     - name: Enable Developer Command Prompt
       uses: ilammy/msvc-dev-cmd@v1.13.0
-    - name: Set up Python 3.12
+    - name: Set up Python 3.13
       uses: actions/setup-python@v5
       with:
-        python-version: "3.12"
+        python-version: "3.13"
     - name: Install Dependencies
       run: |
         python -m pip install --upgrade pip
@@ -149,8 +173,3 @@ jobs:
       with:
         path: .\WiiLinkPatcherGUI.dist
         name: WiiLinkPatcherGUI-Windows-x64
-    - name: Upload Onefile Package
-      uses: actions/upload-artifact@v4
-      with:
-        path: .\WiiLinkPatcherGUI.exe
-        name: WiiLinkPatcherGUI-Windows-onefile-x64
