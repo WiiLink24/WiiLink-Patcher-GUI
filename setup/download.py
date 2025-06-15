@@ -7,7 +7,7 @@ import json
 import pathlib
 
 from .enums import *
-from modules.consts import patcher_url, wad_directory, temp_dir
+from modules.consts import patcher_url, wad_directory, temp_dir, output_path
 
 
 # Using code from "commands/title/nus.py" from WiiPy by NinjaCheetah
@@ -120,7 +120,7 @@ def download_translation(language: str):
         None"""
     translation_url = f"{patcher_url}/qt-lang/translation_{language}.qm"
 
-    translation_dir = pathlib.Path().joinpath(__file__, "translations")
+    translation_dir = temp_dir.joinpath("translations")
     os.makedirs(translation_dir, exist_ok=True)
 
     download_file(translation_url, translation_dir)
@@ -184,7 +184,7 @@ class DownloadOSCApp:
             print(f"Downloading {app_name} skipped - OSC downloading is disabled!")
             return
 
-        app_path = pathlib.Path().joinpath("WiiLink", "apps", app_name)
+        app_path = output_path.joinpath("WiiLink", "apps", app_name)
 
         os.makedirs(app_path, exist_ok=True)
 
@@ -222,10 +222,9 @@ def download_agc(platform: Platforms):
         DownloadOSCApp("AnyGlobe_Changer")
     else:
         # Dolphin users need v1.0 of AnyGlobe Changer, as the latest OSC release doesn't work with Dolphin, for some reason.
-        app_path = pathlib.Path().joinpath(temp_dir, "AGC")
-        agc_dest = pathlib.Path().joinpath(app_path, "AGC.zip")
+        agc_dest = temp_dir.joinpath("AGC", "AGC.zip")
 
-        os.makedirs(app_path)
+        os.makedirs(agc_dest.parent, exist_ok=True)
 
         print("Downloading AnyGlobe Changer from GitHub:")
         print(" - Downloading release...")
@@ -236,10 +235,10 @@ def download_agc(platform: Platforms):
         print("   - Done!")
         print(" - Extracting release...")
         with zipfile.ZipFile(agc_dest, "r") as agc_zip:
-            agc_zip.extractall(pathlib.Path().joinpath("WiiLink"))
+            agc_zip.extractall(output_path.joinpath("WiiLink"))
         print("   - Done!")
 
-        shutil.rmtree(app_path)
+        shutil.rmtree(agc_dest.parent)
 
 
 def download_spd():

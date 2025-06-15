@@ -26,7 +26,7 @@ class ExtrasChannelSelection(QWizardPage):
 
         super().__init__(parent)
         self.setTitle(self.tr("Step 1: Extras Setup"))
-        self.setSubTitle(self.tr("Select the regional channels you want to install"))
+        self.setSubTitle(self.tr("Select the extra channels you want to install"))
 
         self.label = QLabel(
             self.tr("Select the channels you'd like to install from the list below:")

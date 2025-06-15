@@ -1,4 +1,3 @@
-import pathlib
 import sys
 
 import libWiiPy
@@ -93,16 +92,12 @@ def patch_channel(channel: dict, network: str = None):
     if channel["patches"]:
         print(f"Patching {channel["name"]}:")
         if network:
-            output_wad = pathlib.Path().joinpath(
-                wad_directory, f"{channel["name"]} ({network}).wad"
-            )
+            output_wad = wad_directory.joinpath(f"{channel["name"]} ({network}).wad")
         else:
-            output_wad = pathlib.Path().joinpath(
-                wad_directory, f"{channel["name"]}.wad"
-            )
+            output_wad = wad_directory.joinpath(f"{channel["name"]}.wad")
     else:
         print(f"Downloading {channel["name"]}:")
-        output_wad = pathlib.Path().joinpath(wad_directory, f"{channel["name"]}.wad")
+        output_wad = wad_directory.joinpath(f"{channel["name"]}.wad")
 
     if channel["patch_folder"]:
         file_url = f"{patcher_url}/{channel["patch_folder"].lower()}"
