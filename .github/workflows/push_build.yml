@@ -157,7 +157,6 @@ jobs:
         organization-id: 'bcf4928f-3b0a-4b3c-b4bf-a5211cd8ca53'
         project-slug: 'WiiLink-Patcher-GUI'
         signing-policy-slug: 'test-signing'
-        artifact-configuration-slug: 'onefile'
         github-artifact-id: '${{ steps.upload-unsigned-onefile-package.outputs.artifact-id }}'
         wait-for-completion: true
         output-artifact-directory: '.\signed-package'
@@ -198,7 +197,6 @@ jobs:
         organization-id: 'bcf4928f-3b0a-4b3c-b4bf-a5211cd8ca53'
         project-slug: 'WiiLink-Patcher-GUI'
         signing-policy-slug: 'test-signing'
-        artifact-configuration-slug: 'standalone'
         github-artifact-id: '${{ steps.upload-unsigned-standalone-package.outputs.artifact-id }}'
         wait-for-completion: true
         output-artifact-directory: '.\signed-package'
