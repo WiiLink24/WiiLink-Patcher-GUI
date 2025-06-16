@@ -20,10 +20,10 @@ jobs:
       run: |
         sudo apt update && \
         sudo apt install -y ccache patchelf
-    - name: Set up Python 3.13
+    - name: Set up Python 3.12
       uses: actions/setup-python@v5
       with:
-        python-version: "3.13"
+        python-version: "3.12"
     - name: Install Dependencies
       run: |
         python -m pip install --upgrade pip
@@ -51,10 +51,10 @@ jobs:
       run: |
         sudo apt update && \
         sudo apt install -y ccache patchelf
-    - name: Set up Python 3.13
+    - name: Set up Python 3.12
       uses: actions/setup-python@v5
       with:
-        python-version: "3.13"
+        python-version: "3.12"
     - name: Install Dependencies
       run: |
         python -m pip install --upgrade pip
@@ -78,10 +78,10 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-      - name: Set up Python 3.13
+      - name: Set up Python 3.12
         uses: actions/setup-python@v5
         with:
-          python-version: "3.13"
+          python-version: "3.12"
       - name: Install Dependencies
         run: |
           python -m pip install --upgrade pip
@@ -105,10 +105,10 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-      - name: Set up Python 3.13
+      - name: Set up Python 3.12
         uses: actions/setup-python@v5
         with:
-          python-version: "3.13"
+          python-version: "3.12"
       - name: Install Dependencies
         run: |
           python -m pip install --upgrade pip
@@ -134,21 +134,37 @@ jobs:
     - uses: actions/checkout@v4
     - name: Enable Developer Command Prompt
       uses: ilammy/msvc-dev-cmd@v1.13.0
-    - name: Set up Python 3.13
+    - name: Set up Python 3.12
       uses: actions/setup-python@v5
       with:
-        python-version: "3.13"
+        python-version: "3.12"
     - name: Install Dependencies
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
     - name: Build Package
       run: .\Build.ps1 -additional_args "--onefile"
-    - name: Upload Onefile Package
+    - name: Upload unsigned Onefile Package
+      id: upload-unsigned-onefile-package
       uses: actions/upload-artifact@v4
       with:
         path: .\WiiLinkPatcherGUI.exe
         name: WiiLinkPatcherGUI-Windows-onefile-x64
+    - name: Sign Onefile Package
+      uses: signpath/github-action-submit-signing-request@v1.1
+      with:
+        api-token: '${{ secrets.SIGNPATH_API_TOKEN }}'
+        organization-id: 'bcf4928f-3b0a-4b3c-b4bf-a5211cd8ca53'
+        project-slug: 'WiiLink-Patcher-GUI'
+        signing-policy-slug: 'onefile'
+        github-artifact-id: '${{ steps.upload-unsigned-onefile-package.artifact-id }}'
+        wait-for-completion: true
+        output-artifact-directory: '.\signed-package'
+    - name: Upload signed Onefile Package
+      uses: actions/upload-artifact@v4
+      with:
+        path: .\signed-package\WiiLinkPatcherGUI.exe
+        name: WiiLinkPatcherGUI-Windows-onefile-x64-signed
 
   build-windows-x64:
 
@@ -158,18 +174,34 @@ jobs:
     - uses: actions/checkout@v4
     - name: Enable Developer Command Prompt
       uses: ilammy/msvc-dev-cmd@v1.13.0
-    - name: Set up Python 3.13
+    - name: Set up Python 3.12
       uses: actions/setup-python@v5
       with:
-        python-version: "3.13"
+        python-version: "3.12"
     - name: Install Dependencies
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
     - name: Build Package
       run: .\Build.ps1
-    - name: Upload Package
+    - name: Upload unsigned Standalone Package
+      id: upload-unsigned-standalone-package
       uses: actions/upload-artifact@v4
       with:
         path: .\WiiLinkPatcherGUI.dist
         name: WiiLinkPatcherGUI-Windows-x64
+    - name: Sign Standalone Package
+      uses: signpath/github-action-submit-signing-request@v1.1
+      with:
+        api-token: '${{ secrets.SIGNPATH_API_TOKEN }}'
+        organization-id: 'bcf4928f-3b0a-4b3c-b4bf-a5211cd8ca53'
+        project-slug: 'WiiLink-Patcher-GUI'
+        signing-policy-slug: 'standalone'
+        github-artifact-id: '${{ steps.upload-unsigned-standalone-package.artifact-id }}'
+        wait-for-completion: true
+        output-artifact-directory: '.\signed-package'
+    - name: Upload signed Standalone Package
+      uses: actions/upload-artifact@v4
+      with:
+        path: .\signed-package
+        name: WiiLinkPatcherGUI-Windows-x64-signed
