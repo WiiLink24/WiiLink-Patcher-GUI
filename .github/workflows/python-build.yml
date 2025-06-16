@@ -1,5 +1,5 @@
-# This workflow will install Python dependencies and then build the patcher for all platforms
-# Taken with permission from ".github/workflows/python-build.yml" in https://github.com/NinjaCheetah/NUSGet by NinjaCheetah
+# Using code with permission from ".github/workflows/python-build.yml" from NUSGet by NinjaCheetah
+# https://github.com/NinjaCheetah/NUSGet
 
 name: Build Patcher
 

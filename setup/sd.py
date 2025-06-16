@@ -21,6 +21,7 @@ from PySide6.QtWidgets import (
 )
 from PySide6.QtCore import QTimer, QThread, QObject, Signal
 
+from modules.consts import wad_directory, apps_directory
 from .newsRenderer import NewsRenderer
 
 sd_path = ""
@@ -189,8 +190,8 @@ class SelectSD(QWizardPage):
         selected_device = self.combo.currentData()
 
         if (
-            pathlib.Path().joinpath("WiiLink", "WAD").exists()
-            and pathlib.Path().joinpath("WiiLink", "WAD").is_dir()
+            wad_directory.exists()
+            and wad_directory.is_dir()
         ):
             # Find existing WAD folder, regardless of case
             for folder in os.listdir(selected_device):
@@ -379,20 +380,20 @@ class CopyFiles(QObject):
 
         try:
             if (
-                pathlib.Path().joinpath("WiiLink", "apps").exists()
-                and pathlib.Path().joinpath("WiiLink", "apps").is_dir()
+                apps_directory.exists()
+                and apps_directory.is_dir()
             ):
                 shutil.copytree(
-                    pathlib.Path().joinpath("WiiLink", "apps"),
+                    apps_directory,
                     pathlib.Path().joinpath(sd_path, sd_apps_path),
                     dirs_exist_ok=True,
                 )
             if (
-                pathlib.Path().joinpath("WiiLink", "WAD").exists()
-                and pathlib.Path().joinpath("WiiLink", "WAD").is_dir()
+                wad_directory.exists()
+                and wad_directory.is_dir()
             ):
                 shutil.copytree(
-                    pathlib.Path().joinpath("WiiLink", "WAD"),
+                    wad_directory,
                     pathlib.Path().joinpath(sd_path, sd_wad_path),
                     dirs_exist_ok=True,
                 )

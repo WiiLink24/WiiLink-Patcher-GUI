@@ -10,6 +10,7 @@ from PySide6.QtWidgets import (
 
 from .patch import PatchingPage
 from .enums import *
+from modules.consts import wiilink_dir
 
 regional_channels = False
 regional_lang = Languages.Japan
@@ -241,7 +242,10 @@ class ExpressRegionalChannelLanguage(QWizardPage):
             self,
             self.tr("Russian notice for Wii Room"),
             self.tr(
-                "You have selected the Russian translation for Wii Room<br>Proper functionality is not guaranteed for systems without the Russian Wii Menu.<br>Follow the installation guide at <a href='https://wii.zazios.ru/rus_menu'>https://wii.zazios.ru/rus_menu</a> if you have not already done so.<br>(The guide is only available in Russian for now)"
+                """You have selected the Russian translation for Wii Room<br>
+Proper functionality is not guaranteed for systems without the Russian Wii Menu.<br>
+Follow the installation guide at <a href='https://wii.zazios.ru/rus_menu'>https://wii.zazios.ru/rus_menu</a> if you have not already done so.<br>
+(The guide is only available in Russian for now)"""
             ),
         )
 
@@ -380,7 +384,7 @@ class ExpressPlatformConfiguration(QWizardPage):
         return True
 
     def nextId(self):
-        if pathlib.Path().joinpath("WiiLink").exists():
+        if wiilink_dir.exists():
             return 10
 
         return 11

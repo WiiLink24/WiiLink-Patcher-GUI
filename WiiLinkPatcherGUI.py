@@ -69,7 +69,7 @@ from setup.download import (
 from setup.patch import PatchingPage
 from setup.sd import AskSD, SelectSD, WADCleanup, FileCopying
 from modules.widgets import ClickableLabel
-from modules.consts import temp_dir, file_path, wiilink_dir, patcher_version
+from modules.consts import temp_dir, file_path, wiilink_dir, patcher_version, output_path
 
 
 class IntroPage(QWizardPage):
@@ -341,19 +341,20 @@ class WiiLinkFolderDetected(QWizardPage):
         self.setTitle(self.tr("WiiLink folder detected!"))
         self.setSubTitle(
             self.tr(
-                "A directory called 'WiiLink' has been found in the current directory."
+                "A directory called 'WiiLink' has been found in the 'Downloads' directory."
             )
         )
 
         self.label = QLabel(
             self.tr(
-                """The patcher has detected a directory called 'WiiLink' in your current directory.
-The patcher uses the 'WiiLink' directory to store its files, therefore this
-directory causes a conflict.
+                """The patcher has detected a directory called 'WiiLink' in your 'Downloads' directory.
+The patcher uses the 'WiiLink' directory to store its files, therefore this directory causes a conflict.
 
 What would you like to do?"""
             )
         )
+
+        self.label.setWordWrap(True)
 
         self.options = {
             "rename": QRadioButton(
@@ -386,19 +387,19 @@ What would you like to do?"""
     def validatePage(self):
         if self.options["rename"].isChecked():
             try:
-                os.rename("WiiLink", "WiiLink.bak")
+                os.rename(wiilink_dir, output_path.joinpath("WiiLink.bak"))
             except (OSError, FileExistsError):
                 i = 1
                 while True:
                     try:
-                        os.rename("WiiLink", f"WiiLink.bak ({i})")
+                        os.rename(wiilink_dir, output_path.joinpath(f"WiiLink.bak ({i})"))
                     except (OSError, FileExistsError):
                         i += 1
                         continue
                     else:
                         break
         elif self.options["delete"].isChecked():
-            shutil.rmtree("WiiLink")
+            shutil.rmtree(wiilink_dir)
         return True
 
     def isComplete(self):
@@ -450,7 +451,8 @@ class PatchingComplete(QWizardPage):
         # Message with file path
         self.message = QLabel(
             self.tr(
-                f"<p>You can find the relevant files by clicking the button below. Please open a support ticket on our <a href='https://discord.gg/wiilink' style='color: #4a86e8; text-decoration: none;'>Discord server</a> if you have any issues.</p>"
+                f"""<p>You can find the relevant files by clicking the button below.
+Please open a support ticket on our <a href='https://discord.gg/wiilink' style='color: #4a86e8; text-decoration: none;'>Discord server</a> if you have any issues.</p>"""
             )
         )
         self.message.setStyleSheet(

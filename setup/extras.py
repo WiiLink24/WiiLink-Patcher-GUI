@@ -13,6 +13,7 @@ from PySide6.QtWidgets import (
 from .enums import *
 from .patch import PatchingPage
 from modules.widgets import CollapsibleBox
+from modules.consts import wiilink_dir
 
 
 class ExtrasChannelSelection(QWizardPage):
@@ -178,7 +179,7 @@ class ExtrasRegionConfiguration(QWizardPage):
         return False
 
     def nextId(self):
-        if pathlib.Path().joinpath("WiiLink").exists():
+        if wiilink_dir.exists():
             return 10
 
         return 11

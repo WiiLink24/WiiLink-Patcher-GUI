@@ -7,10 +7,10 @@ import json
 import pathlib
 
 from .enums import *
-from modules.consts import patcher_url, wad_directory, temp_dir, output_path
+from modules.consts import patcher_url, wad_directory, temp_dir, wiilink_dir
 
 
-# Using code from "commands/title/nus.py" from WiiPy by NinjaCheetah
+# Using code with permission from "commands/title/nus.py" from WiiPy by NinjaCheetah
 # https://github.com/NinjaCheetah/WiiPy
 
 
@@ -184,7 +184,7 @@ class DownloadOSCApp:
             print(f"Downloading {app_name} skipped - OSC downloading is disabled!")
             return
 
-        app_path = output_path.joinpath("WiiLink", "apps", app_name)
+        app_path = wiilink_dir.joinpath("apps", app_name)
 
         os.makedirs(app_path, exist_ok=True)
 
@@ -235,7 +235,7 @@ def download_agc(platform: Platforms):
         print("   - Done!")
         print(" - Extracting release...")
         with zipfile.ZipFile(agc_dest, "r") as agc_zip:
-            agc_zip.extractall(output_path.joinpath("WiiLink"))
+            agc_zip.extractall(wiilink_dir)
         print("   - Done!")
 
         shutil.rmtree(agc_dest.parent)

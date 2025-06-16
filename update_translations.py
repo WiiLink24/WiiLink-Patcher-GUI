@@ -1,5 +1,6 @@
-# "update_translations.py", licensed under the MPL 2.0 license
-# Adapted with permission from "update_translations.py" in https://github.com/NinjaCheetah/NUSGet by NinjaCheetah
+# Using code with permission from "update_translations.py" from NUSGet by NinjaCheetah
+# https://github.com/NinjaCheetah/NUSGet
+
 # This script exists to work around an issue in PySide6 where the "pyside6-project lupdate" command doesn't work as
 # expected, as it struggles to parse the paths in the .pyproject file. This does what it's meant to do for it.
 
