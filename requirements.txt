@@ -1,7 +1,7 @@
 libWiiPy
 PySide6
 tomlkit
-nuitka~=2.6.0
+nuitka
 bsdiff4
 imageio
 requests
