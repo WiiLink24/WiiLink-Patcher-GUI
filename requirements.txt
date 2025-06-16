@@ -4,7 +4,7 @@ tomlkit
 nuitka
 bsdiff4
 imageio
-requests==2.32.3
+requests==2.32.4
 psutil
 black
 pyudev
