@@ -158,7 +158,7 @@ jobs:
         project-slug: 'WiiLink-Patcher-GUI'
         signing-policy-slug: 'test-signing'
         artifact-configuration-slug: 'onefile'
-        github-artifact-id: '${{ steps.upload-unsigned-onefile-package.artifact-id }}'
+        github-artifact-id: '${{ steps.upload-unsigned-onefile-package.outputs.artifact-id }}'
         wait-for-completion: true
         output-artifact-directory: '.\signed-package'
     - name: Upload signed Onefile Package
@@ -199,7 +199,7 @@ jobs:
         project-slug: 'WiiLink-Patcher-GUI'
         signing-policy-slug: 'test-signing'
         artifact-configuration-slug: 'standalone'
-        github-artifact-id: '${{ steps.upload-unsigned-standalone-package.artifact-id }}'
+        github-artifact-id: '${{ steps.upload-unsigned-standalone-package.outputs.artifact-id }}'
         wait-for-completion: true
         output-artifact-directory: '.\signed-package'
     - name: Upload signed Standalone Package
