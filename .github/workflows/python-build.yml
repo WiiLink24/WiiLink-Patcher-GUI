@@ -156,7 +156,8 @@ jobs:
         api-token: '${{ secrets.SIGNPATH_API_TOKEN }}'
         organization-id: 'bcf4928f-3b0a-4b3c-b4bf-a5211cd8ca53'
         project-slug: 'WiiLink-Patcher-GUI'
-        signing-policy-slug: 'onefile'
+        signing-policy-slug: 'test-signing'
+        artifact-configuration-slug: 'onefile'
         github-artifact-id: '${{ steps.upload-unsigned-onefile-package.artifact-id }}'
         wait-for-completion: true
         output-artifact-directory: '.\signed-package'
@@ -196,7 +197,8 @@ jobs:
         api-token: '${{ secrets.SIGNPATH_API_TOKEN }}'
         organization-id: 'bcf4928f-3b0a-4b3c-b4bf-a5211cd8ca53'
         project-slug: 'WiiLink-Patcher-GUI'
-        signing-policy-slug: 'standalone'
+        signing-policy-slug: 'test-signing'
+        artifact-configuration-slug: 'standalone'
         github-artifact-id: '${{ steps.upload-unsigned-standalone-package.artifact-id }}'
         wait-for-completion: true
         output-artifact-directory: '.\signed-package'
