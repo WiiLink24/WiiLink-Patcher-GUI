@@ -189,10 +189,7 @@ class SelectSD(QWizardPage):
         global sd_wad_path
         selected_device = self.combo.currentData()
 
-        if (
-            wad_directory.exists()
-            and wad_directory.is_dir()
-        ):
+        if wad_directory.exists() and wad_directory.is_dir():
             # Find existing WAD folder, regardless of case
             for folder in os.listdir(selected_device):
                 if (
@@ -379,19 +376,13 @@ class CopyFiles(QObject):
                 sd_apps_path = folder
 
         try:
-            if (
-                apps_directory.exists()
-                and apps_directory.is_dir()
-            ):
+            if apps_directory.exists() and apps_directory.is_dir():
                 shutil.copytree(
                     apps_directory,
                     pathlib.Path().joinpath(sd_path, sd_apps_path),
                     dirs_exist_ok=True,
                 )
-            if (
-                wad_directory.exists()
-                and wad_directory.is_dir()
-            ):
+            if wad_directory.exists() and wad_directory.is_dir():
                 shutil.copytree(
                     wad_directory,
                     pathlib.Path().joinpath(sd_path, sd_wad_path),

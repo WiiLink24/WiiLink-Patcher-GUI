@@ -69,7 +69,13 @@ from setup.download import (
 from setup.patch import PatchingPage
 from setup.sd import AskSD, SelectSD, WADCleanup, FileCopying
 from modules.widgets import ClickableLabel
-from modules.consts import temp_dir, file_path, wiilink_dir, patcher_version, output_path
+from modules.consts import (
+    temp_dir,
+    file_path,
+    wiilink_dir,
+    patcher_version,
+    output_path,
+)
 
 
 class IntroPage(QWizardPage):
@@ -392,7 +398,9 @@ What would you like to do?"""
                 i = 1
                 while True:
                     try:
-                        os.rename(wiilink_dir, output_path.joinpath(f"WiiLink.bak ({i})"))
+                        os.rename(
+                            wiilink_dir, output_path.joinpath(f"WiiLink.bak ({i})")
+                        )
                     except (OSError, FileExistsError):
                         i += 1
                         continue
