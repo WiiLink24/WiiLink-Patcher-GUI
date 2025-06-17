@@ -144,27 +144,11 @@ jobs:
         pip install -r requirements.txt
     - name: Build Package
       run: .\Build.ps1 -additional_args "--onefile"
-    - name: Upload unsigned Onefile Package
-      id: upload-unsigned-onefile-package
+    - name: Upload Onefile Package
       uses: actions/upload-artifact@v4
       with:
         path: .\WiiLinkPatcherGUI.exe
         name: WiiLinkPatcherGUI-Windows-onefile-x64
-    - name: Sign Onefile Package
-      uses: signpath/github-action-submit-signing-request@v1.1
-      with:
-        api-token: '${{ secrets.SIGNPATH_API_TOKEN }}'
-        organization-id: 'bcf4928f-3b0a-4b3c-b4bf-a5211cd8ca53'
-        project-slug: 'WiiLink-Patcher-GUI'
-        signing-policy-slug: 'test-signing'
-        github-artifact-id: '${{ steps.upload-unsigned-onefile-package.outputs.artifact-id }}'
-        wait-for-completion: true
-        output-artifact-directory: '.\signed-package'
-    - name: Upload signed Onefile Package
-      uses: actions/upload-artifact@v4
-      with:
-        path: .\signed-package\WiiLinkPatcherGUI.exe
-        name: WiiLinkPatcherGUI-Windows-onefile-x64-signed
 
   build-windows-x64:
 
@@ -184,24 +168,8 @@ jobs:
         pip install -r requirements.txt
     - name: Build Package
       run: .\Build.ps1
-    - name: Upload unsigned Standalone Package
-      id: upload-unsigned-standalone-package
+    - name: Upload Standalone Package
       uses: actions/upload-artifact@v4
       with:
         path: .\WiiLinkPatcherGUI.dist
         name: WiiLinkPatcherGUI-Windows-x64
-    - name: Sign Standalone Package
-      uses: signpath/github-action-submit-signing-request@v1.1
-      with:
-        api-token: '${{ secrets.SIGNPATH_API_TOKEN }}'
-        organization-id: 'bcf4928f-3b0a-4b3c-b4bf-a5211cd8ca53'
-        project-slug: 'WiiLink-Patcher-GUI'
-        signing-policy-slug: 'test-signing'
-        github-artifact-id: '${{ steps.upload-unsigned-standalone-package.outputs.artifact-id }}'
-        wait-for-completion: true
-        output-artifact-directory: '.\signed-package'
-    - name: Upload signed Standalone Package
-      uses: actions/upload-artifact@v4
-      with:
-        path: .\signed-package
-        name: WiiLinkPatcherGUI-Windows-x64-signed
