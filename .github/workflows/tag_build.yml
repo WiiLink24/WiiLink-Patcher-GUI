@@ -4,9 +4,9 @@
 name: Build and Sign Patcher Release
 
 on:
-  label:
-    types:
-      - created
+  push:
+    tags:
+      - "*"
 
 permissions:
   contents: read
