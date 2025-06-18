@@ -8,3 +8,4 @@ requests
 psutil
 black
 pyudev
+certifi==2025.4.26
