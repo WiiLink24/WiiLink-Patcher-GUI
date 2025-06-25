@@ -284,9 +284,9 @@ class About(QWidget):
                     "<a href=https://noahpistilli.ca style='color: #4a86e8; text-decoration: none;'><b>Sketch</b></a> - WiiLink Project Lead"
                 )
             ),
-            "isla": QLabel(
+            "harry": QLabel(
                 self.tr(
-                    "<a href=https://islawalker.uk style='color: #4a86e8; text-decoration: none;'><b>Isla</b></a> - WiiLink Patcher GUI Developer"
+                    "<a href=https://harrywalker.uk style='color: #4a86e8; text-decoration: none;'><b>Harry</b></a> - WiiLink Patcher GUI Developer"
                 )
             ),
             "pablo": QLabel(
