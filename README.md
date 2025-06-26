@@ -59,5 +59,13 @@ pip install --upgrade -r requirements.txt
 make all
 ```
 
+## Sponsors
+<table>
+  <tr>
+    <td><img src="https://github.com/user-attachments/assets/bd599cbc-d860-41da-91a8-c1e70a57605d" alt="SignPath Logo"></img></td>
+    <td>Free code signing on Windows provided by <a href="https://about.signpath.io">SignPath.io</a>, certificate by <a href="https://signpath.org">SignPath Foundation</a></td>
+  </tr>
+</table>
+
 ## Special thanks
 Special thanks to [@NinjaCheetah](https://github.com/NinjaCheetah) for all his help with this project, and his work on libWiiPy.
