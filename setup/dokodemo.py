@@ -149,7 +149,7 @@ class DokodemoPatchingPage(QWizardPage):
         self.setTitle(self.tr("Patching in progress"))
         self.setSubTitle(self.tr("Please wait while the patcher works its magic!"))
 
-        self.label = QLabel(self.tr(f"Patching Wii Room Anywhere ({language})..."))
+        self.label = QLabel(self.tr(f"Patching Wii Room Anywhere ({language.name})..."))
         self.label.setWordWrap(True)
         self.progress_bar = QProgressBar(self)
 
