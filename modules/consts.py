@@ -7,7 +7,7 @@ import sys
 import os
 
 patcher_url = "https://patcher.wiilink24.com"
-patcher_version = "1.1.2"
+patcher_version = "1.1.3 Nightly"
 
 temp_dir = pathlib.Path().joinpath(tempfile.gettempdir(), "WiiLinkPatcher")
 file_path = pathlib.Path(__file__).parents[1]
@@ -27,3 +27,4 @@ wiilink_dir = output_path.joinpath("WiiLink")
 
 wad_directory = wiilink_dir.joinpath("WAD")
 apps_directory = wiilink_dir.joinpath("apps")
+nds_directory = wiilink_dir.joinpath("nds")

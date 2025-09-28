@@ -34,6 +34,7 @@ class SetupTypes(enum.Enum):
     Express = 0
     Custom = 1
     Extras = 2
+    Dokodemo = 3
 
 
 class WFCNetworks(enum.Enum):

@@ -59,6 +59,11 @@ from setup.extras import (
     ExtrasPlatformConfiguration,
     ExtrasRegionConfiguration,
 )
+from setup.dokodemo import (
+    DokodemoSelectFile,
+    DokodemoSelectLanguage,
+    DokodemoPatchingPage,
+)
 from setup.download import (
     connection_test,
     download_translation_dict,
@@ -131,6 +136,9 @@ class MainMenu(QWizardPage):
                     "Extra Channels (Optional)\nAdd additional channels to your Wii"
                 )
             ),
+            "dokodemo": QRadioButton(
+                self.tr("Wii Room Anywhere\nPatch a Dokodemo ROM to work with Wii Room")
+            ),
             "about": QPushButton(self.tr("About WiiLink Patcher")),
         }
 
@@ -157,6 +165,8 @@ class MainMenu(QWizardPage):
             PatchingPage.setup_type = SetupTypes.Custom
         elif self.options["extra_channels"].isChecked():
             PatchingPage.setup_type = SetupTypes.Extras
+        elif self.options["dokodemo"].isChecked():
+            PatchingPage.setup_type = SetupTypes.Dokodemo
 
         return True
 
@@ -176,6 +186,8 @@ class MainMenu(QWizardPage):
             return 200
         elif self.options["extra_channels"].isChecked():
             return 300
+        elif self.options["dokodemo"].isChecked():
+            return 400
         return 0  # Stay on the same page if nothing is selected
 
     def show_about(self):
@@ -640,6 +652,10 @@ class WiiLinkPatcherGUI(QWizard):
         self.setPage(300, ExtrasChannelSelection(patches_json))
         self.setPage(301, ExtrasPlatformConfiguration())
         self.setPage(302, ExtrasRegionConfiguration())
+
+        self.setPage(400, DokodemoSelectFile())
+        self.setPage(401, DokodemoSelectLanguage())
+        self.setPage(402, DokodemoPatchingPage())
 
         self.setPage(1000, PatchingComplete())
 

@@ -1,4 +1,5 @@
 import sys
+import traceback
 
 import libWiiPy
 import bsdiff4
@@ -27,7 +28,7 @@ from .download import (
     download_spd,
 )
 from .newsRenderer import NewsRenderer
-from modules.consts import wad_directory, patcher_url
+from modules.consts import wad_directory, patcher_url, nds_directory
 
 
 def apply_bsdiff_patches(
@@ -51,26 +52,14 @@ def apply_bsdiff_patches(
         print(f" - Patching content {index + 1}...")
 
         print("   - Downloading patch...")
-
-        try:
-            patch_binary = download_patch(channel_name.lower(), patch_file)
-        except Exception as e:
-            print("      - Failed!")
-            raise ValueError(e)
-        else:
-            print("      - Done!")
+        patch_binary = download_patch(channel_name.lower(), patch_file)
+        print("      - Done!")
 
         stock_content = title.get_content_by_index(index)
 
         print("   - Applying patch...")
-
-        try:
-            patched_content = bsdiff4.patch(stock_content, patch_binary)
-        except Exception as e:
-            print("      - Failed!")
-            raise ValueError(e)
-        else:
-            print("      - Done!")
+        patched_content = bsdiff4.patch(stock_content, patch_binary)
+        print("      - Done!")
 
         title.set_content(patched_content, index)
 
@@ -138,14 +127,38 @@ def patch_channel(channel: dict, network: str = None):
         print("   - Done!")
 
     print(" - Packing WAD...")
+    open(output_wad, "wb").write(title.dump_wad())
+    print("   - Done!")
 
-    try:
-        open(output_wad, "wb").write(title.dump_wad())
-    except Exception as e:
-        print("   - Failed!")
-        raise ValueError(e)
-    else:
-        print("   - Done!")
+
+def patch_dokodemo(language: Languages, rom: bytes):
+    """Applies patches to Dokodemo Wii no Ma
+
+    Args:
+        language: The language to patch Dokodemo to
+        rom: The Dokodemo ROM to patch
+
+    Returns:
+        None"""
+
+    print("Patching Wii Room Anywhere:")
+
+    nds_directory.mkdir(exist_ok=True, parents=True)
+    output_rom = nds_directory.joinpath(
+        f"Wii Room Anywhere ({language.name}) (WiiLink).nds"
+    )
+
+    print(" - Downloading patch...")
+    patch = download_patch("dokodemo", language.name)
+    print("   - Done!")
+
+    print(" - Patching ROM...")
+    patched_rom = bsdiff4.patch(rom, patch)
+    print("   - Done!")
+
+    print(" - Writing ROM...")
+    output_rom.write_bytes(patched_rom)
+    print("   - Done!")
 
 
 class PatchingPage(QWizardPage):
@@ -281,11 +294,12 @@ class PatchingPage(QWizardPage):
 
     def handle_error(self, error: str):
         """Display errors thrown from the patching logic to the user"""
+        error = error.replace("\n", "<br>")
 
         QMessageBox.warning(
             self,
             "WiiLink Patcher - Warning",
-            f"An exception was encountered while patching.<br><br>Exception:<br>{error}<br><br>Please report this issue in the WiiLink Discord Server (<a href='https://discord.gg/wiilink'>discord.gg/wiilink</a>).",
+            f"An exception was encountered while patching.<br><br>{error}<br>Please report this issue in the WiiLink Discord Server (<a href='https://discord.gg/wiilink'>discord.gg/wiilink</a>).",
         )
 
     def toggle_console(self, event=None):
@@ -323,13 +337,10 @@ class PatchingWorker(QObject):
 
         try:
             self.download_supporting_apps()
-        except Exception as e:
-            print(
-                f"""An exception occured!
-Exception:
-{e}"""
-            )
-            self.error.emit(f"{e}")
+        except:
+            exception_traceback = traceback.format_exc()
+            print(exception_traceback)
+            self.error.emit(f"{exception_traceback}")
 
         percentage += percentage_increment
         self.broadcast_percentage.emit(round(percentage))
@@ -373,14 +384,10 @@ Exception:
                         )
 
                         patch_channel(additional_channel_dict)
-            except Exception as e:
-                print(
-                    f"""An exception occured!
-
-Exception:
-{e}"""
-                )
-                self.error.emit(f"{e}")
+            except:
+                exception_traceback = traceback.format_exc()
+                print(exception_traceback)
+                self.error.emit(f"{exception_traceback}")
             finally:
                 percentage += percentage_increment
                 self.broadcast_percentage.emit(round(percentage))
