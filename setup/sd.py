@@ -1,6 +1,7 @@
 import os
 import subprocess
 import sys
+import traceback
 import psutil
 import shutil
 import pathlib
@@ -25,7 +26,6 @@ from modules.consts import wad_directory, apps_directory
 from .newsRenderer import NewsRenderer
 
 sd_path = ""
-sd_wad_path = "WAD"
 
 
 def get_devices(removable_only=True):
@@ -166,6 +166,8 @@ class SelectSD(QWizardPage):
         self.setLayout(self.layout)
 
         self.devices = []
+
+    def initializePage(self):
         self.refresh_devices()
 
     def refresh_devices(self):
@@ -186,18 +188,13 @@ class SelectSD(QWizardPage):
         return False
 
     def nextId(self):
-        global sd_wad_path
         selected_device = self.combo.currentData()
 
-        if wad_directory.exists() and wad_directory.is_dir():
-            # Find existing WAD folder, regardless of case
-            for folder in os.listdir(selected_device):
-                if (
-                    folder.upper() == "WAD"
-                    and pathlib.Path(selected_device).joinpath(folder).is_dir()
-                ):
-                    sd_wad_path = folder
-                    return 14
+        if (
+            wad_directory.is_dir()
+            and pathlib.Path(selected_device).joinpath("WAD").exists()
+        ):
+            return 14
 
         return 15
 
@@ -253,32 +250,42 @@ What would you like to do?"""
 
         self.setLayout(self.layout)
 
+    def handle_error(self, error: str):
+        """Display errors thrown in manipulating folder to the user"""
+        error = error.replace("\n", "<br>")
+
+        QMessageBox.warning(
+            self,
+            "WiiLink Patcher - Warning",
+            f"An exception was encountered while performing your selected action.<br><br>{error}<br>Please report this issue in the WiiLink Discord Server (<a href='https://discord.gg/wiilink'>discord.gg/wiilink</a>).",
+        )
+
     def validatePage(self):
         global sd_path
-        global sd_wad_path
+        sd_wad_directory = pathlib.Path(sd_path).joinpath("WAD")
 
-        sd_wad_directory = pathlib.Path().joinpath(sd_path, sd_wad_path)
-        if self.options["rename"].isChecked():
-            try:
-                os.rename(sd_wad_directory, pathlib.Path().joinpath(sd_path, "WAD.bak"))
-            except (OSError, FileExistsError):
-                i = 1
-                while True:
-                    try:
-                        os.rename(
-                            sd_wad_directory,
-                            pathlib.Path().joinpath(sd_path, f"WAD.bak ({i})"),
-                        )
-                    except (OSError, FileExistsError):
+        try:
+            if self.options["rename"].isChecked():
+                if pathlib.Path(sd_path).joinpath("WAD.bak").exists():
+                    i = 1
+                    while pathlib.Path(sd_path).joinpath(f"WAD.bak ({i})").exists():
                         i += 1
-                        continue
-                    else:
-                        break
-            finally:
-                sd_wad_path = "WAD"
-        elif self.options["delete"].isChecked():
-            shutil.rmtree(sd_wad_directory)
-            sd_wad_path = "WAD"
+                    os.rename(
+                        sd_wad_directory,
+                        pathlib.Path(sd_path).joinpath(f"WAD.bak ({i})"),
+                    )
+                else:
+                    os.rename(
+                        sd_wad_directory, pathlib.Path(sd_path).joinpath("WAD.bak")
+                    )
+
+            elif self.options["delete"].isChecked():
+                shutil.rmtree(sd_wad_directory)
+        except:
+            exception_traceback = traceback.format_exc()
+            print(exception_traceback)
+            self.handle_error(exception_traceback)
+            return False
 
         return True
 
@@ -350,11 +357,13 @@ class FileCopying(QWizardPage):
         return 1000
 
     def handle_error(self, error: str):
-        """Display errors thrown from the patching logic to the user"""
+        """Display errors thrown to the user"""
+        error = error.replace("\n", "<br>")
+
         QMessageBox.warning(
             self,
             "WiiLink Patcher - Warning",
-            f"An exception was encountered while copying files.<br><br>Exception:<br>{error}<br><br>Please report this issue in the WiiLink Discord Server (<a href='https://discord.gg/wiilink'>discord.gg/wiilink</a>).",
+            f"An exception was encountered while copying files.<br><br>{error}<br>Please report this issue in the WiiLink Discord Server (<a href='https://discord.gg/wiilink'>discord.gg/wiilink</a>).",
         )
 
 
@@ -364,31 +373,23 @@ class CopyFiles(QObject):
 
     def copy_files(self):
         global sd_path
-        global sd_wad_path
-
-        # Find existing apps folder, regardless of case
-        sd_apps_path = "apps"
-        for folder in os.listdir(sd_path):
-            if (
-                folder.lower() == "apps"
-                and pathlib.Path().joinpath(sd_path, folder).is_dir()
-            ):
-                sd_apps_path = folder
 
         try:
-            if apps_directory.exists() and apps_directory.is_dir():
+            if apps_directory.is_dir():
                 shutil.copytree(
                     apps_directory,
-                    pathlib.Path().joinpath(sd_path, sd_apps_path),
+                    pathlib.Path(sd_path).joinpath("apps"),
                     dirs_exist_ok=True,
                 )
-            if wad_directory.exists() and wad_directory.is_dir():
+            if wad_directory.is_dir():
                 shutil.copytree(
                     wad_directory,
-                    pathlib.Path().joinpath(sd_path, sd_wad_path),
+                    pathlib.Path(sd_path).joinpath("WAD"),
                     dirs_exist_ok=True,
                 )
-        except Exception as e:
-            self.error.emit(f"{e}")
+        except:
+            exception_traceback = traceback.format_exc()
+            print(exception_traceback)
+            self.error.emit(f"{exception_traceback}")
 
         self.finished.emit(True)

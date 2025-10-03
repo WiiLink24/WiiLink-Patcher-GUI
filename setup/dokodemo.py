@@ -20,6 +20,7 @@ from PySide6.QtWidgets import (
     QWizard,
 )
 
+from modules.consts import wiilink_dir
 from modules.widgets import ConsoleOutput
 from setup.enums import Languages
 from setup.newsRenderer import NewsRenderer
@@ -135,6 +136,11 @@ class DokodemoSelectLanguage(QWizardPage):
                 language = button_language
 
         return True
+
+    def nextId(self):
+        if wiilink_dir.exists():
+            return 10
+        return 402
 
 
 class DokodemoPatchingPage(QWizardPage):

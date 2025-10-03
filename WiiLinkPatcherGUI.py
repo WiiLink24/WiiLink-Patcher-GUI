@@ -20,6 +20,7 @@ import pathlib
 import shutil
 import subprocess
 import sys
+import traceback
 import webbrowser
 import random
 import json
@@ -402,24 +403,35 @@ What would you like to do?"""
 
         self.setLayout(self.layout)
 
+    def handle_error(self, error: str):
+        """Display errors thrown in manipulating folder to the user"""
+        error = error.replace("\n", "<br>")
+
+        QMessageBox.warning(
+            self,
+            "WiiLink Patcher - Warning",
+            f"An exception was encountered while performing your selected action.<br><br>{error}<br>Please report this issue in the WiiLink Discord Server (<a href='https://discord.gg/wiilink'>discord.gg/wiilink</a>).",
+        )
+
     def validatePage(self):
-        if self.options["rename"].isChecked():
-            try:
-                os.rename(wiilink_dir, output_path.joinpath("WiiLink.bak"))
-            except (OSError, FileExistsError):
-                i = 1
-                while True:
-                    try:
-                        os.rename(
-                            wiilink_dir, output_path.joinpath(f"WiiLink.bak ({i})")
-                        )
-                    except (OSError, FileExistsError):
+        try:
+            if self.options["rename"].isChecked():
+                if output_path.joinpath("WiiLink.bak").exists():
+                    i = 1
+                    while output_path.joinpath(f"WiiLink.bak ({i})").exists():
                         i += 1
-                        continue
-                    else:
-                        break
-        elif self.options["delete"].isChecked():
-            shutil.rmtree(wiilink_dir)
+                    os.rename(wiilink_dir, output_path.joinpath(f"WiiLink.bak ({i})"))
+                else:
+                    os.rename(wiilink_dir, output_path.joinpath("WiiLink.bak"))
+
+            elif self.options["delete"].isChecked():
+                shutil.rmtree(wiilink_dir)
+        except:
+            exception_traceback = traceback.format_exc()
+            print(exception_traceback)
+            self.handle_error(exception_traceback)
+            return False
+
         return True
 
     def isComplete(self):
@@ -508,7 +520,7 @@ Please open a support ticket on our <a href='https://discord.gg/wiilink' style='
                     )
                     self.layout.addWidget(open_guide)
                     open_guide.clicked.connect(self.open_guide_link)
-            case _:
+            case SetupTypes.Express | SetupTypes.Custom:
                 open_guide = QPushButton(
                     self.tr("Open the WiiLink installation guide in your web browser")
                 )
