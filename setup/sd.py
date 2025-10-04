@@ -382,11 +382,14 @@ class CopyFiles(QObject):
                     dirs_exist_ok=True,
                 )
             if wad_directory.is_dir():
-                shutil.copytree(
-                    wad_directory,
-                    pathlib.Path(sd_path).joinpath("WAD"),
-                    dirs_exist_ok=True,
-                )
+                pathlib.Path(sd_path).joinpath("WAD").mkdir(exist_ok=True)
+
+                for file in wad_directory.iterdir():
+                    if not file.name.startswith("."):
+                        # macOS makes a bunch of hidden files that show up at the top of the list in yawmME.
+                        # Very confusing for end users, hence we don't copy hidden files.
+                        shutil.copy(file, pathlib.Path(sd_path).joinpath("WAD"))
+
         except:
             exception_traceback = traceback.format_exc()
             print(exception_traceback)
