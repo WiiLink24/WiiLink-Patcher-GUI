@@ -84,34 +84,6 @@ from modules.consts import (
 )
 
 
-class IntroPage(QWizardPage):
-    def __init__(self, parent=None):
-        super().__init__(parent)
-        self.setTitle(self.tr("Welcome to the WiiLink Patcher!"))
-        self.setSubTitle(
-            self.tr(
-                "This tool will walk you through downloading the necessary files to install WiiLink."
-            )
-        )
-
-        self.label = QLabel(
-            self.tr(
-                """Welcome to the WiiLink Patcher!
-                            
-With this tool, you'll be able to get patched files to install WiiLink in no time!
-
-Press 'Next' to get started!"""
-            )
-        )
-        self.label.setWordWrap(True)
-
-        self.layout = QVBoxLayout()
-
-        self.layout.addWidget(self.label)
-
-        self.setLayout(self.layout)
-
-
 class MainMenu(QWizardPage):
     def __init__(self, parent=None):
         super().__init__(parent)
@@ -627,7 +599,7 @@ class WiiLinkPatcherGUI(QWizard):
         self.setSubTitleFormat(Qt.TextFormat.RichText)
 
         self.setFixedWidth(550)
-        self.setMaximumHeight(625)
+        self.setFixedHeight(625)
 
         # Override button text to remove chevrons
         self.setButtonText(QWizard.WizardButton.NextButton, self.tr("Next"))
@@ -639,8 +611,7 @@ class WiiLinkPatcherGUI(QWizard):
         patches_json = json.loads(patches_raw)
 
         # Page setup
-        self.setPage(0, IntroPage())
-        self.setPage(1, MainMenu())
+        self.setPage(0, MainMenu())
 
         self.setPage(10, WiiLinkFolderDetected())
         self.setPage(11, PatchingPage(patches_json))
