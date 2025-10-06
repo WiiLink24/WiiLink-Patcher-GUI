@@ -189,6 +189,8 @@ class SelectSD(QWizardPage):
 
     def nextId(self):
         selected_device = self.combo.currentData()
+        if not selected_device:
+            return 15
 
         if (
             wad_directory.is_dir()

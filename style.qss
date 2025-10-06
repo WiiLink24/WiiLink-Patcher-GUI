@@ -249,6 +249,12 @@ QComboBox::drop-down {
     border-bottom-right-radius: 8px;
 }
 
+QComboBox QListView {
+    font-size: 13px;
+    font-weight: 500;
+    color: #ffffff;
+}
+
 QComboBox::down-arrow {
     image: url(%AssetsDir%/dropdown_arrow.svg);
     width: 12px;
