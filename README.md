@@ -5,11 +5,14 @@ WiiLink Patcher GUI is a Python program built around the excellent [libWiiPy](ht
 You can download the latest release from the [Releases Page](https://github.com/WiiLink24/WiiLink-Patcher-GUI/releases).
 
 ### System Requirements
-| Operating System | Required Version         |
-|------------------|--------------------------|
-| Windows          | Windows 10 1809 or later |
-| macOS            | macOS Monterey or later  |
-| Linux            | glibc 2.35 or later      |
+| Operating System | Minimum Version              |
+|------------------|------------------------------|
+| Windows          | Windows 10 1809             |
+| macOS            | macOS Monterey           |
+| Linux            | Ubuntu 22.04 (or equivalent) |
+
+> [!TIP]
+> Don't meet these system requirements? Check out our [CLI Patcher](https://github.com/WiiLink24/WiiLink24-Patcher) instead.
 
 > **NOTE:** In **Windows**, your antivirus may flag the **patcher** as malware. This is a **false positive**, and you can safely ignore it. If you are still unsure, you can inspect the source code, and/or compile it yourself for extra verification. You can also temporarily disable your antivirus to download the patcher, or add an exception for it if you put it in a dedicated folder.
 
