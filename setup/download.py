@@ -110,36 +110,6 @@ def get_latest_version() -> str:
     return latest_version
 
 
-def download_translation(language: str):
-    """Downloads a specified translation file from the server, ready to be loaded into the app
-
-    Args:
-        language: The two-character code of the language of the translation to download
-
-    Returns:
-        None"""
-    translation_url = f"{patcher_url}/qt-lang/translation_{language}.qm"
-
-    translation_dir = temp_dir.joinpath("translations")
-    os.makedirs(translation_dir, exist_ok=True)
-
-    download_file(translation_url, translation_dir)
-
-
-def download_translation_dict():
-    """Downloads and returns a dictionary of available languages from the server
-
-    Returns:
-        The dictionary of available translations"""
-    url = f"{patcher_url}/qt-lang/languages.json"
-
-    raw_json = download_file(url)
-
-    translation_dict = json.loads(raw_json)
-
-    return translation_dict
-
-
 def download_file(url: str, destination: str | pathlib.Path = None):
     """Simple function to download files from a specified URL
 

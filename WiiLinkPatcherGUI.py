@@ -14,6 +14,7 @@
 # nuitka-project: --include-data-dir={MAIN_DIRECTORY}/assets=assets
 # nuitka-project: --include-data-dir={MAIN_DIRECTORY}/data=data
 # nuitka-project: --include-data-file={MAIN_DIRECTORY}/style.qss=style.qss
+# nuitka-project: --include-data-file={MAIN_DIRECTORY}/translations/*.qm=translations/
 
 import os
 import pathlib
@@ -67,8 +68,6 @@ from setup.dokodemo import (
 )
 from setup.download import (
     connection_test,
-    download_translation_dict,
-    download_translation,
     get_latest_version,
     DownloadOSCApp,
 )
@@ -645,40 +644,10 @@ class WiiLinkPatcherGUI(QWizard):
         self.setStartId(0)
 
     def translation_setup(self):
-        """Static method to download and load patcher translations for the user's language if they exist
+        """Static method to load patcher translations for the user's language if they exist
 
         Returns:
             None"""
-
-        # Get user's 2-character language code from QLocale
-        language = QLocale.languageToCode(QLocale.system().language())
-
-        # Download dictionary of supported languages
-        try:
-            supported_languages = download_translation_dict()
-        except Exception as e:
-            QMessageBox.warning(
-                self,
-                "WiiLink Patcher - Warning",
-                f"""The patcher failed to download the list of languages. Therefore, it will run in English.
-
-    Exception:
-    {e}""",
-            )
-        else:
-            # Download the translation file if there is a translation available for the user's language
-            if language in supported_languages:
-                try:
-                    download_translation(language)
-                except Exception as e:
-                    QMessageBox.warning(
-                        self,
-                        "WiiLink Patcher - Warning",
-                        f"""The patcher failed to download translations for your language. Therefore, it will run in English
-
-    Exception:
-    {e}""",
-                    )
 
         path = QLibraryInfo.path(QLibraryInfo.LibraryPath.TranslationsPath)
         translator = QTranslator(app)
@@ -686,7 +655,7 @@ class WiiLinkPatcherGUI(QWizard):
             app.installTranslator(translator)
 
         translator = QTranslator(app)
-        path = pathlib.Path().joinpath(file_path, "translations").resolve().as_posix()
+        path = file_path.joinpath("translations").resolve().as_posix()
         if translator.load(QLocale.system(), "translation", "_", path):
             app.installTranslator(translator)
 
