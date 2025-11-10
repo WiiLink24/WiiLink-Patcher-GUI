@@ -36,7 +36,7 @@ class ExtrasChannelSelection(QWizardPage):
 
         scroll_area = QScrollArea()
         scroll_area.setWidgetResizable(True)
-        scroll_area.setFixedHeight(300)
+        scroll_area.setFixedHeight(400)
 
         container = QWidget()
         container_layout = QVBoxLayout(container)
