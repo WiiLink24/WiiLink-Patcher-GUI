@@ -33,7 +33,7 @@ python -m black .
 
 ## Compiling
 To compile the patcher, you will first need to install a few dependencies:
-> - [Python](https://python.org) (the patcher has only been tested on Python 3.12+)
+> - [Python 3.13](https://www.python.org/downloads/release/python-3139/) (the patcher has only been tested on Python 3.12+)
 > - [Git](https://git-scm.com) (optional but highly recommended)
 
 - Clone the repository to your computer

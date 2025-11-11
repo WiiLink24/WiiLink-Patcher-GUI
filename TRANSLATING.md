@@ -2,7 +2,7 @@
 
 To translate the patcher, you'll need some things installed on your PC first:
 - [Git](https://git-scm.org)
-- [Python](https://python.org)
+- [Python 3.13](https://www.python.org/downloads/release/python-3139/)
 
 ### Step 1: Forking and cloning the repository
 First, you'll want to fork, clone and enter this repository.
