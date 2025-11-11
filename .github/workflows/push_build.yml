@@ -74,7 +74,7 @@ jobs:
 
   build-macos-x64:
 
-    runs-on: macos-14-large
+    runs-on: macos-15-large
 
     steps:
       - uses: actions/checkout@v4
@@ -101,7 +101,7 @@ jobs:
 
   build-macos-arm64:
 
-    runs-on: macos-14
+    runs-on: macos-15
 
     steps:
       - uses: actions/checkout@v4
