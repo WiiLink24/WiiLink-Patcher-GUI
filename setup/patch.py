@@ -17,7 +17,7 @@ from PySide6.QtWidgets import (
 
 from PySide6.QtGui import QFont
 
-from modules.widgets import ConsoleOutput
+from modules.widgets import ConsoleOutput, FunFacts
 from .enums import *
 from .download import (
     download_patch,
@@ -188,7 +188,12 @@ class PatchingPage(QWizardPage):
         layout = QVBoxLayout()
         layout.addWidget(self.label)
         layout.addWidget(self.progress_bar)
+
         layout.addSpacing(10)
+        self.fact_box = FunFacts(self)
+        layout.addWidget(self.fact_box)
+
+        layout.addSpacing(25)
         layout.addWidget(self.news_box)
 
         self.console = QTextEdit()

@@ -9,6 +9,8 @@ files = [
     "./setup/extras.py",
     "./setup/patch.py",
     "./setup/sd.py",
+    "./setup/dokodemo.py",
+    "./modules/widgets.py",
     "./translations/translation_fr.ts",
     "./translations/translation_hu.ts",
     "./translations/translation_it.ts",

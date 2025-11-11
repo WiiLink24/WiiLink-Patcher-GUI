@@ -23,6 +23,7 @@ from PySide6.QtWidgets import (
 from PySide6.QtCore import QTimer, QThread, QObject, Signal
 
 from modules.consts import wad_directory, apps_directory
+from modules.widgets import FunFacts
 from .newsRenderer import NewsRenderer
 
 sd_path = ""
@@ -318,7 +319,12 @@ class FileCopying(QWizardPage):
         layout = QVBoxLayout()
         layout.addWidget(self.label)
         layout.addWidget(self.progress_bar)
+
         layout.addSpacing(10)
+        self.fact_box = FunFacts(self)
+        layout.addWidget(self.fact_box)
+
+        layout.addSpacing(25)
         layout.addWidget(self.news_box)
 
         self.setLayout(layout)

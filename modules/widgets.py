@@ -1,4 +1,6 @@
+import random
 import sys
+import time
 
 from PySide6.QtWidgets import (
     QWidget,
@@ -7,8 +9,9 @@ from PySide6.QtWidgets import (
     QVBoxLayout,
     QLabel,
     QTextEdit,
+    QSizePolicy,
 )
-from PySide6.QtCore import Qt, Signal, QObject
+from PySide6.QtCore import Qt, Signal, QObject, QThread
 from PySide6.QtGui import QTextCursor
 
 
@@ -84,3 +87,96 @@ class ConsoleOutput(QObject):
         cursor.movePosition(QTextCursor.MoveOperation.End)
         cursor.insertText(message)
         self.text_edit.setTextCursor(cursor)
+
+
+class FunFacts(QLabel):
+    def __init__(self, parent=None):
+        super().__init__(parent)
+        self.setWordWrap(True)
+        self.setStyleSheet(
+            """
+            background-color: #333333;
+            color: white;
+            border: 1px solid #555555;
+            border-radius: 5px;
+            padding: 10px;
+            font-size: 12px;
+        """
+        )
+        self.setTextFormat(Qt.TextFormat.RichText)
+        self.setOpenExternalLinks(True)
+
+        self.setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+        self.adjustSize()
+
+        self.setAlignment(Qt.AlignmentFlag.AlignLeft)
+
+        self.fact_thread = QThread()
+        self.fact_worker = FactWorker()
+
+        self.fact_worker.moveToThread(self.fact_thread)
+        self.fact_thread.started.connect(self.fact_worker.update_facts)
+
+        self.fact_worker.emit_fact.connect(self.set_fact)
+
+        self.fact_thread.start()
+
+    def set_fact(self, fact: str):
+        self.setText(
+            self.tr(
+                f"""<h3>Did you know?</h3>
+        
+        {fact}"""
+            )
+        )
+
+
+class FactWorker(QObject):
+    emit_fact = Signal(str)
+
+    def __init__(self, parent=None):
+        super().__init__(parent)
+        self.facts = [
+            self.tr("The Wii was the best selling game-console of 2006!"),
+            self.tr('The Wii was called "Revolution" during development!'),
+            self.tr(
+                "The music used in many of the Wii's channels (including the Wii Shop, Mii, Check Mii Out, and Forecast Channel) was composed by Kazumi Totaka."
+            ),
+            self.tr(
+                "The Internet Channel was initially a paid channel for 500 Wii Points."
+            ),
+            self.tr("You can use candles instead of a Wii sensor bar."),
+            self.tr(
+                "The blinking blue light that indicates Wii Mail has been received is actually synced to the bird call of the Japanese bush warbler!"
+            ),
+            self.tr(
+                "Wii Sports is the most sold Wii game released, at a staggering 82.9 million copies sold!"
+            ),
+            self.tr(
+                "We have a forum you can check out at <a href='https://forum.wiilink.ca'>forum.wiilink.ca</a>!"
+            ),
+            self.tr(
+                "The Japanese version of the News Channel uses different weather icons to other regions!"
+            ),
+            self.tr(
+                'The WiiLink project began in 2020 under the name "Rii no Ma", with the goal of reviving Wii no Ma and the other Japan-exclusive channels.'
+            ),
+            self.tr(
+                "RiiConnect24, the first WiiConnect24 revival project, was established in 2015, releasing the first News Channel revival in 2016!"
+            ),
+            self.tr(
+                "Before 2024, there were 2 separate services reviving WiiConnect24 channels - WiiLink and RiiConnect24. The two services were merged at the end of 2023."
+            ),
+            self.tr(
+                "The globe used in the News and Forecast Channels is based on NASA imagery, and is also used in Mario Kart Wii."
+            ),
+            self.tr(
+                "You can press the Reset button while the Wii is in standby mode to turn off the disc drive light indicating that you have a new message."
+            ),
+        ]
+
+    def update_facts(self):
+        while True:
+            current_fact = random.choice(self.facts)
+            self.emit_fact.emit(current_fact)
+            time.sleep(10)
