@@ -124,10 +124,9 @@ class FunFacts(QLabel):
     def set_fact(self, fact: str):
         self.setText(
             self.tr(
-                f"""<h3>Did you know?</h3>
-        
-        {fact}"""
-            )
+                """<h3>Did you know?</h3>
+{}"""
+            ).format(fact)
         )
 
 

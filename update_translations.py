@@ -4,9 +4,13 @@
 # This script exists to work around an issue in PySide6 where the "pyside6-project lupdate" command doesn't work as
 # expected, as it struggles to parse the paths in the .pyproject file. This does what it's meant to do for it.
 
+# Usage:
+# --clean: Remove obsolete strings from translation files
+
 import pathlib
 import tomllib
 import subprocess
+import sys
 
 LUPDATE_CMD = "pyside6-lupdate"
 
@@ -26,6 +30,8 @@ for file in files:
         source_files.append(file)
 
 for target in ts_files:
-    cmd = [LUPDATE_CMD] + [s for s in source_files] + ["-ts"]
-    cmd.append(target)
+    cmd = [LUPDATE_CMD] + [s for s in source_files]
+    if "--clean" in sys.argv:
+        cmd.append("-no-obsolete")
+    cmd.extend(["-ts", target])
     subprocess.run(cmd, cwd=str(pyproject_file.parent))

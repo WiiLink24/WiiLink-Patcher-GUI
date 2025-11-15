@@ -15,13 +15,13 @@
     </message>
     <message>
         <location filename="../WiiLinkPatcherGUI.py" line="210"/>
-        <source>GUI - Version {patcher_version}</source>
-        <translation>Grafikus - Verzió: {patcher_version}</translation>
+        <source>GUI - Version {}</source>
+        <translation>Grafikus - Verzió: {}</translation>
     </message>
     <message>
         <location filename="../WiiLinkPatcherGUI.py" line="217"/>
-        <source>© 2020-{datetime.datetime.now().year} WiiLink Team. All rights reserved.</source>
-        <translation>© 2020–{datetime.datetime.now().year} A WiiLink Csapata. Minden jog fenntartva.</translation>
+        <source>© 2020-{} WiiLink Team. All rights reserved.</source>
+        <translation>© 2020–{} A WiiLink Csapata. Minden jog fenntartva.</translation>
     </message>
     <message>
         <location filename="../WiiLinkPatcherGUI.py" line="234"/>
@@ -219,8 +219,8 @@ Ha még nem rendelkezik a Wii-menü orosz fordításával, akkor a telepítési 
     </message>
     <message>
         <location filename="../setup/dokodemo.py" line="158"/>
-        <source>Patching Wii Room Anywhere ({language.name})...</source>
-        <translation>A Wii Room Anywhere foltolása a következő nyelvre: {language.name}…</translation>
+        <source>Patching Wii Room Anywhere ({})...</source>
+        <translation>A Wii Room Anywhere foltolása a következő nyelvre: {}…</translation>
     </message>
     <message>
         <location filename="../setup/dokodemo.py" line="182"/>
@@ -580,72 +580,72 @@ Telepíthető szolgáltatások:
 <context>
     <name>FactWorker</name>
     <message>
-        <location filename="../modules/widgets.py" line="140"/>
+        <location filename="../modules/widgets.py" line="139"/>
         <source>The Wii was the best selling game-console of 2006!</source>
         <translation>2006-ban a Wii volt a legtöbbet eladott játékkonzol.</translation>
     </message>
     <message>
-        <location filename="../modules/widgets.py" line="141"/>
+        <location filename="../modules/widgets.py" line="140"/>
         <source>The Wii was called &quot;Revolution&quot; during development!</source>
         <translation>A Wii fejlesztés alatii neve „Revolution” (forradalom) volt.</translation>
     </message>
     <message>
-        <location filename="../modules/widgets.py" line="143"/>
+        <location filename="../modules/widgets.py" line="142"/>
         <source>The music used in many of the Wii&apos;s channels (including the Wii Shop, Mii, Check Mii Out, and Forecast Channel) was composed by Kazumi Totaka.</source>
         <translation>A Wii csatornáin előforduló számos zeneszámot (beleértve a Wii Áruházcsatornát, a Miiversenycsatornát és az Időjáráscsatornát is) Totaka Kazumi szerezte.</translation>
     </message>
     <message>
-        <location filename="../modules/widgets.py" line="146"/>
+        <location filename="../modules/widgets.py" line="145"/>
         <source>The Internet Channel was initially a paid channel for 500 Wii Points.</source>
         <translation>Az Internetcsatorna eredetileg fizetős volt: 500 Wii-pontért lehetett megvásárolni.</translation>
     </message>
     <message>
-        <location filename="../modules/widgets.py" line="148"/>
+        <location filename="../modules/widgets.py" line="147"/>
         <source>You can use candles instead of a Wii sensor bar.</source>
         <translation>Egy Wii Remote Wii Sensor Bar hiányában gyertyákkal is működik.</translation>
     </message>
     <message>
-        <location filename="../modules/widgets.py" line="150"/>
+        <location filename="../modules/widgets.py" line="149"/>
         <source>The blinking blue light that indicates Wii Mail has been received is actually synced to the bird call of the Japanese bush warbler!</source>
         <translation>Az olvasatlan üzenetet jelző lemezolvasófény a japán berkiposzáta csiripelését követi.</translation>
     </message>
     <message>
-        <location filename="../modules/widgets.py" line="153"/>
+        <location filename="../modules/widgets.py" line="152"/>
         <source>Wii Sports is the most sold Wii game released, at a staggering 82.9 million copies sold!</source>
         <translation>A legtöbbet eladott Wii-játék a Wii Sports. 82,9 millió másolatot vásároltak meg belőle!</translation>
     </message>
     <message>
-        <location filename="../modules/widgets.py" line="156"/>
+        <location filename="../modules/widgets.py" line="155"/>
         <source>We have a forum you can check out at &lt;a href=&apos;https://forum.wiilink.ca&apos;&gt;forum.wiilink.ca&lt;/a&gt;!</source>
         <translation>A fórumunk a &lt;a href=&apos;https://forum.wiilink.ca&apos;&gt;forum.wiilink.ca&lt;/a&gt; címen található meg.</translation>
     </message>
     <message>
-        <location filename="../modules/widgets.py" line="159"/>
+        <location filename="../modules/widgets.py" line="158"/>
         <source>The Japanese version of the News Channel uses different weather icons to other regions!</source>
         <translation>A Hírcsatorna japán verziója a többi régiótól eltérő ikonokat használ.</translation>
     </message>
     <message>
-        <location filename="../modules/widgets.py" line="162"/>
+        <location filename="../modules/widgets.py" line="161"/>
         <source>The WiiLink project began in 2020 under the name &quot;Rii no Ma&quot;, with the goal of reviving Wii no Ma and the other Japan-exclusive channels.</source>
         <translation>A WiiLink projekt 2020-ban indult „Rii no Ma”-néven, a Wii no Ma és egyéb kizárólag Japánban üzemelt csatornák újraélesztésére.</translation>
     </message>
     <message>
-        <location filename="../modules/widgets.py" line="165"/>
+        <location filename="../modules/widgets.py" line="164"/>
         <source>RiiConnect24, the first WiiConnect24 revival project, was established in 2015, releasing the first News Channel revival in 2016!</source>
         <translation>A WiiConnect24 első feltámasztóprojektjét RiiConnect24-nek hívták, 2015-ben indult és a Hírcsatorna első használható változatát egy évvel később tették közzé.</translation>
     </message>
     <message>
-        <location filename="../modules/widgets.py" line="168"/>
+        <location filename="../modules/widgets.py" line="167"/>
         <source>Before 2024, there were 2 separate services reviving WiiConnect24 channels - WiiLink and RiiConnect24. The two services were merged at the end of 2023.</source>
         <translation>2024 előtt két különböző szolgáltatás is a WiiConnect24-csatornák feltámasztásán dolgozott: a WiiLink és a RiiConnect24. Ez a két projekt 2023 végén összeolvadt.</translation>
     </message>
     <message>
-        <location filename="../modules/widgets.py" line="171"/>
+        <location filename="../modules/widgets.py" line="170"/>
         <source>The globe used in the News and Forecast Channels is based on NASA imagery, and is also used in Mario Kart Wii.</source>
         <translation>A Hír- és Időjáráscsatornán használt földgömb a NASA fényképeit használja, illetve a Mario Kart Wiiben is előfordul.</translation>
     </message>
     <message>
-        <location filename="../modules/widgets.py" line="174"/>
+        <location filename="../modules/widgets.py" line="173"/>
         <source>You can press the Reset button while the Wii is in standby mode to turn off the disc drive light indicating that you have a new message.</source>
         <translation>Ha zavar a készenléti módban világító – olvasatlan üzenetet jelző – lemezolvasófény, akkor a Reset gomb megnyomásával kikapcsolhatod azt.</translation>
     </message>
@@ -673,11 +673,9 @@ Telepíthető szolgáltatások:
     <message>
         <location filename="../modules/widgets.py" line="127"/>
         <source>&lt;h3&gt;Did you know?&lt;/h3&gt;
-        
-        {fact}</source>
+{}</source>
         <translation>&lt;h3&gt;Érdekesség!&lt;/h3&gt;
-        
-        {fact}</translation>
+{}</translation>
     </message>
 </context>
 <context>
@@ -739,6 +737,11 @@ Dokodemo ROM foltozása a Wii Roomos használat lehetővé tétele érdekében</
         <translation>A csatornák foltozása sikeresen befejeződött</translation>
     </message>
     <message>
+        <location filename="../WiiLinkPatcherGUI.py" line="450"/>
+        <source>&lt;h1&gt;Patching completed!&lt;/h1&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../WiiLinkPatcherGUI.py" line="457"/>
         <source>&lt;p&gt;You can find the relevant files by clicking the button below.
 Please open a support ticket on our &lt;a href=&apos;https://discord.gg/wiilink&apos; style=&apos;color: #4a86e8; text-decoration: none;&apos;&gt;Discord server&lt;/a&gt; if you have any issues.&lt;/p&gt;</source>
@@ -794,13 +797,13 @@ Ha bármilyen problémába ütköznél, akkor a &lt;a href=&apos;https://discord
     <name>PatchingWorker</name>
     <message>
         <location filename="../setup/patch.py" line="363"/>
-        <source>Patching {channel_to_patch[&apos;name&apos;]}...</source>
-        <translation>A(z) {channel_to_patch[&apos;name&apos;]} foltozása…</translation>
+        <source>Patching {}...</source>
+        <translation>A(z) {} foltozása…</translation>
     </message>
     <message>
         <location filename="../setup/patch.py" line="367"/>
-        <source>Downloading {channel_to_patch[&apos;name&apos;]}...</source>
-        <translation>A(z) {channel_to_patch[&apos;name&apos;]} letöltése…</translation>
+        <source>Downloading {}...</source>
+        <translation>A(z) {} letöltése…</translation>
     </message>
 </context>
 <context>

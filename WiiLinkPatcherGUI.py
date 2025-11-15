@@ -207,15 +207,15 @@ class About(QWidget):
         title_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
         # Version
-        version_label = QLabel(self.tr(f"GUI - Version {patcher_version}"))
+        version_label = QLabel(self.tr("GUI - Version {}").format(patcher_version))
         version_label.setProperty("class", "version")
         version_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
         # Copyright
         copyright_label = QLabel(
             self.tr(
-                f"© 2020-{datetime.datetime.now().year} WiiLink Team. All rights reserved."
-            )
+                "© 2020-{} WiiLink Team. All rights reserved."
+            ).format(datetime.datetime.now().year)
         )
         copyright_label.setProperty("class", "copyright")
         copyright_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
@@ -447,14 +447,14 @@ class PatchingComplete(QWizardPage):
         emoji_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
         # Heading
-        heading = QLabel("<h1>Patching completed!</h1>")
+        heading = QLabel(self.tr("<h1>Patching completed!</h1>"))
         heading.setStyleSheet("background-color: transparent; color: white; margin: 0;")
         heading.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
         # Message with file path
         self.message = QLabel(
             self.tr(
-                f"""<p>You can find the relevant files by clicking the button below.
+                """<p>You can find the relevant files by clicking the button below.
 Please open a support ticket on our <a href='https://discord.gg/wiilink' style='color: #4a86e8; text-decoration: none;'>Discord server</a> if you have any issues.</p>"""
             )
         )
