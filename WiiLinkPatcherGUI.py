@@ -213,9 +213,9 @@ class About(QWidget):
 
         # Copyright
         copyright_label = QLabel(
-            self.tr(
-                "© 2020-{} WiiLink Team. All rights reserved."
-            ).format(datetime.datetime.now().year)
+            self.tr("© 2020-{} WiiLink Team. All rights reserved.").format(
+                datetime.datetime.now().year
+            )
         )
         copyright_label.setProperty("class", "copyright")
         copyright_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
