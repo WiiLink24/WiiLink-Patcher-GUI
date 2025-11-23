@@ -196,6 +196,8 @@ class About(QWidget):
             .resolve()
             .as_posix()
         )
+        self.setWindowIcon(icon)
+
         logo_pixmap = icon.pixmap(96, 96)
         logo_label.setPixmap(logo_pixmap)
         logo_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
