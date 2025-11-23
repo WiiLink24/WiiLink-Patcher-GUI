@@ -57,7 +57,12 @@ def check_removable(device: psutil._common.sdiskpart):
                 device_info = subprocess.check_output(
                     ["diskutil", "info", device.device], text=True
                 )
-                return "Removable Media: Yes" in device_info
+                info_lines = device_info.splitlines()
+                for line in info_lines:
+                    if "Removable Media:" and "Yes" in line:
+                        return True
+
+                return False
             case "linux":
                 import pyudev
 
