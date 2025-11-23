@@ -19,7 +19,7 @@
         <translation>Grafikus - Verzió: {}</translation>
     </message>
     <message>
-        <location filename="../WiiLinkPatcherGUI.py" line="217"/>
+        <location filename="../WiiLinkPatcherGUI.py" line="216"/>
         <source>© 2020-{} WiiLink Team. All rights reserved.</source>
         <translation>© 2020–{} A WiiLink Csapata. Minden jog fenntartva.</translation>
     </message>
@@ -64,7 +64,12 @@
         <translation>&lt;a href=https://ninjacheetah.dev style=&apos;color: #4a86e8; text-decoration: none;&apos;&gt;&lt;b&gt;NinjaCheetah&lt;/b&gt;&lt;/a&gt; - A libWiiPy fejlesztője</translation>
     </message>
     <message>
-        <location filename="../WiiLinkPatcherGUI.py" line="324"/>
+        <location filename="../WiiLinkPatcherGUI.py" line="299"/>
+        <source>&lt;a href=https://example.com style=&apos;color: #4a86e8; text-decoration: none;&apos;&gt;&lt;b&gt;YOUR NAME&lt;/b&gt;&lt;/a&gt; - LANGUAGE Translator</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../WiiLinkPatcherGUI.py" line="332"/>
         <source>GayLink Patcher</source>
         <translation>GayLink Patcher</translation>
     </message>
@@ -218,18 +223,18 @@ Ha még nem rendelkezik a Wii-menü orosz fordításával, akkor a telepítési 
         <translation>Légy türelemmel, amíg a varázsló a foltolást végzi.</translation>
     </message>
     <message>
-        <location filename="../setup/dokodemo.py" line="158"/>
+        <location filename="../setup/dokodemo.py" line="159"/>
         <source>Patching Wii Room Anywhere ({})...</source>
         <translation>A Wii Room Anywhere foltolása a következő nyelvre: {}…</translation>
     </message>
     <message>
-        <location filename="../setup/dokodemo.py" line="182"/>
-        <location filename="../setup/dokodemo.py" line="285"/>
+        <location filename="../setup/dokodemo.py" line="184"/>
+        <location filename="../setup/dokodemo.py" line="287"/>
         <source>Show Details</source>
         <translation>Részletek megjelenítése</translation>
     </message>
     <message>
-        <location filename="../setup/dokodemo.py" line="287"/>
+        <location filename="../setup/dokodemo.py" line="289"/>
         <source>Hide Details</source>
         <translation>Részletek elrejtése</translation>
     </message>
@@ -727,39 +732,39 @@ Dokodemo ROM foltozása a Wii Roomos használat lehetővé tétele érdekében</
 <context>
     <name>PatchingComplete</name>
     <message>
-        <location filename="../WiiLinkPatcherGUI.py" line="424"/>
+        <location filename="../WiiLinkPatcherGUI.py" line="432"/>
         <source>Success!</source>
         <translation>Kész!</translation>
     </message>
     <message>
-        <location filename="../WiiLinkPatcherGUI.py" line="425"/>
+        <location filename="../WiiLinkPatcherGUI.py" line="433"/>
         <source>Everything has been patched successfully</source>
         <translation>A csatornák foltozása sikeresen befejeződött</translation>
     </message>
     <message>
-        <location filename="../WiiLinkPatcherGUI.py" line="450"/>
+        <location filename="../WiiLinkPatcherGUI.py" line="458"/>
         <source>&lt;h1&gt;Patching completed!&lt;/h1&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../WiiLinkPatcherGUI.py" line="457"/>
+        <location filename="../WiiLinkPatcherGUI.py" line="465"/>
         <source>&lt;p&gt;You can find the relevant files by clicking the button below.
 Please open a support ticket on our &lt;a href=&apos;https://discord.gg/wiilink&apos; style=&apos;color: #4a86e8; text-decoration: none;&apos;&gt;Discord server&lt;/a&gt; if you have any issues.&lt;/p&gt;</source>
         <translation>&lt;p&gt;A szükséges fájlokat az alábbi gomb megnyomásával érheted el.
 Ha bármilyen problémába ütköznél, akkor a &lt;a href=&apos;https://discord.gg/wiilink&apos; style=&apos;color: #4a86e8; text-decoration: none;&apos;&gt;Discord-szerverünkön&lt;/a&gt; hibajegyet indíthatsz.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../WiiLinkPatcherGUI.py" line="470"/>
+        <location filename="../WiiLinkPatcherGUI.py" line="478"/>
         <source>Open the &apos;WiiLink&apos; folder</source>
         <translation>A WiiLink mappa megnyitása</translation>
     </message>
     <message>
-        <location filename="../WiiLinkPatcherGUI.py" line="490"/>
+        <location filename="../WiiLinkPatcherGUI.py" line="498"/>
         <source>Open the WAD installation guide in your web browser</source>
         <translation>A WAD-telepítési útmutató megnyitása böngészőben</translation>
     </message>
     <message>
-        <location filename="../WiiLinkPatcherGUI.py" line="496"/>
+        <location filename="../WiiLinkPatcherGUI.py" line="504"/>
         <source>Open the WiiLink installation guide in your web browser</source>
         <translation>A WiiLink-telepítési útmutató megnyitása böngészőben</translation>
     </message>
@@ -875,17 +880,17 @@ NEM AJÁNLOTT</translation>
 <context>
     <name>WiiLinkFolderDetected</name>
     <message>
-        <location filename="../WiiLinkPatcherGUI.py" line="331"/>
+        <location filename="../WiiLinkPatcherGUI.py" line="339"/>
         <source>WiiLink folder detected!</source>
         <translation>WiiLink mappát észleltünk!</translation>
     </message>
     <message>
-        <location filename="../WiiLinkPatcherGUI.py" line="334"/>
+        <location filename="../WiiLinkPatcherGUI.py" line="342"/>
         <source>A directory called &apos;WiiLink&apos; has been found in the &apos;Downloads&apos; directory.</source>
         <translation>Egy WiiLink könytárat észleltünk a Letöltések mappában.</translation>
     </message>
     <message>
-        <location filename="../WiiLinkPatcherGUI.py" line="340"/>
+        <location filename="../WiiLinkPatcherGUI.py" line="348"/>
         <source>The patcher has detected a directory called &apos;WiiLink&apos; in your &apos;Downloads&apos; directory.
 The patcher uses the &apos;WiiLink&apos; directory to store its files, therefore this directory causes a conflict.
 
@@ -896,19 +901,19 @@ Egy ilyen megnevezésű könyvtár a WiiLink Patcher fájljait tartalmazza, így
 Hogyan szeretnél cselekedni?</translation>
     </message>
     <message>
-        <location filename="../WiiLinkPatcherGUI.py" line="352"/>
+        <location filename="../WiiLinkPatcherGUI.py" line="360"/>
         <source>Rename the existing &apos;WiiLink&apos; directory to &apos;WiiLink.bak&apos;
 (Recommended)</source>
         <translation>A létező WiiLink könyvtár átnevezése „WiiLink.bak”-ra
 (ajánlott)</translation>
     </message>
     <message>
-        <location filename="../WiiLinkPatcherGUI.py" line="355"/>
+        <location filename="../WiiLinkPatcherGUI.py" line="363"/>
         <source>Delete the existing &apos;WiiLink&apos; directory</source>
         <translation>A létező WiiLink könyvtár törlése</translation>
     </message>
     <message>
-        <location filename="../WiiLinkPatcherGUI.py" line="357"/>
+        <location filename="../WiiLinkPatcherGUI.py" line="365"/>
         <source>Leave the existing &apos;WiiLink&apos; directory as-is
 NOT RECOMMENDED</source>
         <translation>A létező WiiLink könyvtár figyelmen kívül hagyása
@@ -918,17 +923,17 @@ NEM AJÁNLOTT</translation>
 <context>
     <name>WiiLinkPatcherGUI</name>
     <message>
-        <location filename="../WiiLinkPatcherGUI.py" line="596"/>
+        <location filename="../WiiLinkPatcherGUI.py" line="604"/>
         <source>WiiLink Patcher</source>
         <translation>WiiLink Patcher</translation>
     </message>
     <message>
-        <location filename="../WiiLinkPatcherGUI.py" line="604"/>
+        <location filename="../WiiLinkPatcherGUI.py" line="612"/>
         <source>Next</source>
         <translation>Tovább</translation>
     </message>
     <message>
-        <location filename="../WiiLinkPatcherGUI.py" line="605"/>
+        <location filename="../WiiLinkPatcherGUI.py" line="613"/>
         <source>Back</source>
         <translation>Vissza</translation>
     </message>
