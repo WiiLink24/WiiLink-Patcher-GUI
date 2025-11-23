@@ -298,9 +298,14 @@ class About(QWidget):
             credit.setContentsMargins(15, 0, 0, 0)
             self.layout.addWidget(credit)
 
-        translator = self.tr("<a href=https://example.com style='color: #4a86e8; text-decoration: none;'><b>YOUR NAME</b></a> - LANGUAGE Translator")
+        translator = self.tr(
+            "<a href=https://example.com style='color: #4a86e8; text-decoration: none;'><b>YOUR NAME</b></a> - LANGUAGE Translator"
+        )
 
-        if translator != "<a href=https://example.com style='color: #4a86e8; text-decoration: none;'><b>YOUR NAME</b></a> - LANGUAGE Translator":
+        if (
+            translator
+            != "<a href=https://example.com style='color: #4a86e8; text-decoration: none;'><b>YOUR NAME</b></a> - LANGUAGE Translator"
+        ):
             translator_credit = QLabel(translator)
             translator_credit.setOpenExternalLinks(True)
             translator_credit.setContentsMargins(15, 0, 0, 0)
