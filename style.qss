@@ -3,6 +3,11 @@ About {
     color: #ffffff;
 }
 
+LanguageSelector {
+    background-color: #222222;
+    color: #ffffff;
+}
+
 QLabel {
     color: #ffffff;
 }

@@ -18,6 +18,7 @@
 
 import os
 import pathlib
+import re
 import shutil
 import subprocess
 import sys
@@ -27,7 +28,7 @@ import random
 import json
 import datetime
 
-from PySide6.QtCore import QTranslator, QLocale, QLibraryInfo, QTimer, Qt
+from PySide6.QtCore import QTranslator, QLocale, QLibraryInfo, QTimer, Qt, QEventLoop
 from PySide6.QtGui import QIcon
 from PySide6.QtWidgets import (
     QWizard,
@@ -39,6 +40,8 @@ from PySide6.QtWidgets import (
     QPushButton,
     QMessageBox,
     QWidget,
+    QComboBox,
+    QDialog,
 )
 
 from setup.custom import (
@@ -173,7 +176,7 @@ class About(QWidget):
         super().__init__(parent)
         self.setWindowTitle(self.tr("WiiLink Patcher - About"))
         self.setFixedWidth(450)
-        self.setFixedHeight(500)
+        self.setFixedHeight(550)
 
         # Set background color to match main app
         stylesheet = open(pathlib.Path().joinpath(file_path, "style.qss"), "r").read()
@@ -554,6 +557,8 @@ Please open a support ticket on our <a href='https://discord.gg/wiilink' style='
 
 
 class WiiLinkPatcherGUI(QWizard):
+    language = QLocale("en")
+
     def __init__(self, parent=None):
         super().__init__(parent)
 
@@ -606,6 +611,8 @@ class WiiLinkPatcherGUI(QWizard):
         self.check_connection()
         if "Nightly" not in patcher_version and "RC" not in patcher_version:
             self.check_for_updates()
+
+        self.language_selector = LanguageSelector()
         self.translation_setup()
 
         self.setWindowTitle(self.tr("WiiLink Patcher"))
@@ -664,14 +671,16 @@ class WiiLinkPatcherGUI(QWizard):
         Returns:
             None"""
 
+        self.language_selector.exec()
+
         path = QLibraryInfo.path(QLibraryInfo.LibraryPath.TranslationsPath)
         translator = QTranslator(app)
-        if translator.load(QLocale.system(), "qtbase", "_", path):
+        if translator.load(self.language, "qtbase", "_", path):
             app.installTranslator(translator)
 
         translator = QTranslator(app)
         path = file_path.joinpath("translations").resolve().as_posix()
-        if translator.load(QLocale.system(), "translation", "_", path):
+        if translator.load(self.language, "translation", "_", path):
             app.installTranslator(translator)
 
     def check_connection(self):
@@ -769,6 +778,66 @@ Latest version: {latest_version}""",
                         "https://github.com/WiiLink24/WiiLink-Patcher-GUI/releases/latest"
                     )
                     sys.exit()
+
+
+class LanguageSelector(QDialog):
+    def __init__(self, parent=None):
+        super().__init__(parent)
+        self.setWindowTitle("WiiLink Patcher - Select Language")
+        self.setFixedWidth(450)
+        self.setFixedHeight(150)
+
+        # Set background color to match main app
+        stylesheet = open(pathlib.Path().joinpath(file_path, "style.qss"), "r").read()
+        stylesheet = stylesheet.replace(
+            "%AssetsDir%",
+            pathlib.Path(file_path).joinpath("assets").resolve().as_posix(),
+        )
+        self.setStyleSheet(stylesheet)
+        self.layout = QVBoxLayout()
+
+        icon = QIcon(
+            pathlib.Path()
+            .joinpath(file_path, "assets", "logo.webp")
+            .resolve()
+            .as_posix()
+        )
+        self.setWindowIcon(icon)
+
+        label = QLabel(
+            "Select the language you'd like to use the patcher in from the list below:"
+        )
+        label.setWordWrap(True)
+        self.layout.addWidget(label)
+
+        translation_path = file_path.joinpath("translations")
+        languages = translation_path.iterdir()
+        self.language_names = {"English": "en"}
+
+        for language in languages:
+            language_code = re.findall("translation_(.*).qm", language.name)
+            if len(language_code):
+                locale = QLocale(language_code[0])
+
+                self.language_names.update(
+                    {locale.nativeLanguageName(): language_code[0]}
+                )
+
+        self.language_dropdown = QComboBox()
+        self.language_dropdown.addItems(self.language_names.keys())
+        self.layout.addWidget(self.language_dropdown)
+
+        done = QPushButton("Done")
+        done.clicked.connect(self.set_language)
+        self.layout.addWidget(done)
+
+        self.setLayout(self.layout)
+
+    def set_language(self):
+        selected_name = self.language_dropdown.currentText()
+        selected_language = self.language_names[selected_name]
+        WiiLinkPatcherGUI.language = QLocale(selected_language)
+        self.destroy()
 
 
 if __name__ == "__main__":
