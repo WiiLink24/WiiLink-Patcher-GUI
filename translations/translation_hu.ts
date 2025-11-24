@@ -66,7 +66,7 @@
     <message>
         <location filename="../WiiLinkPatcherGUI.py" line="299"/>
         <source>&lt;a href=https://example.com style=&apos;color: #4a86e8; text-decoration: none;&apos;&gt;&lt;b&gt;YOUR NAME&lt;/b&gt;&lt;/a&gt; - LANGUAGE Translator</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;a href=https://bsky.app/profile/szija.hu style=&apos;color: #4a86e8; text-decoration: none;&apos;&gt;&lt;b&gt;Szíjártó Levente Pál&lt;/b&gt;&lt;/a&gt; - Magyar fordításTranslator</translation>
     </message>
     <message>
         <location filename="../WiiLinkPatcherGUI.py" line="332"/>
@@ -744,7 +744,7 @@ Dokodemo ROM foltozása a Wii Roomos használat lehetővé tétele érdekében</
     <message>
         <location filename="../WiiLinkPatcherGUI.py" line="458"/>
         <source>&lt;h1&gt;Patching completed!&lt;/h1&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;h2&gt;A folyamat sikeresen befejeződött.&lt;/h2&gt;</translation>
     </message>
     <message>
         <location filename="../WiiLinkPatcherGUI.py" line="465"/>
