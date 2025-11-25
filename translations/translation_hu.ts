@@ -4,72 +4,72 @@
 <context>
     <name>About</name>
     <message>
-        <location filename="../WiiLinkPatcherGUI.py" line="177"/>
+        <location filename="../WiiLinkPatcherGUI.py" line="178"/>
         <source>WiiLink Patcher - About</source>
         <translation>WiiLink Patcher - Névjegy</translation>
     </message>
     <message>
-        <location filename="../WiiLinkPatcherGUI.py" line="210"/>
+        <location filename="../WiiLinkPatcherGUI.py" line="211"/>
         <source>WiiLink Patcher</source>
         <translation>WiiLink Patcher</translation>
     </message>
     <message>
-        <location filename="../WiiLinkPatcherGUI.py" line="215"/>
+        <location filename="../WiiLinkPatcherGUI.py" line="216"/>
         <source>GUI - Version {}</source>
         <translation>Grafikus - Verzió: {}</translation>
     </message>
     <message>
-        <location filename="../WiiLinkPatcherGUI.py" line="221"/>
+        <location filename="../WiiLinkPatcherGUI.py" line="222"/>
         <source>© 2020-{} WiiLink Team. All rights reserved.</source>
         <translation>© 2020–{} A WiiLink Csapata. Minden jog fenntartva.</translation>
     </message>
     <message>
-        <location filename="../WiiLinkPatcherGUI.py" line="239"/>
+        <location filename="../WiiLinkPatcherGUI.py" line="240"/>
         <source>Visit WiiLink Website</source>
         <translation>Ugrás a WiiLink honlapjára</translation>
     </message>
     <message>
-        <location filename="../WiiLinkPatcherGUI.py" line="246"/>
+        <location filename="../WiiLinkPatcherGUI.py" line="247"/>
         <source>View Project on GitHub</source>
         <translation>Ugrás a GitHub-adattárba</translation>
     </message>
     <message>
-        <location filename="../WiiLinkPatcherGUI.py" line="264"/>
+        <location filename="../WiiLinkPatcherGUI.py" line="265"/>
         <source>WiiLink Team</source>
         <translation>A WiiLink Csapata</translation>
     </message>
     <message>
-        <location filename="../WiiLinkPatcherGUI.py" line="273"/>
+        <location filename="../WiiLinkPatcherGUI.py" line="274"/>
         <source>&lt;a href=https://noahpistilli.ca style=&apos;color: #4a86e8; text-decoration: none;&apos;&gt;&lt;b&gt;Sketch&lt;/b&gt;&lt;/a&gt; - WiiLink Project Lead</source>
         <translation>&lt;a href=https://noahpistilli.ca style=&apos;color: #4a86e8; text-decoration: none;&apos;&gt;&lt;b&gt;Sketch&lt;/b&gt;&lt;/a&gt; - A WiiLink feje</translation>
     </message>
     <message>
-        <location filename="../WiiLinkPatcherGUI.py" line="278"/>
+        <location filename="../WiiLinkPatcherGUI.py" line="279"/>
         <source>&lt;a href=https://harrywalker.uk style=&apos;color: #4a86e8; text-decoration: none;&apos;&gt;&lt;b&gt;Harry&lt;/b&gt;&lt;/a&gt; - WiiLink Patcher GUI Developer</source>
         <translation>&lt;a href=https://harrywalker.uk style=&apos;color: #4a86e8; text-decoration: none;&apos;&gt;&lt;b&gt;Harry&lt;/b&gt;&lt;/a&gt; - A grafikus WiiLink Patcher fejlesztője</translation>
     </message>
     <message>
-        <location filename="../WiiLinkPatcherGUI.py" line="283"/>
+        <location filename="../WiiLinkPatcherGUI.py" line="284"/>
         <source>&lt;a href=https://github.com/pabloscorner style=&apos;color: #4a86e8; text-decoration: none;&apos;&gt;&lt;b&gt;PablosCorner&lt;/b&gt;&lt;/a&gt; - WiiLink Patcher CLI Developer</source>
         <translation>&lt;a href=https://github.com/pabloscorner style=&apos;color: #4a86e8; text-decoration: none;&apos;&gt;&lt;b&gt;PablosCorner&lt;/b&gt;&lt;/a&gt; - A parancssoros WiiLink Patcher feljesztője</translation>
     </message>
     <message>
-        <location filename="../WiiLinkPatcherGUI.py" line="288"/>
+        <location filename="../WiiLinkPatcherGUI.py" line="289"/>
         <source>&lt;a href=https://github.com/humanoidear style=&apos;color: #4a86e8; text-decoration: none;&apos;&gt;&lt;b&gt;Alex&lt;/b&gt;&lt;/a&gt; - WiiLink Design Lead</source>
         <translation>&lt;a href=https://github.com/humanoidear style=&apos;color: #4a86e8; text-decoration: none;&apos;&gt;&lt;b&gt;Alex&lt;/b&gt;&lt;/a&gt; - A WiiLink fő tervezője</translation>
     </message>
     <message>
-        <location filename="../WiiLinkPatcherGUI.py" line="293"/>
+        <location filename="../WiiLinkPatcherGUI.py" line="294"/>
         <source>&lt;a href=https://ninjacheetah.dev style=&apos;color: #4a86e8; text-decoration: none;&apos;&gt;&lt;b&gt;NinjaCheetah&lt;/b&gt;&lt;/a&gt; - libWiiPy Developer</source>
         <translation>&lt;a href=https://ninjacheetah.dev style=&apos;color: #4a86e8; text-decoration: none;&apos;&gt;&lt;b&gt;NinjaCheetah&lt;/b&gt;&lt;/a&gt; - A libWiiPy fejlesztője</translation>
     </message>
     <message>
-        <location filename="../WiiLinkPatcherGUI.py" line="305"/>
+        <location filename="../WiiLinkPatcherGUI.py" line="306"/>
         <source>&lt;a href=https://example.com style=&apos;color: #4a86e8; text-decoration: none;&apos;&gt;&lt;b&gt;YOUR NAME&lt;/b&gt;&lt;/a&gt; - LANGUAGE Translator</source>
         <translation>&lt;a href=https://bsky.app/profile/szija.hu style=&apos;color: #4a86e8; text-decoration: none;&apos;&gt;&lt;b&gt;Szíjártó Levente Pál&lt;/b&gt;&lt;/a&gt; - Magyar fordításTranslator</translation>
     </message>
     <message>
-        <location filename="../WiiLinkPatcherGUI.py" line="342"/>
+        <location filename="../WiiLinkPatcherGUI.py" line="343"/>
         <source>GayLink Patcher</source>
         <translation>GayLink Patcher</translation>
     </message>
@@ -626,8 +626,12 @@ Telepíthető szolgáltatások:
     </message>
     <message>
         <location filename="../modules/widgets.py" line="158"/>
+        <source>Japanese regions in the Forecast Channel uses different weather icons to other regions!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>The Japanese version of the News Channel uses different weather icons to other regions!</source>
-        <translation>A Hírcsatorna japán verziója a többi régiótól eltérő ikonokat használ.</translation>
+        <translation type="vanished">A Hírcsatorna japán verziója a többi régiótól eltérő ikonokat használ.</translation>
     </message>
     <message>
         <location filename="../modules/widgets.py" line="161"/>
@@ -686,45 +690,50 @@ Telepíthető szolgáltatások:
 <context>
     <name>MainMenu</name>
     <message>
-        <location filename="../WiiLinkPatcherGUI.py" line="95"/>
+        <location filename="../WiiLinkPatcherGUI.py" line="96"/>
         <source>Choose what you&apos;d like to do!</source>
         <translation>Válaszd ki a kívánt telepítési módot.</translation>
     </message>
     <message>
-        <location filename="../WiiLinkPatcherGUI.py" line="97"/>
+        <location filename="../WiiLinkPatcherGUI.py" line="98"/>
         <source>We recommend choosing &apos;Express Setup&apos; for first-time users.</source>
         <translation>Ha először használod ezt a varázslót, akkor a gyors telepítést javasoljuk.</translation>
     </message>
     <message>
-        <location filename="../WiiLinkPatcherGUI.py" line="103"/>
+        <location filename="../WiiLinkPatcherGUI.py" line="104"/>
         <source>Express Setup (Recommended)
 The fastest way to get started with WiiLink</source>
         <translation>Gyors telepítés (ajánlott)
 A WiiLink telepítésének legegyszerűbb módja</translation>
     </message>
     <message>
-        <location filename="../WiiLinkPatcherGUI.py" line="107"/>
+        <location filename="../WiiLinkPatcherGUI.py" line="108"/>
         <source>Custom Setup (Advanced)
 Customize your WiiLink installation</source>
         <translation>Egyéni telepítés (haladó)
 A WiiLink telepítésének személyre szabása</translation>
     </message>
     <message>
-        <location filename="../WiiLinkPatcherGUI.py" line="111"/>
+        <location filename="../WiiLinkPatcherGUI.py" line="112"/>
         <source>Extra Channels (Optional)
 Add additional channels to your Wii</source>
         <translation>Extra csatornák (nem kötelező)
 További csatornák telepítése a Wiire</translation>
     </message>
     <message>
-        <location filename="../WiiLinkPatcherGUI.py" line="115"/>
+        <location filename="../WiiLinkPatcherGUI.py" line="116"/>
+        <source>Wii Room Anywhere
+Patch a Dokodemo Wii no Ma ROM to work with Wii Room</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Wii Room Anywhere
 Patch a Dokodemo ROM to work with Wii Room</source>
-        <translation>Wii Room Anywhere
+        <translation type="vanished">Wii Room Anywhere
 Dokodemo ROM foltozása a Wii Roomos használat lehetővé tétele érdekében</translation>
     </message>
     <message>
-        <location filename="../WiiLinkPatcherGUI.py" line="117"/>
+        <location filename="../WiiLinkPatcherGUI.py" line="118"/>
         <source>About WiiLink Patcher</source>
         <translation>A WiiLink Patcher névjegye</translation>
     </message>
@@ -732,39 +741,39 @@ Dokodemo ROM foltozása a Wii Roomos használat lehetővé tétele érdekében</
 <context>
     <name>PatchingComplete</name>
     <message>
-        <location filename="../WiiLinkPatcherGUI.py" line="442"/>
+        <location filename="../WiiLinkPatcherGUI.py" line="450"/>
         <source>Success!</source>
         <translation>Kész!</translation>
     </message>
     <message>
-        <location filename="../WiiLinkPatcherGUI.py" line="443"/>
+        <location filename="../WiiLinkPatcherGUI.py" line="451"/>
         <source>Everything has been patched successfully</source>
         <translation>A csatornák foltozása sikeresen befejeződött</translation>
     </message>
     <message>
-        <location filename="../WiiLinkPatcherGUI.py" line="468"/>
+        <location filename="../WiiLinkPatcherGUI.py" line="476"/>
         <source>&lt;h1&gt;Patching completed!&lt;/h1&gt;</source>
         <translation>&lt;h2&gt;A folyamat sikeresen befejeződött.&lt;/h2&gt;</translation>
     </message>
     <message>
-        <location filename="../WiiLinkPatcherGUI.py" line="475"/>
+        <location filename="../WiiLinkPatcherGUI.py" line="483"/>
         <source>&lt;p&gt;You can find the relevant files by clicking the button below.
 Please open a support ticket on our &lt;a href=&apos;https://discord.gg/wiilink&apos; style=&apos;color: #4a86e8; text-decoration: none;&apos;&gt;Discord server&lt;/a&gt; if you have any issues.&lt;/p&gt;</source>
         <translation>&lt;p&gt;A szükséges fájlokat az alábbi gomb megnyomásával érheted el.
 Ha bármilyen problémába ütköznél, akkor a &lt;a href=&apos;https://discord.gg/wiilink&apos; style=&apos;color: #4a86e8; text-decoration: none;&apos;&gt;Discord-szerverünkön&lt;/a&gt; hibajegyet indíthatsz.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../WiiLinkPatcherGUI.py" line="489"/>
+        <location filename="../WiiLinkPatcherGUI.py" line="499"/>
         <source>Open the &apos;WiiLink&apos; folder</source>
         <translation>A WiiLink mappa megnyitása</translation>
     </message>
     <message>
-        <location filename="../WiiLinkPatcherGUI.py" line="509"/>
+        <location filename="../WiiLinkPatcherGUI.py" line="519"/>
         <source>Open the WAD installation guide in your web browser</source>
         <translation>A WAD-telepítési útmutató megnyitása böngészőben</translation>
     </message>
     <message>
-        <location filename="../WiiLinkPatcherGUI.py" line="515"/>
+        <location filename="../WiiLinkPatcherGUI.py" line="525"/>
         <source>Open the WiiLink installation guide in your web browser</source>
         <translation>A WiiLink-telepítési útmutató megnyitása böngészőben</translation>
     </message>
@@ -880,17 +889,17 @@ NEM AJÁNLOTT</translation>
 <context>
     <name>WiiLinkFolderDetected</name>
     <message>
-        <location filename="../WiiLinkPatcherGUI.py" line="349"/>
+        <location filename="../WiiLinkPatcherGUI.py" line="350"/>
         <source>WiiLink folder detected!</source>
         <translation>WiiLink mappát észleltünk!</translation>
     </message>
     <message>
-        <location filename="../WiiLinkPatcherGUI.py" line="352"/>
+        <location filename="../WiiLinkPatcherGUI.py" line="353"/>
         <source>A directory called &apos;WiiLink&apos; has been found in the &apos;Downloads&apos; directory.</source>
         <translation>Egy WiiLink könytárat észleltünk a Letöltések mappában.</translation>
     </message>
     <message>
-        <location filename="../WiiLinkPatcherGUI.py" line="358"/>
+        <location filename="../WiiLinkPatcherGUI.py" line="359"/>
         <source>The patcher has detected a directory called &apos;WiiLink&apos; in your &apos;Downloads&apos; directory.
 The patcher uses the &apos;WiiLink&apos; directory to store its files, therefore this directory causes a conflict.
 
@@ -901,19 +910,19 @@ Egy ilyen megnevezésű könyvtár a WiiLink Patcher fájljait tartalmazza, így
 Hogyan szeretnél cselekedni?</translation>
     </message>
     <message>
-        <location filename="../WiiLinkPatcherGUI.py" line="370"/>
+        <location filename="../WiiLinkPatcherGUI.py" line="371"/>
         <source>Rename the existing &apos;WiiLink&apos; directory to &apos;WiiLink.bak&apos;
 (Recommended)</source>
         <translation>A létező WiiLink könyvtár átnevezése „WiiLink.bak”-ra
 (ajánlott)</translation>
     </message>
     <message>
-        <location filename="../WiiLinkPatcherGUI.py" line="373"/>
+        <location filename="../WiiLinkPatcherGUI.py" line="374"/>
         <source>Delete the existing &apos;WiiLink&apos; directory</source>
         <translation>A létező WiiLink könyvtár törlése</translation>
     </message>
     <message>
-        <location filename="../WiiLinkPatcherGUI.py" line="375"/>
+        <location filename="../WiiLinkPatcherGUI.py" line="376"/>
         <source>Leave the existing &apos;WiiLink&apos; directory as-is
 NOT RECOMMENDED</source>
         <translation>A létező WiiLink könyvtár figyelmen kívül hagyása
@@ -923,17 +932,17 @@ NEM AJÁNLOTT</translation>
 <context>
     <name>WiiLinkPatcherGUI</name>
     <message>
-        <location filename="../WiiLinkPatcherGUI.py" line="619"/>
+        <location filename="../WiiLinkPatcherGUI.py" line="629"/>
         <source>WiiLink Patcher</source>
         <translation>WiiLink Patcher</translation>
     </message>
     <message>
-        <location filename="../WiiLinkPatcherGUI.py" line="627"/>
+        <location filename="../WiiLinkPatcherGUI.py" line="637"/>
         <source>Next</source>
         <translation>Tovább</translation>
     </message>
     <message>
-        <location filename="../WiiLinkPatcherGUI.py" line="628"/>
+        <location filename="../WiiLinkPatcherGUI.py" line="638"/>
         <source>Back</source>
         <translation>Vissza</translation>
     </message>

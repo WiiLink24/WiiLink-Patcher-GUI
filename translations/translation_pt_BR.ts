@@ -4,72 +4,72 @@
 <context>
     <name>About</name>
     <message>
-        <location filename="../WiiLinkPatcherGUI.py" line="177"/>
+        <location filename="../WiiLinkPatcherGUI.py" line="178"/>
         <source>WiiLink Patcher - About</source>
         <translation>Sobre o WiiLink Patcher</translation>
     </message>
     <message>
-        <location filename="../WiiLinkPatcherGUI.py" line="210"/>
+        <location filename="../WiiLinkPatcherGUI.py" line="211"/>
         <source>WiiLink Patcher</source>
         <translation>WiiLink Patcher</translation>
     </message>
     <message>
-        <location filename="../WiiLinkPatcherGUI.py" line="215"/>
+        <location filename="../WiiLinkPatcherGUI.py" line="216"/>
         <source>GUI - Version {}</source>
         <translation>GUI - Versão: {}</translation>
     </message>
     <message>
-        <location filename="../WiiLinkPatcherGUI.py" line="221"/>
+        <location filename="../WiiLinkPatcherGUI.py" line="222"/>
         <source>© 2020-{} WiiLink Team. All rights reserved.</source>
         <translation>© 2020–{} Equipe WiiLink. Todos os direitos reservados.</translation>
     </message>
     <message>
-        <location filename="../WiiLinkPatcherGUI.py" line="239"/>
+        <location filename="../WiiLinkPatcherGUI.py" line="240"/>
         <source>Visit WiiLink Website</source>
         <translation>Visite o site do WiiLink</translation>
     </message>
     <message>
-        <location filename="../WiiLinkPatcherGUI.py" line="246"/>
+        <location filename="../WiiLinkPatcherGUI.py" line="247"/>
         <source>View Project on GitHub</source>
         <translation>Veja o projeto no GitHub</translation>
     </message>
     <message>
-        <location filename="../WiiLinkPatcherGUI.py" line="264"/>
+        <location filename="../WiiLinkPatcherGUI.py" line="265"/>
         <source>WiiLink Team</source>
         <translation>Equipe WiiLink</translation>
     </message>
     <message>
-        <location filename="../WiiLinkPatcherGUI.py" line="273"/>
+        <location filename="../WiiLinkPatcherGUI.py" line="274"/>
         <source>&lt;a href=https://noahpistilli.ca style=&apos;color: #4a86e8; text-decoration: none;&apos;&gt;&lt;b&gt;Sketch&lt;/b&gt;&lt;/a&gt; - WiiLink Project Lead</source>
         <translation>&lt;a href=https://noahpistilli.ca style=&apos;color: #4a86e8; text-decoration: none;&apos;&gt;&lt;b&gt;Sketch&lt;/b&gt;&lt;/a&gt; - Liderança do projeto</translation>
     </message>
     <message>
-        <location filename="../WiiLinkPatcherGUI.py" line="278"/>
+        <location filename="../WiiLinkPatcherGUI.py" line="279"/>
         <source>&lt;a href=https://harrywalker.uk style=&apos;color: #4a86e8; text-decoration: none;&apos;&gt;&lt;b&gt;Harry&lt;/b&gt;&lt;/a&gt; - WiiLink Patcher GUI Developer</source>
         <translation>&lt;a href=https://harrywalker.uk style=&apos;color: #4a86e8; text-decoration: none;&apos;&gt;&lt;b&gt;Harry&lt;/b&gt;&lt;/a&gt; - Desenvolvimento do WiiLink Patcher GUI</translation>
     </message>
     <message>
-        <location filename="../WiiLinkPatcherGUI.py" line="283"/>
+        <location filename="../WiiLinkPatcherGUI.py" line="284"/>
         <source>&lt;a href=https://github.com/pabloscorner style=&apos;color: #4a86e8; text-decoration: none;&apos;&gt;&lt;b&gt;PablosCorner&lt;/b&gt;&lt;/a&gt; - WiiLink Patcher CLI Developer</source>
         <translation>&lt;a href=https://github.com/pabloscorner style=&apos;color: #4a86e8; text-decoration: none;&apos;&gt;&lt;b&gt;PablosCorner&lt;/b&gt;&lt;/a&gt; - Desenvolvimento do WiiLink Patcher CLI</translation>
     </message>
     <message>
-        <location filename="../WiiLinkPatcherGUI.py" line="288"/>
+        <location filename="../WiiLinkPatcherGUI.py" line="289"/>
         <source>&lt;a href=https://github.com/humanoidear style=&apos;color: #4a86e8; text-decoration: none;&apos;&gt;&lt;b&gt;Alex&lt;/b&gt;&lt;/a&gt; - WiiLink Design Lead</source>
         <translation>&lt;a href=https://github.com/humanoidear style=&apos;color: #4a86e8; text-decoration: none;&apos;&gt;&lt;b&gt;Alex&lt;/b&gt;&lt;/a&gt; - Liderança de edição gráfica</translation>
     </message>
     <message>
-        <location filename="../WiiLinkPatcherGUI.py" line="293"/>
+        <location filename="../WiiLinkPatcherGUI.py" line="294"/>
         <source>&lt;a href=https://ninjacheetah.dev style=&apos;color: #4a86e8; text-decoration: none;&apos;&gt;&lt;b&gt;NinjaCheetah&lt;/b&gt;&lt;/a&gt; - libWiiPy Developer</source>
         <translation>&lt;a href=https://ninjacheetah.dev style=&apos;color: #4a86e8; text-decoration: none;&apos;&gt;&lt;b&gt;NinjaCheetah&lt;/b&gt;&lt;/a&gt; - Desenvolvimento do libWiiPy</translation>
     </message>
     <message>
-        <location filename="../WiiLinkPatcherGUI.py" line="305"/>
+        <location filename="../WiiLinkPatcherGUI.py" line="306"/>
         <source>&lt;a href=https://example.com style=&apos;color: #4a86e8; text-decoration: none;&apos;&gt;&lt;b&gt;YOUR NAME&lt;/b&gt;&lt;/a&gt; - LANGUAGE Translator</source>
         <translation>&lt;a href=https://bsky.app/profile/jinjogal.bsky.social style=&apos;color: #4a86e8; text-decoration: none;&apos;&gt;&lt;b&gt;Jinjo&lt;/b&gt;&lt;/a&gt; - Tradução para português brasileiro</translation>
     </message>
     <message>
-        <location filename="../WiiLinkPatcherGUI.py" line="342"/>
+        <location filename="../WiiLinkPatcherGUI.py" line="343"/>
         <source>GayLink Patcher</source>
         <translation>GayLink Patcher</translation>
     </message>
@@ -626,8 +626,12 @@ Serviços que seriam instalados:
     </message>
     <message>
         <location filename="../modules/widgets.py" line="158"/>
+        <source>Japanese regions in the Forecast Channel uses different weather icons to other regions!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>The Japanese version of the News Channel uses different weather icons to other regions!</source>
-        <translation>A versão japonesa do Canal de Notícias usa ícones de clima diferentes de outras regiões!</translation>
+        <translation type="vanished">A versão japonesa do Canal de Notícias usa ícones de clima diferentes de outras regiões!</translation>
     </message>
     <message>
         <location filename="../modules/widgets.py" line="161"/>
@@ -686,45 +690,50 @@ Serviços que seriam instalados:
 <context>
     <name>MainMenu</name>
     <message>
-        <location filename="../WiiLinkPatcherGUI.py" line="95"/>
+        <location filename="../WiiLinkPatcherGUI.py" line="96"/>
         <source>Choose what you&apos;d like to do!</source>
         <translation>Escolha o que quiser.</translation>
     </message>
     <message>
-        <location filename="../WiiLinkPatcherGUI.py" line="97"/>
+        <location filename="../WiiLinkPatcherGUI.py" line="98"/>
         <source>We recommend choosing &apos;Express Setup&apos; for first-time users.</source>
         <translation>Recomendamos a configuração rápida para usuários novos.</translation>
     </message>
     <message>
-        <location filename="../WiiLinkPatcherGUI.py" line="103"/>
+        <location filename="../WiiLinkPatcherGUI.py" line="104"/>
         <source>Express Setup (Recommended)
 The fastest way to get started with WiiLink</source>
         <translation>Configuração rápida (Recomendado)
 O jeito mais rápido de obter o WiiLink</translation>
     </message>
     <message>
-        <location filename="../WiiLinkPatcherGUI.py" line="107"/>
+        <location filename="../WiiLinkPatcherGUI.py" line="108"/>
         <source>Custom Setup (Advanced)
 Customize your WiiLink installation</source>
         <translation>Configuração personalizada (Avançado)
 Personalize a sua instalação do WiiLink</translation>
     </message>
     <message>
-        <location filename="../WiiLinkPatcherGUI.py" line="111"/>
+        <location filename="../WiiLinkPatcherGUI.py" line="112"/>
         <source>Extra Channels (Optional)
 Add additional channels to your Wii</source>
         <translation>Canais adicionais (Opcional)
 Extras para o seu Wii</translation>
     </message>
     <message>
-        <location filename="../WiiLinkPatcherGUI.py" line="115"/>
+        <location filename="../WiiLinkPatcherGUI.py" line="116"/>
+        <source>Wii Room Anywhere
+Patch a Dokodemo Wii no Ma ROM to work with Wii Room</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Wii Room Anywhere
 Patch a Dokodemo ROM to work with Wii Room</source>
-        <translation>Wii Room Anywhere
+        <translation type="vanished">Wii Room Anywhere
 Aplique um patch em uma ROM do Dokodemo</translation>
     </message>
     <message>
-        <location filename="../WiiLinkPatcherGUI.py" line="117"/>
+        <location filename="../WiiLinkPatcherGUI.py" line="118"/>
         <source>About WiiLink Patcher</source>
         <translation>Sobre o WiiLink Patcher</translation>
     </message>
@@ -732,39 +741,39 @@ Aplique um patch em uma ROM do Dokodemo</translation>
 <context>
     <name>PatchingComplete</name>
     <message>
-        <location filename="../WiiLinkPatcherGUI.py" line="442"/>
+        <location filename="../WiiLinkPatcherGUI.py" line="450"/>
         <source>Success!</source>
         <translation>Pronto!</translation>
     </message>
     <message>
-        <location filename="../WiiLinkPatcherGUI.py" line="443"/>
+        <location filename="../WiiLinkPatcherGUI.py" line="451"/>
         <source>Everything has been patched successfully</source>
         <translation>Arquivos patcheados com sucesso</translation>
     </message>
     <message>
-        <location filename="../WiiLinkPatcherGUI.py" line="468"/>
+        <location filename="../WiiLinkPatcherGUI.py" line="476"/>
         <source>&lt;h1&gt;Patching completed!&lt;/h1&gt;</source>
         <translation>&lt;h1&gt;Concluído!&lt;/h1&gt;</translation>
     </message>
     <message>
-        <location filename="../WiiLinkPatcherGUI.py" line="475"/>
+        <location filename="../WiiLinkPatcherGUI.py" line="483"/>
         <source>&lt;p&gt;You can find the relevant files by clicking the button below.
 Please open a support ticket on our &lt;a href=&apos;https://discord.gg/wiilink&apos; style=&apos;color: #4a86e8; text-decoration: none;&apos;&gt;Discord server&lt;/a&gt; if you have any issues.&lt;/p&gt;</source>
         <translation>&lt;p&gt;Encontre os arquivos relevantes clicando no botão abaixo.
 Entre em contato no nosso Discord se tiver algum problema: &lt;a href=&apos;https://discord.gg/wiilink&apos; style=&apos;color: #4a86e8; text-decoration: none;&apos;&gt;Discord-szerverünkön&lt;/a&gt;&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../WiiLinkPatcherGUI.py" line="489"/>
+        <location filename="../WiiLinkPatcherGUI.py" line="499"/>
         <source>Open the &apos;WiiLink&apos; folder</source>
         <translation>Abrir a pasta WiiLink</translation>
     </message>
     <message>
-        <location filename="../WiiLinkPatcherGUI.py" line="509"/>
+        <location filename="../WiiLinkPatcherGUI.py" line="519"/>
         <source>Open the WAD installation guide in your web browser</source>
         <translation>Abrir o guia de instalação de WADs no seu navegador</translation>
     </message>
     <message>
-        <location filename="../WiiLinkPatcherGUI.py" line="515"/>
+        <location filename="../WiiLinkPatcherGUI.py" line="525"/>
         <source>Open the WiiLink installation guide in your web browser</source>
         <translation>Abrir o guia de instalação do WiiLink no seu navegador</translation>
     </message>
@@ -880,17 +889,17 @@ NÃO RECOMENDADO</translation>
 <context>
     <name>WiiLinkFolderDetected</name>
     <message>
-        <location filename="../WiiLinkPatcherGUI.py" line="349"/>
+        <location filename="../WiiLinkPatcherGUI.py" line="350"/>
         <source>WiiLink folder detected!</source>
         <translation>A pasta WiiLink foi detectada!</translation>
     </message>
     <message>
-        <location filename="../WiiLinkPatcherGUI.py" line="352"/>
+        <location filename="../WiiLinkPatcherGUI.py" line="353"/>
         <source>A directory called &apos;WiiLink&apos; has been found in the &apos;Downloads&apos; directory.</source>
         <translation>Um diretório chamado &apos;WiiLink&apos; foi encontrado na sua pasta de Downloads.</translation>
     </message>
     <message>
-        <location filename="../WiiLinkPatcherGUI.py" line="358"/>
+        <location filename="../WiiLinkPatcherGUI.py" line="359"/>
         <source>The patcher has detected a directory called &apos;WiiLink&apos; in your &apos;Downloads&apos; directory.
 The patcher uses the &apos;WiiLink&apos; directory to store its files, therefore this directory causes a conflict.
 
@@ -901,19 +910,19 @@ O patcher utiliza o diretório &apos;WiiLink&apos; para armazenar seus arquivos.
 Escolha uma das opções abaixo.</translation>
     </message>
     <message>
-        <location filename="../WiiLinkPatcherGUI.py" line="370"/>
+        <location filename="../WiiLinkPatcherGUI.py" line="371"/>
         <source>Rename the existing &apos;WiiLink&apos; directory to &apos;WiiLink.bak&apos;
 (Recommended)</source>
         <translation>Renomear o diretório existente para &apos;WiiLink.bak&apos;
 (Recomendado)</translation>
     </message>
     <message>
-        <location filename="../WiiLinkPatcherGUI.py" line="373"/>
+        <location filename="../WiiLinkPatcherGUI.py" line="374"/>
         <source>Delete the existing &apos;WiiLink&apos; directory</source>
         <translation>Apagar o diretório &apos;WiiLink&apos; existente</translation>
     </message>
     <message>
-        <location filename="../WiiLinkPatcherGUI.py" line="375"/>
+        <location filename="../WiiLinkPatcherGUI.py" line="376"/>
         <source>Leave the existing &apos;WiiLink&apos; directory as-is
 NOT RECOMMENDED</source>
         <translation>Deixar o repositório &apos;WiiLink&apos; como está
@@ -923,17 +932,17 @@ NÃO RECOMENDADO</translation>
 <context>
     <name>WiiLinkPatcherGUI</name>
     <message>
-        <location filename="../WiiLinkPatcherGUI.py" line="619"/>
+        <location filename="../WiiLinkPatcherGUI.py" line="629"/>
         <source>WiiLink Patcher</source>
         <translation>WiiLink Patcher</translation>
     </message>
     <message>
-        <location filename="../WiiLinkPatcherGUI.py" line="627"/>
+        <location filename="../WiiLinkPatcherGUI.py" line="637"/>
         <source>Next</source>
         <translation>Próximo</translation>
     </message>
     <message>
-        <location filename="../WiiLinkPatcherGUI.py" line="628"/>
+        <location filename="../WiiLinkPatcherGUI.py" line="638"/>
         <source>Back</source>
         <translation>Voltar</translation>
     </message>
