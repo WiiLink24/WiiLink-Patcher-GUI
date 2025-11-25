@@ -16,5 +16,6 @@ files = [
     "./translations/translation_it.ts",
     "./translations/translation_ja.ts",
     "./translations/translation_nl.ts",
+    "./translations/translation_pt_BR.ts",
     # Example language file: "./translations/translation_xx[_XX].ts"
 ]
