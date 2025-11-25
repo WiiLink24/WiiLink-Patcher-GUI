@@ -678,7 +678,7 @@ Services qui peuvent être installés :
         <location filename="../modules/widgets.py" line="127"/>
         <source>&lt;h3&gt;Did you know?&lt;/h3&gt;
 {}</source>
-        <translation>&lt;h3&gt;Le saviez-vous ?&lt;h3&gt;
+        <translation>&lt;h3&gt;Le saviez-vous ?&lt;/h3&gt;
 {}</translation>
     </message>
 </context>

@@ -41,7 +41,8 @@ from PySide6.QtWidgets import (
     QMessageBox,
     QWidget,
     QComboBox,
-    QDialog, QSizePolicy,
+    QDialog,
+    QSizePolicy,
 )
 
 from setup.custom import (
@@ -479,7 +480,9 @@ Please open a support ticket on our <a href='https://discord.gg/wiilink' style='
         self.message.setStyleSheet(
             "background-color: transparent; color: white; margin: 0;"
         )
-        self.message.setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Expanding)
+        self.message.setSizePolicy(
+            QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Expanding
+        )
         self.message.setTextFormat(Qt.TextFormat.RichText)
         self.message.setWordWrap(True)
         self.message.setAlignment(Qt.AlignmentFlag.AlignCenter)
