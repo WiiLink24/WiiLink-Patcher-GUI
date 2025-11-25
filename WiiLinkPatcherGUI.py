@@ -558,7 +558,7 @@ Please open a support ticket on our <a href='https://discord.gg/wiilink' style='
 
 
 class WiiLinkPatcherGUI(QWizard):
-    language = QLocale("en_US")
+    language = QLocale("en")
 
     def __init__(self, parent=None):
         super().__init__(parent)
@@ -810,20 +810,8 @@ class LanguageSelector(QDialog):
         )
         label.setWordWrap(True)
         self.layout.addWidget(label)
-
-        translation_path = file_path.joinpath("translations")
-        languages = translation_path.iterdir()
-        self.language_names = {"English (United States)": "en_US"}
-
-        for language in languages:
-            language_code = re.findall("translation_(.*).qm", language.name)
-            if len(language_code):
-                locale = QLocale(language_code[0])
-                language_name = (
-                    f"{locale.nativeLanguageName()} ({locale.nativeTerritoryName()})"
-                )
-
-                self.language_names.update({language_name: language_code[0]})
+        language_json = file_path.joinpath("translations", "languages.json").read_text()
+        self.language_names = json.loads(language_json)
 
         self.language_dropdown = QComboBox()
         self.language_dropdown.addItems(self.language_names.keys())

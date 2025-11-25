@@ -754,17 +754,17 @@ Please open a support ticket on our &lt;a href=&apos;https://discord.gg/wiilink&
 Entre em contato no nosso Discord se tiver algum problema: &lt;a href=&apos;https://discord.gg/wiilink&apos; style=&apos;color: #4a86e8; text-decoration: none;&apos;&gt;Discord-szerverünkön&lt;/a&gt;&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../WiiLinkPatcherGUI.py" line="488"/>
+        <location filename="../WiiLinkPatcherGUI.py" line="489"/>
         <source>Open the &apos;WiiLink&apos; folder</source>
         <translation>Abrir a pasta WiiLink</translation>
     </message>
     <message>
-        <location filename="../WiiLinkPatcherGUI.py" line="508"/>
+        <location filename="../WiiLinkPatcherGUI.py" line="509"/>
         <source>Open the WAD installation guide in your web browser</source>
         <translation>Abrir o guia de instalação de WADs no seu navegador</translation>
     </message>
     <message>
-        <location filename="../WiiLinkPatcherGUI.py" line="514"/>
+        <location filename="../WiiLinkPatcherGUI.py" line="515"/>
         <source>Open the WiiLink installation guide in your web browser</source>
         <translation>Abrir o guia de instalação do WiiLink no seu navegador</translation>
     </message>
@@ -923,17 +923,17 @@ NÃO RECOMENDADO</translation>
 <context>
     <name>WiiLinkPatcherGUI</name>
     <message>
-        <location filename="../WiiLinkPatcherGUI.py" line="618"/>
+        <location filename="../WiiLinkPatcherGUI.py" line="619"/>
         <source>WiiLink Patcher</source>
         <translation>WiiLink Patcher</translation>
     </message>
     <message>
-        <location filename="../WiiLinkPatcherGUI.py" line="626"/>
+        <location filename="../WiiLinkPatcherGUI.py" line="627"/>
         <source>Next</source>
         <translation>Próximo</translation>
     </message>
     <message>
-        <location filename="../WiiLinkPatcherGUI.py" line="627"/>
+        <location filename="../WiiLinkPatcherGUI.py" line="628"/>
         <source>Back</source>
         <translation>Voltar</translation>
     </message>
