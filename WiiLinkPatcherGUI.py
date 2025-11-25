@@ -432,6 +432,13 @@ What would you like to do?"""
 
         return False
 
+    def nextId(self):
+        match PatchingPage.setup_type:
+            case SetupTypes.Dokodemo:
+                return 402
+            case _:
+                return 11
+
 
 class PatchingComplete(QWizardPage):
     def __init__(self, parent=None):
