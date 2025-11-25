@@ -155,7 +155,7 @@ class FactWorker(QObject):
                 "We have a forum you can check out at <a href='https://forum.wiilink.ca'>forum.wiilink.ca</a>!"
             ),
             self.tr(
-                "The Japanese version of the News Channel uses different weather icons to other regions!"
+                "Japanese regions in the Forecast Channel uses different weather icons to other regions!"
             ),
             self.tr(
                 'The WiiLink project began in 2020 under the name "Rii no Ma", with the goal of reviving Wii no Ma and the other Japan-exclusive channels.'

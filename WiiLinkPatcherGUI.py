@@ -113,7 +113,7 @@ class MainMenu(QWizardPage):
                 )
             ),
             "dokodemo": QRadioButton(
-                self.tr("Wii Room Anywhere\nPatch a Dokodemo ROM to work with Wii Room")
+                self.tr("Wii Room Anywhere\nPatch a Dokodemo Wii no Ma ROM to work with Wii Room")
             ),
             "about": QPushButton(self.tr("About WiiLink Patcher")),
         }
