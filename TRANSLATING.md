@@ -55,5 +55,7 @@ If you have Qt Linguist installed system-wide already, you can use that instead.
 
 Once you've launched Qt Linguist, you can open the `.ts` file for your language in it.
 
+We have a localisation sheet available [here](https://docs.google.com/spreadsheets/d/1uNqUGsfe1Y-CuVvV-UaVUPdde-OhkweanIRUk5XBhj8) with channel names in it. Please use the channel names from this spreadsheet to help keep these strings consistent with what we use elsewhere!
+
 ### Step 5: Pushing
 Finally, commit and push your changes to your fork. Then, open a pull request in this repository to add your language!
