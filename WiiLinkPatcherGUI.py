@@ -15,10 +15,10 @@
 # nuitka-project: --include-data-dir={MAIN_DIRECTORY}/data=data
 # nuitka-project: --include-data-file={MAIN_DIRECTORY}/style.qss=style.qss
 # nuitka-project: --include-data-file={MAIN_DIRECTORY}/translations/*.qm=translations/
+# nuitka-project: --include-data-file={MAIN_DIRECTORY}/translations/languages.json=translations/languages.json
 
 import os
 import pathlib
-import re
 import shutil
 import subprocess
 import sys
@@ -113,7 +113,9 @@ class MainMenu(QWizardPage):
                 )
             ),
             "dokodemo": QRadioButton(
-                self.tr("Wii Room Anywhere\nPatch a Dokodemo Wii no Ma ROM to work with Wii Room")
+                self.tr(
+                    "Wii Room Anywhere\nPatch a Dokodemo Wii no Ma ROM to work with Wii Room"
+                )
             ),
             "about": QPushButton(self.tr("About WiiLink Patcher")),
         }
