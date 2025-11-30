@@ -627,7 +627,7 @@ Serviços que seriam instalados:
     <message>
         <location filename="../modules/widgets.py" line="158"/>
         <source>Japanese regions in the Forecast Channel uses different weather icons to other regions!</source>
-        <translation type="unfinished"></translation>
+        <translation>As regiões do Japão no Canal do Tempo usam ícones diferentes das regiões de outros países!</translation>
     </message>
     <message>
         <source>The Japanese version of the News Channel uses different weather icons to other regions!</source>
@@ -724,7 +724,8 @@ Extras para o seu Wii</translation>
         <location filename="../WiiLinkPatcherGUI.py" line="116"/>
         <source>Wii Room Anywhere
 Patch a Dokodemo Wii no Ma ROM to work with Wii Room</source>
-        <translation type="unfinished"></translation>
+        <translation>Wii Room Anywhere
+Aplique um patch em uma ROM do Dokodemo Wii no Ma</translation>
     </message>
     <message>
         <source>Wii Room Anywhere

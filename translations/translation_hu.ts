@@ -627,7 +627,7 @@ Telepíthető szolgáltatások:
     <message>
         <location filename="../modules/widgets.py" line="158"/>
         <source>Japanese regions in the Forecast Channel uses different weather icons to other regions!</source>
-        <translation type="unfinished"></translation>
+        <translation>A japán régiójú Időjáráscsatorna a többitől eltérő ikonokat használ.</translation>
     </message>
     <message>
         <source>The Japanese version of the News Channel uses different weather icons to other regions!</source>
@@ -724,7 +724,8 @@ További csatornák telepítése a Wiire</translation>
         <location filename="../WiiLinkPatcherGUI.py" line="116"/>
         <source>Wii Room Anywhere
 Patch a Dokodemo Wii no Ma ROM to work with Wii Room</source>
-        <translation type="unfinished"></translation>
+        <translation>Wii Room Anywhere
+Dokodemo Wii no Ma ROM foltozása Wii Roomos használathoz</translation>
     </message>
     <message>
         <source>Wii Room Anywhere
