@@ -178,7 +178,13 @@ class SelectSD(QWizardPage):
 
     def refresh_devices(self):
         removable_only = self.checkbox.isChecked()
-        new_devices = get_devices(removable_only=removable_only)
+        try:
+            new_devices = get_devices(removable_only=removable_only)
+        except:
+            exception_traceback = traceback.format_exc()
+            print(exception_traceback)
+            self.handle_error(f"{exception_traceback}")
+            return
 
         if new_devices != self.devices:
             self.devices = new_devices
@@ -212,6 +218,15 @@ class SelectSD(QWizardPage):
         sd_path = self.combo.currentData()
 
         return True
+
+    def handle_error(self, error: str):
+        error = error.replace("\n", "<br>")
+
+        QMessageBox.warning(
+            self,
+            "WiiLink Patcher - Warning",
+            f"An exception was encountered while attempting to list SD cards.<br><br>{error}<br>Please report this issue in the WiiLink Discord Server (<a href='https://discord.gg/wiilink'>discord.gg/wiilink</a>).",
+        )
 
 
 class WADCleanup(QWizardPage):
