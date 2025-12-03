@@ -11,6 +11,7 @@
 
 # These are standard options that are needed on all platforms.
 # nuitka-project: --plugin-enable=pyside6
+# nuitka-project: --include-package-data=PySide6:*.qm
 # nuitka-project: --include-data-dir={MAIN_DIRECTORY}/assets=assets
 # nuitka-project: --include-data-dir={MAIN_DIRECTORY}/data=data
 # nuitka-project: --include-data-file={MAIN_DIRECTORY}/style.qss=style.qss
