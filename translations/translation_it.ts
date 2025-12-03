@@ -4,74 +4,74 @@
 <context>
     <name>About</name>
     <message>
-        <location filename="../WiiLinkPatcherGUI.py" line="178"/>
+        <location filename="../WiiLinkPatcherGUI.py" line="180"/>
         <source>WiiLink Patcher - About</source>
-        <translation type="unfinished"></translation>
+        <translation>Informazioni su WiiLink Patcher</translation>
     </message>
     <message>
-        <location filename="../WiiLinkPatcherGUI.py" line="211"/>
+        <location filename="../WiiLinkPatcherGUI.py" line="213"/>
         <source>WiiLink Patcher</source>
         <translation>WiiLink Patcher</translation>
     </message>
     <message>
-        <location filename="../WiiLinkPatcherGUI.py" line="216"/>
+        <location filename="../WiiLinkPatcherGUI.py" line="218"/>
         <source>GUI - Version {}</source>
-        <translation type="unfinished"></translation>
+        <translation>GUI - Versione: {}</translation>
     </message>
     <message>
-        <location filename="../WiiLinkPatcherGUI.py" line="222"/>
+        <location filename="../WiiLinkPatcherGUI.py" line="224"/>
         <source>© 2020-{} WiiLink Team. All rights reserved.</source>
-        <translation type="unfinished"></translation>
+        <translation>© 2020–{} Team WiiLink. Tutti i diritti riservati.</translation>
     </message>
     <message>
-        <location filename="../WiiLinkPatcherGUI.py" line="240"/>
+        <location filename="../WiiLinkPatcherGUI.py" line="242"/>
         <source>Visit WiiLink Website</source>
         <translation>Visita il sito di WiiLink</translation>
     </message>
     <message>
-        <location filename="../WiiLinkPatcherGUI.py" line="247"/>
+        <location filename="../WiiLinkPatcherGUI.py" line="249"/>
         <source>View Project on GitHub</source>
-        <translation type="unfinished"></translation>
+        <translation>Guarda il progetto su GitHub</translation>
     </message>
     <message>
-        <location filename="../WiiLinkPatcherGUI.py" line="265"/>
+        <location filename="../WiiLinkPatcherGUI.py" line="267"/>
         <source>WiiLink Team</source>
-        <translation type="unfinished"></translation>
+        <translation>Team WiiLink</translation>
     </message>
     <message>
-        <location filename="../WiiLinkPatcherGUI.py" line="274"/>
+        <location filename="../WiiLinkPatcherGUI.py" line="276"/>
         <source>&lt;a href=https://noahpistilli.ca style=&apos;color: #4a86e8; text-decoration: none;&apos;&gt;&lt;b&gt;Sketch&lt;/b&gt;&lt;/a&gt; - WiiLink Project Lead</source>
-        <translation>&lt;a href=https://noahpistilli.ca style=&apos;color: #4a86e8; text-decoration: none;&apos;&gt;&lt;b&gt;Sketch&lt;/b&gt;&lt;/a&gt; - Fondatore di WiiLink</translation>
+        <translation>&lt;a href=https://noahpistilli.ca style=&apos;color: #4a86e8; text-decoration: none;&apos;&gt;&lt;b&gt;Sketch&lt;/b&gt;&lt;/a&gt; - Leader del progetto</translation>
     </message>
     <message>
-        <location filename="../WiiLinkPatcherGUI.py" line="279"/>
+        <location filename="../WiiLinkPatcherGUI.py" line="281"/>
         <source>&lt;a href=https://harrywalker.uk style=&apos;color: #4a86e8; text-decoration: none;&apos;&gt;&lt;b&gt;Harry&lt;/b&gt;&lt;/a&gt; - WiiLink Patcher GUI Developer</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;a href=https://harrywalker.uk style=&apos;color: #4a86e8; text-decoration: none;&apos;&gt;&lt;b&gt;Harry&lt;/b&gt;&lt;/a&gt; - Sviluppo della GUI del WiiLink Patcher GUI</translation>
     </message>
     <message>
-        <location filename="../WiiLinkPatcherGUI.py" line="284"/>
+        <location filename="../WiiLinkPatcherGUI.py" line="286"/>
         <source>&lt;a href=https://github.com/pabloscorner style=&apos;color: #4a86e8; text-decoration: none;&apos;&gt;&lt;b&gt;PablosCorner&lt;/b&gt;&lt;/a&gt; - WiiLink Patcher CLI Developer</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;a href=https://github.com/pabloscorner style=&apos;color: #4a86e8; text-decoration: none;&apos;&gt;&lt;b&gt;PablosCorner&lt;/b&gt;&lt;/a&gt; - Sviluppo della CLI di WiiLink Patcher CLI</translation>
     </message>
     <message>
-        <location filename="../WiiLinkPatcherGUI.py" line="289"/>
+        <location filename="../WiiLinkPatcherGUI.py" line="291"/>
         <source>&lt;a href=https://github.com/humanoidear style=&apos;color: #4a86e8; text-decoration: none;&apos;&gt;&lt;b&gt;Alex&lt;/b&gt;&lt;/a&gt; - WiiLink Design Lead</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;a href=https://github.com/humanoidear style=&apos;color: #4a86e8; text-decoration: none;&apos;&gt;&lt;b&gt;Alex&lt;/b&gt;&lt;/a&gt; - Leader del design grafico</translation>
     </message>
     <message>
-        <location filename="../WiiLinkPatcherGUI.py" line="294"/>
+        <location filename="../WiiLinkPatcherGUI.py" line="296"/>
         <source>&lt;a href=https://ninjacheetah.dev style=&apos;color: #4a86e8; text-decoration: none;&apos;&gt;&lt;b&gt;NinjaCheetah&lt;/b&gt;&lt;/a&gt; - libWiiPy Developer</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;a href=https://ninjacheetah.dev style=&apos;color: #4a86e8; text-decoration: none;&apos;&gt;&lt;b&gt;NinjaCheetah&lt;/b&gt;&lt;/a&gt; - Sviluppo di libWiiPy</translation>
     </message>
     <message>
-        <location filename="../WiiLinkPatcherGUI.py" line="306"/>
+        <location filename="../WiiLinkPatcherGUI.py" line="308"/>
         <source>&lt;a href=https://example.com style=&apos;color: #4a86e8; text-decoration: none;&apos;&gt;&lt;b&gt;YOUR NAME&lt;/b&gt;&lt;/a&gt; - LANGUAGE Translator</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;a href=https://x.com/PeIIoh style=&apos;color: #4a86e8; text-decoration: none;&apos;&gt;&lt;b&gt;Pello&lt;/b&gt;&lt;/a&gt; - Traduttore italiano</translation>
     </message>
     <message>
-        <location filename="../WiiLinkPatcherGUI.py" line="343"/>
+        <location filename="../WiiLinkPatcherGUI.py" line="345"/>
         <source>GayLink Patcher</source>
-        <translation type="unfinished"></translation>
+        <translation>GayLink Patcher</translation>
     </message>
 </context>
 <context>
@@ -79,22 +79,22 @@
     <message>
         <location filename="../setup/sd.py" line="89"/>
         <source>File copying</source>
-        <translation type="unfinished"></translation>
+        <translation>Copia dei file</translation>
     </message>
     <message>
         <location filename="../setup/sd.py" line="92"/>
         <source>Decide if you&apos;d like the patcher to copy its files to an external storage device.</source>
-        <translation type="unfinished"></translation>
+        <translation>Scegliere se il patcher debba copiare i file su un dispositivo di archiviazione esterno.</translation>
     </message>
     <message>
         <location filename="../setup/sd.py" line="98"/>
         <source>Would you like the patcher to automatically copy its patched files to your SD card / USB drive?</source>
-        <translation type="unfinished"></translation>
+        <translation>Il patcher deve copiare i file generati direttamente sulla scheda SD / dispositivo USB?</translation>
     </message>
     <message>
         <location filename="../setup/sd.py" line="103"/>
         <source>Yes</source>
-        <translation>Si</translation>
+        <translation>Sì</translation>
     </message>
     <message>
         <location filename="../setup/sd.py" line="104"/>
@@ -107,22 +107,22 @@
     <message>
         <location filename="../setup/custom.py" line="187"/>
         <source>Step 3: Custom Setup</source>
-        <translation>Passo 3: Installazione Personalizzata</translation>
+        <translation>Passo 3: Configurazione personalizzata</translation>
     </message>
     <message>
         <location filename="../setup/custom.py" line="188"/>
         <source>Choose console platform</source>
-        <translation>Seleziona la piattaforma della console</translation>
+        <translation>Scegliere la piattaforma della console</translation>
     </message>
     <message>
         <location filename="../setup/custom.py" line="191"/>
         <source>Which platform will you be installing WiiLink onto?</source>
-        <translation>Su quale versione di Wii saranno installati i canali?</translation>
+        <translation>Su che piattaforma sarà installato WiiLink?</translation>
     </message>
     <message>
         <location filename="../setup/custom.py" line="198"/>
         <source>Dolphin Emulator</source>
-        <translation>Dolphin Emulator</translation>
+        <translation>Emulatore Dolphin</translation>
     </message>
 </context>
 <context>
@@ -130,22 +130,22 @@
     <message>
         <location filename="../setup/custom.py" line="234"/>
         <source>Step 4: Custom Setup</source>
-        <translation>Passo 4: Installazione Personalizzata</translation>
+        <translation>Passo 4: Configurazione personalizzata</translation>
     </message>
     <message>
         <location filename="../setup/custom.py" line="235"/>
         <source>Choose console region</source>
-        <translation type="unfinished"></translation>
+        <translation>Scegliere la piattaforma della console</translation>
     </message>
     <message>
         <location filename="../setup/custom.py" line="237"/>
         <source>Which region is your console?</source>
-        <translation type="unfinished"></translation>
+        <translation>Qual è la regione della console?</translation>
     </message>
     <message>
         <location filename="../setup/custom.py" line="241"/>
         <source>North America (NTSC-U)</source>
-        <translation>Nord America (NTSC-U)</translation>
+        <translation>America del Nord (NTSC-U)</translation>
     </message>
     <message>
         <location filename="../setup/custom.py" line="242"/>
@@ -163,22 +163,22 @@
     <message>
         <location filename="../setup/custom.py" line="97"/>
         <source>Step 2: Custom Setup</source>
-        <translation>Passo 2: Installazione Personalizzata</translation>
+        <translation>Passo 3: Configurazione personalizzata</translation>
     </message>
     <message>
         <location filename="../setup/custom.py" line="98"/>
         <source>Select the regional channels you want to install</source>
-        <translation>Seleziona i canali di regionali da installare</translation>
+        <translation>Selezionare i canali regionali da installare</translation>
     </message>
     <message>
         <location filename="../setup/custom.py" line="101"/>
         <source>Select the channels you&apos;d like to install from the list below:</source>
-        <translation type="unfinished">Seleziona i canali extra da installare:</translation>
+        <translation>Selezionare i canali dalla lista seguente:</translation>
     </message>
     <message>
         <location filename="../setup/custom.py" line="145"/>
         <source>Russian notice for Wii Room</source>
-        <translation type="unfinished"></translation>
+        <translation>Avviso per Wii Room in russo</translation>
     </message>
     <message>
         <location filename="../setup/custom.py" line="147"/>
@@ -186,7 +186,10 @@
 Proper functionality is not guaranteed for systems without the Russian Wii Menu.&lt;br&gt;
 Follow the installation guide at &lt;a href=&apos;https://wii.zazios.ru/rus_menu&apos;&gt;https://wii.zazios.ru/rus_menu&lt;/a&gt; if you have not already done so.&lt;br&gt;
 (The guide is only available in Russian for now)</source>
-        <translation type="unfinished"></translation>
+        <translation>La traduzione russa di Wii Room è stata selezionata.&lt;br&gt;
+Alcune funzionalità potrebbero non essere disponibili senza l&apos;installazione del Menu Wii in russo.&lt;br&gt;
+Nel caso, seguire la guida per l&apos;installazione al link: &lt;a href=&apos;https://wii.zazios.ru/rus_menu&apos;&gt;https://wii.zazios.ru/rus_menu&lt;/a&gt;.&lt;br&gt;
+(Per il momento, la guida è disponibile solo in russo).</translation>
     </message>
 </context>
 <context>
@@ -194,17 +197,17 @@ Follow the installation guide at &lt;a href=&apos;https://wii.zazios.ru/rus_menu
     <message>
         <location filename="../setup/custom.py" line="32"/>
         <source>Step 1: Custom Setup</source>
-        <translation>Passo 1: Installazione Personalizzata</translation>
+        <translation>Passo 1: Configurazione personalizzata</translation>
     </message>
     <message>
         <location filename="../setup/custom.py" line="34"/>
         <source>Select the WiiConnect24 channels you want to install</source>
-        <translation>Seleziona i canali di WiiConnect24 da installare</translation>
+        <translation>Selezionare i canali WiiConnect24 da installare</translation>
     </message>
     <message>
         <location filename="../setup/custom.py" line="38"/>
         <source>Select the channels you&apos;d like to install from the list below:</source>
-        <translation type="unfinished">Seleziona i canali extra da installare:</translation>
+        <translation>Selezionare i canali dalla lista seguente:</translation>
     </message>
 </context>
 <context>
@@ -212,28 +215,28 @@ Follow the installation guide at &lt;a href=&apos;https://wii.zazios.ru/rus_menu
     <message>
         <location filename="../setup/dokodemo.py" line="155"/>
         <source>Patching in progress</source>
-        <translation type="unfinished">Il processo di patch è in corso</translation>
+        <translation>Patching in corso</translation>
     </message>
     <message>
         <location filename="../setup/dokodemo.py" line="156"/>
         <source>Please wait while the patcher works its magic!</source>
-        <translation type="unfinished"></translation>
+        <translation>Attendere, il patcher sta facendo la sua magia!</translation>
     </message>
     <message>
         <location filename="../setup/dokodemo.py" line="159"/>
         <source>Patching Wii Room Anywhere ({})...</source>
-        <translation type="unfinished"></translation>
+        <translation>Patching di Wii Room Anywhere {}…</translation>
     </message>
     <message>
         <location filename="../setup/dokodemo.py" line="184"/>
         <location filename="../setup/dokodemo.py" line="287"/>
         <source>Show Details</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostrare dettagli</translation>
     </message>
     <message>
         <location filename="../setup/dokodemo.py" line="289"/>
         <source>Hide Details</source>
-        <translation type="unfinished"></translation>
+        <translation>Nascondere dettagli</translation>
     </message>
 </context>
 <context>
@@ -241,49 +244,51 @@ Follow the installation guide at &lt;a href=&apos;https://wii.zazios.ru/rus_menu
     <message>
         <location filename="../setup/dokodemo.py" line="38"/>
         <source>Step 1: Wii Room Anywhere</source>
-        <translation type="unfinished"></translation>
+        <translation>Passo 1: Wii Room Anywhere</translation>
     </message>
     <message>
         <location filename="../setup/dokodemo.py" line="39"/>
         <source>Select &apos;Dokodemo Wii no Ma&apos; ROM.</source>
-        <translation type="unfinished"></translation>
+        <translation>Selezionare una ROM di &apos;Dokodemo Wii no Ma&apos;</translation>
     </message>
     <message>
         <location filename="../setup/dokodemo.py" line="43"/>
         <source>To get Wii Room Anywhere, you need to provide your own ROM for Revision 1 of &apos;Dokodemo Wii no Ma&apos;.</source>
-        <translation type="unfinished"></translation>
+        <translation>Per accedere a Wii Room Anywhere, è necessario disporre di una ROM di &apos;Dokodemo Wii no Ma&apos; (Revisione 1).</translation>
     </message>
     <message>
         <location filename="../setup/dokodemo.py" line="50"/>
         <source>Select your ROM...</source>
-        <translation type="unfinished"></translation>
+        <translation>Selezionare la ROM…</translation>
     </message>
     <message>
         <location filename="../setup/dokodemo.py" line="52"/>
         <source>Browse...</source>
-        <translation type="unfinished"></translation>
+        <translation>Sfogliare…</translation>
     </message>
     <message>
         <location filename="../setup/dokodemo.py" line="68"/>
         <source>Select &apos;Dokodemo Wii no Ma&apos; ROM</source>
-        <translation type="unfinished"></translation>
+        <translation>Selezionare la ROM di &apos;Dokodemo Wii no Ma&apos;</translation>
     </message>
     <message>
         <location filename="../setup/dokodemo.py" line="70"/>
         <source>Nintendo DS ROMs (*.nds)</source>
-        <translation type="unfinished"></translation>
+        <translation>ROM del Nintendo DS (*.nds)</translation>
     </message>
     <message>
         <location filename="../setup/dokodemo.py" line="88"/>
         <source>Invalid ROM</source>
-        <translation type="unfinished"></translation>
+        <translation>ROM invalida</translation>
     </message>
     <message>
         <location filename="../setup/dokodemo.py" line="90"/>
         <source>The ROM you provided is not a valid &apos;Dokodemo Wii no Ma&apos; ROM!
             
 Ensure the ROM you selected is of Revision 1 of &apos;Dokodemo Wii no Ma&apos;.</source>
-        <translation type="unfinished"></translation>
+        <translation>La ROM selezionata non è valida!
+
+Controllare che la ROM selezionata sia &apos;Dokodemo Wii no Ma&apos; (Revisão 1)</translation>
     </message>
 </context>
 <context>
@@ -291,27 +296,27 @@ Ensure the ROM you selected is of Revision 1 of &apos;Dokodemo Wii no Ma&apos;.<
     <message>
         <location filename="../setup/dokodemo.py" line="107"/>
         <source>Step 2: Wii Room Anywhere</source>
-        <translation type="unfinished"></translation>
+        <translation>Passo 2: Wii Room Anywhere</translation>
     </message>
     <message>
         <location filename="../setup/dokodemo.py" line="108"/>
         <source>Choose the language for Wii Room Anywhere.</source>
-        <translation type="unfinished"></translation>
+        <translation>Scegliere la lingua di Wii Room Anywhere.</translation>
     </message>
     <message>
         <location filename="../setup/dokodemo.py" line="111"/>
         <source>What language would you like &lt;b&gt;Wii Room Anywhere&lt;/b&gt; to be in?</source>
-        <translation type="unfinished"></translation>
+        <translation>In che lingua dovrebbe essere &lt;b&gt;Wii Room Anywhere&lt;/b&gt;?</translation>
     </message>
     <message>
         <location filename="../setup/dokodemo.py" line="115"/>
         <source>English</source>
-        <translation type="unfinished"></translation>
+        <translation>Inglese</translation>
     </message>
     <message>
         <location filename="../setup/dokodemo.py" line="116"/>
         <source>Japanese</source>
-        <translation type="unfinished">Giapponese</translation>
+        <translation>Giapponese</translation>
     </message>
 </context>
 <context>
@@ -319,27 +324,27 @@ Ensure the ROM you selected is of Revision 1 of &apos;Dokodemo Wii no Ma&apos;.<
     <message>
         <location filename="../setup/express.py" line="256"/>
         <source>Step 2C: Express Setup</source>
-        <translation>Passo 2C: Installazione Rapida</translation>
+        <translation>Passo 2.3: Configurazione rapida</translation>
     </message>
     <message>
         <location filename="../setup/express.py" line="257"/>
         <source>Choose Food Channel version.</source>
-        <translation>Scegli la versione del Canale Cibo.</translation>
+        <translation>Scegliere la versione del Canale Cibo.</translation>
     </message>
     <message>
         <location filename="../setup/express.py" line="261"/>
         <source>Which version of the &lt;b&gt;Food Channel&lt;/b&gt; would you like to install?</source>
-        <translation>Per il &lt;b&gt;Canale Cibo&lt;/b&gt;, quale versione vuoi installare?</translation>
+        <translation>Che versione del &lt;b&gt;Canale Cibo&lt;/b&gt; sarà installata?</translation>
     </message>
     <message>
         <location filename="../setup/express.py" line="267"/>
         <source>Standard (Fake Ordering)</source>
-        <translation>Standard (Ordini finti)</translation>
+        <translation>Standard (ordini simulati)</translation>
     </message>
     <message>
         <location filename="../setup/express.py" line="268"/>
         <source>Domino&apos;s (US and Canada only)</source>
-        <translation>Domino&apos;s (solo USA e Canada)</translation>
+        <translation>Domino&apos;s (solo per Stati Uniti e Canada)</translation>
     </message>
 </context>
 <context>
@@ -347,22 +352,22 @@ Ensure the ROM you selected is of Revision 1 of &apos;Dokodemo Wii no Ma&apos;.<
     <message>
         <location filename="../setup/express.py" line="306"/>
         <source>Step 3: Express Setup</source>
-        <translation>Passo 3: Installazione Rapida</translation>
+        <translation>Passo 3: Configurazione rapida</translation>
     </message>
     <message>
         <location filename="../setup/express.py" line="307"/>
         <source>Choose console platform.</source>
-        <translation>Scegli la piattaforma della console.</translation>
+        <translation>Scegliere la piattaforma della console.</translation>
     </message>
     <message>
         <location filename="../setup/express.py" line="310"/>
         <source>Which platform will you be installing WiiLink onto?</source>
-        <translation>Su quale versione di Wii saranno installati i canali?</translation>
+        <translation>Su che piattaforma sarà installato WiiLink?</translation>
     </message>
     <message>
         <location filename="../setup/express.py" line="317"/>
         <source>Dolphin Emulator</source>
-        <translation>Dolphin Emulator</translation>
+        <translation>Emulatore Dolphin</translation>
     </message>
 </context>
 <context>
@@ -370,22 +375,22 @@ Ensure the ROM you selected is of Revision 1 of &apos;Dokodemo Wii no Ma&apos;.<
     <message>
         <location filename="../setup/express.py" line="24"/>
         <source>Step 1: Express Setup</source>
-        <translation>Passo 1: Installazione Rapida</translation>
+        <translation>Passo 1: Configurazione rapida</translation>
     </message>
     <message>
         <location filename="../setup/express.py" line="25"/>
         <source>Choose your region for WiiConnect24 services.</source>
-        <translation>Scegli la regione per i servizi WiiConnect24.</translation>
+        <translation>Selezionare una regione per i servizi di WiiConnect24.</translation>
     </message>
     <message>
         <location filename="../setup/express.py" line="29"/>
         <source>For the WiiConnect24 services, which region would you like to install?</source>
-        <translation>Per i servizi WiiConnect24, che regione vuoi installare?</translation>
+        <translation>Installare i canali di WiiConnect24 per quale regione?</translation>
     </message>
     <message>
         <location filename="../setup/express.py" line="35"/>
         <source>North America (NTSC-U)</source>
-        <translation>Nord America (NTSC-U)</translation>
+        <translation>America del Nord (NTSC-U)</translation>
     </message>
     <message>
         <location filename="../setup/express.py" line="36"/>
@@ -403,22 +408,22 @@ Ensure the ROM you selected is of Revision 1 of &apos;Dokodemo Wii no Ma&apos;.<
     <message>
         <location filename="../setup/express.py" line="198"/>
         <source>Step 2B: Express Setup</source>
-        <translation>Passo 2B: Installazione Rapida</translation>
+        <translation>Passo 2.2: Configurazione rapida</translation>
     </message>
     <message>
         <location filename="../setup/express.py" line="199"/>
         <source>Choose the language for Wii Room.</source>
-        <translation>Scegli la lingua di Wii Room.</translation>
+        <translation>Scegliere la lingua di Wii Room.</translation>
     </message>
     <message>
         <location filename="../setup/express.py" line="202"/>
         <source>What language would you like &lt;b&gt;Wii Room&lt;/b&gt; to be in?</source>
-        <translation>Per &lt;b&gt;Wii Room&lt;/b&gt;, che lingua vuoi selezionare?</translation>
+        <translation>In che lingua dovrebbe essere &lt;b&gt;Wii Room&lt;/b&gt;?</translation>
     </message>
     <message>
         <location filename="../setup/express.py" line="243"/>
         <source>Russian notice for Wii Room</source>
-        <translation type="unfinished"></translation>
+        <translation>Avviso per Wii Room in russo</translation>
     </message>
     <message>
         <location filename="../setup/express.py" line="245"/>
@@ -426,7 +431,10 @@ Ensure the ROM you selected is of Revision 1 of &apos;Dokodemo Wii no Ma&apos;.<
 Proper functionality is not guaranteed for systems without the Russian Wii Menu.&lt;br&gt;
 Follow the installation guide at &lt;a href=&apos;https://wii.zazios.ru/rus_menu&apos;&gt;https://wii.zazios.ru/rus_menu&lt;/a&gt; if you have not already done so.&lt;br&gt;
 (The guide is only available in Russian for now)</source>
-        <translation type="unfinished"></translation>
+        <translation>La traduzione russa di Wii Room è stata selezionata.&lt;br&gt;
+Alcune funzionalità potrebbero non essere disponibili senza l&apos;installazione del Menu Wii in russo.&lt;br&gt;
+Nel caso, seguire la guida per l&apos;installazione al link: &lt;a href=&apos;https://wii.zazios.ru/rus_menu&apos;&gt;https://wii.zazios.ru/rus_menu&lt;/a&gt;.&lt;br&gt;
+(Per il momento, la guida è disponibile solo in russo).</translation>
     </message>
 </context>
 <context>
@@ -434,27 +442,27 @@ Follow the installation guide at &lt;a href=&apos;https://wii.zazios.ru/rus_menu
     <message>
         <location filename="../setup/express.py" line="130"/>
         <source>Step 2A: Express Setup</source>
-        <translation>Passo 2A: Installazione Rapida</translation>
+        <translation>Passo 2.1: Configurazione rapida</translation>
     </message>
     <message>
         <location filename="../setup/express.py" line="133"/>
         <source>Choose if you&apos;d like translations for WiiLink&apos;s regional channels.</source>
-        <translation>Scegli la lingua dei canali regionali di WiiLink.</translation>
+        <translation>Scegliere la lingua dei canali regionali di WiiLink.</translation>
     </message>
     <message>
         <location filename="../setup/express.py" line="139"/>
         <source>Would you like &lt;b&gt;Wii Room&lt;/b&gt;, &lt;b&gt;Photo Prints Channel&lt;/b&gt;, and the &lt;b&gt;Food Channel&lt;/b&gt; to be translated?</source>
-        <translation>Per &lt;b&gt;Wii Room&lt;/b&gt;, il &lt;b&gt;Canale Stampa Foto&lt;/b&gt;, e il &lt;b&gt;Canale Cibo&lt;/b&gt;, che lingua vuoi selezionare?</translation>
+        <translation>Si desidera installare le traduzioni di &lt;b&gt;Wii Room&lt;/b&gt;, &lt;b&gt;Canale Stampa Foto&lt;/b&gt; e &lt;b&gt;Canale Cibo&lt;/b&gt;?</translation>
     </message>
     <message>
         <location filename="../setup/express.py" line="145"/>
         <source>Translated (eg. English, French, etc.)</source>
-        <translation>Tradotto (ad es. inglese, francese, ecc.)</translation>
+        <translation>Canali tradotti (es: inglese, francese, italiano, ecc.)</translation>
     </message>
     <message>
         <location filename="../setup/express.py" line="147"/>
         <source>Japanese</source>
-        <translation>Giapponese</translation>
+        <translation>Solo in giapponese</translation>
     </message>
 </context>
 <context>
@@ -462,12 +470,12 @@ Follow the installation guide at &lt;a href=&apos;https://wii.zazios.ru/rus_menu
     <message>
         <location filename="../setup/express.py" line="73"/>
         <source>Step 2: Express Setup</source>
-        <translation>Passo 2: Installazione Rapida</translation>
+        <translation>Passo 2: Configurazione rapida</translation>
     </message>
     <message>
         <location filename="../setup/express.py" line="75"/>
         <source>Choose if you&apos;d like to install additional regional channels.</source>
-        <translation type="unfinished"></translation>
+        <translation>Scegliere se installare altri canali regionali.</translation>
     </message>
     <message>
         <location filename="../setup/express.py" line="80"/>
@@ -479,9 +487,9 @@ Services that would be installed:
 - Photo Prints Channel (Digicam Print Channel)
 - Food Channel (Demae Channel)
 - Kirby TV Channel</source>
-        <translation>Vuoi installare i servizi per i canali regionali di WiiLink?
+        <translation>Si desidera installare i canali regionali di WiiLink?
 
-Servizi che verranno installati:
+Servizi che saranno installati:
 
 - Wii Room (Wii no Ma)
 - Canale Stampa Foto (Digicam Print Channel)
@@ -491,7 +499,7 @@ Servizi che verranno installati:
     <message>
         <location filename="../setup/express.py" line="92"/>
         <source>Yes</source>
-        <translation>Si</translation>
+        <translation>Sì</translation>
     </message>
     <message>
         <location filename="../setup/express.py" line="93"/>
@@ -504,17 +512,17 @@ Servizi che verranno installati:
     <message>
         <location filename="../setup/extras.py" line="29"/>
         <source>Step 1: Extras Setup</source>
-        <translation>Passo 1: Installazione Extra</translation>
+        <translation>Passo 1: Configurazione degli extra</translation>
     </message>
     <message>
         <location filename="../setup/extras.py" line="30"/>
         <source>Select the extra channels you want to install</source>
-        <translation>Seleziona i canali extra da installare</translation>
+        <translation>Selezionare i canali extra da installare</translation>
     </message>
     <message>
         <location filename="../setup/extras.py" line="33"/>
         <source>Select the channels you&apos;d like to install from the list below:</source>
-        <translation>Seleziona i canali extra da installare:</translation>
+        <translation>Selezionare i canali dalla lista seguente:</translation>
     </message>
 </context>
 <context>
@@ -522,22 +530,22 @@ Servizi che verranno installati:
     <message>
         <location filename="../setup/extras.py" line="93"/>
         <source>Step 2: Extras Setup</source>
-        <translation>Passo 2: Installazione Extra</translation>
+        <translation>Passo 2: Configurazione degli extra</translation>
     </message>
     <message>
         <location filename="../setup/extras.py" line="94"/>
         <source>Choose console platform.</source>
-        <translation>Scegli la piattaforma della console.</translation>
+        <translation>Scegliere la piattaforma della console.</translation>
     </message>
     <message>
         <location filename="../setup/extras.py" line="97"/>
         <source>Which platform will you be installing the channels onto?</source>
-        <translation>Su quale versione di Wii saranno installati i canali?</translation>
+        <translation>Su che piattaforma saranno installati i canali?</translation>
     </message>
     <message>
         <location filename="../setup/extras.py" line="104"/>
         <source>Dolphin Emulator</source>
-        <translation>Dolphin Emulator</translation>
+        <translation>Emulatore Dolphin</translation>
     </message>
 </context>
 <context>
@@ -545,22 +553,22 @@ Servizi che verranno installati:
     <message>
         <location filename="../setup/extras.py" line="140"/>
         <source>Step 3: Extras Setup</source>
-        <translation>Passo 3: Installazione Extra</translation>
+        <translation>Passo 3: Configurazione degli extra</translation>
     </message>
     <message>
         <location filename="../setup/extras.py" line="141"/>
         <source>Choose console region.</source>
-        <translation type="unfinished"></translation>
+        <translation>Scegliere la piattaforma della console.</translation>
     </message>
     <message>
         <location filename="../setup/extras.py" line="143"/>
         <source>Which region is your console?</source>
-        <translation type="unfinished"></translation>
+        <translation>Qual è la regione della console?</translation>
     </message>
     <message>
         <location filename="../setup/extras.py" line="147"/>
         <source>North America (NTSC-U)</source>
-        <translation>Nord America (NTSC-U)</translation>
+        <translation>America del Nord (NTSC-U)</translation>
     </message>
     <message>
         <location filename="../setup/extras.py" line="148"/>
@@ -578,90 +586,90 @@ Servizi che verranno installati:
     <message>
         <location filename="../modules/widgets.py" line="139"/>
         <source>The Wii was the best selling game-console of 2006!</source>
-        <translation type="unfinished"></translation>
+        <translation>La Wii è stata la console più venduta del 2006!</translation>
     </message>
     <message>
         <location filename="../modules/widgets.py" line="140"/>
         <source>The Wii was called &quot;Revolution&quot; during development!</source>
-        <translation type="unfinished"></translation>
+        <translation>Nella fase di sviluppo, la Wii si chiamava &quot;Revolution&quot;!</translation>
     </message>
     <message>
         <location filename="../modules/widgets.py" line="142"/>
         <source>The music used in many of the Wii&apos;s channels (including the Wii Shop, Mii, Check Mii Out, and Forecast Channel) was composed by Kazumi Totaka.</source>
-        <translation type="unfinished"></translation>
+        <translation>La musica usata in svariati canali della Wii (Wii Shop, Canale Mii e Canale Meteo) è stata composta da Kazumi Totaka.</translation>
     </message>
     <message>
         <location filename="../modules/widgets.py" line="145"/>
         <source>The Internet Channel was initially a paid channel for 500 Wii Points.</source>
-        <translation type="unfinished"></translation>
+        <translation>Il Canale Internet era inizialmente a pagamento. Costava 500 Wii Points.</translation>
     </message>
     <message>
         <location filename="../modules/widgets.py" line="147"/>
         <source>You can use candles instead of a Wii sensor bar.</source>
-        <translation type="unfinished"></translation>
+        <translation>Al posto della barra sensore della Wii, si possono usare due candele.</translation>
     </message>
     <message>
         <location filename="../modules/widgets.py" line="149"/>
         <source>The blinking blue light that indicates Wii Mail has been received is actually synced to the bird call of the Japanese bush warbler!</source>
-        <translation type="unfinished"></translation>
+        <translation>La luce blu che indica la ricezione di un messaggio da Wii Mail è sincronizzata con il canto dell&apos;usignolo dei cespugli giapponese!</translation>
     </message>
     <message>
         <location filename="../modules/widgets.py" line="152"/>
         <source>Wii Sports is the most sold Wii game released, at a staggering 82.9 million copies sold!</source>
-        <translation type="unfinished"></translation>
+        <translation>Wii Sports è il gioco per Wii di maggior successo, con un vertiginoso totale di 82,9 milioni di copie vendute!</translation>
     </message>
     <message>
         <location filename="../modules/widgets.py" line="155"/>
         <source>We have a forum you can check out at &lt;a href=&apos;https://forum.wiilink.ca&apos;&gt;forum.wiilink.ca&lt;/a&gt;!</source>
-        <translation type="unfinished"></translation>
+        <translation>Abbiamo un forum, accessibile a: &lt;a href=&apos;https://forum.wiilink.ca&apos;&gt;forum.wiilink.ca&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="../modules/widgets.py" line="158"/>
         <source>Japanese regions in the Forecast Channel uses different weather icons to other regions!</source>
-        <translation type="unfinished"></translation>
+        <translation>Nel Canale Meteo, le regioni del Giappone sono rappresentate da icone diverse da quelle degli altri paesi!</translation>
     </message>
     <message>
         <location filename="../modules/widgets.py" line="161"/>
         <source>The WiiLink project began in 2020 under the name &quot;Rii no Ma&quot;, with the goal of reviving Wii no Ma and the other Japan-exclusive channels.</source>
-        <translation type="unfinished"></translation>
+        <translation>Il progetto WiiLink è nato nel 2020, con il nome di &quot;Rii no Ma&quot; e l&apos;obiettivo di riportare in vita Wii no Ma e altri canali solo giapponesi.</translation>
     </message>
     <message>
         <location filename="../modules/widgets.py" line="164"/>
         <source>RiiConnect24, the first WiiConnect24 revival project, was established in 2015, releasing the first News Channel revival in 2016!</source>
-        <translation type="unfinished"></translation>
+        <translation>Il primo progetto sostitutivo di WiiConnect24, RiiConnect24, è stato fondato nel 2015, e ha rilasciato la propria versione del Canale Notizie nel 2016!</translation>
     </message>
     <message>
         <location filename="../modules/widgets.py" line="167"/>
         <source>Before 2024, there were 2 separate services reviving WiiConnect24 channels - WiiLink and RiiConnect24. The two services were merged at the end of 2023.</source>
-        <translation type="unfinished"></translation>
+        <translation>Prima del 2024, esistevano due servizi diversi sostitutivi di WiiConnect24 - WiiLink e RiiConnect24. I due progetti si sono uniti alla fine del 2023.</translation>
     </message>
     <message>
         <location filename="../modules/widgets.py" line="170"/>
         <source>The globe used in the News and Forecast Channels is based on NASA imagery, and is also used in Mario Kart Wii.</source>
-        <translation type="unfinished"></translation>
+        <translation>Il globo usato nei Canali Notizie e Meteo è basato su immagini della NASA, ed è lo stesso che si trova in Mario Kart Wii.</translation>
     </message>
     <message>
         <location filename="../modules/widgets.py" line="173"/>
         <source>You can press the Reset button while the Wii is in standby mode to turn off the disc drive light indicating that you have a new message.</source>
-        <translation type="unfinished"></translation>
+        <translation>È possibile premere il pulsante Reset mentre la Wii è in standby per disabilitare la luce che indica la ricezione di un nuovo messaggio.</translation>
     </message>
 </context>
 <context>
     <name>FileCopying</name>
     <message>
-        <location filename="../setup/sd.py" line="315"/>
+        <location filename="../setup/sd.py" line="330"/>
         <source>Copying in progress</source>
-        <translation type="unfinished"></translation>
+        <translation>Copia in corso</translation>
     </message>
     <message>
-        <location filename="../setup/sd.py" line="316"/>
+        <location filename="../setup/sd.py" line="331"/>
         <source>Please wait while the patcher copies its files...</source>
-        <translation type="unfinished"></translation>
+        <translation>Attendere la copia dei file…</translation>
     </message>
     <message>
-        <location filename="../setup/sd.py" line="318"/>
+        <location filename="../setup/sd.py" line="333"/>
         <source>Copying files...</source>
-        <translation type="unfinished"></translation>
+        <translation>Copia dei file…</translation>
     </message>
 </context>
 <context>
@@ -670,7 +678,8 @@ Servizi che verranno installati:
         <location filename="../modules/widgets.py" line="127"/>
         <source>&lt;h3&gt;Did you know?&lt;/h3&gt;
 {}</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;h3&gt;Lo sapevi?&lt;/h3&gt;
+{}</translation>
     </message>
 </context>
 <context>
@@ -678,80 +687,85 @@ Servizi che verranno installati:
     <message>
         <location filename="../WiiLinkPatcherGUI.py" line="96"/>
         <source>Choose what you&apos;d like to do!</source>
-        <translation type="unfinished"></translation>
+        <translation>Scegliere l&apos;azione da compiere.</translation>
     </message>
     <message>
         <location filename="../WiiLinkPatcherGUI.py" line="98"/>
         <source>We recommend choosing &apos;Express Setup&apos; for first-time users.</source>
-        <translation type="unfinished"></translation>
+        <translation>Per utenti nuovi, consigliamo la &apos;Configurazione rapida&apos;.</translation>
     </message>
     <message>
         <location filename="../WiiLinkPatcherGUI.py" line="104"/>
         <source>Express Setup (Recommended)
 The fastest way to get started with WiiLink</source>
-        <translation type="unfinished"></translation>
+        <translation>Configurazione rapida (Consigliata)
+Il modo più veloce di installare WiiLink</translation>
     </message>
     <message>
         <location filename="../WiiLinkPatcherGUI.py" line="108"/>
         <source>Custom Setup (Advanced)
 Customize your WiiLink installation</source>
-        <translation type="unfinished"></translation>
+        <translation>Configurazione personalizzata (Avanzata)
+Per personalizzare l&apos;installazione di WiiLink</translation>
     </message>
     <message>
         <location filename="../WiiLinkPatcherGUI.py" line="112"/>
         <source>Extra Channels (Optional)
 Add additional channels to your Wii</source>
-        <translation type="unfinished"></translation>
+        <translation>Canali extra (Facoltativo)
+Aggiungere canali extra alla propria Wii</translation>
     </message>
     <message>
-        <location filename="../WiiLinkPatcherGUI.py" line="116"/>
+        <location filename="../WiiLinkPatcherGUI.py" line="117"/>
         <source>Wii Room Anywhere
 Patch a Dokodemo Wii no Ma ROM to work with Wii Room</source>
-        <translation type="unfinished"></translation>
+        <translation>Wii Room Anywhere
+Patchare una ROM di Dokodemo Wii no Ma perché funzioni con Wii Room</translation>
     </message>
     <message>
-        <location filename="../WiiLinkPatcherGUI.py" line="118"/>
+        <location filename="../WiiLinkPatcherGUI.py" line="120"/>
         <source>About WiiLink Patcher</source>
-        <translation type="unfinished"></translation>
+        <translation>Informazioni su WiiLink Patcher</translation>
     </message>
 </context>
 <context>
     <name>PatchingComplete</name>
     <message>
-        <location filename="../WiiLinkPatcherGUI.py" line="450"/>
+        <location filename="../WiiLinkPatcherGUI.py" line="452"/>
         <source>Success!</source>
-        <translation type="unfinished"></translation>
+        <translation>Finito!</translation>
     </message>
     <message>
-        <location filename="../WiiLinkPatcherGUI.py" line="451"/>
+        <location filename="../WiiLinkPatcherGUI.py" line="453"/>
         <source>Everything has been patched successfully</source>
-        <translation type="unfinished"></translation>
+        <translation>Patching completato con successo</translation>
     </message>
     <message>
-        <location filename="../WiiLinkPatcherGUI.py" line="476"/>
+        <location filename="../WiiLinkPatcherGUI.py" line="478"/>
         <source>&lt;h1&gt;Patching completed!&lt;/h1&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;h1&gt;Patching completato!&lt;/h1&gt;</translation>
     </message>
     <message>
-        <location filename="../WiiLinkPatcherGUI.py" line="483"/>
+        <location filename="../WiiLinkPatcherGUI.py" line="485"/>
         <source>&lt;p&gt;You can find the relevant files by clicking the button below.
 Please open a support ticket on our &lt;a href=&apos;https://discord.gg/wiilink&apos; style=&apos;color: #4a86e8; text-decoration: none;&apos;&gt;Discord server&lt;/a&gt; if you have any issues.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;È possibile visualizzare i file rilevanti cliccando sul pulsante in basso.
+Se si incontrasse un problema, è possibile aprire un ticket sul nostro &lt;a href=&apos;https://discord.gg/wiilink&apos; style=&apos;color: #4a86e8; text-decoration: none;&apos;&gt;server Discord&lt;/a&gt;&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../WiiLinkPatcherGUI.py" line="499"/>
+        <location filename="../WiiLinkPatcherGUI.py" line="501"/>
         <source>Open the &apos;WiiLink&apos; folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Aprire la cartella &apos;WiiLink&apos;</translation>
     </message>
     <message>
-        <location filename="../WiiLinkPatcherGUI.py" line="519"/>
+        <location filename="../WiiLinkPatcherGUI.py" line="521"/>
         <source>Open the WAD installation guide in your web browser</source>
-        <translation type="unfinished"></translation>
+        <translation>Aprire nel proprio browser la guida all&apos;installazione dei file WAD</translation>
     </message>
     <message>
-        <location filename="../WiiLinkPatcherGUI.py" line="525"/>
+        <location filename="../WiiLinkPatcherGUI.py" line="527"/>
         <source>Open the WiiLink installation guide in your web browser</source>
-        <translation type="unfinished"></translation>
+        <translation>Aprire nel proprio browser la guida all&apos;installazione di WiiLink</translation>
     </message>
 </context>
 <context>
@@ -759,28 +773,28 @@ Please open a support ticket on our &lt;a href=&apos;https://discord.gg/wiilink&
     <message>
         <location filename="../setup/patch.py" line="179"/>
         <source>Patching in progress</source>
-        <translation>Il processo di patch è in corso</translation>
+        <translation>Patching in corso</translation>
     </message>
     <message>
         <location filename="../setup/patch.py" line="180"/>
         <source>Please wait while the patcher works its magic!</source>
-        <translation type="unfinished"></translation>
+        <translation>Attendere, il patcher sta facendo la sua magia!</translation>
     </message>
     <message>
         <location filename="../setup/patch.py" line="182"/>
         <source>Downloading files...</source>
-        <translation>Scaricamento dei file...</translation>
+        <translation>Download dei file…</translation>
     </message>
     <message>
         <location filename="../setup/patch.py" line="206"/>
         <location filename="../setup/patch.py" line="317"/>
         <source>Show Details</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostrare dettagli</translation>
     </message>
     <message>
         <location filename="../setup/patch.py" line="319"/>
         <source>Hide Details</source>
-        <translation type="unfinished"></translation>
+        <translation>Nascondere dettagli</translation>
     </message>
 </context>
 <context>
@@ -788,12 +802,12 @@ Please open a support ticket on our &lt;a href=&apos;https://discord.gg/wiilink&
     <message>
         <location filename="../setup/patch.py" line="363"/>
         <source>Patching {}...</source>
-        <translation type="unfinished"></translation>
+        <translation>Applicazione della patch a {}…</translation>
     </message>
     <message>
         <location filename="../setup/patch.py" line="367"/>
         <source>Downloading {}...</source>
-        <translation type="unfinished"></translation>
+        <translation>Download di {}…</translation>
     </message>
 </context>
 <context>
@@ -801,116 +815,126 @@ Please open a support ticket on our &lt;a href=&apos;https://discord.gg/wiilink&
     <message>
         <location filename="../setup/sd.py" line="144"/>
         <source>Copying files: Step 1</source>
-        <translation type="unfinished"></translation>
+        <translation>Passo 1: Copia dei file</translation>
     </message>
     <message>
         <location filename="../setup/sd.py" line="145"/>
         <source>Select your storage device.</source>
-        <translation type="unfinished"></translation>
+        <translation>Selezionare il dispositivo di archiviazione.</translation>
     </message>
     <message>
         <location filename="../setup/sd.py" line="149"/>
         <source>&lt;b&gt;Select your SD card / USB drive:&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Selezionare la scheda SD / dispositivo USB:&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="../setup/sd.py" line="165"/>
         <source>Refresh</source>
-        <translation type="unfinished"></translation>
+        <translation>Ricaricare</translation>
     </message>
 </context>
 <context>
     <name>WADCleanup</name>
     <message>
-        <location filename="../setup/sd.py" line="220"/>
+        <location filename="../setup/sd.py" line="235"/>
         <source>Copying files: Step 1A</source>
-        <translation type="unfinished"></translation>
+        <translation>Passo 1.1: Copia dei file</translation>
     </message>
     <message>
-        <location filename="../setup/sd.py" line="221"/>
+        <location filename="../setup/sd.py" line="236"/>
         <source>Choose what to do with existing WAD folder.</source>
-        <translation type="unfinished"></translation>
+        <translation>Scegliere cosa fare con la cartella WAD già esistente.</translation>
     </message>
     <message>
-        <location filename="../setup/sd.py" line="229"/>
+        <location filename="../setup/sd.py" line="244"/>
         <source>The patcher has detected a directory called &apos;WAD&apos; on your selected storage device.
 The &apos;WAD&apos; directory is used to store channels you install on your Wii, therefore this directory causes a conflict.
 
 What would you like to do?</source>
-        <translation type="unfinished"></translation>
+        <translation>Il patcher ha individuato una cartella chiamata &apos;WAD&apos; nel dispositivo di archiviazione scelto.
+La cartella &apos;WAD&apos; conterrà i canali installati sulla Wii. Pertanto, la cartella preesistente causa un conflitto.
+
+Selezionare una delle opzioni seguenti.</translation>
     </message>
     <message>
-        <location filename="../setup/sd.py" line="240"/>
+        <location filename="../setup/sd.py" line="255"/>
         <source>Rename the existing &apos;WAD&apos; directory to &apos;WAD.bak&apos;
 (Recommended)</source>
-        <translation type="unfinished"></translation>
+        <translation>Rinominare la cartella esistente &apos;WAD.bak&apos;
+(Consigliato)</translation>
     </message>
     <message>
-        <location filename="../setup/sd.py" line="243"/>
+        <location filename="../setup/sd.py" line="258"/>
         <source>Delete the existing &apos;WAD&apos; directory</source>
-        <translation type="unfinished"></translation>
+        <translation>Apagar o diretório &apos;WAD&apos; existente</translation>
     </message>
     <message>
-        <location filename="../setup/sd.py" line="245"/>
+        <location filename="../setup/sd.py" line="260"/>
         <source>Leave the existing &apos;WAD&apos; directory as-is
 NOT RECOMMENDED</source>
-        <translation type="unfinished"></translation>
+        <translation>Mantenere la cartella &apos;WAD&apos;
+(NON CONSIGLIATO)</translation>
     </message>
 </context>
 <context>
     <name>WiiLinkFolderDetected</name>
     <message>
-        <location filename="../WiiLinkPatcherGUI.py" line="350"/>
+        <location filename="../WiiLinkPatcherGUI.py" line="352"/>
         <source>WiiLink folder detected!</source>
-        <translation type="unfinished"></translation>
+        <translation>È stata individuata una cartella di WiiLink!</translation>
     </message>
     <message>
-        <location filename="../WiiLinkPatcherGUI.py" line="353"/>
+        <location filename="../WiiLinkPatcherGUI.py" line="355"/>
         <source>A directory called &apos;WiiLink&apos; has been found in the &apos;Downloads&apos; directory.</source>
-        <translation type="unfinished"></translation>
+        <translation>Una cartella chiamata &apos;WiiLink&apos; è stata individuata nel percorso Download.</translation>
     </message>
     <message>
-        <location filename="../WiiLinkPatcherGUI.py" line="359"/>
+        <location filename="../WiiLinkPatcherGUI.py" line="361"/>
         <source>The patcher has detected a directory called &apos;WiiLink&apos; in your &apos;Downloads&apos; directory.
 The patcher uses the &apos;WiiLink&apos; directory to store its files, therefore this directory causes a conflict.
 
 What would you like to do?</source>
-        <translation type="unfinished"></translation>
+        <translation>Il patcher ha individuato una cartella chiamata &apos;WiiLink&apos; nel percorso Download.
+Il patcher usa la cartella &apos;WiiLink&apos; per salvare i propri file. Pertanto, la cartella preesistente causa un conflitto.
+
+Selezionare una delle opzioni seguenti.</translation>
     </message>
     <message>
-        <location filename="../WiiLinkPatcherGUI.py" line="371"/>
+        <location filename="../WiiLinkPatcherGUI.py" line="373"/>
         <source>Rename the existing &apos;WiiLink&apos; directory to &apos;WiiLink.bak&apos;
 (Recommended)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../WiiLinkPatcherGUI.py" line="374"/>
-        <source>Delete the existing &apos;WiiLink&apos; directory</source>
-        <translation type="unfinished"></translation>
+        <translation>Rinominare la cartella esistente &apos;WiiLink.bak&apos;
+(Consigliato)</translation>
     </message>
     <message>
         <location filename="../WiiLinkPatcherGUI.py" line="376"/>
+        <source>Delete the existing &apos;WiiLink&apos; directory</source>
+        <translation>Apagar o diretório &apos;WiiLink&apos; existente</translation>
+    </message>
+    <message>
+        <location filename="../WiiLinkPatcherGUI.py" line="378"/>
         <source>Leave the existing &apos;WiiLink&apos; directory as-is
 NOT RECOMMENDED</source>
-        <translation type="unfinished"></translation>
+        <translation>Mantenere la cartella &apos;WiiLink&apos;
+(NON CONSIGLIATO)</translation>
     </message>
 </context>
 <context>
     <name>WiiLinkPatcherGUI</name>
     <message>
-        <location filename="../WiiLinkPatcherGUI.py" line="629"/>
+        <location filename="../WiiLinkPatcherGUI.py" line="631"/>
         <source>WiiLink Patcher</source>
         <translation>WiiLink Patcher</translation>
     </message>
     <message>
-        <location filename="../WiiLinkPatcherGUI.py" line="637"/>
+        <location filename="../WiiLinkPatcherGUI.py" line="639"/>
         <source>Next</source>
-        <translation type="unfinished"></translation>
+        <translation>Avanti</translation>
     </message>
     <message>
-        <location filename="../WiiLinkPatcherGUI.py" line="638"/>
+        <location filename="../WiiLinkPatcherGUI.py" line="640"/>
         <source>Back</source>
-        <translation type="unfinished"></translation>
+        <translation>Indietro</translation>
     </message>
 </context>
 </TS>
