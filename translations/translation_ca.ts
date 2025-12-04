@@ -676,7 +676,8 @@ Aquests canals són els següents:
         <location filename="../modules/widgets.py" line="127"/>
         <source>&lt;h3&gt;Did you know?&lt;/h3&gt;
 {}</source>
-        <translation>Ho sabíeu?</translation>
+        <translation>&lt;h3&gt;Ho sabíeu?&lt;/h3&gt;
+{}</translation>
     </message>
 </context>
 <context>
@@ -746,7 +747,7 @@ Afegir suport per al Wii Room a una ROM Wii Room Anywhere</translation>
         <location filename="../WiiLinkPatcherGUI.py" line="486"/>
         <source>&lt;p&gt;You can find the relevant files by clicking the button below.
 Please open a support ticket on our &lt;a href=&apos;https://discord.gg/wiilink&apos; style=&apos;color: #4a86e8; text-decoration: none;&apos;&gt;Discord server&lt;/a&gt; if you have any issues.&lt;/p&gt;</source>
-        <translation>Trobareu els fitxers pertinents fent clic al botó més avall.
+        <translation>&lt;p&gt;Trobareu els fitxers pertinents fent clic al botó més avall.
 Si teniu cap problema, si us plau, creeu un tiquet de suport al nostre &lt;a href=&apos;https://discord.gg/wiilink&apos; style=&apos;color: #4a86e8; text-decoration: none;&apos;&gt;servidor Discord&lt;/a&gt;.&lt;/p&gt;</translation>
     </message>
     <message>

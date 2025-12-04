@@ -801,7 +801,7 @@ Please open a support ticket on our &lt;a href=&apos;https://discord.gg/wiilink&
     <message>
         <location filename="../setup/patch.py" line="363"/>
         <source>Patching {}...</source>
-        <translation>Вносим изменения в {]...</translation>
+        <translation>Вносим изменения в {}...</translation>
     </message>
     <message>
         <location filename="../setup/patch.py" line="367"/>

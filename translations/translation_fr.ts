@@ -178,7 +178,7 @@
     <message>
         <location filename="../setup/custom.py" line="145"/>
         <source>Russian notice for Wii Room</source>
-        <translation></translation>
+        <translation>Avertissement pour Wii Room en russe</translation>
     </message>
     <message>
         <location filename="../setup/custom.py" line="147"/>
