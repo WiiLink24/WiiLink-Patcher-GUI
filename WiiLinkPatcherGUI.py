@@ -823,7 +823,9 @@ class LanguageSelector(QDialog):
         )
         label.setWordWrap(True)
         self.layout.addWidget(label)
-        language_json = file_path.joinpath("translations", "languages.json").read_text(encoding="utf-8")
+        language_json = file_path.joinpath("translations", "languages.json").read_text(
+            encoding="utf-8"
+        )
         self.language_names = json.loads(language_json)
 
         self.language_dropdown = QComboBox()
