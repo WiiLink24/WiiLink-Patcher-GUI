@@ -3,6 +3,7 @@
 #    nuitka-project: --standalone
 #    nuitka-project: --macos-create-app-bundle
 #    nuitka-project: --macos-app-icon={MAIN_DIRECTORY}/assets/logo.webp
+#    nuitka-project: --macos-app-version=1.2.3
 # nuitka-project-if: {OS} == "Windows":
 #    nuitka-project: --windows-icon-from-ico={MAIN_DIRECTORY}/assets/logo.webp
 #    nuitka-project: --windows-console-mode=disable
