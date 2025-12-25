@@ -10,6 +10,8 @@
 #    nuitka-project: --onefile
 
 # These are standard options that are needed on all platforms.
+# nuitka-project: --product-version=1.2.3
+# nuitka-project: --copyright="© 2020-2025 WiiLink Team. All rights reserved."
 # nuitka-project: --plugin-enable=pyside6
 # nuitka-project: --include-package-data=PySide6:*.qm
 # nuitka-project: --include-data-dir={MAIN_DIRECTORY}/assets=assets

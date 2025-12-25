@@ -44,7 +44,7 @@ def get_devices(removable_only=True):
     return devices
 
 
-def check_removable(device: psutil._common.sdiskpart):
+def check_removable(device: psutil._ntuples.sdiskpart):
     try:
         match sys.platform:
             case "win32":
