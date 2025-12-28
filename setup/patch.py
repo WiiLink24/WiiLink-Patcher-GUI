@@ -1,6 +1,7 @@
 import sys
 import traceback
 
+import libTWLPy
 import libWiiPy
 import bsdiff4
 
@@ -131,15 +132,34 @@ def patch_channel(channel: dict, network: str = None):
     print("   - Done!")
 
 
-def patch_dokodemo(language: Languages, rom: bytes):
+def patch_dokodemo(language: Languages):
     """Applies patches to Dokodemo Wii no Ma
 
     Args:
         language: The language to patch Dokodemo to
-        rom: The Dokodemo ROM to patch
 
     Returns:
         None"""
+
+    title = libTWLPy.Title()
+
+    print(" - Downloading and parsing TMD...")
+    tmd = libTWLPy.download_tmd("000300044b44474a", 256)
+    title.load_tmd(tmd)
+    print("   - Done!")
+
+    print(" - Downloading and parsing ticket...")
+    ticket = libTWLPy.download_ticket("000300044b44474a")
+
+    title.load_ticket(ticket)
+    print("   - Done!")
+
+    print(" - Downloading certificate chain...")
+    title.load_content_records()
+    title.content.content = libTWLPy.download_content("000300044b44474a", title.tmd.content_record.content_id)
+    rom = title.get_content()
+
+    print("   - Done!")
 
     print("Patching Wii Room Anywhere:")
 

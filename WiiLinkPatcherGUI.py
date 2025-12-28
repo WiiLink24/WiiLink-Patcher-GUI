@@ -70,7 +70,6 @@ from setup.extras import (
     ExtrasRegionConfiguration,
 )
 from setup.dokodemo import (
-    DokodemoSelectFile,
     DokodemoSelectLanguage,
     DokodemoPatchingPage,
 )
@@ -118,7 +117,7 @@ class MainMenu(QWizardPage):
             ),
             "dokodemo": QRadioButton(
                 self.tr(
-                    "Wii Room Anywhere\nPatch a Dokodemo Wii no Ma ROM to work with Wii Room"
+                    "Wii Room Anywhere\nPatch Dokodemo Wii no Ma to work with Wii Room"
                 )
             ),
             "about": QPushButton(self.tr("About WiiLink Patcher")),
@@ -441,7 +440,7 @@ What would you like to do?"""
     def nextId(self):
         match PatchingPage.setup_type:
             case SetupTypes.Dokodemo:
-                return 402
+                return 401
             case _:
                 return 11
 
@@ -674,9 +673,8 @@ class WiiLinkPatcherGUI(QWizard):
         self.setPage(301, ExtrasPlatformConfiguration())
         self.setPage(302, ExtrasRegionConfiguration())
 
-        self.setPage(400, DokodemoSelectFile())
-        self.setPage(401, DokodemoSelectLanguage())
-        self.setPage(402, DokodemoPatchingPage())
+        self.setPage(400, DokodemoSelectLanguage())
+        self.setPage(401, DokodemoPatchingPage())
 
         self.setPage(1000, PatchingComplete())
 
