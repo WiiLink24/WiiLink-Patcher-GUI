@@ -294,7 +294,7 @@ Podeu trobar una guia (en rus) sobre com fer-ho aquí: &lt;a href=&apos;https://
     <message>
         <location filename="../setup/express.py" line="32"/>
         <source>Step 1: Express Setup</source>
-        <translation type="unfinished">Part 1: Configuració ràpida</translation>
+        <translation>Part 1: Configuració ràpida</translation>
     </message>
     <message>
         <location filename="../setup/express.py" line="33"/>
@@ -309,7 +309,7 @@ Podeu trobar una guia (en rus) sobre com fer-ho aquí: &lt;a href=&apos;https://
     <message>
         <location filename="../setup/express.py" line="66"/>
         <source>Russian notice for Wii Room</source>
-        <translation type="unfinished">Pel que fa a la versió russa del Wii Room</translation>
+        <translation>Pel que fa a la versió russa del Wii Room</translation>
     </message>
     <message>
         <location filename="../setup/express.py" line="68"/>
@@ -317,7 +317,7 @@ Podeu trobar una guia (en rus) sobre com fer-ho aquí: &lt;a href=&apos;https://
 Proper functionality is not guaranteed for systems without the Russian Wii Menu.&lt;br&gt;
 Follow the installation guide at &lt;a href=&apos;https://wii.zazios.ru/rus_menu&apos;&gt;https://wii.zazios.ru/rus_menu&lt;/a&gt; if you have not already done so.&lt;br&gt;
 (The guide is only available in Russian for now)</source>
-        <translation type="unfinished">Heu triat la traducció russa del Wii Room&lt;br&gt;
+        <translation>Heu triat la traducció russa del Wii Room&lt;br&gt;
 Perquè el canal funcioni correctament, heu d&apos;instaŀlar la traducció russa del menú Wii.&lt;br&gt;
 Podeu trobar una guia (en rus) sobre com fer-ho aquí: &lt;a href=&apos;https://wii.zazios.ru/rus_menu&apos;&gt;https://wii.zazios.ru/rus_menu&lt;/a&gt;&lt;br&gt;</translation>
     </message>
@@ -331,7 +331,7 @@ Podeu trobar una guia (en rus) sobre com fer-ho aquí: &lt;a href=&apos;https://
     <message>
         <location filename="../setup/express.py" line="365"/>
         <source>Step 5: Express Setup</source>
-        <translation type="unfinished"></translation>
+        <translation>Part 5: Configuració ràpida</translation>
     </message>
     <message>
         <location filename="../setup/express.py" line="366"/>
@@ -358,7 +358,7 @@ Podeu trobar una guia (en rus) sobre com fer-ho aquí: &lt;a href=&apos;https://
     <message>
         <location filename="../setup/express.py" line="152"/>
         <source>Step 2: Express Setup</source>
-        <translation type="unfinished">Part 2: Configuració ràpida</translation>
+        <translation>Part 2: Configuració ràpida</translation>
     </message>
     <message>
         <location filename="../setup/express.py" line="153"/>
@@ -476,12 +476,12 @@ Aquests canals són els següents:
     <message>
         <location filename="../setup/express.py" line="285"/>
         <source>Step 4: Express Setup</source>
-        <translation type="unfinished"></translation>
+        <translation>Part 4: Configuració ràpida</translation>
     </message>
     <message>
         <location filename="../setup/express.py" line="286"/>
         <source>Select the regional channels you want to install</source>
-        <translation type="unfinished">Canals territorials</translation>
+        <translation>Canals territorials</translation>
     </message>
     <message>
         <location filename="../setup/express.py" line="292"/>
@@ -494,7 +494,7 @@ Aquests canals són els següents:
     <message>
         <location filename="../setup/express.py" line="109"/>
         <source>Step 1A: Express Setup</source>
-        <translation type="unfinished"></translation>
+        <translation>Part 1A: Configuració ràpida</translation>
     </message>
     <message>
         <location filename="../setup/express.py" line="110"/>
@@ -512,12 +512,12 @@ Aquests canals són els següents:
     <message>
         <location filename="../setup/express.py" line="210"/>
         <source>Step 3: Express Setup</source>
-        <translation type="unfinished">Part 3: Configuració ràpida</translation>
+        <translation>Part 3: Configuració ràpida</translation>
     </message>
     <message>
         <location filename="../setup/express.py" line="212"/>
         <source>Select the WiiConnect24 channels you want to install</source>
-        <translation type="unfinished">Canals WiiConnect24</translation>
+        <translation>Canals WiiConnect24</translation>
     </message>
     <message>
         <location filename="../setup/express.py" line="219"/>

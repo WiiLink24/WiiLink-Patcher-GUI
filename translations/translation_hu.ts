@@ -295,7 +295,7 @@ Ha még nem rendelkezik a Wii-menü orosz fordításával, akkor a telepítési 
     <message>
         <location filename="../setup/express.py" line="32"/>
         <source>Step 1: Express Setup</source>
-        <translation type="unfinished">1. lépés: Gyors telepítés</translation>
+        <translation>1. lépés: Gyors telepítés</translation>
     </message>
     <message>
         <location filename="../setup/express.py" line="33"/>
@@ -310,7 +310,7 @@ Ha még nem rendelkezik a Wii-menü orosz fordításával, akkor a telepítési 
     <message>
         <location filename="../setup/express.py" line="66"/>
         <source>Russian notice for Wii Room</source>
-        <translation type="unfinished">Megjegyzés az orosz Wii Roomhoz</translation>
+        <translation>Megjegyzés az orosz Wii Roomhoz</translation>
     </message>
     <message>
         <location filename="../setup/express.py" line="68"/>
@@ -318,7 +318,7 @@ Ha még nem rendelkezik a Wii-menü orosz fordításával, akkor a telepítési 
 Proper functionality is not guaranteed for systems without the Russian Wii Menu.&lt;br&gt;
 Follow the installation guide at &lt;a href=&apos;https://wii.zazios.ru/rus_menu&apos;&gt;https://wii.zazios.ru/rus_menu&lt;/a&gt; if you have not already done so.&lt;br&gt;
 (The guide is only available in Russian for now)</source>
-        <translation type="unfinished">A Wii Room orosz fordítását választotta ki.&lt;br&gt;
+        <translation>A Wii Room orosz fordítását választotta ki.&lt;br&gt;
 Lehetséges, hogy ezen változat az orosz Wii-menü nélküli konzolokon nem fog működni.&lt;br&gt;
 Ha még nem rendelkezik a Wii-menü orosz fordításával, akkor a telepítési útmutatót a következő hivatkozáson találhatja: &lt;a href=&apos;https://wii.zazios.ru/rus_menu&apos;&gt;https://wii.zazios.ru/rus_menu&lt;/a&gt;.&lt;br&gt;
 (Ez az útmutató jelenleg csak orosz nyelven érhető el.)</translation>
@@ -333,7 +333,7 @@ Ha még nem rendelkezik a Wii-menü orosz fordításával, akkor a telepítési 
     <message>
         <location filename="../setup/express.py" line="365"/>
         <source>Step 5: Express Setup</source>
-        <translation type="unfinished"></translation>
+        <translation>5. lépés: Gyors telepítés</translation>
     </message>
     <message>
         <location filename="../setup/express.py" line="366"/>
@@ -360,7 +360,7 @@ Ha még nem rendelkezik a Wii-menü orosz fordításával, akkor a telepítési 
     <message>
         <location filename="../setup/express.py" line="152"/>
         <source>Step 2: Express Setup</source>
-        <translation type="unfinished">2. lépés: Gyors telepítés</translation>
+        <translation>2. lépés: Gyors telepítés</translation>
     </message>
     <message>
         <location filename="../setup/express.py" line="153"/>
@@ -479,12 +479,12 @@ Telepíthető szolgáltatások:
     <message>
         <location filename="../setup/express.py" line="285"/>
         <source>Step 4: Express Setup</source>
-        <translation type="unfinished"></translation>
+        <translation>4. lépés: Gyors telepítés</translation>
     </message>
     <message>
         <location filename="../setup/express.py" line="286"/>
         <source>Select the regional channels you want to install</source>
-        <translation type="unfinished">Telepítendő régiós csatornák megadása</translation>
+        <translation>Telepítendő régiós csatornák megadása</translation>
     </message>
     <message>
         <location filename="../setup/express.py" line="292"/>
@@ -497,7 +497,7 @@ Telepíthető szolgáltatások:
     <message>
         <location filename="../setup/express.py" line="109"/>
         <source>Step 1A: Express Setup</source>
-        <translation type="unfinished"></translation>
+        <translation>1.1. lépés: Gyors telepítés</translation>
     </message>
     <message>
         <location filename="../setup/express.py" line="110"/>
@@ -515,12 +515,12 @@ Telepíthető szolgáltatások:
     <message>
         <location filename="../setup/express.py" line="210"/>
         <source>Step 3: Express Setup</source>
-        <translation type="unfinished">3. lépés: Gyors telepítés</translation>
+        <translation>3. lépés: Gyors telepítés</translation>
     </message>
     <message>
         <location filename="../setup/express.py" line="212"/>
         <source>Select the WiiConnect24 channels you want to install</source>
-        <translation type="unfinished">Telepítendő WiiConnect24 csatornák megadása</translation>
+        <translation>Telepítendő WiiConnect24 csatornák megadása</translation>
     </message>
     <message>
         <location filename="../setup/express.py" line="219"/>

@@ -295,7 +295,7 @@ Suivez le guide d&apos;installation à &lt;a href=&apos;https://wii.zazios.ru/ru
     <message>
         <location filename="../setup/express.py" line="32"/>
         <source>Step 1: Express Setup</source>
-        <translation type="unfinished">Étape 1: Installation rapide</translation>
+        <translation>Étape 1: Installation rapide</translation>
     </message>
     <message>
         <location filename="../setup/express.py" line="33"/>
@@ -310,7 +310,7 @@ Suivez le guide d&apos;installation à &lt;a href=&apos;https://wii.zazios.ru/ru
     <message>
         <location filename="../setup/express.py" line="66"/>
         <source>Russian notice for Wii Room</source>
-        <translation type="unfinished">Avertissement pour Wii Room en russe</translation>
+        <translation>Avertissement pour Wii Room en russe</translation>
     </message>
     <message>
         <location filename="../setup/express.py" line="68"/>
@@ -318,7 +318,7 @@ Suivez le guide d&apos;installation à &lt;a href=&apos;https://wii.zazios.ru/ru
 Proper functionality is not guaranteed for systems without the Russian Wii Menu.&lt;br&gt;
 Follow the installation guide at &lt;a href=&apos;https://wii.zazios.ru/rus_menu&apos;&gt;https://wii.zazios.ru/rus_menu&lt;/a&gt; if you have not already done so.&lt;br&gt;
 (The guide is only available in Russian for now)</source>
-        <translation type="unfinished">Vous avez sélectionné la traduction russe pour Wii Room&lt;br&gt;
+        <translation>Vous avez sélectionné la traduction russe pour Wii Room&lt;br&gt;
 Le bon fonctionnement de la chaîne n&apos;est pas garanti pour les systèmes sans le menu Wii russe.&lt;br&gt;
 Suivez le guide d&apos;installation à &lt;a href=&apos;https://wii.zazios.ru/rus_menu&apos;&gt;https://wii.zazios.ru/rus_menu&lt;/a&gt; si ce n&apos;est pas déjà le cas.&lt;br&gt;
 (Le guide est seulement disponible en russe pour l&apos;instant)</translation>
@@ -333,7 +333,7 @@ Suivez le guide d&apos;installation à &lt;a href=&apos;https://wii.zazios.ru/ru
     <message>
         <location filename="../setup/express.py" line="365"/>
         <source>Step 5: Express Setup</source>
-        <translation type="unfinished"></translation>
+        <translation>Étape 5: Installation rapide</translation>
     </message>
     <message>
         <location filename="../setup/express.py" line="366"/>
@@ -360,7 +360,7 @@ Suivez le guide d&apos;installation à &lt;a href=&apos;https://wii.zazios.ru/ru
     <message>
         <location filename="../setup/express.py" line="152"/>
         <source>Step 2: Express Setup</source>
-        <translation type="unfinished">Étape 2: Installation rapide</translation>
+        <translation>Étape 2: Installation rapide</translation>
     </message>
     <message>
         <location filename="../setup/express.py" line="153"/>
@@ -479,12 +479,12 @@ Services qui peuvent être installés :
     <message>
         <location filename="../setup/express.py" line="285"/>
         <source>Step 4: Express Setup</source>
-        <translation type="unfinished"></translation>
+        <translation>Étape 4: Installation rapide</translation>
     </message>
     <message>
         <location filename="../setup/express.py" line="286"/>
         <source>Select the regional channels you want to install</source>
-        <translation type="unfinished">Sélectionnez les chaînes régionales à installer</translation>
+        <translation>Sélectionnez les chaînes régionales à installer</translation>
     </message>
     <message>
         <location filename="../setup/express.py" line="292"/>
@@ -497,7 +497,7 @@ Services qui peuvent être installés :
     <message>
         <location filename="../setup/express.py" line="109"/>
         <source>Step 1A: Express Setup</source>
-        <translation type="unfinished"></translation>
+        <translation>Étape 1A: Installation rapide</translation>
     </message>
     <message>
         <location filename="../setup/express.py" line="110"/>
@@ -515,12 +515,12 @@ Services qui peuvent être installés :
     <message>
         <location filename="../setup/express.py" line="210"/>
         <source>Step 3: Express Setup</source>
-        <translation type="unfinished">Étape 3: Installation rapide</translation>
+        <translation>Étape 3: Installation rapide</translation>
     </message>
     <message>
         <location filename="../setup/express.py" line="212"/>
         <source>Select the WiiConnect24 channels you want to install</source>
-        <translation type="unfinished">Sélectionnez les chaînes WiiConnect24 à installer</translation>
+        <translation>Sélectionnez les chaînes WiiConnect24 à installer</translation>
     </message>
     <message>
         <location filename="../setup/express.py" line="219"/>
