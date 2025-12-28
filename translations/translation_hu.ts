@@ -277,12 +277,12 @@ Ha még nem rendelkezik a Wii-menü orosz fordításával, akkor a telepítési 
     <message>
         <location filename="../setup/express.py" line="33"/>
         <source>Choose the language for your installation.</source>
-        <translation type="unfinished"></translation>
+        <translation>A telepítendő nyelv megadása.</translation>
     </message>
     <message>
         <location filename="../setup/express.py" line="36"/>
         <source>What language would you like to use the channels in?</source>
-        <translation type="unfinished"></translation>
+        <translation>Milyen nyelven szeretnéd használni a csatornákat?</translation>
     </message>
     <message>
         <location filename="../setup/express.py" line="66"/>
@@ -372,7 +372,7 @@ Ha még nem rendelkezik a Wii-menü orosz fordításával, akkor a telepítési 
     <message>
         <location filename="../setup/express.py" line="292"/>
         <source>Select the regional channels you&apos;d like to install from the list below:</source>
-        <translation type="unfinished"></translation>
+        <translation>Telepítendő régiós csatornák megadása:</translation>
     </message>
 </context>
 <context>
@@ -385,12 +385,12 @@ Ha még nem rendelkezik a Wii-menü orosz fordításával, akkor a telepítési 
     <message>
         <location filename="../setup/express.py" line="110"/>
         <source>Choose a secondary language for your installation.</source>
-        <translation type="unfinished"></translation>
+        <translation>Pótnyelv megadása.</translation>
     </message>
     <message>
         <location filename="../setup/express.py" line="114"/>
         <source>Not all channels are available in the language you selected. For these channels, what language would you like to use?</source>
-        <translation type="unfinished"></translation>
+        <translation>A kiválasztott nyelv csak bizonyos csatornákhoz érhető el. A többi csatornát milyen nyelven szeretnéd használni?</translation>
     </message>
 </context>
 <context>
@@ -408,7 +408,7 @@ Ha még nem rendelkezik a Wii-menü orosz fordításával, akkor a telepítési 
     <message>
         <location filename="../setup/express.py" line="219"/>
         <source>Select the WiiConnect24 channels you&apos;d like to install from the list below:</source>
-        <translation type="unfinished"></translation>
+        <translation>Telepítendő WiiConnect24-csatornák megadása:</translation>
     </message>
 </context>
 <context>
@@ -623,7 +623,8 @@ További csatornák telepítése a Wiire</translation>
         <location filename="../WiiLinkPatcherGUI.py" line="120"/>
         <source>Wii Room Anywhere
 Patch Dokodemo Wii no Ma to work with Wii Room</source>
-        <translation type="unfinished"></translation>
+        <translation>Wii Room Anywhere
+Dokodemo ROM foltozása Wii Roomos használathoz</translation>
     </message>
     <message>
         <location filename="../WiiLinkPatcherGUI.py" line="123"/>
