@@ -268,29 +268,6 @@ Ha még nem rendelkezik a Wii-menü orosz fordításával, akkor a telepítési 
     </message>
 </context>
 <context>
-    <name>ExpressDemaeConfiguration</name>
-    <message>
-        <source>Step 2C: Express Setup</source>
-        <translation type="vanished">2.3. lépés: Gyors telepítés</translation>
-    </message>
-    <message>
-        <source>Choose Food Channel version.</source>
-        <translation type="vanished">Az Ételcsatorna telepítendő változatának kiválasztása.</translation>
-    </message>
-    <message>
-        <source>Which version of the &lt;b&gt;Food Channel&lt;/b&gt; would you like to install?</source>
-        <translation type="vanished">Az &lt;b&gt;Ételcsatorna&lt;/b&gt; mely változatát szeretnéd telepíteni?</translation>
-    </message>
-    <message>
-        <source>Standard (Fake Ordering)</source>
-        <translation type="vanished">Alapértelmezett (nem valódi rendelés)</translation>
-    </message>
-    <message>
-        <source>Domino&apos;s (US and Canada only)</source>
-        <translation type="vanished">Domino&apos;s (csak az Egyesült Államokban és Kanadában elérhető)</translation>
-    </message>
-</context>
-<context>
     <name>ExpressLanguage</name>
     <message>
         <location filename="../setup/express.py" line="32"/>
@@ -327,10 +304,6 @@ Ha még nem rendelkezik a Wii-menü orosz fordításával, akkor a telepítési 
 <context>
     <name>ExpressPlatformConfiguration</name>
     <message>
-        <source>Step 3: Express Setup</source>
-        <translation type="vanished">3. lépés: Gyors telepítés</translation>
-    </message>
-    <message>
         <location filename="../setup/express.py" line="365"/>
         <source>Step 5: Express Setup</source>
         <translation>5. lépés: Gyors telepítés</translation>
@@ -353,10 +326,6 @@ Ha még nem rendelkezik a Wii-menü orosz fordításával, akkor a telepítési 
 </context>
 <context>
     <name>ExpressRegion</name>
-    <message>
-        <source>Step 1: Express Setup</source>
-        <translation type="vanished">1. lépés: Gyors telepítés</translation>
-    </message>
     <message>
         <location filename="../setup/express.py" line="152"/>
         <source>Step 2: Express Setup</source>
@@ -389,93 +358,7 @@ Ha még nem rendelkezik a Wii-menü orosz fordításával, akkor a telepítési 
     </message>
 </context>
 <context>
-    <name>ExpressRegionalChannelLanguage</name>
-    <message>
-        <source>Step 2B: Express Setup</source>
-        <translation type="vanished">2.2. lépés: Gyors telepítés</translation>
-    </message>
-    <message>
-        <source>Choose the language for Wii Room.</source>
-        <translation type="vanished">A Wii Room nyelvének megadása.</translation>
-    </message>
-    <message>
-        <source>What language would you like &lt;b&gt;Wii Room&lt;/b&gt; to be in?</source>
-        <translation type="vanished">Milyen nyelven szeretnéd használni a &lt;b&gt;Wii Roomot&lt;/b&gt;?</translation>
-    </message>
-    <message>
-        <source>Russian notice for Wii Room</source>
-        <translation type="vanished">Megjegyzés az orosz Wii Roomhoz</translation>
-    </message>
-    <message>
-        <source>You have selected the Russian translation for Wii Room&lt;br&gt;
-Proper functionality is not guaranteed for systems without the Russian Wii Menu.&lt;br&gt;
-Follow the installation guide at &lt;a href=&apos;https://wii.zazios.ru/rus_menu&apos;&gt;https://wii.zazios.ru/rus_menu&lt;/a&gt; if you have not already done so.&lt;br&gt;
-(The guide is only available in Russian for now)</source>
-        <translation type="vanished">A Wii Room orosz fordítását választotta ki.&lt;br&gt;
-Lehetséges, hogy ezen változat az orosz Wii-menü nélküli konzolokon nem fog működni.&lt;br&gt;
-Ha még nem rendelkezik a Wii-menü orosz fordításával, akkor a telepítési útmutatót a következő hivatkozáson találhatja: &lt;a href=&apos;https://wii.zazios.ru/rus_menu&apos;&gt;https://wii.zazios.ru/rus_menu&lt;/a&gt;.&lt;br&gt;
-(Ez az útmutató jelenleg csak orosz nyelven érhető el.)</translation>
-    </message>
-</context>
-<context>
-    <name>ExpressRegionalChannelTranslation</name>
-    <message>
-        <source>Step 2A: Express Setup</source>
-        <translation type="vanished">2.1. lépés: Gyors telepítés</translation>
-    </message>
-    <message>
-        <source>Choose if you&apos;d like translations for WiiLink&apos;s regional channels.</source>
-        <translation type="vanished">A WiiLink régiós csatornák nyelvének megadása.</translation>
-    </message>
-    <message>
-        <source>Would you like &lt;b&gt;Wii Room&lt;/b&gt;, &lt;b&gt;Photo Prints Channel&lt;/b&gt;, and the &lt;b&gt;Food Channel&lt;/b&gt; to be translated?</source>
-        <translation type="vanished">Szeretnéd honosítva használni a &lt;b&gt;Wii Roomot&lt;/b&gt;, &lt;b&gt;Fényképrendelő-csatornát&lt;/b&gt; és &lt;b&gt;Ételcsatornát&lt;/b&gt;?</translation>
-    </message>
-    <message>
-        <source>Translated (eg. English, French, etc.)</source>
-        <translation type="vanished">Honosított (pl.: magyar, angol, stb.)</translation>
-    </message>
-    <message>
-        <source>Japanese</source>
-        <translation type="vanished">japán</translation>
-    </message>
-</context>
-<context>
     <name>ExpressRegionalChannels</name>
-    <message>
-        <source>Step 2: Express Setup</source>
-        <translation type="vanished">2. lépés: Gyors telepítés</translation>
-    </message>
-    <message>
-        <source>Choose if you&apos;d like to install additional regional channels.</source>
-        <translation type="vanished">További régiós csatornák telepítésének megadása.</translation>
-    </message>
-    <message>
-        <source>Would you like to install WiiLink&apos;s regional channel services?
-
-Services that would be installed:
-
-- Wii Room (Wii no Ma)
-- Photo Prints Channel (Digicam Print Channel)
-- Food Channel (Demae Channel)
-- Kirby TV Channel</source>
-        <translation type="vanished">Szeretnéd telepíteni a WiiLink régiós csatornaszolgáltatásait?
-
-Telepíthető szolgáltatások:
-
-- Wii Room (Wii no Ma)
-- Fényképrendelő-csatorna (Digicam Print Channel)
-- Ételcsatorna (Demae Channel)
-- Kirby TV-Csatorna</translation>
-    </message>
-    <message>
-        <source>Yes</source>
-        <translation type="vanished">Igen</translation>
-    </message>
-    <message>
-        <source>No</source>
-        <translation type="vanished">Nem</translation>
-    </message>
     <message>
         <location filename="../setup/express.py" line="285"/>
         <source>Step 4: Express Setup</source>
