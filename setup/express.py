@@ -6,22 +6,150 @@ from PySide6.QtWidgets import (
     QVBoxLayout,
     QRadioButton,
     QMessageBox,
+    QCheckBox,
 )
 
 from .patch import PatchingPage
 from .enums import *
 from modules.consts import wiilink_dir
 
-regional_channels = False
-regional_lang = Languages.Japan
-wiiroom_lang = Languages.English
-demae = ""
+
+class ExpressLanguage(QWizardPage):
+    languages = {
+        Languages.English: "English",
+        Languages.Spanish: "español",
+        Languages.French: "français",
+        Languages.German: "Deutsch",
+        Languages.Italian: "italiano",
+        Languages.Dutch: "Nederlands",
+        Languages.Portuguese: "português brasileiro",
+        Languages.Russian: "русский",
+        Languages.Japanese: "日本語",
+    }
+
+    def __init__(self, parent=None):
+        super().__init__(parent)
+        self.setTitle(self.tr("Step 1: Express Setup"))
+        self.setSubTitle(self.tr("Choose the language for your installation."))
+
+        self.label = QLabel(
+            self.tr("What language would you like to use the channels in?")
+        )
+        self.label.setWordWrap(True)
+
+        # Layout
+        self.layout = QVBoxLayout()
+
+        self.layout.addWidget(self.label)
+
+        # Dictionary to hold buttons
+        self.buttons = {}
+
+        # Add buttons to layout
+        for key, label in self.languages.items():
+            button = QRadioButton(label)
+            self.layout.addWidget(button)
+            self.buttons[key] = button
+            button.clicked.connect(self.completeChanged.emit)
+
+        # Select the first option
+        next(iter(self.buttons.values())).setChecked(True)
+
+        # Set layout
+        self.setLayout(self.layout)
+
+        self.buttons[Languages.Russian].clicked.connect(self.russian_notice)
+
+    def russian_notice(self):
+        QMessageBox.warning(
+            self,
+            self.tr("Russian notice for Wii Room"),
+            self.tr(
+                """You have selected the Russian translation for Wii Room<br>
+Proper functionality is not guaranteed for systems without the Russian Wii Menu.<br>
+Follow the installation guide at <a href='https://wii.zazios.ru/rus_menu'>https://wii.zazios.ru/rus_menu</a> if you have not already done so.<br>
+(The guide is only available in Russian for now)"""
+            ),
+        )
+
+    def nextId(self):
+        match self.wizard().property("language"):
+            case Languages.English | Languages.Japanese:
+                return 102
+            case _:
+                return 101
+
+    def validatePage(self):
+        for key, button in self.buttons.items():
+            if button.isChecked():
+                self.wizard().setProperty("language", key)
+
+                match key:
+                    case Languages.Portuguese | Languages.Russian:
+                        self.wizard().setProperty("custom_language", True)
+                    case Languages.English | Languages.Japanese:
+                        self.wizard().setProperty("custom_language", False)
+                        self.wizard().setProperty("secondary_language", key)
+                    case _:
+                        self.wizard().setProperty("custom_language", False)
+
+                return True
+
+        return False
+
+
+class ExpressSecondaryLanguage(QWizardPage):
+    languages = {
+        Languages.English: "English",
+        Languages.Japanese: "日本語",
+    }
+
+    def __init__(self, parent=None):
+        super().__init__(parent)
+        self.setTitle(self.tr("Step 1A: Express Setup"))
+        self.setSubTitle(self.tr("Choose a secondary language for your installation."))
+
+        self.label = QLabel(
+            self.tr(
+                "Not all channels are available in the language you selected. For these channels, what language would you like to use?"
+            )
+        )
+        self.label.setWordWrap(True)
+
+        # Layout
+        self.layout = QVBoxLayout()
+
+        self.layout.addWidget(self.label)
+
+        # Dictionary to hold buttons
+        self.buttons = {}
+
+        # Add buttons to layout
+        for key, label in self.languages.items():
+            button = QRadioButton(label)
+            self.layout.addWidget(button)
+            self.buttons[key] = button
+            button.clicked.connect(self.completeChanged.emit)
+
+        # Select the first option
+        next(iter(self.buttons.values())).setChecked(True)
+
+        # Set layout
+        self.setLayout(self.layout)
+
+    def validatePage(self):
+        for key, button in self.buttons.items():
+            if button.isChecked():
+                self.wizard().setProperty("secondary_language", key)
+                return True
+
+        return False
 
 
 class ExpressRegion(QWizardPage):
     def __init__(self, parent=None):
         super().__init__(parent)
-        self.setTitle(self.tr("Step 1: Express Setup"))
+        self.setTitle(self.tr("Step 2: Express Setup"))
         self.setSubTitle(self.tr("Choose your region for WiiConnect24 services."))
 
         self.label = QLabel(
@@ -67,243 +195,174 @@ class ExpressRegion(QWizardPage):
         return False
 
 
+class ExpressWiiConnect24Channels(QWizardPage):
+    checkboxes = {}
+
+    def __init__(self, patches_json: dict, parent=None):
+        self.patches_json = patches_json
+
+        wc24_channels = []
+        for channel in patches_json:
+            if channel["type"] == "wc24":
+                wc24_channels.append(channel)
+
+        super().__init__(parent)
+        self.setTitle(self.tr("Step 3: Express Setup"))
+        self.setSubTitle(
+            self.tr("Select the WiiConnect24 channels you want to install")
+        )
+
+        layout = QVBoxLayout()
+
+        self.label = QLabel(
+            self.tr(
+                "Select the WiiConnect24 channels you'd like to install from the list below:"
+            )
+        )
+        self.label.setWordWrap(True)
+        layout.addWidget(self.label)
+
+        for channel in wc24_channels:
+            checkbox = QCheckBox(channel["name"])
+            checkbox.setChecked(True)
+            self.checkboxes[channel["category_id"]] = checkbox
+            layout.addWidget(checkbox)
+
+        self.setLayout(layout)
+
+    def validatePage(self):
+        selected_wc24_channels = []
+
+        for channel, checkbox in self.checkboxes.items():
+            if checkbox.isChecked():
+                if self.wizard().property(
+                    "custom_language"
+                ) and self.find_custom_translation_id(channel):
+                    selected_wc24_channels.append(
+                        f"{channel}_{self.find_custom_translation_id(channel)}"
+                    )
+                else:
+                    selected_wc24_channels.append(
+                        f"{channel}_{self.find_region_id(channel)}"
+                    )
+
+        self.wizard().setProperty("wc24_channels", selected_wc24_channels)
+        return True
+
+    def find_region_id(self, channel: int):
+        for category in self.patches_json:
+            if category["category_id"] == channel:
+                for variant in category["channels"]:
+                    if variant["region"] == PatchingPage.region.name:
+                        return variant["item_id"]
+
+        raise KeyError(
+            f"Channel {channel} has no variant for {PatchingPage.region.name}!"
+        )
+
+    def find_custom_translation_id(self, channel: int):
+        for category in self.patches_json:
+            if category["category_id"] == channel:
+                for variant in category["channels"]:
+                    if variant["language"] == self.wizard().property("language").name:
+                        return variant["item_id"]
+
+        return False
+
+
 class ExpressRegionalChannels(QWizardPage):
-    def __init__(self, parent=None):
+    checkboxes = {}
+
+    def __init__(self, patches_json: dict, parent=None):
+        self.patches_json = patches_json
+
+        regional_channels = []
+        for channel in patches_json:
+            if channel["type"] == "regional":
+                regional_channels.append(channel)
+
         super().__init__(parent)
-        self.setTitle(self.tr("Step 2: Express Setup"))
-        self.setSubTitle(
-            self.tr("Choose if you'd like to install additional regional channels.")
-        )
-
-        self.label = QLabel(
-            self.tr(
-                """Would you like to install WiiLink's regional channel services?
-
-Services that would be installed:
-
-- Wii Room (Wii no Ma)
-- Photo Prints Channel (Digicam Print Channel)
-- Food Channel (Demae Channel)
-- Kirby TV Channel"""
-            )
-        )
-        self.label.setWordWrap(True)
-
-        self.Yes = QRadioButton(self.tr("Yes"))
-        self.No = QRadioButton(self.tr("No"))
+        self.setTitle(self.tr("Step 4: Express Setup"))
+        self.setSubTitle(self.tr("Select the regional channels you want to install"))
 
         layout = QVBoxLayout()
 
-        layout.addWidget(self.label)
-
-        layout.addWidget(self.Yes)
-        layout.addWidget(self.No)
-
-        self.Yes.setChecked(True)
-
-        self.setLayout(layout)
-
-        self.Yes.clicked.connect(self.completeChanged.emit)
-        self.No.clicked.connect(self.completeChanged.emit)
-
-    def isComplete(self):
-        global regional_channels
-        if self.Yes.isChecked():
-            regional_channels = True
-            return True
-        elif self.No.isChecked():
-            regional_channels = False
-            return True
-        return False
-
-    def nextId(self):
-        if self.Yes.isChecked():
-            return 102
-        elif self.No.isChecked():
-            return 105
-        return 0
-
-
-class ExpressRegionalChannelTranslation(QWizardPage):
-    def __init__(self, parent=None):
-        super().__init__(parent)
-        self.setTitle(self.tr("Step 2A: Express Setup"))
-        self.setSubTitle(
-            self.tr(
-                "Choose if you'd like translations for WiiLink's regional channels."
-            )
-        )
-
         self.label = QLabel(
             self.tr(
-                "Would you like <b>Wii Room</b>, <b>Photo Prints Channel</b>, and the <b>Food Channel</b> to be translated?"
+                "Select the regional channels you'd like to install from the list below:"
             )
         )
         self.label.setWordWrap(True)
-
-        self.Translated = QRadioButton(
-            self.tr("Translated (eg. English, French, etc.)")
-        )
-        self.Japanese = QRadioButton(self.tr("Japanese"))
-
-        layout = QVBoxLayout()
-
         layout.addWidget(self.label)
 
-        layout.addWidget(self.Translated)
-        layout.addWidget(self.Japanese)
-
-        self.Translated.setChecked(True)
+        for channel in regional_channels:
+            checkbox = QCheckBox(channel["name"])
+            checkbox.clicked.connect(self.completeChanged.emit)
+            self.checkboxes[channel["category_id"]] = checkbox
+            layout.addWidget(checkbox)
 
         self.setLayout(layout)
 
-        self.Translated.clicked.connect(self.completeChanged.emit)
-        self.Japanese.clicked.connect(self.completeChanged.emit)
-
     def isComplete(self):
-        global regional_lang
-        global wiiroom_lang
-
-        if self.Translated.isChecked():
-            regional_lang = Languages.English
+        if len(self.wizard().property("wc24_channels")) > 0:
             return True
-        elif self.Japanese.isChecked():
-            regional_lang = Languages.Japan
-            wiiroom_lang = Languages.Japan
-            return True
-        return False
 
-    def nextId(self):
-        if self.Translated.isChecked():
-            return 103
-        elif self.Japanese.isChecked():
-            return 104
-        return 0
-
-
-class ExpressRegionalChannelLanguage(QWizardPage):
-    languages = {
-        Languages.English: "English",
-        Languages.Spanish: "Español",
-        Languages.French: "Français",
-        Languages.German: "Deutsch",
-        Languages.Italian: "Italiano",
-        Languages.Dutch: "Nederlands",
-        Languages.Portuguese: "Português (Brasil)",
-        Languages.Russian: "Русский",
-    }
-
-    def __init__(self, parent=None):
-        super().__init__(parent)
-        self.setTitle(self.tr("Step 2B: Express Setup"))
-        self.setSubTitle(self.tr("Choose the language for Wii Room."))
-
-        self.label = QLabel(
-            self.tr("What language would you like <b>Wii Room</b> to be in?")
-        )
-        self.label.setWordWrap(True)
-
-        # Layout
-        self.layout = QVBoxLayout()
-
-        self.layout.addWidget(self.label)
-
-        # Dictionary to hold buttons
-        self.buttons = {}
-
-        # Add buttons to layout
-        for key, label in self.languages.items():
-            button = QRadioButton(label)
-            self.layout.addWidget(button)
-            self.buttons[key] = button
-            button.clicked.connect(self.completeChanged.emit)
-
-        # Select the first option
-        next(iter(self.buttons.values())).setChecked(True)
-
-        # Set layout
-        self.setLayout(self.layout)
-
-        self.buttons[Languages.Russian].clicked.connect(self.russian_notice)
-
-    def isComplete(self):
-        """Enable Next button only if a radio button is selected"""
-        global wiiroom_lang
-
-        for key, button in self.buttons.items():
-            if button.isChecked():
-                wiiroom_lang = key
+        for checkbox in self.checkboxes.values():
+            if checkbox.isChecked():
                 return True
 
         return False
 
-    def russian_notice(self):
-        QMessageBox.warning(
-            self,
-            self.tr("Russian notice for Wii Room"),
-            self.tr(
-                """You have selected the Russian translation for Wii Room<br>
-Proper functionality is not guaranteed for systems without the Russian Wii Menu.<br>
-Follow the installation guide at <a href='https://wii.zazios.ru/rus_menu'>https://wii.zazios.ru/rus_menu</a> if you have not already done so.<br>
-(The guide is only available in Russian for now)"""
-            ),
+    def validatePage(self):
+        selected_regional_channels = []
+        PatchingPage.regional_channels = False
+
+        for channel, checkbox in self.checkboxes.items():
+            if checkbox.isChecked():
+                if len(self.find_category(channel)["channels"]) == 1:
+                    selected_regional_channels.append(f"{channel}_1")
+                elif self.find_translation_id(channel):
+                    selected_regional_channels.append(
+                        f"{channel}_{self.find_translation_id(channel)}"
+                    )
+                else:
+                    selected_regional_channels.append(
+                        f"{channel}_{self.find_translation_id(channel, self.wizard().property("secondary_language"))}"
+                    )
+
+        if len(selected_regional_channels) > 0:
+            PatchingPage.regional_channels = True
+
+        PatchingPage.selected_channels = (
+            self.wizard().property("wc24_channels") + selected_regional_channels
         )
 
+        return True
 
-class ExpressDemaeConfiguration(QWizardPage):
-    def __init__(self, parent=None):
-        super().__init__(parent)
-        self.setTitle(self.tr("Step 2C: Express Setup"))
-        self.setSubTitle(self.tr("Choose Food Channel version."))
+    def find_category(self, category_id: int):
+        for category in self.patches_json:
+            if category["category_id"] == category_id:
+                return category
 
-        self.label = QLabel(
-            self.tr(
-                "Which version of the <b>Food Channel</b> would you like to install?"
-            )
-        )
-        self.label.setWordWrap(True)
+        raise KeyError(f"Category {category_id} does not exist!")
 
-        self.demae_configs = {
-            DemaeConfigs.Standard: self.tr("Standard (Fake Ordering)"),
-            DemaeConfigs.Dominos: self.tr("Domino's (US and Canada only)"),
-        }
+    def find_translation_id(self, channel: int, language: Languages = None):
+        if language is None:
+            language = self.wizard().property("language")
 
-        self.layout = QVBoxLayout()
+        for category in self.patches_json:
+            if category["category_id"] == channel:
+                for variant in category["channels"]:
+                    if variant["language"] == language.name:
+                        return variant["item_id"]
 
-        self.layout.addWidget(self.label)
-
-        # Dictionary to hold buttons
-        self.buttons = {}
-
-        # Add buttons to layout
-        for key, label in self.demae_configs.items():
-            button = QRadioButton(label)
-            self.layout.addWidget(button)
-            self.buttons[key] = button
-            button.clicked.connect(self.completeChanged.emit)
-
-        # Select the first option
-        next(iter(self.buttons.values())).setChecked(True)
-
-        self.setLayout(self.layout)
-
-    def isComplete(self):
-        global demae
-        global regional_lang
-
-        if self.buttons[DemaeConfigs.Standard].isChecked():
-            demae = f"9_{regional_lang.value}"
-            return True
-        elif self.buttons[DemaeConfigs.Dominos].isChecked():
-            demae = "9_3"
-            return True
         return False
 
 
 class ExpressPlatformConfiguration(QWizardPage):
-    def __init__(self, patches_json: dict, parent=None):
+    def __init__(self, parent=None):
         super().__init__(parent)
-        self.setTitle(self.tr("Step 3: Express Setup"))
+        self.setTitle(self.tr("Step 5: Express Setup"))
         self.setSubTitle(self.tr("Choose console platform."))
 
         self.label = QLabel(
@@ -338,50 +397,13 @@ class ExpressPlatformConfiguration(QWizardPage):
         # Set layout
         self.setLayout(self.layout)
 
-        self.patches_json = patches_json
-
-    def isComplete(self):
+    def validatePage(self):
         for key, button in self.buttons.items():
             if button.isChecked():
                 PatchingPage.platform = key
                 return True
 
         return False
-
-    def validatePage(self):
-        global regional_lang
-        global wiiroom_lang
-        global demae
-        global regional_channels
-
-        selected_channels = []
-
-        for category in self.patches_json:
-            if category["type"] == "wc24":
-                selected_channels.append(
-                    f"{category["category_id"]}_{PatchingPage.region.value}"
-                )
-
-        # I am not particularly happy with the solution I have came up with here.
-        # Hardcoding the channels like this isn't ideal, but it's what I've done as the language selection
-        # across regional channels is not consistent at present.
-        #
-        # - Isla
-
-        if regional_channels:
-            selected_channels.extend(
-                [
-                    f"7_{wiiroom_lang.value}",
-                    f"8_{regional_lang.value}",
-                    demae,
-                    "10_1",
-                ]
-            )
-
-        PatchingPage.regional_channels = regional_channels
-        PatchingPage.selected_channels = selected_channels
-
-        return True
 
     def nextId(self):
         if wiilink_dir.exists():

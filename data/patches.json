@@ -7,6 +7,8 @@
     "channels": [
       {
         "item_id": 1,
+        "language": null,
+        "region": "USA",
         "latest_version": 7,
         "patch_folder": "forecast",
         "name": "Forecast Channel (USA)",
@@ -29,6 +31,8 @@
       },
       {
         "item_id": 2,
+        "language": null,
+        "region": "PAL",
         "latest_version": 7,
         "patch_folder": "forecast",
         "name": "Forecast Channel (PAL)",
@@ -51,6 +55,8 @@
       },
       {
         "item_id": 3,
+        "language": null,
+        "region": "Japan",
         "latest_version": 7,
         "patch_folder": "forecast",
         "name": "Forecast Channel (Japan)",
@@ -81,6 +87,8 @@
     "channels": [
       {
         "item_id": 1,
+        "language": null,
+        "region": "USA",
         "latest_version": 7,
         "patch_folder": "news",
         "name": "News Channel (USA)",
@@ -97,6 +105,8 @@
       },
       {
         "item_id": 2,
+        "language": null,
+        "region": "PAL",
         "latest_version": 7,
         "patch_folder": "news",
         "name": "News Channel (PAL)",
@@ -113,6 +123,8 @@
       },
       {
         "item_id": 3,
+        "language": null,
+        "region": "Japan",
         "latest_version": 7,
         "patch_folder": "news",
         "name": "News Channel (Japan)",
@@ -137,6 +149,8 @@
     "channels": [
       {
         "item_id": 1,
+        "language": null,
+        "region": "USA",
         "latest_version": 1792,
         "patch_folder": "nc",
         "name": "Nintendo Channel (USA)",
@@ -155,6 +169,8 @@
       },
       {
         "item_id": 2,
+        "language": null,
+        "region": "PAL",
         "latest_version": 1792,
         "patch_folder": "nc",
         "name": "Nintendo Channel (PAL)",
@@ -173,6 +189,8 @@
       },
       {
         "item_id": 3,
+        "language": null,
+        "region": "Japan",
         "latest_version": 1792,
         "patch_folder": "nc",
         "name": "Nintendo Channel (Japan)",
@@ -197,6 +215,8 @@
     "channels": [
       {
         "item_id": 1,
+        "language": null,
+        "region": "USA",
         "latest_version": 512,
         "patch_folder": "evc",
         "name": "Everybody Votes Channel (USA)",
@@ -220,6 +240,8 @@
       },
       {
         "item_id": 2,
+        "language": null,
+        "region": "PAL",
         "latest_version": 512,
         "patch_folder": "evc",
         "name": "Everybody Votes Channel (PAL)",
@@ -243,6 +265,8 @@
       },
       {
         "item_id": 3,
+        "language": null,
+        "region": "Japan",
         "latest_version": 512,
         "patch_folder": "evc",
         "name": "Everybody Votes Channel (Japan)",
@@ -272,6 +296,8 @@
     "channels": [
       {
         "item_id": 1,
+        "language": null,
+        "region": "USA",
         "latest_version": 2,
         "patch_folder": "regsel",
         "name": "Region Select (USA)",
@@ -288,6 +314,8 @@
       },
       {
         "item_id": 2,
+        "language": null,
+        "region": "PAL",
         "latest_version": 2,
         "patch_folder": "regsel",
         "name": "Region Select (PAL)",
@@ -304,6 +332,8 @@
       },
       {
         "item_id": 3,
+        "language": null,
+        "region": "Japan",
         "latest_version": 2,
         "patch_folder": "regsel",
         "name": "Region Select (Japan)",
@@ -328,6 +358,8 @@
     "channels": [
       {
         "item_id": 1,
+        "language": null,
+        "region": "USA",
         "latest_version": 512,
         "patch_folder": "cmoc",
         "name": "Check Mii Out Channel (USA)",
@@ -346,6 +378,8 @@
       },
       {
         "item_id": 2,
+        "language": null,
+        "region": "PAL",
         "latest_version": 512,
         "patch_folder": "cmoc",
         "name": "Mii Contest Channel (PAL)",
@@ -364,6 +398,8 @@
       },
       {
         "item_id": 3,
+        "language": null,
+        "region": "Japan",
         "latest_version": 512,
         "patch_folder": "cmoc",
         "name": "Check Mii Out Channel (Japan)",
@@ -388,6 +424,8 @@
     "channels": [
       {
         "item_id": 1,
+        "language": "Japanese",
+        "region": null,
         "latest_version": 1025,
         "patch_folder": "WiinoMa",
         "name": "Wii no Ma (Japanese)",
@@ -408,6 +446,8 @@
       },
       {
         "item_id": 2,
+        "language": "English",
+        "region": null,
         "latest_version": 1025,
         "patch_folder": "WiinoMa",
         "name": "Wii Room (English)",
@@ -434,6 +474,8 @@
       },
       {
         "item_id": 3,
+        "language": "Spanish",
+        "region": null,
         "latest_version": 1025,
         "patch_folder": "WiinoMa",
         "name": "Wii Room (Espa\u00f1ol)",
@@ -460,6 +502,8 @@
       },
       {
         "item_id": 4,
+        "language": "French",
+        "region": null,
         "latest_version": 1025,
         "patch_folder": "WiinoMa",
         "name": "Wii Room (Fran\u00e7ais)",
@@ -486,6 +530,8 @@
       },
       {
         "item_id": 5,
+        "language": "German",
+        "region": null,
         "latest_version": 1025,
         "patch_folder": "WiinoMa",
         "name": "Wii Room (Deutsch)",
@@ -512,6 +558,8 @@
       },
       {
         "item_id": 6,
+        "language": "Italian",
+        "region": null,
         "latest_version": 1025,
         "patch_folder": "WiinoMa",
         "name": "Wii Room (Italiano)",
@@ -538,6 +586,8 @@
       },
       {
         "item_id": 7,
+        "language": "Dutch",
+        "region": null,
         "latest_version": 1025,
         "patch_folder": "WiinoMa",
         "name": "Wii Room (Nederlands)",
@@ -564,6 +614,8 @@
       },
       {
         "item_id": 8,
+        "language": "Portuguese",
+        "region": null,
         "latest_version": 1025,
         "patch_folder": "WiinoMa",
         "name": "Wii Room (Portugu\u00eas (Brasil))",
@@ -602,6 +654,8 @@
       },
       {
         "item_id": 9,
+        "language": "Russian",
+        "region": null,
         "latest_version": 1025,
         "patch_folder": "WiinoMa",
         "name": "Wii Room (\u0420\u0443\u0441\u0441\u043a\u0438\u0439)",
@@ -660,6 +714,8 @@
     "channels": [
       {
         "item_id": 1,
+        "language": "Japanese",
+        "region": null,
         "latest_version": 1024,
         "patch_folder": "Digicam",
         "name": "Digicam Print Channel (Japanese)",
@@ -676,6 +732,8 @@
       },
       {
         "item_id": 2,
+        "language": "English",
+        "region": null,
         "latest_version": 1024,
         "patch_folder": "Digicam",
         "name": "Photo Prints Channel (English)",
@@ -704,12 +762,14 @@
   },
   {
     "category_id": 9,
-    "name": "Food Channel",
+    "name": "Food Channel (Standard)",
     "type": "regional",
     "network": "WiiLink",
     "channels": [
       {
         "item_id": 1,
+        "language": "Japanese",
+        "region": null,
         "latest_version": 512,
         "patch_folder": "Demae",
         "name": "Demae Channel (Standard) (Japanese)",
@@ -726,6 +786,8 @@
       },
       {
         "item_id": 2,
+        "language": "English",
+        "region": null,
         "latest_version": 512,
         "patch_folder": "Demae",
         "name": "Food Channel (Standard) (English)",
@@ -749,32 +811,6 @@
         "additional_files": [
           "tmd"
         ]
-      },
-      {
-        "item_id": 3,
-        "latest_version": 512,
-        "patch_folder": "Dominos",
-        "name": "Food Channel (Domino's) (English)",
-        "patches": [
-          {
-            "patch_name": "Dominos_0",
-            "content_id": 0
-          },
-          {
-            "patch_name": "Dominos_1",
-            "content_id": 1
-          },
-          {
-            "patch_name": "Dominos_2",
-            "content_id": 2
-          }
-        ],
-        "title_id": "000100014843484a",
-        "additional_apps": null,
-        "additional_channels": null,
-        "additional_files": [
-          "tmd"
-        ]
       }
     ]
   },
@@ -786,6 +822,8 @@
     "channels": [
       {
         "item_id": 1,
+        "language": null,
+        "region": null,
         "latest_version": 257,
         "patch_folder": "ktv",
         "name": "Kirby TV Channel",
@@ -813,6 +851,8 @@
     "channels": [
       {
         "item_id": 1,
+        "language": null,
+        "region": null,
         "latest_version": null,
         "patch_folder": null,
         "name": "System Channel Restorer",
@@ -834,6 +874,8 @@
     "channels": [
       {
         "item_id": 1,
+        "language": null,
+        "region": "USA",
         "latest_version": 512,
         "patch_folder": "ws",
         "name": "Wii Speak Channel (USA)",
@@ -850,6 +892,8 @@
       },
       {
         "item_id": 2,
+        "language": null,
+        "region": "PAL",
         "latest_version": 512,
         "patch_folder": "ws",
         "name": "Wii Speak Channel (PAL)",
@@ -866,6 +910,8 @@
       },
       {
         "item_id": 3,
+        "language": null,
+        "region": "Japan",
         "latest_version": 512,
         "patch_folder": "ws",
         "name": "Wii Speak Channel (Japan)",
@@ -890,6 +936,8 @@
     "channels": [
       {
         "item_id": 1,
+        "language": null,
+        "region": "PAL",
         "latest_version": 512,
         "patch_folder": "tatc",
         "name": "Today and Tomorrow Channel (PAL)",
@@ -903,6 +951,8 @@
       },
       {
         "item_id": 2,
+        "language": null,
+        "region": "Japan",
         "latest_version": 512,
         "patch_folder": "tatc",
         "name": "Today and Tomorrow Channel (Japan)",
@@ -922,6 +972,8 @@
     "channels": [
       {
         "item_id": 1,
+        "language": null,
+        "region": "USA",
         "latest_version": 3,
         "patch_folder": null,
         "name": "EULA (USA)",
@@ -933,6 +985,8 @@
       },
       {
         "item_id": 2,
+        "language": null,
+        "region": "PAL",
         "latest_version": 3,
         "patch_folder": null,
         "name": "EULA (PAL)",
@@ -944,6 +998,8 @@
       },
       {
         "item_id": 3,
+        "language": null,
+        "region": "Japan",
         "latest_version": 3,
         "patch_folder": null,
         "name": "EULA (Japan)",
@@ -952,6 +1008,42 @@
         "additional_apps": null,
         "additional_channels": null,
         "additional_files": null
+      }
+    ]
+  },
+  {
+    "category_id": 15,
+    "name": "Food Channel (Domino's)",
+    "type": "regional",
+    "network": "WiiLink",
+    "channels": [
+      {
+        "item_id": 1,
+        "language": "English",
+        "region": null,
+        "latest_version": 512,
+        "patch_folder": "Dominos",
+        "name": "Food Channel (Domino's) (English)",
+        "patches": [
+          {
+            "patch_name": "Dominos_0",
+            "content_id": 0
+          },
+          {
+            "patch_name": "Dominos_1",
+            "content_id": 1
+          },
+          {
+            "patch_name": "Dominos_2",
+            "content_id": 2
+          }
+        ],
+        "title_id": "000100014843484a",
+        "additional_apps": null,
+        "additional_channels": null,
+        "additional_files": [
+          "tmd"
+        ]
       }
     ]
   }

@@ -8,7 +8,7 @@ class Regions(enum.Enum):
 
 
 class Languages(enum.Enum):
-    Japan = 1
+    Japanese = 1
     English = 2
     Spanish = 3
     French = 4

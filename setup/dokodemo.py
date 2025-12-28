@@ -28,6 +28,7 @@ from setup.patch import patch_dokodemo
 
 language = Languages.English
 
+
 class DokodemoSelectLanguage(QWizardPage):
     def __init__(self, parent=None):
         super().__init__(parent)
@@ -42,7 +43,7 @@ class DokodemoSelectLanguage(QWizardPage):
 
         self.languages = {
             Languages.English: QRadioButton(self.tr("English")),
-            Languages.Japan: QRadioButton(self.tr("Japanese")),
+            Languages.Japanese: QRadioButton(self.tr("Japanese")),
         }
 
         layout = QVBoxLayout()

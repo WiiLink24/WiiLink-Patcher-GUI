@@ -58,11 +58,11 @@ from setup.custom import (
 from setup.enums import Platforms, SetupTypes
 from setup.express import (
     ExpressRegion,
-    ExpressRegionalChannels,
-    ExpressRegionalChannelTranslation,
-    ExpressRegionalChannelLanguage,
-    ExpressDemaeConfiguration,
     ExpressPlatformConfiguration,
+    ExpressLanguage,
+    ExpressSecondaryLanguage,
+    ExpressWiiConnect24Channels,
+    ExpressRegionalChannels,
 )
 from setup.extras import (
     ExtrasChannelSelection,
@@ -657,12 +657,12 @@ class WiiLinkPatcherGUI(QWizard):
         self.setPage(14, WADCleanup())
         self.setPage(15, FileCopying())
 
-        self.setPage(100, ExpressRegion())
-        self.setPage(101, ExpressRegionalChannels())
-        self.setPage(102, ExpressRegionalChannelTranslation())
-        self.setPage(103, ExpressRegionalChannelLanguage())
-        self.setPage(104, ExpressDemaeConfiguration())
-        self.setPage(105, ExpressPlatformConfiguration(patches_json))
+        self.setPage(100, ExpressLanguage())
+        self.setPage(101, ExpressSecondaryLanguage())
+        self.setPage(102, ExpressRegion())
+        self.setPage(103, ExpressWiiConnect24Channels(patches_json))
+        self.setPage(104, ExpressRegionalChannels(patches_json))
+        self.setPage(105, ExpressPlatformConfiguration())
 
         self.setPage(200, CustomWiiConnect24Channels(patches_json))
         self.setPage(201, CustomRegionalChannels(patches_json))

@@ -1,6 +1,6 @@
 libTWLPy
 libWiiPy
-PySide6~=6.9.0
+PySide6
 tomlkit
 nuitka
 bsdiff4

@@ -159,7 +159,9 @@ def patch_dokodemo(language: Languages):
 
     print(" - Downloading content...")
     title.load_content_records()
-    title.content.content = libTWLPy.download_content(title_id, title.tmd.content_record.content_id)
+    title.content.content = libTWLPy.download_content(
+        title_id, title.tmd.content_record.content_id
+    )
     rom = title.get_content()
 
     print("   - Done!")
