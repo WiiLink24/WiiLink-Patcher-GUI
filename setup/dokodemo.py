@@ -26,85 +26,14 @@ from setup.enums import Languages
 from setup.newsRenderer import NewsRenderer
 from setup.patch import patch_dokodemo
 
-rom = b""
 language = Languages.English
-
-
-class DokodemoSelectFile(QWizardPage):
-    def __init__(self, parent=None):
-        super().__init__(parent)
-        self.valid_rom = False
-
-        self.setTitle(self.tr("Step 1: Wii Room Anywhere"))
-        self.setSubTitle(self.tr("Select 'Dokodemo Wii no Ma' ROM."))
-
-        label = QLabel(
-            self.tr(
-                "To get Wii Room Anywhere, you need to provide your own ROM for Revision 1 of 'Dokodemo Wii no Ma'."
-            )
-        )
-        label.setWordWrap(True)
-
-        self.path = QLineEdit()
-        self.path.setReadOnly(True)
-        self.path.setPlaceholderText(self.tr("Select your ROM..."))
-
-        self.select = QPushButton(self.tr("Browse..."))
-        self.select.pressed.connect(self.select_dokodemo_rom)
-
-        sublayout = QHBoxLayout()
-        sublayout.addWidget(self.path)
-        sublayout.addWidget(self.select)
-
-        layout = QVBoxLayout()
-        layout.addWidget(label)
-        layout.addLayout(sublayout)
-
-        self.setLayout(layout)
-
-    def select_dokodemo_rom(self):
-        dokodemo = QFileDialog(self).getOpenFileName(
-            self,
-            self.tr("Select 'Dokodemo Wii no Ma' ROM"),
-            "~",
-            self.tr("Nintendo DS ROMs (*.nds)"),
-        )
-        self.path.setText(dokodemo[0])
-        self.validate_rom()
-
-    def validate_rom(self):
-        global rom
-
-        self.valid_rom = False
-        rom = pathlib.Path(self.path.text()).read_bytes()
-        rom_hash = hashlib.sha512(rom).hexdigest()
-
-        dokodemo_hash = "86441ecaf2337039173beee9ede34b557df18e2e1d180c02bde20dac633de1ca244acca34468a93fc4208d8ad64c14727def41e48ba50766ed1eba657a8d3adb"
-        if rom_hash == dokodemo_hash:
-            self.valid_rom = True
-        else:
-            QMessageBox.warning(
-                self,
-                self.tr("Invalid ROM"),
-                self.tr(
-                    """The ROM you provided is not a valid 'Dokodemo Wii no Ma' ROM!
-            
-Ensure the ROM you selected is of Revision 1 of 'Dokodemo Wii no Ma'."""
-                ),
-            )
-
-        self.completeChanged.emit()
-
-    def isComplete(self):
-        return self.valid_rom
-
 
 class DokodemoSelectLanguage(QWizardPage):
     def __init__(self, parent=None):
         super().__init__(parent)
         self.language = Languages.English
 
-        self.setTitle(self.tr("Step 2: Wii Room Anywhere"))
+        self.setTitle(self.tr("Wii Room Anywhere"))
         self.setSubTitle(self.tr("Choose the language for Wii Room Anywhere."))
 
         label = QLabel(
@@ -128,7 +57,6 @@ class DokodemoSelectLanguage(QWizardPage):
         self.setLayout(layout)
 
     def validatePage(self):
-        global rom
         global language
 
         for button_language, button in self.languages.items():
@@ -140,7 +68,7 @@ class DokodemoSelectLanguage(QWizardPage):
     def nextId(self):
         if wiilink_dir.exists():
             return 10
-        return 402
+        return 401
 
 
 class DokodemoPatchingPage(QWizardPage):
@@ -203,7 +131,6 @@ class DokodemoPatchingPage(QWizardPage):
         self.logic_worker = DokodemoPatchingWorker()
 
     def initializePage(self):
-        global rom
         QTimer.singleShot(0, self.disable_back_button)
 
         # Redirect outputs to the console
@@ -211,7 +138,6 @@ class DokodemoPatchingPage(QWizardPage):
         sys.stderr = ConsoleOutput(self.console, sys.__stderr__)
 
         # Setup variables
-        self.logic_worker.rom = rom
         self.logic_worker.language = language
 
         self.logic_worker.moveToThread(self.logic_thread)
@@ -290,7 +216,6 @@ class DokodemoPatchingPage(QWizardPage):
 
 
 class DokodemoPatchingWorker(QObject):
-    rom: bytes
     language: Languages
 
     is_patching_complete: bool
@@ -301,7 +226,7 @@ class DokodemoPatchingWorker(QObject):
 
     def patching_functions(self):
         try:
-            patch_dokodemo(self.language, self.rom)
+            patch_dokodemo(self.language)
         except:
             exception_traceback = traceback.format_exc()
             print(exception_traceback)
