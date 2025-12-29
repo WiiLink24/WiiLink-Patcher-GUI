@@ -66,7 +66,7 @@
     <message>
         <location filename="../WiiLinkPatcherGUI.py" line="311"/>
         <source>&lt;a href=https://example.com style=&apos;color: #4a86e8; text-decoration: none;&apos;&gt;&lt;b&gt;YOUR NAME&lt;/b&gt;&lt;/a&gt; - LANGUAGE Translator</source>
-        <translation>&lt;a href=https://example.com style=&apos;color: #4a86e8; text-decoration: none;&apos;&gt;&lt;b&gt;DDinghoya&lt;/b&gt;&lt;/a&gt; - 언어 번역가</translation>
+        <translation>&lt;a href=https://github.com/DDinghoya style=&apos;color: #4a86e8; text-decoration: none;&apos;&gt;&lt;b&gt;DDinghoya&lt;/b&gt;&lt;/a&gt; - 언어 번역가</translation>
     </message>
     <message>
         <location filename="../WiiLinkPatcherGUI.py" line="348"/>
