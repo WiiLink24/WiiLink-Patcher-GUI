@@ -300,12 +300,12 @@ Suivez le guide d&apos;installation à &lt;a href=&apos;https://wii.zazios.ru/ru
     <message>
         <location filename="../setup/express.py" line="33"/>
         <source>Choose the language for your installation.</source>
-        <translation type="unfinished"></translation>
+        <translation>Choisissez la langue de votre installation.</translation>
     </message>
     <message>
         <location filename="../setup/express.py" line="36"/>
         <source>What language would you like to use the channels in?</source>
-        <translation type="unfinished"></translation>
+        <translation>Dans quelle langue voulez-vous utiliser les chaînes ?</translation>
     </message>
     <message>
         <location filename="../setup/express.py" line="66"/>
@@ -489,7 +489,7 @@ Services qui peuvent être installés :
     <message>
         <location filename="../setup/express.py" line="292"/>
         <source>Select the regional channels you&apos;d like to install from the list below:</source>
-        <translation type="unfinished"></translation>
+        <translation>Sélectionnez les chaînes régionales que vous souhaitez installer depuis la liste :</translation>
     </message>
 </context>
 <context>
@@ -502,12 +502,12 @@ Services qui peuvent être installés :
     <message>
         <location filename="../setup/express.py" line="110"/>
         <source>Choose a secondary language for your installation.</source>
-        <translation type="unfinished"></translation>
+        <translation>Choisissez une langue secondaire pour votre installation.</translation>
     </message>
     <message>
         <location filename="../setup/express.py" line="114"/>
         <source>Not all channels are available in the language you selected. For these channels, what language would you like to use?</source>
-        <translation type="unfinished"></translation>
+        <translation>Certaines chaînes ne sont pas disponibles dans la langue que vous avez sélectionnée. Pour ces chaînes, quelle langue voulez-vous utiliser ?</translation>
     </message>
 </context>
 <context>
@@ -525,7 +525,7 @@ Services qui peuvent être installés :
     <message>
         <location filename="../setup/express.py" line="219"/>
         <source>Select the WiiConnect24 channels you&apos;d like to install from the list below:</source>
-        <translation type="unfinished"></translation>
+        <translation>Sélectionnez les chaînes WiiConnect24 que vous souhaitez installer depuis la liste :</translation>
     </message>
 </context>
 <context>
@@ -740,7 +740,8 @@ Installez des chaînes additionnelles sur votre Wii</translation>
         <location filename="../WiiLinkPatcherGUI.py" line="120"/>
         <source>Wii Room Anywhere
 Patch Dokodemo Wii no Ma to work with Wii Room</source>
-        <translation type="unfinished"></translation>
+        <translation>Wii Room Anywhere
+Patcher Dokodemo Wii no Ma pour Wii Room</translation>
     </message>
     <message>
         <location filename="../WiiLinkPatcherGUI.py" line="123"/>
@@ -758,7 +759,7 @@ Patch Dokodemo Wii no Ma to work with Wii Room</source>
     <message>
         <location filename="../WiiLinkPatcherGUI.py" line="456"/>
         <source>Everything has been patched successfully</source>
-        <translation>Tout a été patché avec succès.</translation>
+        <translation>Tout a été patché avec succès</translation>
     </message>
     <message>
         <location filename="../WiiLinkPatcherGUI.py" line="481"/>
