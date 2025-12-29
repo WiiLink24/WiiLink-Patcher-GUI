@@ -267,29 +267,6 @@ Podeu trobar una guia (en rus) sobre com fer-ho aquí: &lt;a href=&apos;https://
     </message>
 </context>
 <context>
-    <name>ExpressDemaeConfiguration</name>
-    <message>
-        <source>Step 2C: Express Setup</source>
-        <translation type="vanished">Part 2C: Configuració ràpida</translation>
-    </message>
-    <message>
-        <source>Choose Food Channel version.</source>
-        <translation type="vanished">Versió del Canal Menjar</translation>
-    </message>
-    <message>
-        <source>Which version of the &lt;b&gt;Food Channel&lt;/b&gt; would you like to install?</source>
-        <translation type="vanished">Quina versió del &lt;b&gt;Canal Menjar&lt;/b&gt; voleu instaŀlar?</translation>
-    </message>
-    <message>
-        <source>Standard (Fake Ordering)</source>
-        <translation type="vanished">Estàndard (comandes simulades)</translation>
-    </message>
-    <message>
-        <source>Domino&apos;s (US and Canada only)</source>
-        <translation type="vanished">Domino&apos;s (només EUA i Canadà)</translation>
-    </message>
-</context>
-<context>
     <name>ExpressLanguage</name>
     <message>
         <location filename="../setup/express.py" line="32"/>
@@ -299,12 +276,12 @@ Podeu trobar una guia (en rus) sobre com fer-ho aquí: &lt;a href=&apos;https://
     <message>
         <location filename="../setup/express.py" line="33"/>
         <source>Choose the language for your installation.</source>
-        <translation type="unfinished"></translation>
+        <translation>Llengua dels texts de pantalla dels canals</translation>
     </message>
     <message>
         <location filename="../setup/express.py" line="36"/>
         <source>What language would you like to use the channels in?</source>
-        <translation type="unfinished"></translation>
+        <translation>En quina llengua voleu utilitzar els canals?</translation>
     </message>
     <message>
         <location filename="../setup/express.py" line="66"/>
@@ -324,10 +301,6 @@ Podeu trobar una guia (en rus) sobre com fer-ho aquí: &lt;a href=&apos;https://
 </context>
 <context>
     <name>ExpressPlatformConfiguration</name>
-    <message>
-        <source>Step 3: Express Setup</source>
-        <translation type="vanished">Part 3: Configuració ràpida</translation>
-    </message>
     <message>
         <location filename="../setup/express.py" line="365"/>
         <source>Step 5: Express Setup</source>
@@ -351,10 +324,6 @@ Podeu trobar una guia (en rus) sobre com fer-ho aquí: &lt;a href=&apos;https://
 </context>
 <context>
     <name>ExpressRegion</name>
-    <message>
-        <source>Step 1: Express Setup</source>
-        <translation type="vanished">Part 1: Configuració ràpida</translation>
-    </message>
     <message>
         <location filename="../setup/express.py" line="152"/>
         <source>Step 2: Express Setup</source>
@@ -387,92 +356,7 @@ Podeu trobar una guia (en rus) sobre com fer-ho aquí: &lt;a href=&apos;https://
     </message>
 </context>
 <context>
-    <name>ExpressRegionalChannelLanguage</name>
-    <message>
-        <source>Step 2B: Express Setup</source>
-        <translation type="vanished">Part 2B: Configuració ràpida</translation>
-    </message>
-    <message>
-        <source>Choose the language for Wii Room.</source>
-        <translation type="vanished">Trieu la llengua del Wii Room.</translation>
-    </message>
-    <message>
-        <source>What language would you like &lt;b&gt;Wii Room&lt;/b&gt; to be in?</source>
-        <translation type="vanished">Trieu una llengua per als texts de pantalla del &lt;b&gt;Wii Room&lt;/b&gt;.</translation>
-    </message>
-    <message>
-        <source>Russian notice for Wii Room</source>
-        <translation type="vanished">Pel que fa a la versió russa del Wii Room</translation>
-    </message>
-    <message>
-        <source>You have selected the Russian translation for Wii Room&lt;br&gt;
-Proper functionality is not guaranteed for systems without the Russian Wii Menu.&lt;br&gt;
-Follow the installation guide at &lt;a href=&apos;https://wii.zazios.ru/rus_menu&apos;&gt;https://wii.zazios.ru/rus_menu&lt;/a&gt; if you have not already done so.&lt;br&gt;
-(The guide is only available in Russian for now)</source>
-        <translation type="vanished">Heu triat la traducció russa del Wii Room&lt;br&gt;
-Perquè el canal funcioni correctament, heu d&apos;instaŀlar la traducció russa del menú Wii.&lt;br&gt;
-Podeu trobar una guia (en rus) sobre com fer-ho aquí: &lt;a href=&apos;https://wii.zazios.ru/rus_menu&apos;&gt;https://wii.zazios.ru/rus_menu&lt;/a&gt;&lt;br&gt;</translation>
-    </message>
-</context>
-<context>
-    <name>ExpressRegionalChannelTranslation</name>
-    <message>
-        <source>Step 2A: Express Setup</source>
-        <translation type="vanished">Part 2A: Configuració ràpida</translation>
-    </message>
-    <message>
-        <source>Choose if you&apos;d like translations for WiiLink&apos;s regional channels.</source>
-        <translation type="vanished">Trieu si voleu les traduccions dels canals territorials japonesos.</translation>
-    </message>
-    <message>
-        <source>Would you like &lt;b&gt;Wii Room&lt;/b&gt;, &lt;b&gt;Photo Prints Channel&lt;/b&gt;, and the &lt;b&gt;Food Channel&lt;/b&gt; to be translated?</source>
-        <translation type="vanished">Trieu si voleu instaŀlar les traduccions extraoficials del &lt;b&gt;Wii Room&lt;/b&gt;, del &lt;b&gt;Canal Impressions de Fotos&lt;/b&gt; i del &lt;b&gt;Canal Menjar&lt;/b&gt; o les versions japoneses originals.</translation>
-    </message>
-    <message>
-        <source>Translated (eg. English, French, etc.)</source>
-        <translation type="vanished">Versions traduïdes</translation>
-    </message>
-    <message>
-        <source>Japanese</source>
-        <translation type="vanished">Versions originals</translation>
-    </message>
-</context>
-<context>
     <name>ExpressRegionalChannels</name>
-    <message>
-        <source>Step 2: Express Setup</source>
-        <translation type="vanished">Part 2: Configuració ràpida</translation>
-    </message>
-    <message>
-        <source>Choose if you&apos;d like to install additional regional channels.</source>
-        <translation type="vanished">Trieu si voleu instaŀlar els canals territorials.</translation>
-    </message>
-    <message>
-        <source>Would you like to install WiiLink&apos;s regional channel services?
-
-Services that would be installed:
-
-- Wii Room (Wii no Ma)
-- Photo Prints Channel (Digicam Print Channel)
-- Food Channel (Demae Channel)
-- Kirby TV Channel</source>
-        <translation type="vanished">Voleu instaŀlar les versions de WiiLink dels canals territorials?
-		
-Aquests canals són els següents:
-
-- Wii Room (Wii no Ma)
-- Canal Impressions de Fotos (Digicam Print Channel)
-- Canal Menjar (Demae Channel)
-- Canal Kirby TV (Kirby TV Channel)</translation>
-    </message>
-    <message>
-        <source>Yes</source>
-        <translation type="vanished">Sí</translation>
-    </message>
-    <message>
-        <source>No</source>
-        <translation type="vanished">No</translation>
-    </message>
     <message>
         <location filename="../setup/express.py" line="285"/>
         <source>Step 4: Express Setup</source>
@@ -486,7 +370,7 @@ Aquests canals són els següents:
     <message>
         <location filename="../setup/express.py" line="292"/>
         <source>Select the regional channels you&apos;d like to install from the list below:</source>
-        <translation type="unfinished"></translation>
+        <translation>Trieu quins canals territorials de la llista voleu instaŀlar.</translation>
     </message>
 </context>
 <context>
@@ -499,12 +383,12 @@ Aquests canals són els següents:
     <message>
         <location filename="../setup/express.py" line="110"/>
         <source>Choose a secondary language for your installation.</source>
-        <translation type="unfinished"></translation>
+        <translation>Tria de llengua de suport</translation>
     </message>
     <message>
         <location filename="../setup/express.py" line="114"/>
         <source>Not all channels are available in the language you selected. For these channels, what language would you like to use?</source>
-        <translation type="unfinished"></translation>
+        <translation>Com que no tots els canals són compatibles amb la llengua que heu triat, heu de triar una segona llengua per als canals sense compatibilitat.</translation>
     </message>
 </context>
 <context>
@@ -522,7 +406,7 @@ Aquests canals són els següents:
     <message>
         <location filename="../setup/express.py" line="219"/>
         <source>Select the WiiConnect24 channels you&apos;d like to install from the list below:</source>
-        <translation type="unfinished"></translation>
+        <translation>Trieu quins canals WiiConnect24 de la llista voleu instaŀlar.</translation>
     </message>
 </context>
 <context>
@@ -737,7 +621,8 @@ Instaŀleu canals addicionals a la vostra Wii.</translation>
         <location filename="../WiiLinkPatcherGUI.py" line="120"/>
         <source>Wii Room Anywhere
 Patch Dokodemo Wii no Ma to work with Wii Room</source>
-        <translation type="unfinished"></translation>
+        <translation>Wii Room Anywhere
+Afegiu suport per al Wii Room a una ROM Dokodemo Wii no Ma</translation>
     </message>
     <message>
         <location filename="../WiiLinkPatcherGUI.py" line="123"/>
