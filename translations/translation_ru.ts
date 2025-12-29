@@ -67,7 +67,7 @@
     <message>
         <location filename="../WiiLinkPatcherGUI.py" line="311"/>
         <source>&lt;a href=https://example.com style=&apos;color: #4a86e8; text-decoration: none;&apos;&gt;&lt;b&gt;YOUR NAME&lt;/b&gt;&lt;/a&gt; - LANGUAGE Translator</source>
-        <translation>&lt;a href=https://github.com/eversiege style=&apos;color: #4a86e8; text-decoration: none;&apos;&gt;&lt;b&gt;eversiege&lt;/b&gt;&lt;/a&gt; - Переводчик на русский язык</translation>
+        <translation>&lt;a href=https://github.com/eversiege style=&apos;color: #4a86e8; text-decoration: none;&apos;&gt;&lt;b&gt;eversiege&lt;/b&gt;&lt;/a&gt; и &lt;a href=https://www.zazios.ru style=&apos;color: #4a86e8; text-decoration: none;&apos;&gt;&lt;b&gt;ZAZiOs&lt;/b&gt;&lt;/a&gt; - Переводчики на русский язык</translation>
     </message>
     <message>
         <location filename="../WiiLinkPatcherGUI.py" line="348"/>
@@ -268,29 +268,6 @@ Follow the installation guide at &lt;a href=&apos;https://wii.zazios.ru/rus_menu
     </message>
 </context>
 <context>
-    <name>ExpressDemaeConfiguration</name>
-    <message>
-        <source>Step 2C: Express Setup</source>
-        <translation type="vanished">Шаг 2С: Экспресс-установка</translation>
-    </message>
-    <message>
-        <source>Choose Food Channel version.</source>
-        <translation type="vanished">Выберите версию &quot;Канала доставки&quot;.</translation>
-    </message>
-    <message>
-        <source>Which version of the &lt;b&gt;Food Channel&lt;/b&gt; would you like to install?</source>
-        <translation type="vanished">Какую версию &lt;b&gt;Канала Доставки&lt;/b&gt; вы хотите установить?</translation>
-    </message>
-    <message>
-        <source>Standard (Fake Ordering)</source>
-        <translation type="vanished">Стандартный (поддельные заказы)</translation>
-    </message>
-    <message>
-        <source>Domino&apos;s (US and Canada only)</source>
-        <translation type="vanished">Domino&apos;s (только по США и Канаде)</translation>
-    </message>
-</context>
-<context>
     <name>ExpressLanguage</name>
     <message>
         <location filename="../setup/express.py" line="32"/>
@@ -300,12 +277,12 @@ Follow the installation guide at &lt;a href=&apos;https://wii.zazios.ru/rus_menu
     <message>
         <location filename="../setup/express.py" line="33"/>
         <source>Choose the language for your installation.</source>
-        <translation type="unfinished"></translation>
+        <translation>Выберите язык для установки.</translation>
     </message>
     <message>
         <location filename="../setup/express.py" line="36"/>
         <source>What language would you like to use the channels in?</source>
-        <translation type="unfinished"></translation>
+        <translation>На каком языке вы хотите использовать каналы?</translation>
     </message>
     <message>
         <location filename="../setup/express.py" line="66"/>
@@ -325,10 +302,6 @@ Follow the installation guide at &lt;a href=&apos;https://wii.zazios.ru/rus_menu
 </context>
 <context>
     <name>ExpressPlatformConfiguration</name>
-    <message>
-        <source>Step 3: Express Setup</source>
-        <translation type="vanished">Шаг 3: Экспресс-установка</translation>
-    </message>
     <message>
         <location filename="../setup/express.py" line="365"/>
         <source>Step 5: Express Setup</source>
@@ -352,10 +325,6 @@ Follow the installation guide at &lt;a href=&apos;https://wii.zazios.ru/rus_menu
 </context>
 <context>
     <name>ExpressRegion</name>
-    <message>
-        <source>Step 1: Express Setup</source>
-        <translation type="vanished">Шаг 1: Экспресс-установка</translation>
-    </message>
     <message>
         <location filename="../setup/express.py" line="152"/>
         <source>Step 2: Express Setup</source>
@@ -388,92 +357,7 @@ Follow the installation guide at &lt;a href=&apos;https://wii.zazios.ru/rus_menu
     </message>
 </context>
 <context>
-    <name>ExpressRegionalChannelLanguage</name>
-    <message>
-        <source>Step 2B: Express Setup</source>
-        <translation type="vanished">Шаг 2В: Экспресс-установка</translation>
-    </message>
-    <message>
-        <source>Choose the language for Wii Room.</source>
-        <translation type="vanished">Выберите язык для Wii Room.</translation>
-    </message>
-    <message>
-        <source>What language would you like &lt;b&gt;Wii Room&lt;/b&gt; to be in?</source>
-        <translation type="vanished">На каком языке вы хотите использовать &lt;b&gt;Wii Room&lt;/b&gt;?</translation>
-    </message>
-    <message>
-        <source>Russian notice for Wii Room</source>
-        <translation type="vanished">Уведомление для пользователей Wii Room на русском языке</translation>
-    </message>
-    <message>
-        <source>You have selected the Russian translation for Wii Room&lt;br&gt;
-Proper functionality is not guaranteed for systems without the Russian Wii Menu.&lt;br&gt;
-Follow the installation guide at &lt;a href=&apos;https://wii.zazios.ru/rus_menu&apos;&gt;https://wii.zazios.ru/rus_menu&lt;/a&gt; if you have not already done so.&lt;br&gt;
-(The guide is only available in Russian for now)</source>
-        <translation type="vanished">Вы выбрали русский перевод для Wii Room&lt;br&gt;
-Надлежащая работа не гарантируется для систем без русского меню Wii.&lt;br&gt;
-Если у вас его нет, следуйте инструкциям по установке меню на сайте &lt;a href=&apos;https://wii.zazios.ru/rus_menu&apos;&gt;https://wii.zazios.ru/rus_menu&lt;/a&gt;.&lt;br&gt;</translation>
-    </message>
-</context>
-<context>
-    <name>ExpressRegionalChannelTranslation</name>
-    <message>
-        <source>Step 2A: Express Setup</source>
-        <translation type="vanished">Шаг 2А: Экспресс-установка</translation>
-    </message>
-    <message>
-        <source>Choose if you&apos;d like translations for WiiLink&apos;s regional channels.</source>
-        <translation type="vanished">Выберите, хотите ли вы переводы для региональных каналов WiiLink.</translation>
-    </message>
-    <message>
-        <source>Would you like &lt;b&gt;Wii Room&lt;/b&gt;, &lt;b&gt;Photo Prints Channel&lt;/b&gt;, and the &lt;b&gt;Food Channel&lt;/b&gt; to be translated?</source>
-        <translation type="vanished">Хотите, чтобы каналы &lt;b&gt;Wii Room&lt;/b&gt;, &lt;b&gt;Канал фотопечати&lt;/b&gt; и &lt;b&gt;Канал доставки&lt;/b&gt; были переведены?</translation>
-    </message>
-    <message>
-        <source>Translated (eg. English, French, etc.)</source>
-        <translation type="vanished">Да (перевести на Английский, Французкий, Русский и т.д.)</translation>
-    </message>
-    <message>
-        <source>Japanese</source>
-        <translation type="vanished">Нет (оставить на Японском)</translation>
-    </message>
-</context>
-<context>
     <name>ExpressRegionalChannels</name>
-    <message>
-        <source>Step 2: Express Setup</source>
-        <translation type="vanished">Шаг 2: Экспресс-установка</translation>
-    </message>
-    <message>
-        <source>Choose if you&apos;d like to install additional regional channels.</source>
-        <translation type="vanished">Выберите, хотите ли вы установить дополнительные региональные каналы.</translation>
-    </message>
-    <message>
-        <source>Would you like to install WiiLink&apos;s regional channel services?
-
-Services that would be installed:
-
-- Wii Room (Wii no Ma)
-- Photo Prints Channel (Digicam Print Channel)
-- Food Channel (Demae Channel)
-- Kirby TV Channel</source>
-        <translation type="vanished">Хотите установить региональные каналы WiiLink?
-
-Будут установлены следующие сервисы:
-
-- Wii Room (Wii no Ma)
-- Канал фотопечати (Digicam Print Channel)
-- Канал доставки (Demae Channel)
-- Канал Теле-Кирби</translation>
-    </message>
-    <message>
-        <source>Yes</source>
-        <translation type="vanished">Да</translation>
-    </message>
-    <message>
-        <source>No</source>
-        <translation type="vanished">Нет</translation>
-    </message>
     <message>
         <location filename="../setup/express.py" line="285"/>
         <source>Step 4: Express Setup</source>
@@ -487,7 +371,7 @@ Services that would be installed:
     <message>
         <location filename="../setup/express.py" line="292"/>
         <source>Select the regional channels you&apos;d like to install from the list below:</source>
-        <translation type="unfinished"></translation>
+        <translation>Выберите региональные каналы, которые вы хотели бы установить, из списка ниже:</translation>
     </message>
 </context>
 <context>
@@ -500,12 +384,12 @@ Services that would be installed:
     <message>
         <location filename="../setup/express.py" line="110"/>
         <source>Choose a secondary language for your installation.</source>
-        <translation type="unfinished"></translation>
+        <translation>Выберите дополнительный язык для установки.</translation>
     </message>
     <message>
         <location filename="../setup/express.py" line="114"/>
         <source>Not all channels are available in the language you selected. For these channels, what language would you like to use?</source>
-        <translation type="unfinished"></translation>
+        <translation>Не все каналы доступны на выбранном языке. Выберите язык для недоступных каналов.</translation>
     </message>
 </context>
 <context>
@@ -523,7 +407,7 @@ Services that would be installed:
     <message>
         <location filename="../setup/express.py" line="219"/>
         <source>Select the WiiConnect24 channels you&apos;d like to install from the list below:</source>
-        <translation type="unfinished"></translation>
+        <translation>Выберите каналы WiiConnect 24, которые вы хотели бы установить, из списка ниже:</translation>
     </message>
 </context>
 <context>
@@ -738,7 +622,8 @@ Add additional channels to your Wii</source>
         <location filename="../WiiLinkPatcherGUI.py" line="120"/>
         <source>Wii Room Anywhere
 Patch Dokodemo Wii no Ma to work with Wii Room</source>
-        <translation type="unfinished"></translation>
+        <translation>Wii Room Anywhere
+Устанавливает патч для Dokodemo Wii no Ma позволяя работать с Wii Room</translation>
     </message>
     <message>
         <location filename="../WiiLinkPatcherGUI.py" line="123"/>
