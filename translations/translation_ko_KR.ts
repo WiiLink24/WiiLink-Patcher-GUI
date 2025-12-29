@@ -268,29 +268,6 @@ Follow the installation guide at &lt;a href=&apos;https://wii.zazios.ru/rus_menu
     </message>
 </context>
 <context>
-    <name>ExpressDemaeConfiguration</name>
-    <message>
-        <source>Step 2C: Express Setup</source>
-        <translation type="vanished">2C 단계: 빠른 설정</translation>
-    </message>
-    <message>
-        <source>Choose Food Channel version.</source>
-        <translation type="vanished">푸드 채널 버전을 선택하세요.</translation>
-    </message>
-    <message>
-        <source>Which version of the &lt;b&gt;Food Channel&lt;/b&gt; would you like to install?</source>
-        <translation type="vanished">어떤 버전의 &lt;b&gt;푸드 채널&lt;/b&gt;을 설치할까요?</translation>
-    </message>
-    <message>
-        <source>Standard (Fake Ordering)</source>
-        <translation type="vanished">기본 (가짜 주문)</translation>
-    </message>
-    <message>
-        <source>Domino&apos;s (US and Canada only)</source>
-        <translation type="vanished">도미노피자 (미국 및 캐나다 전용)</translation>
-    </message>
-</context>
-<context>
     <name>ExpressLanguage</name>
     <message>
         <location filename="../setup/express.py" line="32"/>
@@ -327,10 +304,6 @@ Follow the installation guide at &lt;a href=&apos;https://wii.zazios.ru/rus_menu
 <context>
     <name>ExpressPlatformConfiguration</name>
     <message>
-        <source>Step 3: Express Setup</source>
-        <translation type="vanished">Passo 3: Configuração rápida</translation>
-    </message>
-    <message>
         <location filename="../setup/express.py" line="365"/>
         <source>Step 5: Express Setup</source>
         <translation>5 단계: 빠른 설정</translation>
@@ -353,10 +326,6 @@ Follow the installation guide at &lt;a href=&apos;https://wii.zazios.ru/rus_menu
 </context>
 <context>
     <name>ExpressRegion</name>
-    <message>
-        <source>Step 1: Express Setup</source>
-        <translation type="vanished">Passo 1: Configuração rápida</translation>
-    </message>
     <message>
         <location filename="../setup/express.py" line="152"/>
         <source>Step 2: Express Setup</source>
@@ -389,93 +358,7 @@ Follow the installation guide at &lt;a href=&apos;https://wii.zazios.ru/rus_menu
     </message>
 </context>
 <context>
-    <name>ExpressRegionalChannelLanguage</name>
-    <message>
-        <source>Step 2B: Express Setup</source>
-        <translation type="vanished">2B 단계: 빠른 설정</translation>
-    </message>
-    <message>
-        <source>Choose the language for Wii Room.</source>
-        <translation type="vanished">Wii Room의 언어를 선택하세요.</translation>
-    </message>
-    <message>
-        <source>What language would you like &lt;b&gt;Wii Room&lt;/b&gt; to be in?</source>
-        <translation type="vanished">&lt;b&gt;Wii Room&lt;/b&gt;을 어떤 언어로 제공할까요?</translation>
-    </message>
-    <message>
-        <source>Russian notice for Wii Room</source>
-        <translation type="vanished">Wii Room에 대한 러시아어 공지</translation>
-    </message>
-    <message>
-        <source>You have selected the Russian translation for Wii Room&lt;br&gt;
-Proper functionality is not guaranteed for systems without the Russian Wii Menu.&lt;br&gt;
-Follow the installation guide at &lt;a href=&apos;https://wii.zazios.ru/rus_menu&apos;&gt;https://wii.zazios.ru/rus_menu&lt;/a&gt; if you have not already done so.&lt;br&gt;
-(The guide is only available in Russian for now)</source>
-        <translation type="vanished">Wii Room의 러시아어 번역을 선택하였습니다.&lt;br&gt;
-러시아어 Wii 메뉴가 없는 시스템에서는 정상적인 작동이 보장되지 않습니다.&lt;br&gt;
-아직 설치하지 않았다면 &lt;a href=&apos;https://wii.zazios.ru/rus_menu&apos;&gt;https://wii.zazios.ru/rus_menu&lt;/a&gt;에서 설치 가이드를 따르세요.&lt;br&gt;
-(현재 가이드는 러시아어로만 제공됩니다.)</translation>
-    </message>
-</context>
-<context>
-    <name>ExpressRegionalChannelTranslation</name>
-    <message>
-        <source>Step 2A: Express Setup</source>
-        <translation type="vanished">2A 단계: 빠른 설정</translation>
-    </message>
-    <message>
-        <source>Choose if you&apos;d like translations for WiiLink&apos;s regional channels.</source>
-        <translation type="vanished">WiiLink의 지역 채널에 대한 번역을 원하면 선택하세요.</translation>
-    </message>
-    <message>
-        <source>Would you like &lt;b&gt;Wii Room&lt;/b&gt;, &lt;b&gt;Photo Prints Channel&lt;/b&gt;, and the &lt;b&gt;Food Channel&lt;/b&gt; to be translated?</source>
-        <translation type="vanished">&lt;b&gt;Wii Room&lt;/b&gt;, &lt;b&gt;사진 출력 채널&lt;/b&gt;, &lt;b&gt;푸드 채널&lt;/b&gt;을 번역할까요?</translation>
-    </message>
-    <message>
-        <source>Translated (eg. English, French, etc.)</source>
-        <translation type="vanished">번역됨 (예: 영어, 프랑스어 등)</translation>
-    </message>
-    <message>
-        <source>Japanese</source>
-        <translation type="vanished">일본어</translation>
-    </message>
-</context>
-<context>
     <name>ExpressRegionalChannels</name>
-    <message>
-        <source>Step 2: Express Setup</source>
-        <translation type="vanished">Passo 2: Configuração rápida</translation>
-    </message>
-    <message>
-        <source>Choose if you&apos;d like to install additional regional channels.</source>
-        <translation type="vanished">Defina a instalação de outros canais regionais.</translation>
-    </message>
-    <message>
-        <source>Would you like to install WiiLink&apos;s regional channel services?
-
-Services that would be installed:
-
-- Wii Room (Wii no Ma)
-- Photo Prints Channel (Digicam Print Channel)
-- Food Channel (Demae Channel)
-- Kirby TV Channel</source>
-        <translation type="vanished">Gostaria de instalar os canais regionais do WiiLink?
-
-Serviços que seriam instalados:
-
-- Wii Room (Wii no Ma)
-- Canal de Impressão de Fotos (Digicam Print Channel)
-- Canal de Comida (Demae Channel)
-- Canal Kirby TV</translation>
-    </message>
-    <message>
-        <source>Yes</source>
-        <translation type="vanished">Sim</translation>
-    </message>
-    <message>
-        <source>No</source>
-        <translation type="vanished">Não</translation>
-    </message>
     <message>
         <location filename="../setup/express.py" line="285"/>
         <source>Step 4: Express Setup</source>
