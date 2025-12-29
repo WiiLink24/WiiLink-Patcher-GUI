@@ -367,6 +367,10 @@
           {
             "patch_name": "CMOC_1_USA",
             "content_id": 1
+          },
+          {
+            "patch_name": "CMOC_4_USA",
+            "content_id": 4
           }
         ],
         "title_id": "0001000148415045",
@@ -387,6 +391,10 @@
           {
             "patch_name": "CMOC_1_PAL",
             "content_id": 1
+          },
+          {
+            "patch_name": "CMOC_4_PAL",
+            "content_id": 4
           }
         ],
         "title_id": "0001000148415050",
@@ -407,6 +415,10 @@
           {
             "patch_name": "CMOC_1_Japan",
             "content_id": 1
+          },
+          {
+            "patch_name": "CMOC_4_Japan",
+            "content_id": 4
           }
         ],
         "title_id": "000100014841504a",
