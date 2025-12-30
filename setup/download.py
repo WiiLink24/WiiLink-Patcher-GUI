@@ -1,4 +1,5 @@
 import os
+import traceback
 import requests
 import zipfile
 import libWiiPy
@@ -7,7 +8,13 @@ import json
 import pathlib
 
 from .enums import *
-from modules.consts import patcher_url, wad_directory, temp_dir, wiilink_dir
+from modules.consts import (
+    patcher_url,
+    wad_directory,
+    temp_dir,
+    wiilink_dir,
+    patcher_version,
+)
 
 
 # Using code with permission from "commands/title/nus.py" from WiiPy by NinjaCheetah
@@ -28,19 +35,9 @@ def connection_test():
     patcher_expected = b"If the patcher can read this, the connection test succeeds.\n"
 
     print(" - Checking connection to patcher server...")
-    patcher_response = requests.get(url=patcher_test, timeout=10)
+    patcher_response = download_file(url=patcher_test)
 
-    if patcher_response.status_code != 200:
-        print(
-            f"""Connection test failed!
-Got HTTP code {patcher_response.status_code}.
-URL: {patcher_test}"""
-        )
-        return "fail-patcher"
-
-    patcher_content = patcher_response.content
-
-    if patcher_content != patcher_expected:
+    if patcher_response != patcher_expected:
         print(
             f"""Unexpected response!
 Expected: {patcher_expected}
@@ -70,22 +67,10 @@ URL: {nus_test}"""
 
     print(" - Checking connection to OSC...")
     try:
-        osc_request = requests.get(osc_test, timeout=10)
-    except Exception as e:
-        print(
-            f"""An exception occurred while connecting to OSC!
-
-Exception:
-{e}"""
-        )
-        return "fail-osc"
-
-    if osc_request.status_code != 200:
-        print(
-            f"""Connection test failed!
-Got HTTP code {osc_request.status_code}.
-URL: {osc_test}"""
-        )
+        download_file(url=osc_test)
+    except:
+        exception_traceback = traceback.format_exc()
+        print(exception_traceback)
         return "fail-osc"
 
     print("   - Success!")
@@ -119,23 +104,20 @@ def download_file(url: str, destination: str | pathlib.Path = None):
 
     Returns:
         The binary contents of the URL, or None if the destination is specified"""
-    response = requests.get(url=url)
-    if response.status_code != 200:
-        print(
-            f"""Received HTTP status code {response.status_code}!
-File URL: {url}"""
-        )
-        raise ValueError(
-            f"""Received HTTP status code {response.status_code}!
-File URL: {url}"""
-        )
+
+    response = requests.get(
+        url=url,
+        headers={"User-Agent": f"WiiLink Patcher GUI {patcher_version}"},
+        timeout=30,
+    )
+    response.raise_for_status()
+
+    file = response.content
+    if destination is not None:
+        open(destination, "wb").write(file)
+        return None
     else:
-        file = response.content
-        if destination is not None:
-            open(destination, "wb").write(file)
-            return None
-        else:
-            return file
+        return file
 
 
 class DownloadOSCApp:
