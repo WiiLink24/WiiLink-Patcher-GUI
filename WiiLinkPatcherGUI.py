@@ -3,7 +3,7 @@
 #    nuitka-project: --standalone
 #    nuitka-project: --macos-create-app-bundle
 #    nuitka-project: --macos-app-icon={MAIN_DIRECTORY}/assets/logo.webp
-#    nuitka-project: --macos-app-version=1.2.3
+#    nuitka-project: --macos-app-version=1.3.0
 # nuitka-project-if: {OS} == "Windows":
 #    nuitka-project: --windows-icon-from-ico={MAIN_DIRECTORY}/assets/logo.webp
 #    nuitka-project: --windows-console-mode=disable
@@ -11,7 +11,7 @@
 #    nuitka-project: --onefile
 
 # These are standard options that are needed on all platforms.
-# nuitka-project: --product-version=1.2.3
+# nuitka-project: --product-version=1.3.0
 # nuitka-project: --copyright="© 2020-2025 WiiLink Team. All rights reserved."
 # nuitka-project: --plugin-enable=pyside6
 # nuitka-project: --include-package-data=PySide6:*.qm
