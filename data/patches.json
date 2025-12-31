@@ -1051,11 +1051,60 @@
           }
         ],
         "title_id": "000100014843484a",
-        "additional_apps": null,
+        "additional_apps": [
+          "wiilink-account-linker"
+        ],
         "additional_channels": null,
         "additional_files": [
           "tmd"
         ]
+      }
+    ]
+  },
+  {
+    "category_id": 16,
+    "name": "Internet Channel",
+    "type": "extra",
+    "network": "WiiLink",
+    "channels": [
+      {
+        "item_id": 1,
+        "language": null,
+        "region": "USA",
+        "latest_version": 3,
+        "patch_folder": null,
+        "name": "Internet Channel (USA)",
+        "patches": null,
+        "title_id": "0001000148414445",
+        "additional_apps": null,
+        "additional_channels": null,
+        "additional_files": null
+      },
+      {
+        "item_id": 2,
+        "language": null,
+        "region": "PAL",
+        "latest_version": 3,
+        "patch_folder": null,
+        "name": "Internet Channel (PAL)",
+        "patches": null,
+        "title_id": "0001000148414450",
+        "additional_apps": null,
+        "additional_channels": null,
+        "additional_files": null
+      },
+      {
+        "item_id": 3,
+        "language": null,
+        "region": "Japan",
+        "latest_version": 3,
+        "patch_folder": null,
+        "name": "Internet Channel (Japan)",
+        "patches": null,
+        "title_id": "000100014841444a",
+        "additional_apps": null,
+        "additional_channels": null,
+        "additional_files": null
       }
     ]
   }

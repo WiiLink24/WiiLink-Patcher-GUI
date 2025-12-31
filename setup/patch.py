@@ -444,6 +444,13 @@ class PatchingWorker(QObject):
 
                 DownloadOSCApp("Mail-Patcher")
 
+        # Download Internet Channel with Demae Domino's
+        if "15_1" in self.selected_channels:
+            internet_category = self.find_category(16)
+            internet_channel = self.find_channel(internet_category, self.region.value)
+
+            patch_channel(internet_channel)
+
     def find_category(self, category_id: int):
         for category in self.patches_json:
             if category["category_id"] == category_id:
