@@ -78,4 +78,4 @@ make all
 </table>
 
 ## Special thanks
-Special thanks to [@NinjaCheetah](https://github.com/NinjaCheetah) for all his help with this project, and his work on libWiiPy.
+Special thanks to [@NinjaCheetah](https://github.com/NinjaCheetah) for all his help with this project, and his work on libWiiPy and libTWLPy.
