@@ -512,45 +512,21 @@ Please open a support ticket on our <a href='https://discord.gg/wiilink' style='
         # Main layout
         self.layout = QVBoxLayout()
         self.layout.addWidget(self.container)
+
+        open_guide = QPushButton(
+            self.tr("Open the WiiLink installation guide in your web browser")
+        )
+        self.layout.addWidget(open_guide)
+        open_guide.clicked.connect(self.open_guide_link)
+
         self.setLayout(self.layout)
 
     def initializePage(self):
-        match PatchingPage.setup_type:
-            case SetupTypes.Extras:
-                if PatchingPage.platform != Platforms.Dolphin:
-                    open_guide = QPushButton(
-                        self.tr("Open the WAD installation guide in your web browser")
-                    )
-                    self.layout.addWidget(open_guide)
-                    open_guide.clicked.connect(self.open_guide_link)
-            case SetupTypes.Express | SetupTypes.Custom:
-                open_guide = QPushButton(
-                    self.tr("Open the WiiLink installation guide in your web browser")
-                )
-                self.layout.addWidget(open_guide)
-                open_guide.clicked.connect(self.open_guide_link)
-
-        self.setLayout(self.layout)
-
         QTimer.singleShot(0, self.disable_buttons)
 
     @staticmethod
     def open_guide_link():
-
-        guide_url = "https://wiilink.ca/guide"
-        match PatchingPage.setup_type:
-            case SetupTypes.Extras:
-                guide_url = "https://wii.hacks.guide/yawmme"
-            case _:
-                match PatchingPage.platform:
-                    case Platforms.Wii:
-                        guide_url = f"{guide_url}/wii/#section-ii---installing-wads-and-patching-wii-mail"
-                    case Platforms.vWii:
-                        guide_url = f"{guide_url}/vwii/#section-iii---installing-wads-and-patching-wii-mail"
-                    case Platforms.Dolphin:
-                        guide_url = f"{guide_url}/dolphin/#section-ii---installing-wads"
-
-        webbrowser.open(guide_url)
+        webbrowser.open("https://wiilink.ca/guide/wads")
 
     @staticmethod
     def open_wiilink_folder():
