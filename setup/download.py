@@ -16,7 +16,6 @@ from modules.consts import (
     patcher_version,
 )
 
-
 # Using code with permission from "commands/title/nus.py" from WiiPy by NinjaCheetah
 # https://github.com/NinjaCheetah/WiiPy
 
@@ -38,11 +37,9 @@ def connection_test():
     patcher_response = download_file(url=patcher_test)
 
     if patcher_response != patcher_expected:
-        print(
-            f"""Unexpected response!
+        print(f"""Unexpected response!
 Expected: {patcher_expected}
-Received: {patcher_response}"""
-        )
+Received: {patcher_response}""")
         return "fail-patcher"
 
     print("   - Success!")
@@ -54,11 +51,9 @@ Received: {patcher_response}"""
         url=nus_test, headers={"User-Agent": "wii libnup/1.0"}, timeout=10
     )
     if nus_request.status_code != 200:
-        print(
-            f"""Connection test failed!
+        print(f"""Connection test failed!
 Got HTTP code {nus_request.status_code}.
-URL: {nus_test}"""
-        )
+URL: {nus_test}""")
         return "fail-nus"
 
     print("   - Success!")

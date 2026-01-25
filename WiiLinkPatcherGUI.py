@@ -458,13 +458,11 @@ class PatchingComplete(QWizardPage):
         # Create a container with rounded corners and slightly lighter background
         self.container = QWidget()
         self.container.setFixedHeight(400)
-        self.container.setStyleSheet(
-            """
+        self.container.setStyleSheet("""
             background-color: #2a2a2a;
             border-radius: 12px;
             padding: 15px;
-        """
-        )
+        """)
 
         # Container layout
         container_layout = QVBoxLayout(self.container)
