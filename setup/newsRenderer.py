@@ -76,16 +76,14 @@ class NewsRenderer:
         """Creates and returns a styled news box label"""
         news_box = QLabel(parent)
         news_box.setWordWrap(True)
-        news_box.setStyleSheet(
-            """
+        news_box.setStyleSheet("""
             background-color: #333333;
             color: white;
             border: 1px solid #555555;
             border-radius: 5px;
             padding: 10px;
             font-size: 12px;
-        """
-        )
+        """)
         news_box.setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
         news_box.adjustSize()
         news_box.setText("Loading latest news...")

@@ -93,16 +93,14 @@ class FunFacts(QLabel):
     def __init__(self, parent=None):
         super().__init__(parent)
         self.setWordWrap(True)
-        self.setStyleSheet(
-            """
+        self.setStyleSheet("""
             background-color: #333333;
             color: white;
             border: 1px solid #555555;
             border-radius: 5px;
             padding: 10px;
             font-size: 12px;
-        """
-        )
+        """)
         self.setTextFormat(Qt.TextFormat.RichText)
         self.setOpenExternalLinks(True)
 
@@ -122,12 +120,8 @@ class FunFacts(QLabel):
         self.fact_thread.start()
 
     def set_fact(self, fact: str):
-        self.setText(
-            self.tr(
-                """<h3>Did you know?</h3>
-{}"""
-            ).format(fact)
-        )
+        self.setText(self.tr("""<h3>Did you know?</h3>
+{}""").format(fact))
 
 
 class FactWorker(QObject):
