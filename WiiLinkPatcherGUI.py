@@ -1,3 +1,4 @@
+#!/usr/bin/python
 # Nuitka options. These determine compilation settings based on the current OS.
 # nuitka-project-if: {OS} == "Darwin":
 #    nuitka-project: --standalone

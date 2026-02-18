@@ -1,0 +1,25 @@
+id: ca.wiilink.Patcher
+runtime: org.freedesktop.Platform
+runtime-version: "{{RUNTIME_VERSION}}"
+sdk: org.freedesktop.Sdk
+command: WiiLinkPatcherGUI
+#cleanup:
+#  - # Decide how to free up unrequired space
+finish-args:
+  - --share=ipc # Generally required (but not necessarily) - Allows Inter-processing communication across (instances of) apps
+  - --socket=fallback-x11 # If the app supports X11, enable this compositor support as a fallback
+  - --device=dri # Direct Rendering Interface, for hardware acceleration
+  - --socket=wayland # Wayland, to display something on the screen of the user :-)
+  - --share=network # To have network acces, because you download files from the Internet
+  - --env=QT_QPA_PLATFORM=wayland # The default xcb platform does not work, because the app is run in a Wayland-only env by default
+modules:
+  - python-deps.json
+  - name: wiilink
+    buildsystem: simple
+    build-commands:
+      - make all
+      - install -Dm755 WiiLinkPatcherGUI /app/bin/WiiLinkPatcherGUI
+    sources:
+      - type: git
+        url: https://github.com/WiiLink24/WiiLink-Patcher-GUI.git
+        branch: "{{APP_VERSION}}"
