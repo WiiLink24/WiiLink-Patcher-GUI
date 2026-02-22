@@ -14,6 +14,7 @@ finish-args:
   - --env=QT_QPA_PLATFORM=wayland # The default xcb platform does not work, because the app is run in a Wayland-only env by default
 modules:
   - python-deps.json
+  - python-missing-deps.json
   - name: wiilink
     buildsystem: simple
     build-commands:
