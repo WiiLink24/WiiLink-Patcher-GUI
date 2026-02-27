@@ -18,6 +18,7 @@ from PySide6.QtWidgets import (
 
 from PySide6.QtGui import QFont
 
+from modules.errors import error_handler
 from modules.widgets import ConsoleOutput, FunFacts
 from .enums import *
 from .download import (
@@ -322,12 +323,10 @@ class PatchingPage(QWizardPage):
 
     def handle_error(self, error: str):
         """Display errors thrown from the patching logic to the user"""
-        error = error.replace("\n", "<br>")
-
-        QMessageBox.warning(
+        QMessageBox.critical(
             self,
-            "WiiLink Patcher - Warning",
-            f"An exception was encountered while patching.<br><br>{error}<br>Please report this issue in the WiiLink Discord Server (<a href='https://discord.gg/wiilink'>discord.gg/wiilink</a>).",
+            "WiiLink Patcher - Error",
+            f"An exception was encountered while patching.<br><pre>{error}</pre><br>If you need help, head over to the WiiLink Discord Server (<a href='https://discord.gg/wiilink'>discord.gg/wiilink</a>).",
         )
 
     def toggle_console(self, event=None):
@@ -412,10 +411,9 @@ class PatchingWorker(QObject):
                         )
 
                         patch_channel(additional_channel_dict)
-            except:
-                exception_traceback = traceback.format_exc()
-                print(exception_traceback)
-                self.error.emit(f"{exception_traceback}")
+            except Exception as e:
+                print(traceback.format_exc())
+                self.error.emit(error_handler(e))
             finally:
                 percentage += percentage_increment
                 self.broadcast_percentage.emit(round(percentage))

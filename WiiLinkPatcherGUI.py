@@ -49,6 +49,7 @@ from PySide6.QtWidgets import (
     QSizePolicy,
 )
 
+from modules.errors import error_handler
 from setup.custom import (
     CustomWiiConnect24Channels,
     CustomRegionalChannels,
@@ -680,7 +681,8 @@ class WiiLinkPatcherGUI(QWizard):
         try:
             connection = connection_test()
         except Exception as e:
-            connection = e
+            print(traceback.format_exc())
+            connection = error_handler(e)
 
         if connection != "success":
             error_message = None
@@ -699,10 +701,7 @@ class WiiLinkPatcherGUI(QWizard):
                     # OSC is a special case here, as the patcher can run without it
                     osc_exception = True
                 case _:
-                    error_message = f"""The patcher failed to connect to the internet.
-
-Exception:
-{connection}"""
+                    error_message = f"""The patcher failed to connect to the internet.<br><pre>{connection}</pre>"""
 
             if error_message:
                 QMessageBox.critical(self, "WiiLink Patcher - Error", error_message)
