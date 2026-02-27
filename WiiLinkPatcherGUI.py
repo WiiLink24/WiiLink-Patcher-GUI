@@ -414,15 +414,12 @@ Otherwise, we recommend selecting your SD card or USB drive that you use in your
 
     def nextId(self):
         wad_path = pathlib.Path(self.path.text()).joinpath("WAD")
-        print(self.path.text())
-        print(wad_path)
-        print(wad_path.is_dir())
-        if wad_path.is_dir():
-            return 11
         match PatchingPage.setup_type:
             case SetupTypes.Dokodemo:
                 return 401
             case _:
+                if wad_path.is_dir():
+                    return 11
                 return 12
 
 
