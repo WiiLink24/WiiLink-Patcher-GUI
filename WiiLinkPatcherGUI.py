@@ -32,7 +32,7 @@ import random
 import json
 import datetime
 
-from PySide6.QtCore import QTranslator, QLocale, QLibraryInfo, QTimer, Qt, QEventLoop
+from PySide6.QtCore import QTranslator, QLocale, QLibraryInfo, QTimer, Qt
 from PySide6.QtGui import QIcon
 from PySide6.QtWidgets import (
     QWizard,
@@ -46,7 +46,7 @@ from PySide6.QtWidgets import (
     QWidget,
     QComboBox,
     QDialog,
-    QSizePolicy,
+    QSizePolicy, QLineEdit, QHBoxLayout, QFileDialog,
 )
 
 from modules.errors import error_handler
@@ -56,7 +56,7 @@ from setup.custom import (
     CustomPlatformConfiguration,
     CustomRegionConfiguration,
 )
-from setup.enums import Platforms, SetupTypes
+from setup.enums import SetupTypes
 from setup.express import (
     ExpressRegion,
     ExpressPlatformConfiguration,
@@ -80,14 +80,11 @@ from setup.download import (
     DownloadOSCApp,
 )
 from setup.patch import PatchingPage
-from setup.sd import AskSD, SelectSD, WADCleanup, FileCopying
 from modules.widgets import ClickableLabel
 from modules.consts import (
     temp_dir,
     file_path,
-    wiilink_dir,
     patcher_version,
-    output_path,
 )
 
 
@@ -349,43 +346,115 @@ class About(QWidget):
             wizard.setWindowTitle(self.tr("GayLink Patcher"))
 
 
-class WiiLinkFolderDetected(QWizardPage):
+class SelectOutputLocation(QWizardPage):
     def __init__(self, parent=None):
         super().__init__(parent)
 
-        self.setTitle(self.tr("WiiLink folder detected!"))
+        self.setTitle(self.tr("Select output location"))
         self.setSubTitle(
             self.tr(
-                "A directory called 'WiiLink' has been found in the 'Downloads' directory."
+                "Choose where to store the files from the patcher."
             )
         )
 
+        label = QLabel(
+            self.tr(
+               """Finally, before we begin, you need to choose where to store the files from the patcher.
+
+If you are using the Dolphin Emulator, we recommend creating a new folder on your PC.
+Otherwise, we recommend selecting your SD card or USB drive that you use in your console."""
+            )
+        )
+
+        label.setWordWrap(True)
+
+        self.path = QLineEdit()
+        self.path.setPlaceholderText(self.tr("Select a location..."))
+
+        self.select = QPushButton(self.tr("Browse"))
+        self.select.pressed.connect(self.select_folder)
+
+        sublayout = QHBoxLayout()
+        sublayout.addWidget(self.path)
+        sublayout.addWidget(self.select)
+
+        layout = QVBoxLayout()
+        layout.addWidget(label)
+        layout.addLayout(sublayout)
+
+        self.setLayout(layout)
+
+    def select_folder(self):
+        directory = QFileDialog(self).getExistingDirectory(
+            self,
+            self.tr("Select output location..."),
+        )
+        self.path.setText(directory)
+        self.completeChanged.emit()
+
+    def validatePage(self):
+        if pathlib.Path(self.path.text()).is_dir():
+            selected_path = pathlib.Path(self.path.text())
+            if selected_path.name.upper() == "WAD" or selected_path.name.lower() == "apps":
+                selected_path = selected_path.parent
+            self.wizard().setProperty("path", selected_path)
+            return True
+
+        QMessageBox.warning(
+            self,
+            self.tr("Invalid location!"),
+            self.tr("The location you have selected is invalid."),
+        )
+        return False
+
+    def isComplete(self):
+        return len(self.path.text()) > 0
+
+    def nextId(self):
+        wad_path = pathlib.Path(self.path.text()).joinpath("WAD")
+        print(self.path.text())
+        print(wad_path)
+        print(wad_path.is_dir())
+        if wad_path.is_dir():
+            return 11
+        match PatchingPage.setup_type:
+            case SetupTypes.Dokodemo:
+                return 401
+            case _:
+                return 12
+
+
+class WADCleanup(QWizardPage):
+    def __init__(self):
+        super().__init__()
+        self.setTitle(self.tr("WAD folder detected"))
+        self.setSubTitle(self.tr("Choose what to do with existing WAD folder."))
+
+        self.layout = QVBoxLayout()
+        self.layout.setSpacing(10)
+        self.layout.setContentsMargins(20, 20, 20, 20)
+
         self.label = QLabel(
             self.tr(
-                """The patcher has detected a directory called 'WiiLink' in your 'Downloads' directory.
-The patcher uses the 'WiiLink' directory to store its files, therefore this directory causes a conflict.
+                """The patcher has detected a directory called 'WAD' in your selected output location.
+The 'WAD' directory is used to store channels you install on your Wii, therefore this directory causes a conflict.
 
 What would you like to do?"""
             )
         )
-
         self.label.setWordWrap(True)
 
         self.options = {
             "rename": QRadioButton(
                 self.tr(
-                    "Rename the existing 'WiiLink' directory to 'WiiLink.bak'\n(Recommended)"
+                    "Rename the existing 'WAD' directory to 'WAD.bak'\n(Recommended)"
                 )
             ),
-            "delete": QRadioButton(self.tr("Delete the existing 'WiiLink' directory")),
+            "delete": QRadioButton(self.tr("Delete the existing 'WAD' directory")),
             "leave": QRadioButton(
-                self.tr("Leave the existing 'WiiLink' directory as-is\nNOT RECOMMENDED")
+                self.tr("Leave the existing 'WAD' directory as-is\nNOT RECOMMENDED")
             ),
         }
-
-        self.layout = QVBoxLayout()
-        self.layout.setSpacing(10)
-        self.layout.setContentsMargins(20, 20, 20, 20)
 
         self.layout.addWidget(self.label)
 
@@ -401,31 +470,36 @@ What would you like to do?"""
 
     def handle_error(self, error: str):
         """Display errors thrown in manipulating folder to the user"""
-        error = error.replace("\n", "<br>")
-
-        QMessageBox.warning(
+        QMessageBox.critical(
             self,
-            "WiiLink Patcher - Warning",
-            f"An exception was encountered while performing your selected action.<br><br>{error}<br>Please report this issue in the WiiLink Discord Server (<a href='https://discord.gg/wiilink'>discord.gg/wiilink</a>).",
+            "WiiLink Patcher - Error",
+            f"An exception was encountered while performing the operation you requested.<br><pre>{error}</pre><br>If you need help, head over to the WiiLink Discord Server (<a href='https://discord.gg/wiilink'>discord.gg/wiilink</a>).",
         )
 
     def validatePage(self):
+        output_path = self.wizard().property("path")
+        wad_path = output_path.joinpath("WAD")
+
         try:
             if self.options["rename"].isChecked():
-                if output_path.joinpath("WiiLink.bak").exists():
+                if pathlib.Path(output_path).joinpath("WAD.bak").exists():
                     i = 1
-                    while output_path.joinpath(f"WiiLink.bak ({i})").exists():
+                    while pathlib.Path(output_path).joinpath(f"WAD.bak ({i})").exists():
                         i += 1
-                    os.rename(wiilink_dir, output_path.joinpath(f"WiiLink.bak ({i})"))
+                    os.rename(
+                        wad_path,
+                        pathlib.Path(output_path).joinpath(f"WAD.bak ({i})"),
+                    )
                 else:
-                    os.rename(wiilink_dir, output_path.joinpath("WiiLink.bak"))
+                    os.rename(
+                        wad_path, pathlib.Path(output_path).joinpath("WAD.bak")
+                    )
 
             elif self.options["delete"].isChecked():
-                shutil.rmtree(wiilink_dir)
-        except:
-            exception_traceback = traceback.format_exc()
-            print(exception_traceback)
-            self.handle_error(exception_traceback)
+                shutil.rmtree(wad_path)
+        except Exception as e:
+            print(traceback.format_exc())
+            self.handle_error(error_handler(e))
             return False
 
         return True
@@ -438,12 +512,6 @@ What would you like to do?"""
 
         return False
 
-    def nextId(self):
-        match PatchingPage.setup_type:
-            case SetupTypes.Dokodemo:
-                return 401
-            case _:
-                return 11
 
 
 class PatchingComplete(QWizardPage):
@@ -500,7 +568,7 @@ Please open a support ticket on our <a href='https://discord.gg/wiilink' style='
         self.message.setOpenExternalLinks(True)
 
         # Open folder button
-        self.open_folder = QPushButton(self.tr("Open the 'WiiLink' folder"))
+        self.open_folder = QPushButton(self.tr("See the files!"))
         self.open_folder.clicked.connect(self.open_wiilink_folder)
 
         # Add widgets to container
@@ -529,16 +597,16 @@ Please open a support ticket on our <a href='https://discord.gg/wiilink' style='
     def open_guide_link():
         webbrowser.open("https://wiilink.ca/guide/wads")
 
-    @staticmethod
-    def open_wiilink_folder():
+    def open_wiilink_folder(self):
+        output_path = self.wizard().property("path")
         match sys.platform:
             case "win32":
-                os.startfile(wiilink_dir)
+                os.startfile(output_path)
             case "darwin":
-                subprocess.Popen(["open", wiilink_dir])
+                subprocess.Popen(["open", output_path])
             case _:
                 try:
-                    subprocess.Popen(["xdg-open", wiilink_dir])
+                    subprocess.Popen(["xdg-open", output_path])
                 except OSError:
                     print("Unable to launch file browser with xdg-open!")
 
@@ -625,12 +693,9 @@ class WiiLinkPatcherGUI(QWizard):
         # Page setup
         self.setPage(0, MainMenu())
 
-        self.setPage(10, WiiLinkFolderDetected())
-        self.setPage(11, PatchingPage(patches_json))
-        self.setPage(12, AskSD())
-        self.setPage(13, SelectSD())
-        self.setPage(14, WADCleanup())
-        self.setPage(15, FileCopying())
+        self.setPage(10, SelectOutputLocation())
+        self.setPage(11, WADCleanup())
+        self.setPage(12, PatchingPage(patches_json))
 
         self.setPage(100, ExpressLanguage())
         self.setPage(101, ExpressSecondaryLanguage())

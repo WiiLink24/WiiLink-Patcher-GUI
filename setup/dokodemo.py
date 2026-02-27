@@ -1,5 +1,4 @@
 import pathlib
-import hashlib
 import sys
 import traceback
 
@@ -7,12 +6,8 @@ from PySide6.QtCore import QTimer, QThread, QObject, Signal
 from PySide6.QtGui import QFont, Qt
 from PySide6.QtWidgets import (
     QWizardPage,
-    QFileDialog,
-    QLineEdit,
     QLabel,
-    QPushButton,
     QVBoxLayout,
-    QHBoxLayout,
     QMessageBox,
     QRadioButton,
     QProgressBar,
@@ -20,7 +15,7 @@ from PySide6.QtWidgets import (
     QWizard,
 )
 
-from modules.consts import wiilink_dir
+from modules.errors import error_handler
 from modules.widgets import ConsoleOutput, FunFacts
 from setup.enums import Languages
 from setup.newsRenderer import NewsRenderer
@@ -67,9 +62,7 @@ class DokodemoSelectLanguage(QWizardPage):
         return True
 
     def nextId(self):
-        if wiilink_dir.exists():
-            return 10
-        return 401
+        return 10
 
 
 class DokodemoPatchingPage(QWizardPage):
@@ -140,6 +133,7 @@ class DokodemoPatchingPage(QWizardPage):
 
         # Setup variables
         self.logic_worker.language = language
+        self.logic_worker.output_path = self.wizard().property("path")
 
         self.logic_worker.moveToThread(self.logic_thread)
         self.logic_thread.started.connect(self.logic_worker.patching_functions)
@@ -194,14 +188,12 @@ class DokodemoPatchingPage(QWizardPage):
         """Updates status above progress bar"""
         self.label.setText(self.status)
 
-    def handle_error(self, error):
+    def handle_error(self, error: str):
         """Display errors thrown from the patching logic to the user"""
-        error = error.replace("\n", "<br>")
-
-        QMessageBox.warning(
+        QMessageBox.critical(
             self,
-            "WiiLink Patcher - Warning",
-            f"An exception was encountered while patching.<br><br>{error}<br>Please report this issue in the WiiLink Discord Server (<a href='https://discord.gg/wiilink'>discord.gg/wiilink</a>).",
+            "WiiLink Patcher - Error",
+            f"An exception was encountered while patching.<br><pre>{error}</pre><br>If you need help, head over to the WiiLink Discord Server (<a href='https://discord.gg/wiilink'>discord.gg/wiilink</a>).",
         )
 
     def toggle_console(self, event=None):
@@ -218,6 +210,7 @@ class DokodemoPatchingPage(QWizardPage):
 
 class DokodemoPatchingWorker(QObject):
     language: Languages
+    output_path: pathlib.Path
 
     is_patching_complete: bool
     finished = Signal(bool)
@@ -227,11 +220,10 @@ class DokodemoPatchingWorker(QObject):
 
     def patching_functions(self):
         try:
-            patch_dokodemo(self.language)
-        except:
-            exception_traceback = traceback.format_exc()
-            print(exception_traceback)
-            self.error.emit(f"{exception_traceback}")
+            patch_dokodemo(self.language, self.output_path)
+        except Exception as e:
+            print(traceback.format_exc())
+            self.error.emit(error_handler(e))
 
         self.broadcast_percentage.emit(100)
         self.finished.emit(True)

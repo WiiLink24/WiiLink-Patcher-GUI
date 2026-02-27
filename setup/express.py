@@ -1,5 +1,3 @@
-import pathlib
-
 from PySide6.QtWidgets import (
     QWizardPage,
     QLabel,
@@ -11,7 +9,6 @@ from PySide6.QtWidgets import (
 
 from .patch import PatchingPage
 from .enums import *
-from modules.consts import wiilink_dir
 
 
 class ExpressLanguage(QWizardPage):
@@ -404,7 +401,4 @@ class ExpressPlatformConfiguration(QWizardPage):
         return False
 
     def nextId(self):
-        if wiilink_dir.exists():
-            return 10
-
-        return 11
+        return 10

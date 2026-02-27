@@ -10,9 +10,7 @@ import pathlib
 from .enums import *
 from modules.consts import (
     patcher_url,
-    wad_directory,
     temp_dir,
-    wiilink_dir,
     patcher_version,
 )
 
@@ -118,11 +116,12 @@ def download_file(url: str, destination: str | pathlib.Path = None):
 class DownloadOSCApp:
     osc_enabled: bool = True
 
-    def __init__(self, app_name: str):
-        """Downloads an app from the OSC to 'WiiLink/apps'
+    def __init__(self, app_name: str, output_path: pathlib.Path):
+        """Downloads an app from the OSC to 'apps/'
 
         Args:
             app_name: The name of the app on OSC to download
+            output_path: The directory to download the app to
 
         Returns:
             None"""
@@ -131,7 +130,7 @@ class DownloadOSCApp:
             print(f"Downloading {app_name} skipped - OSC downloading is disabled!")
             return
 
-        app_path = wiilink_dir.joinpath("apps", app_name)
+        app_path = output_path.joinpath("apps", app_name)
 
         os.makedirs(app_path, exist_ok=True)
 
@@ -157,16 +156,17 @@ class DownloadOSCApp:
         print("   - Done!")
 
 
-def download_agc(platform: Platforms):
+def download_agc(platform: Platforms, output_path: pathlib.Path):
     """Downloads AnyGlobe Changer, either from OSC or GitHub, depending on the user's platform
 
     Args:
         platform: The platform the app will be used on, to determine which source to download from
+        output_path: The directory to download the app to
 
     Returns:
         None"""
     if platform != Platforms.Dolphin:
-        DownloadOSCApp("AnyGlobe_Changer")
+        DownloadOSCApp("AnyGlobe_Changer", output_path)
     else:
         # Dolphin users need v1.0 of AnyGlobe Changer, as the latest OSC release doesn't work with Dolphin, for some reason.
         agc_dest = temp_dir.joinpath("AGC", "AGC.zip")
@@ -182,26 +182,31 @@ def download_agc(platform: Platforms):
         print("   - Done!")
         print(" - Extracting release...")
         with zipfile.ZipFile(agc_dest, "r") as agc_zip:
-            agc_zip.extractall(wiilink_dir)
+            agc_zip.extractall(output_path)
         print("   - Done!")
 
         shutil.rmtree(agc_dest.parent)
 
 
-def download_spd():
-    """Downloads the SPD WAD from the WiiLink Patcher server
+def download_spd(output_path: pathlib.Path):
+    """
+    Downloads the SPD WAD from the WiiLink Patcher server
+
+    Args:
+        output_path: The directory to download the WAD to
 
     Returns:
-        None"""
+        None
+    """
     spd_url = f"{patcher_url}/spd/WiiLink_SPD.wad"
 
-    os.makedirs(wad_directory, exist_ok=True)
+    os.makedirs(output_path.joinpath("WAD"), exist_ok=True)
 
     print("Downloading WiiLink Address Settings:")
     download_file(
         spd_url,
         pathlib.Path().joinpath(
-            wad_directory, "INSTALL ME - WiiLink Address Settings.wad"
+            output_path.joinpath("WAD"), "INSTALL ME - WiiLink Address Settings.wad"
         ),
     )
     print(" - Done!")

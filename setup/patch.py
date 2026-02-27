@@ -1,3 +1,4 @@
+import pathlib
 import sys
 import traceback
 
@@ -30,7 +31,7 @@ from .download import (
     download_spd,
 )
 from .newsRenderer import NewsRenderer
-from modules.consts import wad_directory, patcher_url, nds_directory
+from modules.consts import patcher_url
 
 
 def apply_bsdiff_patches(
@@ -68,15 +69,20 @@ def apply_bsdiff_patches(
     return title
 
 
-def patch_channel(channel: dict, network: str = None):
-    """Download a specified channel from NUS, and apply patches to the channel's app files
+def patch_channel(channel: dict, output_path: pathlib.Path, network: str = None):
+    """
+    Download a specified channel from NUS, and apply patches to the channel's app files
 
     Args:
         channel: A dictionary containing all info on the channel to patch
+        output_path: The directory to save the WAD to
         network: An optional string of the network the channel uses to append to its file name
 
     Returns:
-        None"""
+        None
+    """
+
+    wad_directory = output_path.joinpath("WAD")
 
     wad_directory.mkdir(exist_ok=True, parents=True)
 
@@ -133,14 +139,20 @@ def patch_channel(channel: dict, network: str = None):
     print("   - Done!")
 
 
-def patch_dokodemo(language: Languages):
-    """Applies patches to Dokodemo Wii no Ma
+def patch_dokodemo(language: Languages, output_path: pathlib.Path):
+    """
+    Applies patches to Dokodemo Wii no Ma
 
     Args:
         language: The language to patch Dokodemo to
+        output_path: The directory to save the ROM to
+
 
     Returns:
-        None"""
+        None
+    """
+
+    nds_directory = output_path.joinpath("nds")
 
     title = libTWLPy.Title()
     title_id = "000300044b44474a"
@@ -191,7 +203,6 @@ class PatchingPage(QWizardPage):
     selected_channels: list
     regional_channels: bool = False
     setup_type: SetupTypes
-    osc_enabled: bool = True
 
     patching_complete = False
     percentage: int
@@ -263,6 +274,7 @@ class PatchingPage(QWizardPage):
         self.logic_worker.region = self.region
         self.logic_worker.regional_channels = self.regional_channels
         self.logic_worker.selected_channels = self.selected_channels
+        self.logic_worker.output_path = self.wizard().property("path")
         self.logic_worker.patches_json = self.patches_json
 
         self.logic_worker.moveToThread(self.logic_thread)
@@ -296,9 +308,6 @@ class PatchingPage(QWizardPage):
         QTimer.singleShot(0, self.wizard().next)
 
     def nextId(self):
-        if self.platform != Platforms.Dolphin:
-            return 12
-
         return 1000
 
     def set_percentage(self, percentage: int):
@@ -347,6 +356,7 @@ class PatchingWorker(QObject):
     selected_channels: list
     regional_channels: bool
     setup_type: SetupTypes
+    output_path: pathlib.Path
 
     patches_json: dict
 
@@ -364,10 +374,9 @@ class PatchingWorker(QObject):
 
         try:
             self.download_supporting_apps()
-        except:
-            exception_traceback = traceback.format_exc()
-            print(exception_traceback)
-            self.error.emit(f"{exception_traceback}")
+        except Exception as e:
+            print(traceback.format_exc())
+            self.error.emit(error_handler(e))
 
         percentage += percentage_increment
         self.broadcast_percentage.emit(round(percentage))
@@ -390,14 +399,14 @@ class PatchingWorker(QObject):
                     )
 
                 if channel_category["network"] != "OSC":
-                    patch_channel(channel_to_patch, channel_category["network"])
+                    patch_channel(channel_to_patch, self.output_path, channel_category["network"])
 
                 if channel_to_patch["additional_apps"]:
                     for app in channel_to_patch["additional_apps"]:
                         if app != "agc":
-                            DownloadOSCApp(app)
+                            DownloadOSCApp(app, self.output_path)
                         else:
-                            download_agc(self.platform)
+                            download_agc(self.platform, self.output_path)
 
                 if channel_to_patch["additional_channels"]:
                     for additional_channel in channel_to_patch["additional_channels"]:
@@ -410,7 +419,7 @@ class PatchingWorker(QObject):
                             additional_category, additional_channel_index
                         )
 
-                        patch_channel(additional_channel_dict)
+                        patch_channel(additional_channel_dict, self.output_path)
             except Exception as e:
                 print(traceback.format_exc())
                 self.error.emit(error_handler(e))
@@ -425,29 +434,29 @@ class PatchingWorker(QObject):
         match self.setup_type:
             case SetupTypes.Extras:
                 if self.platform != Platforms.Dolphin:
-                    DownloadOSCApp("yawmME")
+                    DownloadOSCApp("yawmME", self.output_path)
             case _:
                 if self.platform != Platforms.Dolphin:
-                    DownloadOSCApp("yawmME")
-                    DownloadOSCApp("sntp")
+                    DownloadOSCApp("yawmME", self.output_path)
+                    DownloadOSCApp("sntp", self.output_path)
 
                 if self.platform == Platforms.vWii:
                     eula_category = self.find_category(14)
                     eula_channel = self.find_channel(eula_category, self.region.value)
 
-                    patch_channel(eula_channel)
+                    patch_channel(eula_channel, self.output_path)
 
                 if self.regional_channels and self.region != Regions.Japan:
-                    download_spd()
+                    download_spd(self.output_path)
 
-                DownloadOSCApp("Mail-Patcher")
+                DownloadOSCApp("Mail-Patcher", self.output_path)
 
         # Download Internet Channel with Demae Domino's
         if "15_1" in self.selected_channels:
             internet_category = self.find_category(16)
             internet_channel = self.find_channel(internet_category, self.region.value)
 
-            patch_channel(internet_channel)
+            patch_channel(internet_channel, self.output_path)
 
     def find_category(self, category_id: int):
         for category in self.patches_json:
