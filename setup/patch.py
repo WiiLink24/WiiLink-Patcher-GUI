@@ -399,7 +399,9 @@ class PatchingWorker(QObject):
                     )
 
                 if channel_category["network"] != "OSC":
-                    patch_channel(channel_to_patch, self.output_path, channel_category["network"])
+                    patch_channel(
+                        channel_to_patch, self.output_path, channel_category["network"]
+                    )
 
                 if channel_to_patch["additional_apps"]:
                     for app in channel_to_patch["additional_apps"]:

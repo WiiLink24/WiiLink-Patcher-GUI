@@ -46,7 +46,10 @@ from PySide6.QtWidgets import (
     QWidget,
     QComboBox,
     QDialog,
-    QSizePolicy, QLineEdit, QHBoxLayout, QFileDialog,
+    QSizePolicy,
+    QLineEdit,
+    QHBoxLayout,
+    QFileDialog,
 )
 
 from modules.errors import error_handler
@@ -351,15 +354,11 @@ class SelectOutputLocation(QWizardPage):
         super().__init__(parent)
 
         self.setTitle(self.tr("Select output location"))
-        self.setSubTitle(
-            self.tr(
-                "Choose where to store the files from the patcher."
-            )
-        )
+        self.setSubTitle(self.tr("Choose where to store the files from the patcher."))
 
         label = QLabel(
             self.tr(
-               """Finally, before we begin, you need to choose where to store the files from the patcher.
+                """Finally, before we begin, you need to choose where to store the files from the patcher.
 
 If you are using the Dolphin Emulator, we recommend creating a new folder on your PC.
 Otherwise, we recommend selecting your SD card or USB drive that you use in your console."""
@@ -395,7 +394,10 @@ Otherwise, we recommend selecting your SD card or USB drive that you use in your
     def validatePage(self):
         if pathlib.Path(self.path.text()).is_dir():
             selected_path = pathlib.Path(self.path.text())
-            if selected_path.name.upper() == "WAD" or selected_path.name.lower() == "apps":
+            if (
+                selected_path.name.upper() == "WAD"
+                or selected_path.name.lower() == "apps"
+            ):
                 selected_path = selected_path.parent
             self.wizard().setProperty("path", selected_path)
             return True
@@ -491,9 +493,7 @@ What would you like to do?"""
                         pathlib.Path(output_path).joinpath(f"WAD.bak ({i})"),
                     )
                 else:
-                    os.rename(
-                        wad_path, pathlib.Path(output_path).joinpath("WAD.bak")
-                    )
+                    os.rename(wad_path, pathlib.Path(output_path).joinpath("WAD.bak"))
 
             elif self.options["delete"].isChecked():
                 shutil.rmtree(wad_path)
@@ -511,7 +511,6 @@ What would you like to do?"""
                 return True
 
         return False
-
 
 
 class PatchingComplete(QWizardPage):
