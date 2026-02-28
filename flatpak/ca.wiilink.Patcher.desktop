@@ -1,0 +1,11 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+
+Name=WiiLink Patcher
+Comment=Get easily up and running with WiiLink!
+Categories=Utility;Qt;
+
+Icon=ca.wiilink.Patcher
+Exec=WiiLinkPatcherGUI
+Terminal=false

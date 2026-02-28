@@ -1,9 +1,5 @@
-# Directories made by patcher
-WiiLink/
-WiiLink.bak*/
-
 # Executables by Nuitka
-*.bin
+WiiLinkPatcherGUI
 *.exe
 *.app
 
@@ -24,3 +20,9 @@ __pycache__/
 
 .vscode/
 .DS_Store
+
+# Flatpak things
+flatpak/.flatpak-builder
+flatpak/flatpak-build-dir
+flatpak/python3-requirements.json
+flatpak/flatpak-pip-generator.py

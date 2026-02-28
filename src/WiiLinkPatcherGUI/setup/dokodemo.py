@@ -15,11 +15,11 @@ from PySide6.QtWidgets import (
     QWizard,
 )
 
-from modules.errors import error_handler
-from modules.widgets import ConsoleOutput, FunFacts
-from setup.enums import Languages
-from setup.newsRenderer import NewsRenderer
-from setup.patch import patch_dokodemo
+from WiiLinkPatcherGUI.modules.errors import error_handler
+from WiiLinkPatcherGUI.modules.widgets import ConsoleOutput, FunFacts
+from WiiLinkPatcherGUI.setup.enums import Languages
+from WiiLinkPatcherGUI.setup.newsRenderer import NewsRenderer
+from WiiLinkPatcherGUI.setup.patch import patch_dokodemo
 
 language = Languages.English
 

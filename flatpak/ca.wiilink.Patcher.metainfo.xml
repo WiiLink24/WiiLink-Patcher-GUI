@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+  <id>ca.wiilink.Patcher</id>
+
+  <name>WiiLink Patcher</name>
+  <summary>Get easily up and running with WiiLink!</summary>
+
+  <metadata_license>MIT</metadata_license>
+  <project_license>MPL-2.0</project_license>
+
+  <supports>
+    <control>pointing</control>
+    <control>keyboard</control>
+    <control>touch</control>
+  </supports>
+
+  <description>
+    <p>
+      WiiLink Patcher GUI is a Python application that helps you to get up and running with the WiiLink service. It automatically downloads and patches Wii channels from Nintendo’s servers to make them ready to install and use on a modded console.
+    </p>
+  </description>
+
+  <launchable type="desktop-id">ca.wiilink.Patcher.desktop</launchable>
+  <screenshots>
+    <screenshot type="default">
+      <image>https://github.com/WiiLink24/WiiLink-Patcher-GUI/raw/master/screenshots/main_menu.png</image>
+    </screenshot>
+    <screenshot>
+      <image>https://github.com/WiiLink24/WiiLink-Patcher-GUI/raw/master/screenshots/channel_selection.png</image>
+    </screenshot>
+    <screenshot>
+      <image>https://github.com/WiiLink24/WiiLink-Patcher-GUI/raw/master/screenshots/patching.png</image>
+    </screenshot>
+  </screenshots>
+</component>

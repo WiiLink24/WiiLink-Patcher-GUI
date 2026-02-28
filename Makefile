@@ -3,7 +3,7 @@ ARCH_FLAGS?=
 
 all:
 	pyside6-project build pyproject.toml
-	$(CC) --show-progress --assume-yes-for-downloads WiiLinkPatcherGUI.py $(ARCH_FLAGS) -o WiiLinkPatcherGUI
+	$(CC) --show-progress --assume-yes-for-downloads --python-flag="-m" src/WiiLinkPatcherGUI $(ARCH_FLAGS) -o WiiLinkPatcherGUI
 
 clean:
 	rm WiiLinkPatcherGUI

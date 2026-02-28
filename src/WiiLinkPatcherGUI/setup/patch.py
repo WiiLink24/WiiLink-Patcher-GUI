@@ -19,8 +19,8 @@ from PySide6.QtWidgets import (
 
 from PySide6.QtGui import QFont
 
-from modules.errors import error_handler
-from modules.widgets import ConsoleOutput, FunFacts
+from WiiLinkPatcherGUI.modules.errors import error_handler
+from WiiLinkPatcherGUI.modules.widgets import ConsoleOutput, FunFacts
 from .enums import *
 from .download import (
     download_patch,
@@ -31,7 +31,7 @@ from .download import (
     download_spd,
 )
 from .newsRenderer import NewsRenderer
-from modules.consts import patcher_url
+from WiiLinkPatcherGUI.modules.consts import patcher_url
 
 
 def apply_bsdiff_patches(

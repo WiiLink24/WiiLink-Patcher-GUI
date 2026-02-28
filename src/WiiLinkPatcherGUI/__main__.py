@@ -15,25 +15,23 @@
 # nuitka-project: --copyright="© 2020-2025 WiiLink Team. All rights reserved."
 # nuitka-project: --plugin-enable=pyside6
 # nuitka-project: --include-package-data=PySide6:*.qm
-# nuitka-project: --include-data-dir={MAIN_DIRECTORY}/assets=assets
-# nuitka-project: --include-data-dir={MAIN_DIRECTORY}/data=data
-# nuitka-project: --include-data-file={MAIN_DIRECTORY}/style.qss=style.qss
-# nuitka-project: --include-data-file={MAIN_DIRECTORY}/translations/*.qm=translations/
-# nuitka-project: --include-data-file={MAIN_DIRECTORY}/translations/languages.json=translations/languages.json
+# nuitka-project: --include-data-dir={MAIN_DIRECTORY}/assets=WiiLinkPatcherGUI/assets
+# nuitka-project: --include-data-dir={MAIN_DIRECTORY}/data=WiiLinkPatcherGUI/data
+# nuitka-project: --include-data-file={MAIN_DIRECTORY}/style.qss=WiiLinkPatcherGUI/style.qss
+# nuitka-project: --include-data-file={MAIN_DIRECTORY}/translations/*.qm=WiiLinkPatcherGUI/translations/
+# nuitka-project: --include-data-file={MAIN_DIRECTORY}/translations/languages.json=WiiLinkPatcherGUI/translations/languages.json
 
 import os
 import pathlib
 import shutil
-import subprocess
 import sys
 import traceback
-import webbrowser
 import random
 import json
 import datetime
 
-from PySide6.QtCore import QTranslator, QLocale, QLibraryInfo, QTimer, Qt
-from PySide6.QtGui import QIcon
+from PySide6.QtCore import QTranslator, QLocale, QLibraryInfo, QTimer, Qt, QStandardPaths, QUrl
+from PySide6.QtGui import QIcon, QDesktopServices
 from PySide6.QtWidgets import (
     QWizard,
     QApplication,
@@ -52,15 +50,15 @@ from PySide6.QtWidgets import (
     QFileDialog,
 )
 
-from modules.errors import error_handler
-from setup.custom import (
+from WiiLinkPatcherGUI.modules.errors import error_handler
+from WiiLinkPatcherGUI.setup.custom import (
     CustomWiiConnect24Channels,
     CustomRegionalChannels,
     CustomPlatformConfiguration,
     CustomRegionConfiguration,
 )
-from setup.enums import SetupTypes
-from setup.express import (
+from WiiLinkPatcherGUI.setup.enums import SetupTypes
+from WiiLinkPatcherGUI.setup.express import (
     ExpressRegion,
     ExpressPlatformConfiguration,
     ExpressLanguage,
@@ -68,23 +66,23 @@ from setup.express import (
     ExpressWiiConnect24Channels,
     ExpressRegionalChannels,
 )
-from setup.extras import (
+from WiiLinkPatcherGUI.setup.extras import (
     ExtrasChannelSelection,
     ExtrasPlatformConfiguration,
     ExtrasRegionConfiguration,
 )
-from setup.dokodemo import (
+from WiiLinkPatcherGUI.setup.dokodemo import (
     DokodemoSelectLanguage,
     DokodemoPatchingPage,
 )
-from setup.download import (
+from WiiLinkPatcherGUI.setup.download import (
     connection_test,
     get_latest_version,
     DownloadOSCApp,
 )
-from setup.patch import PatchingPage
-from modules.widgets import ClickableLabel
-from modules.consts import (
+from WiiLinkPatcherGUI.setup.patch import PatchingPage
+from WiiLinkPatcherGUI.modules.widgets import ClickableLabel
+from WiiLinkPatcherGUI.modules.consts import (
     temp_dir,
     file_path,
     patcher_version,
@@ -245,14 +243,14 @@ class About(QWidget):
         # Website button
         self.website_button = QPushButton(self.tr("Visit WiiLink Website"))
         self.website_button.clicked.connect(
-            lambda: webbrowser.open("https://wiilink.ca")
+            lambda: QDesktopServices.openUrl("https://wiilink.ca")
         )
         links_layout.addWidget(self.website_button)
 
         # GitHub button
         self.github_button = QPushButton(self.tr("View Project on GitHub"))
         self.github_button.clicked.connect(
-            lambda: webbrowser.open("https://github.com/WiiLink24")
+            lambda: QDesktopServices.openUrl("https://github.com/WiiLink24")
         )
         links_layout.addWidget(self.github_button)
 
@@ -383,11 +381,16 @@ Otherwise, we recommend selecting your SD card or USB drive that you use in your
 
         self.setLayout(layout)
 
+        self.dialog = QFileDialog()
+
+        self.dialog.setDirectory(QStandardPaths.standardLocations(QStandardPaths.StandardLocation.HomeLocation)[0])
+
     def select_folder(self):
-        directory = QFileDialog(self).getExistingDirectory(
+        directory = self.dialog.getExistingDirectory(
             self,
             self.tr("Select output location..."),
         )
+
         self.path.setText(directory)
         self.completeChanged.emit()
 
@@ -591,20 +594,21 @@ Please open a support ticket on our <a href='https://discord.gg/wiilink' style='
 
     @staticmethod
     def open_guide_link():
-        webbrowser.open("https://wiilink.ca/guide/wads")
+        QDesktopServices.openUrl("https://wiilink.ca/guide/wads")
 
     def open_wiilink_folder(self):
         output_path = self.wizard().property("path")
-        match sys.platform:
-            case "win32":
-                os.startfile(output_path)
-            case "darwin":
-                subprocess.Popen(["open", output_path])
-            case _:
-                try:
-                    subprocess.Popen(["xdg-open", output_path])
-                except OSError:
-                    print("Unable to launch file browser with xdg-open!")
+        QDesktopServices.openUrl(QUrl.fromLocalFile(output_path.resolve().as_posix()))
+        #match sys.platform:
+        #    case "win32":
+       #         os.startfile(output_path)
+      #      case "darwin":
+     #           subprocess.Popen(["open", output_path])
+    #        case _:
+   #             try:
+  #                  subprocess.Popen(["xdg-open", output_path])
+ #               except OSError:
+#                    print("Unable to launch file browser with xdg-open!")
 
     def disable_buttons(self):
         self.wizard().button(QWizard.WizardButton.BackButton).setEnabled(False)
@@ -823,7 +827,7 @@ Your version: {patcher_version}
 Latest version: {latest_version}""",
                 )
                 if update == QMessageBox.StandardButton.Yes:
-                    webbrowser.open(
+                    QDesktopServices.openUrl(
                         "https://github.com/WiiLink24/WiiLink-Patcher-GUI/releases/latest"
                     )
                     sys.exit()
