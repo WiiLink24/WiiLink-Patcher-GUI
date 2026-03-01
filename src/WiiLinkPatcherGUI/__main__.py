@@ -4,6 +4,17 @@
 #    nuitka-project: --macos-create-app-bundle
 #    nuitka-project: --macos-app-icon={MAIN_DIRECTORY}/assets/logo.webp
 #    nuitka-project: --macos-app-version=1.3.0
+# nuitka-project: --include-data-dir={MAIN_DIRECTORY}/assets=assets
+# nuitka-project: --include-data-dir={MAIN_DIRECTORY}/data=data
+# nuitka-project: --include-data-file={MAIN_DIRECTORY}/style.qss=style.qss
+# nuitka-project: --include-data-file={MAIN_DIRECTORY}/translations/*.qm=translations/
+# nuitka-project: --include-data-file={MAIN_DIRECTORY}/translations/languages.json=translations/languages.json
+# nuitka-project-if: {OS} != "Darwin":
+# nuitka-project: --include-data-dir={MAIN_DIRECTORY}/assets=WiiLinkPatcherGUI/assets
+# nuitka-project: --include-data-dir={MAIN_DIRECTORY}/data=WiiLinkPatcherGUI/data
+# nuitka-project: --include-data-file={MAIN_DIRECTORY}/style.qss=WiiLinkPatcherGUI/style.qss
+# nuitka-project: --include-data-file={MAIN_DIRECTORY}/translations/*.qm=WiiLinkPatcherGUI/translations/
+# nuitka-project: --include-data-file={MAIN_DIRECTORY}/translations/languages.json=WiiLinkPatcherGUI/translations/languages.json
 # nuitka-project-if: {OS} == "Windows":
 #    nuitka-project: --windows-icon-from-ico={MAIN_DIRECTORY}/assets/logo.webp
 #    nuitka-project: --windows-console-mode=disable
@@ -15,11 +26,6 @@
 # nuitka-project: --copyright="© 2020-2025 WiiLink Team. All rights reserved."
 # nuitka-project: --plugin-enable=pyside6
 # nuitka-project: --include-package-data=PySide6:*.qm
-# nuitka-project: --include-data-dir={MAIN_DIRECTORY}/assets=WiiLinkPatcherGUI/assets
-# nuitka-project: --include-data-dir={MAIN_DIRECTORY}/data=WiiLinkPatcherGUI/data
-# nuitka-project: --include-data-file={MAIN_DIRECTORY}/style.qss=WiiLinkPatcherGUI/style.qss
-# nuitka-project: --include-data-file={MAIN_DIRECTORY}/translations/*.qm=WiiLinkPatcherGUI/translations/
-# nuitka-project: --include-data-file={MAIN_DIRECTORY}/translations/languages.json=WiiLinkPatcherGUI/translations/languages.json
 
 import os
 import pathlib
