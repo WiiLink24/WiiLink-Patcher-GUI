@@ -8,7 +8,7 @@ import json
 import pathlib
 
 from .enums import *
-from modules.consts import (
+from WiiLinkPatcherGUI.modules.consts import (
     patcher_url,
     temp_dir,
     patcher_version,

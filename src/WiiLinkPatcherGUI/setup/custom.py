@@ -7,25 +7,93 @@ from PySide6.QtWidgets import (
     QScrollArea,
     QWidget,
     QSizePolicy,
+    QMessageBox,
 )
 
-from .enums import *
 from .patch import PatchingPage
-from modules.widgets import CollapsibleBox
+from .enums import *
+from WiiLinkPatcherGUI.modules.widgets import CollapsibleBox
+
+selected_wc24_channels = []
 
 
-class ExtrasChannelSelection(QWizardPage):
+class CustomWiiConnect24Channels(QWizardPage):
     checkboxes = {}
 
     def __init__(self, patches_json: dict, parent=None):
         self.categories = []
         for category in patches_json:
-            if category["type"] == "extra":
+            if category["type"] == "wc24":
                 self.categories.append(category)
 
         super().__init__(parent)
-        self.setTitle(self.tr("Step 1: Extras Setup"))
-        self.setSubTitle(self.tr("Select the extra channels you want to install"))
+        self.setTitle(self.tr("Step 1: Custom Setup"))
+        self.setSubTitle(
+            self.tr("Select the WiiConnect24 channels you want to install")
+        )
+
+        self.label = QLabel(
+            self.tr("Select the channels you'd like to install from the list below:")
+        )
+        self.label.setWordWrap(True)
+
+        scroll_area = QScrollArea()
+        scroll_area.setWidgetResizable(True)
+        scroll_area.setFixedHeight(400)
+
+        container = QWidget()
+        container_layout = QVBoxLayout(container)
+        container_layout.setContentsMargins(0, 0, 0, 0)
+        container_layout.setSpacing(0)
+
+        for category in self.categories:
+            box = CollapsibleBox(title=category["name"])
+            box.toggle_button.setSizePolicy(
+                QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Fixed
+            )
+            box.toggle_button.setMinimumWidth(0)
+            for channel in category["channels"]:
+                checkbox = QCheckBox(channel["name"])
+                box.content_layout.addWidget(checkbox)
+                self.checkboxes[f"{category["category_id"]}_{channel["item_id"]}"] = (
+                    checkbox
+                )
+            container_layout.addWidget(box)
+
+        container_layout.addStretch()
+        scroll_area.setWidget(container)
+
+        layout = QVBoxLayout()
+
+        layout.addWidget(self.label)
+        layout.addWidget(scroll_area)
+
+        self.setLayout(layout)
+
+    def validatePage(self):
+        global selected_wc24_channels
+
+        selected_wc24_channels = []
+
+        for channel, checkbox in self.checkboxes.items():
+            if checkbox.isChecked():
+                selected_wc24_channels.append(channel)
+
+        return True
+
+
+class CustomRegionalChannels(QWizardPage):
+    checkboxes = {}
+
+    def __init__(self, patches_json: dict, parent=None):
+        self.categories = []
+        for category in patches_json:
+            if category["type"] == "regional":
+                self.categories.append(category)
+
+        super().__init__(parent)
+        self.setTitle(self.tr("Step 2: Custom Setup"))
+        self.setSubTitle(self.tr("Select the regional channels you want to install"))
 
         self.label = QLabel(
             self.tr("Select the channels you'd like to install from the list below:")
@@ -56,6 +124,8 @@ class ExtrasChannelSelection(QWizardPage):
                 checkbox.clicked.connect(self.completeChanged.emit)
             container_layout.addWidget(box)
 
+        self.checkboxes["7_9"].clicked.connect(self.russian_notice)
+
         container_layout.addStretch()
         scroll_area.setWidget(container)
 
@@ -66,18 +136,40 @@ class ExtrasChannelSelection(QWizardPage):
 
         self.setLayout(layout)
 
+    def russian_notice(self):
+        if self.checkboxes["7_9"].isChecked():
+            QMessageBox.warning(
+                self,
+                self.tr("Russian notice for Wii Room"),
+                self.tr("""You have selected the Russian translation for Wii Room<br>
+Proper functionality is not guaranteed for systems without the Russian Wii Menu.<br>
+Follow the installation guide at <a href='https://wii.zazios.ru/rus_menu'>https://wii.zazios.ru/rus_menu</a> if you have not already done so.<br>
+(The guide is only available in Russian for now)"""),
+            )
+
     def validatePage(self):
-        selected_extra_channels = []
+        global selected_wc24_channels
+
+        selected_regional_channels = []
 
         for channel, checkbox in self.checkboxes.items():
             if checkbox.isChecked():
-                selected_extra_channels.append(channel)
+                selected_regional_channels.append(channel)
 
-        PatchingPage.selected_channels = selected_extra_channels
+        if len(selected_regional_channels) > 0:
+            PatchingPage.regional_channels = True
+
+        PatchingPage.selected_channels = (
+            selected_wc24_channels + selected_regional_channels
+        )
 
         return True
 
     def isComplete(self):
+        for checkbox in CustomWiiConnect24Channels.checkboxes.values():
+            if checkbox.isChecked():
+                return True
+
         for checkbox in self.checkboxes.values():
             if checkbox.isChecked():
                 return True
@@ -85,14 +177,14 @@ class ExtrasChannelSelection(QWizardPage):
         return False
 
 
-class ExtrasPlatformConfiguration(QWizardPage):
+class CustomPlatformConfiguration(QWizardPage):
     def __init__(self, parent=None):
         super().__init__(parent)
-        self.setTitle(self.tr("Step 2: Extras Setup"))
-        self.setSubTitle(self.tr("Choose console platform."))
+        self.setTitle(self.tr("Step 3: Custom Setup"))
+        self.setSubTitle(self.tr("Choose console platform"))
 
         self.label = QLabel(
-            self.tr("Which platform will you be installing the channels onto?")
+            self.tr("Which platform will you be installing WiiLink onto?")
         )
         self.label.setWordWrap(True)
 
@@ -132,11 +224,11 @@ class ExtrasPlatformConfiguration(QWizardPage):
         return False
 
 
-class ExtrasRegionConfiguration(QWizardPage):
+class CustomRegionConfiguration(QWizardPage):
     def __init__(self, parent=None):
         super().__init__(parent)
-        self.setTitle(self.tr("Step 3: Extras Setup"))
-        self.setSubTitle(self.tr("Choose console region."))
+        self.setTitle(self.tr("Step 4: Custom Setup"))
+        self.setSubTitle(self.tr("Choose console region"))
 
         self.label = QLabel(self.tr("Which region is your console?"))
         self.label.setWordWrap(True)

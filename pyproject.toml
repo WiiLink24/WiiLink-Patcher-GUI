@@ -1,22 +1,43 @@
 [project]
 name = "WiiLinkPatcherGUI"
+version = "1.3.2"
+dependencies = [
+    "libTWLPy",
+    "libWiiPy",
+    "bsdiff4",
+    "requests"
+]
+requires-python = ">= 3.12"
+license-files = ["LICENSE"]
+
+[project.scripts]
+WiiLinkPatcherGUI = "WiiLinkPatcherGUI:__main__"
 
 [tool.pyside6-project]
 files = [
-    "WiiLinkPatcherGUI.py",
-    "./setup/express.py",
-    "./setup/custom.py",
-    "./setup/extras.py",
-    "./setup/patch.py",
-    "./setup/sd.py",
-    "./setup/dokodemo.py",
-    "./modules/widgets.py",
-    "./translations/translation_fr.ts",
-    "./translations/translation_hu.ts",
-    "./translations/translation_it.ts",
-    "./translations/translation_pt_BR.ts",
-    "./translations/translation_ca.ts",
-    "./translations/translation_ru.ts",
-    "./translations/translation_ko_KR.ts",
+    "./src/WiiLinkPatcherGUI/__main__.py",
+    "./src/WiiLinkPatcherGUI/setup/express.py",
+    "./src/WiiLinkPatcherGUI/setup/custom.py",
+    "./src/WiiLinkPatcherGUI/setup/extras.py",
+    "./src/WiiLinkPatcherGUI/setup/patch.py",
+    "./src/WiiLinkPatcherGUI/setup/dokodemo.py",
+    "./src/WiiLinkPatcherGUI/modules/widgets.py",
+    "./src/WiiLinkPatcherGUI/translations/translation_fr.ts",
+    "./src/WiiLinkPatcherGUI/translations/translation_hu.ts",
+    "./src/WiiLinkPatcherGUI/translations/translation_it.ts",
+    "./src/WiiLinkPatcherGUI/translations/translation_pt_BR.ts",
+    "./src/WiiLinkPatcherGUI/translations/translation_ca.ts",
+    "./src/WiiLinkPatcherGUI/translations/translation_ru.ts",
+    "./src/WiiLinkPatcherGUI/translations/translation_ko_KR.ts",
     # Example language file: "./translations/translation_xx[_XX].ts"
 ]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+WiiLinkPatcherGUI = ["**/*.qss", "**/*.json", "**/*.qm", "**/*.webp", "**/*.svg"]
+
+[build-system]
+requires = ["setuptools >= 77.0.3"]
+build-backend = "setuptools.build_meta"

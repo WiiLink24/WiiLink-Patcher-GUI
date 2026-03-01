@@ -11,7 +11,7 @@ $buildProject = {
     $argsArray = $additional_args -split " "
 
 
-    python -m nuitka --show-progress --assume-yes-for-downloads @argsArray WiiLinkPatcherGUI.py
+    python -m nuitka --show-progress --assume-yes-for-downloads --python-flag="-m" @argsArray src/WiiLinkPatcherGUI
 }
 
 $cleanBuild = {
