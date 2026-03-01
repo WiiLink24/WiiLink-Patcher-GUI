@@ -36,7 +36,15 @@ import random
 import json
 import datetime
 
-from PySide6.QtCore import QTranslator, QLocale, QLibraryInfo, QTimer, Qt, QStandardPaths, QUrl
+from PySide6.QtCore import (
+    QTranslator,
+    QLocale,
+    QLibraryInfo,
+    QTimer,
+    Qt,
+    QStandardPaths,
+    QUrl,
+)
 from PySide6.QtGui import QIcon, QDesktopServices
 from PySide6.QtWidgets import (
     QWizard,
@@ -389,7 +397,11 @@ Otherwise, we recommend selecting your SD card or USB drive that you use in your
 
         self.dialog = QFileDialog()
 
-        self.dialog.setDirectory(QStandardPaths.standardLocations(QStandardPaths.StandardLocation.HomeLocation)[0])
+        self.dialog.setDirectory(
+            QStandardPaths.standardLocations(
+                QStandardPaths.StandardLocation.HomeLocation
+            )[0]
+        )
 
     def select_folder(self):
         directory = self.dialog.getExistingDirectory(
@@ -605,16 +617,17 @@ Please open a support ticket on our <a href='https://discord.gg/wiilink' style='
     def open_wiilink_folder(self):
         output_path = self.wizard().property("path")
         QDesktopServices.openUrl(QUrl.fromLocalFile(output_path.resolve().as_posix()))
-        #match sys.platform:
+        # match sys.platform:
         #    case "win32":
-       #         os.startfile(output_path)
-      #      case "darwin":
-     #           subprocess.Popen(["open", output_path])
+
+    #         os.startfile(output_path)
+    #      case "darwin":
+    #           subprocess.Popen(["open", output_path])
     #        case _:
-   #             try:
-  #                  subprocess.Popen(["xdg-open", output_path])
- #               except OSError:
-#                    print("Unable to launch file browser with xdg-open!")
+    #             try:
+    #                  subprocess.Popen(["xdg-open", output_path])
+    #               except OSError:
+    #                    print("Unable to launch file browser with xdg-open!")
 
     def disable_buttons(self):
         self.wizard().button(QWizard.WizardButton.BackButton).setEnabled(False)
