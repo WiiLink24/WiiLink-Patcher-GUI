@@ -5,6 +5,10 @@
   <name>WiiLink Patcher</name>
   <summary>Get easily up and running with WiiLink!</summary>
 
+  <developer id="ca.wiilink">
+    <name>WiiLink</name>
+  </developer>
+
   <metadata_license>MIT</metadata_license>
   <project_license>MPL-2.0</project_license>
 
@@ -14,6 +18,19 @@
     <control>touch</control>
   </supports>
 
+  <requires>
+    <internet>always</internet>
+  </requires>
+
+  <content_rating type="oars-1.1" />
+
+  <keywords>
+    <keyword>Wii</keyword>
+    <keyword>Homebrew</keyword>
+    <keyword>WiiLink</keyword>
+    <keyword>WiiConnect24</keyword>
+  </keywords>
+
   <description>
     <p>
       WiiLink Patcher GUI is a Python application that helps you to get up and running with the WiiLink service. It automatically downloads and patches Wii channels from Nintendo’s servers to make them ready to install and use on a modded console.
@@ -21,6 +38,11 @@
   </description>
 
   <launchable type="desktop-id">ca.wiilink.Patcher.desktop</launchable>
+
+  <url type="bugtracker">https://github.com/WiiLink24/WiiLink-Patcher-GUI/issues</url>
+  <url type="homepage">https://wiilink.ca</url>
+  <url type="vcs-browser">https://github.com/WiiLink24/WiiLink-Patcher-GUI</url>
+
   <screenshots>
     <screenshot type="default">
       <image>https://github.com/WiiLink24/WiiLink-Patcher-GUI/raw/master/screenshots/main_menu.png</image>
