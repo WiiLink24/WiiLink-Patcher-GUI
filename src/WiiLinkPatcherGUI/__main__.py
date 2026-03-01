@@ -415,11 +415,6 @@ Otherwise, we recommend selecting your SD card or USB drive that you use in your
     def validatePage(self):
         if pathlib.Path(self.path.text()).is_dir():
             selected_path = pathlib.Path(self.path.text())
-            if (
-                selected_path.name.upper() == "WAD"
-                or selected_path.name.lower() == "apps"
-            ):
-                selected_path = selected_path.parent
             self.wizard().setProperty("path", selected_path)
             return True
 
