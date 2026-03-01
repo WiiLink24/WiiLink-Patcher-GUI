@@ -748,14 +748,14 @@ class WiiLinkPatcherGUI(QWizard):
         self.language_selector.exec()
 
         path = QLibraryInfo.path(QLibraryInfo.LibraryPath.TranslationsPath)
-        translator = QTranslator(app)
+        translator = QTranslator(QApplication.instance())
         if translator.load(self.language, "qtbase", "_", path):
-            app.installTranslator(translator)
+            QApplication.instance().installTranslator(translator)
 
-        translator = QTranslator(app)
+        translator = QTranslator(QApplication.instance())
         path = file_path.joinpath("translations").resolve().as_posix()
         if translator.load(self.language, "translation", "_", path):
-            app.installTranslator(translator)
+            QApplication.instance().installTranslator(translator)
 
     def check_connection(self):
         """Static method to run a connection test and display the results to the user, terminating the patcher if the test is unsuccessful
@@ -903,7 +903,7 @@ class LanguageSelector(QDialog):
         self.destroy()
 
 
-if __name__ == "__main__":
+def main():
     # Clear previous temporary directory to prevent potential conflicts
     if temp_dir.exists():
         shutil.rmtree(temp_dir)
@@ -915,3 +915,7 @@ if __name__ == "__main__":
     # Start the wizard
     wizard.show()
     sys.exit(app.exec())
+
+
+if __name__ == "__main__":
+    main()
