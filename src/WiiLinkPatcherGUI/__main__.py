@@ -682,7 +682,11 @@ class WiiLinkPatcherGUI(QWizard):
 
         # Check the internet connection, and perform internet-related tasks
         self.check_connection()
-        if "Nightly" not in patcher_version and "RC" not in patcher_version:
+        if (
+            "Nightly" not in patcher_version
+            and "RC" not in patcher_version
+            and not pathlib.Path("/.flatpak-info").exists()
+        ):
             self.check_for_updates()
 
         self.language_selector = LanguageSelector()
