@@ -268,6 +268,9 @@ class PatchingPage(QWizardPage):
         sys.stdout = ConsoleOutput(self.console, sys.__stdout__)
         sys.stderr = ConsoleOutput(self.console, sys.__stderr__)
 
+        # Start fact box
+        self.fact_box.start_thread()
+
         # Setup variables
         self.logic_worker.setup_type = self.setup_type
         self.logic_worker.platform = self.platform
@@ -303,6 +306,9 @@ class PatchingPage(QWizardPage):
         # Remove output redirects
         sys.stdout = sys.__stdout__
         sys.stderr = sys.__stderr__
+
+        # Kill fact thread
+        self.fact_box.kill_thread()
 
         self.completeChanged.emit()
         QTimer.singleShot(0, self.wizard().next)

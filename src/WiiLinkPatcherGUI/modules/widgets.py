@@ -11,7 +11,7 @@ from PySide6.QtWidgets import (
     QTextEdit,
     QSizePolicy,
 )
-from PySide6.QtCore import Qt, Signal, QObject, QThread
+from PySide6.QtCore import Qt, Signal, QObject, QThread, QTimer
 from PySide6.QtGui import QTextCursor
 
 
@@ -117,11 +117,18 @@ class FunFacts(QLabel):
 
         self.fact_worker.emit_fact.connect(self.set_fact)
 
-        self.fact_thread.start()
-
     def set_fact(self, fact: str):
         self.setText(self.tr("""<h3>Did you know?</h3>
 {}""").format(fact))
+
+    def start_thread(self):
+        self.fact_thread.start()
+
+    def kill_thread(self):
+        self.fact_worker.timer.stop()
+        self.fact_thread.quit()
+        self.fact_worker.deleteLater()
+        self.fact_thread.deleteLater()
 
 
 class FactWorker(QObject):
@@ -168,8 +175,11 @@ class FactWorker(QObject):
             ),
         ]
 
+        self.timer = QTimer()
+        self.timer.setInterval(10000)
+        self.timer.timeout.connect(self.update_facts)
+        self.timer.start()
+
     def update_facts(self):
-        while True:
-            current_fact = random.choice(self.facts)
-            self.emit_fact.emit(current_fact)
-            time.sleep(10)
+        current_fact = random.choice(self.facts)
+        self.emit_fact.emit(current_fact)
