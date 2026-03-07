@@ -916,6 +916,7 @@ def main():
         shutil.rmtree(temp_dir)
 
     # Create instance of QApplication and the patcher's QWizard
+    global app, wizard
     app = QApplication(sys.argv)
     wizard = WiiLinkPatcherGUI()
 
