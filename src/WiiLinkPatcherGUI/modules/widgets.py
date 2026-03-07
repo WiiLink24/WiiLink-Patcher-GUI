@@ -10,6 +10,7 @@ from PySide6.QtWidgets import (
     QLabel,
     QTextEdit,
     QSizePolicy,
+    QLineEdit,
 )
 from PySide6.QtCore import Qt, Signal, QObject, QThread, QTimer
 from PySide6.QtGui import QTextCursor
@@ -50,6 +51,17 @@ class CollapsibleBox(QWidget):
 
 
 class ClickableLabel(QLabel):
+    clicked = Signal()
+
+    def __init__(self, text="", parent=None):
+        super().__init__(text, parent)
+
+    def mousePressEvent(self, event):
+        if event.button() == Qt.MouseButton.LeftButton:
+            self.clicked.emit()
+
+
+class ClickableLineEdit(QLineEdit):
     clicked = Signal()
 
     def __init__(self, text="", parent=None):

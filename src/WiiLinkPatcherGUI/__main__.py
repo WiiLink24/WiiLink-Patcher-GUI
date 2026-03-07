@@ -95,7 +95,7 @@ from WiiLinkPatcherGUI.setup.download import (
     DownloadOSCApp,
 )
 from WiiLinkPatcherGUI.setup.patch import PatchingPage
-from WiiLinkPatcherGUI.modules.widgets import ClickableLabel
+from WiiLinkPatcherGUI.modules.widgets import ClickableLabel, ClickableLineEdit
 from WiiLinkPatcherGUI.modules.consts import (
     temp_dir,
     file_path,
@@ -379,8 +379,10 @@ Otherwise, we recommend selecting your SD card or USB drive that you use in your
 
         label.setWordWrap(True)
 
-        self.path = QLineEdit()
+        self.path = ClickableLineEdit()
         self.path.setPlaceholderText(self.tr("Select a location..."))
+        self.path.setReadOnly(True)
+        self.path.clicked.connect(self.select_folder)
 
         self.select = QPushButton(self.tr("Browse"))
         self.select.pressed.connect(self.select_folder)
@@ -408,14 +410,20 @@ Otherwise, we recommend selecting your SD card or USB drive that you use in your
             self,
             self.tr("Select output location..."),
         )
+        self.wizard().setProperty("path", pathlib.Path(directory))
+
+        if pathlib.Path("/.flatpak-info").exists():
+            # Get the host path if we're running in a Flatpak
+            directory = os.getxattr(
+                directory, "user.document-portal.host-path"
+            ).decode()
 
         self.path.setText(directory)
         self.completeChanged.emit()
 
     def validatePage(self):
-        if pathlib.Path(self.path.text()).is_dir():
-            selected_path = pathlib.Path(self.path.text())
-            self.wizard().setProperty("path", selected_path)
+        selected_path = self.wizard().property("path")
+        if selected_path.is_dir():
             return True
 
         QMessageBox.warning(
@@ -429,12 +437,12 @@ Otherwise, we recommend selecting your SD card or USB drive that you use in your
         return len(self.path.text()) > 0
 
     def nextId(self):
-        wad_path = pathlib.Path(self.path.text()).joinpath("WAD")
+        selected_path = self.wizard().property("path")
         match PatchingPage.setup_type:
             case SetupTypes.Dokodemo:
                 return 401
             case _:
-                if wad_path.is_dir():
+                if selected_path and selected_path.joinpath("WAD").is_dir():
                     return 11
                 return 12
 
