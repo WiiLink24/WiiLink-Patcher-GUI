@@ -26,8 +26,8 @@ files = [
     "./src/WiiLinkPatcherGUI/translations/translation_hu.ts",
     "./src/WiiLinkPatcherGUI/translations/translation_it.ts",
     "./src/WiiLinkPatcherGUI/translations/translation_pt_BR.ts",
-    "./src/WiiLinkPatcherGUI/translations/translation_ca.ts",
-    "./src/WiiLinkPatcherGUI/translations/translation_ru.ts",
+#    "./src/WiiLinkPatcherGUI/translations/translation_ca.ts",
+#    "./src/WiiLinkPatcherGUI/translations/translation_ru.ts",
     "./src/WiiLinkPatcherGUI/translations/translation_ko_KR.ts",
     # Example language file: "./translations/translation_xx[_XX].ts"
 ]
