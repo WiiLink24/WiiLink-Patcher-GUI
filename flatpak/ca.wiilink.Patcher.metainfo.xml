@@ -45,13 +45,16 @@
 
   <screenshots>
     <screenshot type="default">
-      <image>https://github.com/WiiLink24/WiiLink-Patcher-GUI/raw/master/screenshots/main_menu.png</image>
+      <image>https://github.com/WiiLink24/WiiLink-Patcher-GUI/raw/master/screenshots/main_menu.png?raw=true</image>
+      <caption>Main menu</caption>
     </screenshot>
     <screenshot>
-      <image>https://github.com/WiiLink24/WiiLink-Patcher-GUI/raw/master/screenshots/channel_selection.png</image>
+      <image>https://github.com/WiiLink24/WiiLink-Patcher-GUI/raw/master/screenshots/channel_selection.png?raw=true</image>
+      <caption>Channel selection</caption>
     </screenshot>
     <screenshot>
-      <image>https://github.com/WiiLink24/WiiLink-Patcher-GUI/raw/master/screenshots/patching.png</image>
+      <image>https://github.com/WiiLink24/WiiLink-Patcher-GUI/raw/master/screenshots/patching.png?raw=true</image>
+      <caption>Patching in progress</caption>
     </screenshot>
   </screenshots>
 
