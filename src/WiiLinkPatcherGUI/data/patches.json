@@ -204,6 +204,54 @@
         "additional_apps": null,
         "additional_channels": null,
         "additional_files": null
+      },
+      {
+        "item_id": 4,
+        "language": "Portuguese",
+        "region": null,
+        "latest_version": 1792,
+        "patch_folder": "nc",
+        "name": "Nintendo Channel (português brasileiro)",
+        "patches": [
+          {
+            "patch_name": "NC_0_Portuguese",
+            "content_id": 0
+          },
+          {
+            "patch_name": "NC_1_Portuguese",
+            "content_id": 1
+          },
+          {
+            "patch_name": "NC_4_Portuguese",
+            "content_id": 4
+          },
+          {
+            "patch_name": "NC_5_Portuguese",
+            "content_id": 5
+          },
+          {
+            "patch_name": "NC_6_Portuguese",
+            "content_id": 6
+          },
+          {
+            "patch_name": "NC_8_Portuguese",
+            "content_id": 8
+          },
+          {
+            "patch_name": "NC_9_Portuguese",
+            "content_id": 9
+          },
+          {
+            "patch_name": "NC_A_Portuguese",
+            "content_id": 10
+          }
+        ],
+        "title_id": "0001000148415445",
+        "additional_apps": null,
+        "additional_channels": null,
+        "additional_files":  [
+          "ticket"
+        ]
       }
     ]
   },
