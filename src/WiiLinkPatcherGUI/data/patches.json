@@ -374,7 +374,9 @@
           }
         ],
         "title_id": "0001000148415045",
-        "additional_apps": null,
+        "additional_apps": [
+          "WSR-Patcher"
+        ],
         "additional_channels": null,
         "additional_files": [
           "ticket"
@@ -398,7 +400,9 @@
           }
         ],
         "title_id": "0001000148415050",
-        "additional_apps": null,
+        "additional_apps":  [
+          "WSR-Patcher"
+        ],
         "additional_channels": null,
         "additional_files": [
           "ticket"
@@ -422,7 +426,9 @@
           }
         ],
         "title_id": "000100014841504a",
-        "additional_apps": null,
+        "additional_apps":  [
+          "WSR-Patcher"
+        ],
         "additional_channels": null,
         "additional_files": null
       }
