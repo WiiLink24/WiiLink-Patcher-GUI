@@ -59,15 +59,24 @@
   </screenshots>
 
   <releases>
+    <release version="1.4.1" date="2026-03-12">
+      <url type="details">https://github.com/WiiLink24/WiiLink-Patcher-GUI/releases/tag/v1.4.1</url>
+      <description>
+        <p>Release description:</p>
+        <ul>
+          <li>Fixed images in metainfo for Flatpak release.</li>
+        </ul>
+      </description>
+    </release>
     <release version="1.4.0" date="2026-03-08">
       <url type="details">https://github.com/WiiLink24/WiiLink-Patcher-GUI/releases/tag/v1.4.0</url>
       <description>
         <p>Release description:</p>
         <ul>
-	  <li>First version to support Flatpak!</li>
-	  <li>Improved error messages</li>
-	  <li>Output path is now selected by the end user rather than defaulting to `~/Downloads/WiiLink`</li>
-	  <li>Fixed a crash when closing the app</li>
+          <li>First version to support Flatpak!</li>
+          <li>Improved error messages</li>
+          <li>Output path is now selected by the end user rather than defaulting to `~/Downloads/WiiLink`</li>
+          <li>Fixed a crash when closing the app</li>
         </ul>
       </description>
     </release>

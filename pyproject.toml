@@ -1,6 +1,6 @@
 [project]
 name = "WiiLinkPatcherGUI"
-version = "1.4.0"
+version = "1.4.1"
 dependencies = [
     "libTWLPy",
     "libWiiPy",
@@ -29,7 +29,7 @@ files = [
 #    "./src/WiiLinkPatcherGUI/translations/translation_ca.ts",
 #    "./src/WiiLinkPatcherGUI/translations/translation_ru.ts",
     "./src/WiiLinkPatcherGUI/translations/translation_ko_KR.ts",
-    # Example language file: "./translations/translation_xx[_XX].ts"
+    # Example language file: "./src/WiiLinkPatcherGUI/translations/translation_xx[_XX].ts"
 ]
 
 [tool.setuptools.packages.find]
