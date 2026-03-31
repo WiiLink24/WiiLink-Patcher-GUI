@@ -66,8 +66,8 @@
     <message>
         <location filename="../__main__.py" line="327"/>
         <source>&lt;a href=https://example.com style=&apos;color: #4a86e8; text-decoration: none;&apos;&gt;&lt;b&gt;YOUR NAME&lt;/b&gt;&lt;/a&gt; - LANGUAGE Translator</source>
-        <translatorcomment>idk if you use &quot;German Translator&quot; (if you wanna change it to german replace the text with &quot;Deutsche Sprachübersetzer&quot;)</translatorcomment>
-        <translation>&lt;a href=https://weebo64.is-a.dev/ style=&apos;color: #4a86e8; text-decoration: none;&apos;&gt;&lt;b&gt;Weebo64&lt;/b&gt;&lt;/a&gt; - German Translator (PS: if you dont want to use my website as a url you can always link my github page aswell: "https://github.com/Weebo64")</translation>
+        <translatorcomment>idk if you use &quot;German Translator&quot; (if you wanna change it to german replace the text with &quot;Deutsche Sprachübersetzer&quot;) (PS: if you dont want to use my website as a url you can always link my github page aswell: "https://github.com/Weebo64")</translatorcomment>
+        <translation>&lt;a href=https://weebo64.is-a.dev/ style=&apos;color: #4a86e8; text-decoration: none;&apos;&gt;&lt;b&gt;Weebo64&lt;/b&gt;&lt;/a&gt; - German Translator</translation>
     </message>
     <message>
         <location filename="../__main__.py" line="361"/>
