@@ -66,8 +66,8 @@
     <message>
         <location filename="../__main__.py" line="327"/>
         <source>&lt;a href=https://example.com style=&apos;color: #4a86e8; text-decoration: none;&apos;&gt;&lt;b&gt;YOUR NAME&lt;/b&gt;&lt;/a&gt; - LANGUAGE Translator</source>
-        <translatorcomment>idk if you use &quot;German Translator&quot; (if you wanna change it to german replace the text with &quot;Deutsche Sprachübersetzer&quot;)</translatorcomment>
-        <translation>&lt;a href=https://example.com style=&apos;color: #4a86e8; text-decoration: none;&apos;&gt;&lt;b&gt;Weebo64&lt;/b&gt;&lt;/a&gt; - German Translator</translation>
+        <translatorcomment>idk if you use &quot;German Translator&quot; (if you wanna change it to german replace the text with &quot;Deutsche Sprachübersetzer&quot;) (PS: if you dont want to use my website as a url you can always link my github page aswell: "https://github.com/Weebo64")</translatorcomment>
+        <translation>&lt;a href=https://weebo64.is-a.dev/ style=&apos;color: #4a86e8; text-decoration: none;&apos;&gt;&lt;b&gt;Weebo64&lt;/b&gt;&lt;/a&gt; - German Translator</translation>
     </message>
     <message>
         <location filename="../__main__.py" line="361"/>
@@ -218,17 +218,17 @@ Folge der Installationsanleitung unter &lt;a href=&apos;https://wii.zazios.ru/ru
     <message>
         <location filename="../setup/dokodemo.py" line="32"/>
         <source>Wii Room Anywhere</source>
-        <translation>Wii Room überall</translation>
+        <translation>Wii Room Anywhere</translation>
     </message>
     <message>
         <location filename="../setup/dokodemo.py" line="33"/>
         <source>Choose the language for Wii Room Anywhere.</source>
-        <translation>Wähle die Sprache für Wii Room überall.</translation>
+        <translation>Wähle die Sprache für Wii Room Anywhere.</translation>
     </message>
     <message>
         <location filename="../setup/dokodemo.py" line="37"/>
         <source>What language would you like &lt;b&gt;Wii Room Anywhere&lt;/b&gt; to be in?</source>
-        <translation>In welcher Sprache möchtest du &lt;b&gt;Wii Room überall&lt;/b&gt; haben?</translation>
+        <translation>In welcher Sprache möchtest du &lt;b&gt;Wii Room Anywhere&lt;/b&gt; haben?</translation>
     </message>
     <message>
         <location filename="../setup/dokodemo.py" line="40"/>
@@ -469,7 +469,7 @@ Folge der Installationsanleitung unter &lt;a href=&apos;https://wii.zazios.ru/ru
     <message>
         <location filename="../modules/widgets.py" line="153"/>
         <source>The Wii was called &quot;Revolution&quot; during development!</source>
-        <translation>Die Wii hieß während der Entwicklung "Revolution"!</translation>
+        <translation>Die Wii hieß während der Entwicklung &quot;Revolution&quot;!</translation>
     </message>
     <message>
         <location filename="../modules/widgets.py" line="156"/>
@@ -509,7 +509,7 @@ Folge der Installationsanleitung unter &lt;a href=&apos;https://wii.zazios.ru/ru
     <message>
         <location filename="../modules/widgets.py" line="175"/>
         <source>The WiiLink project began in 2020 under the name &quot;Rii no Ma&quot;, with the goal of reviving Wii no Ma and the other Japan-exclusive channels.</source>
-        <translation>Das WiiLink-Projekt begann 2020 unter dem Namen "Rii no Ma" mit dem Ziel, Wii no Ma und andere Japan-exklusive Kanäle wiederzubeleben.</translation>
+        <translation>Das WiiLink-Projekt begann 2020 unter dem Namen &quot;Rii no Ma&quot; mit dem Ziel, Wii no Ma und andere Japan-exklusive Kanäle wiederzubeleben.</translation>
     </message>
     <message>
         <location filename="../modules/widgets.py" line="178"/>
@@ -552,7 +552,7 @@ Folge der Installationsanleitung unter &lt;a href=&apos;https://wii.zazios.ru/ru
     <message>
         <location filename="../__main__.py" line="115"/>
         <source>We recommend choosing &apos;Express Setup&apos; for first-time users.</source>
-        <translation>Wir empfehlen, "Express Einrichtung" für Anfänger zu wählen.</translation>
+        <translation>Wir empfehlen, &quot;Express Einrichtung&quot; für Anfänger zu wählen.</translation>
     </message>
     <message>
         <location filename="../__main__.py" line="122"/>
@@ -579,7 +579,7 @@ Füge zusätzliche Kanäle zu deiner Wii hinzu</translation>
         <location filename="../__main__.py" line="135"/>
         <source>Wii Room Anywhere
 Patch Dokodemo Wii no Ma to work with Wii Room</source>
-        <translation>Wii Room überall
+        <translation>Wii Room Anywhere
 Patche Dokodemo Wii no Ma, um mit Wii Room zu funktionieren</translation>
     </message>
     <message>
@@ -732,8 +732,8 @@ Andernfalls empfehlen wir dir, deine SD-Karte oder dein USB-Laufwerk auszuwähle
 The &apos;WAD&apos; directory is used to store channels you install on your Wii, therefore this directory causes a conflict.
 
 What would you like to do?</source>
-        <translation>Der Patcher hat ein Verzeichnis namens "WAD" an deinem ausgewählten Ausgabepfad erkannt.
-Das Verzeichnis "WAD" wird verwendet, um Kanäle zu speichern, die du auf deiner Wii installierst, daher verursacht dieses Verzeichnis einen Konflikt.
+        <translation>Der Patcher hat ein Verzeichnis namens &quot;WAD&quot; an deinem ausgewählten Ausgabepfad erkannt.
+Das Verzeichnis &quot;WAD&quot; wird verwendet, um Kanäle zu speichern, die du auf deiner Wii installierst, daher verursacht dieses Verzeichnis einen Konflikt.
 
 Was möchtest du tun?</translation>
     </message>
@@ -741,19 +741,19 @@ Was möchtest du tun?</translation>
         <location filename="../__main__.py" line="475"/>
         <source>Rename the existing &apos;WAD&apos; directory to &apos;WAD.bak&apos;
 (Recommended)</source>
-        <translation>Benenne das vorhandene "WAD"-Verzeichnis in "WAD.bak" um
+        <translation>Benenne das vorhandene &quot;WAD&quot;-Verzeichnis in &quot;WAD.bak&quot; um
 (Empfohlen)</translation>
     </message>
     <message>
         <location filename="../__main__.py" line="476"/>
         <source>Delete the existing &apos;WAD&apos; directory</source>
-        <translation>Lösche das vorhandene "WAD"-Verzeichnis</translation>
+        <translation>Lösche das vorhandene &quot;WAD&quot;-Verzeichnis</translation>
     </message>
     <message>
         <location filename="../__main__.py" line="479"/>
         <source>Leave the existing &apos;WAD&apos; directory as-is
 NOT RECOMMENDED</source>
-        <translation>Behalte das vorhandene "WAD"-Verzeichnis bei
+        <translation>Behalte das vorhandene &quot;WAD&quot;-Verzeichnis bei
 NICHT EMPFOHLEN</translation>
     </message>
 </context>
