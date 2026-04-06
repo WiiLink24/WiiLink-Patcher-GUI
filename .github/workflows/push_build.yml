@@ -176,3 +176,4 @@ jobs:
       with:
         path: .\WiiLinkPatcherGUI.dist
         name: WiiLinkPatcherGUI-Windows-x64
+
