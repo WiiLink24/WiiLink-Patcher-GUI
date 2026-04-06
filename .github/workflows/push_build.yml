@@ -135,8 +135,6 @@ jobs:
 
     steps:
     - uses: actions/checkout@v6
-    - name: Enable Developer Command Prompt
-      uses: ilammy/msvc-dev-cmd@v1.13.0
     - name: Set up Python 3.13
       uses: actions/setup-python@v6
       with:
@@ -159,8 +157,6 @@ jobs:
 
     steps:
     - uses: actions/checkout@v6
-    - name: Enable Developer Command Prompt
-      uses: ilammy/msvc-dev-cmd@v1.13.0
     - name: Set up Python 3.13
       uses: actions/setup-python@v6
       with:
