@@ -18,13 +18,13 @@ jobs:
     runs-on: ubuntu-22.04
 
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v6
     - name: Install ccache for Nuitka
       run: |
         sudo apt update && \
         sudo apt install -y ccache patchelf
     - name: Set up Python 3.13
-      uses: actions/setup-python@v5
+      uses: actions/setup-python@v6
       with:
         python-version: "3.13"
     - name: Install Dependencies
@@ -39,7 +39,7 @@ jobs:
         cd ~
         tar cvf WiiLinkPatcherGUI.tar WiiLinkPatcherGUI
     - name: Upload Package
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v7
       with:
         path: ~/WiiLinkPatcherGUI.tar
         name: WiiLinkPatcherGUI-Linux-x64
@@ -49,13 +49,13 @@ jobs:
     runs-on: ubuntu-24.04-arm
 
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v6
     - name: Install ccache for Nuitka
       run: |
         sudo apt update && \
         sudo apt install -y ccache patchelf
     - name: Set up Python 3.13
-      uses: actions/setup-python@v5
+      uses: actions/setup-python@v6
       with:
         python-version: "3.13"
     - name: Install Dependencies
@@ -70,7 +70,7 @@ jobs:
         cd ~
         tar cvf WiiLinkPatcherGUI.tar WiiLinkPatcherGUI
     - name: Upload Package
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v7
       with:
         path: ~/WiiLinkPatcherGUI.tar
         name: WiiLinkPatcherGUI-Linux-arm64
@@ -80,9 +80,9 @@ jobs:
     runs-on: macos-15-intel
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - name: Set up Python 3.13
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
           python-version: "3.13"
       - name: Install Dependencies
@@ -97,7 +97,7 @@ jobs:
           cd ~
           tar cvf WiiLinkPatcherGUI.tar WiiLinkPatcherGUI.app
       - name: Upload Package
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           path: ~/WiiLinkPatcherGUI.tar
           name: WiiLinkPatcherGUI-macOS-x64
@@ -107,9 +107,9 @@ jobs:
     runs-on: macos-15
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - name: Set up Python 3.13
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
           python-version: "3.13"
       - name: Install Dependencies
@@ -124,7 +124,7 @@ jobs:
           cd ~
           tar cvf WiiLinkPatcherGUI.tar WiiLinkPatcherGUI.app
       - name: Upload Package
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           path: ~/WiiLinkPatcherGUI.tar
           name: WiiLinkPatcherGUI-macOS-arm64
@@ -134,11 +134,11 @@ jobs:
     runs-on: windows-latest
 
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v6
     - name: Enable Developer Command Prompt
       uses: ilammy/msvc-dev-cmd@v1.13.0
     - name: Set up Python 3.13
-      uses: actions/setup-python@v5
+      uses: actions/setup-python@v6
       with:
         python-version: "3.13"
     - name: Install Dependencies
@@ -148,7 +148,7 @@ jobs:
     - name: Build Package
       run: .\Build.ps1 -additional_args "--onefile"
     - name: Upload Onefile Package
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v7
       with:
         path: .\WiiLinkPatcherGUI.exe
         name: WiiLinkPatcherGUI-Windows-onefile-x64
@@ -158,11 +158,11 @@ jobs:
     runs-on: windows-latest
 
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v6
     - name: Enable Developer Command Prompt
       uses: ilammy/msvc-dev-cmd@v1.13.0
     - name: Set up Python 3.13
-      uses: actions/setup-python@v5
+      uses: actions/setup-python@v6
       with:
         python-version: "3.13"
     - name: Install Dependencies
@@ -172,7 +172,8 @@ jobs:
     - name: Build Package
       run: .\Build.ps1
     - name: Upload Standalone Package
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v7
       with:
         path: .\WiiLinkPatcherGUI.dist
         name: WiiLinkPatcherGUI-Windows-x64
+
