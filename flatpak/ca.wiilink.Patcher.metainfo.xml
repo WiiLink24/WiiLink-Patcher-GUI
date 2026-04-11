@@ -59,6 +59,16 @@
   </screenshots>
 
   <releases>
+    <release version="1.5.0" date="2026-04-12">
+      <url type="details">https://github.com/WiiLink24/WiiLink-Patcher-GUI/releases/tag/v1.5.0</url>
+      <description>
+        <p>Release description:</p>
+        <ul>
+          <li>Added Food Channel Just Eat!</li>
+          <li>Updated app icon</li>
+        </ul>
+      </description>
+    </release>
     <release version="1.4.1" date="2026-03-12">
       <url type="details">https://github.com/WiiLink24/WiiLink-Patcher-GUI/releases/tag/v1.4.1</url>
       <description>

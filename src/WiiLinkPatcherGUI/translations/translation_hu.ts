@@ -77,22 +77,22 @@
 <context>
     <name>CustomPlatformConfiguration</name>
     <message>
-        <location filename="../setup/custom.py" line="183"/>
+        <location filename="../setup/custom.py" line="202"/>
         <source>Step 3: Custom Setup</source>
         <translation>3. lépés: Egyéni telepítés</translation>
     </message>
     <message>
-        <location filename="../setup/custom.py" line="184"/>
+        <location filename="../setup/custom.py" line="203"/>
         <source>Choose console platform</source>
         <translation>Környezet megadása</translation>
     </message>
     <message>
-        <location filename="../setup/custom.py" line="188"/>
+        <location filename="../setup/custom.py" line="207"/>
         <source>Which platform will you be installing WiiLink onto?</source>
         <translation>Milyen eszközre végzed a telepítést?</translation>
     </message>
     <message>
-        <location filename="../setup/custom.py" line="194"/>
+        <location filename="../setup/custom.py" line="213"/>
         <source>Dolphin Emulator</source>
         <translation>Dolphin Emulátor</translation>
     </message>
@@ -100,32 +100,32 @@
 <context>
     <name>CustomRegionConfiguration</name>
     <message>
-        <location filename="../setup/custom.py" line="230"/>
+        <location filename="../setup/custom.py" line="249"/>
         <source>Step 4: Custom Setup</source>
         <translation>4. lépés: Egyéni telepítés</translation>
     </message>
     <message>
-        <location filename="../setup/custom.py" line="231"/>
+        <location filename="../setup/custom.py" line="250"/>
         <source>Choose console region</source>
         <translation>Konzol régiójának megadása</translation>
     </message>
     <message>
-        <location filename="../setup/custom.py" line="233"/>
+        <location filename="../setup/custom.py" line="252"/>
         <source>Which region is your console?</source>
         <translation>Milyen régióval rendelkezik a konzol?</translation>
     </message>
     <message>
-        <location filename="../setup/custom.py" line="237"/>
+        <location filename="../setup/custom.py" line="256"/>
         <source>North America (NTSC-U)</source>
         <translation>Észak-Amerika (NTSC-U)</translation>
     </message>
     <message>
-        <location filename="../setup/custom.py" line="238"/>
+        <location filename="../setup/custom.py" line="257"/>
         <source>Europe (PAL)</source>
         <translation>Európa (PAL)</translation>
     </message>
     <message>
-        <location filename="../setup/custom.py" line="239"/>
+        <location filename="../setup/custom.py" line="258"/>
         <source>Japan (NTSC-J)</source>
         <translation>Japán (NTSC-J)</translation>
     </message>
@@ -148,12 +148,31 @@
         <translation>Telepítendő csatornák megadása:</translation>
     </message>
     <message>
-        <location filename="../setup/custom.py" line="143"/>
+        <location filename="../setup/custom.py" line="145"/>
+        <source>Just Eat country support</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../setup/custom.py" line="155"/>
+        <source>You have selected the Just Eat variant of the Food Channel.&lt;br&gt;
+    It is available in the following countries:
+    &lt;ul&gt;
+    &lt;li&gt;United Kingdom&lt;/li&gt;
+    &lt;li&gt;Ireland&lt;/li&gt;
+    &lt;li&gt;Spain&lt;/li&gt;
+    &lt;li&gt;Germany&lt;/li&gt;
+    &lt;li&gt;Austria&lt;/li&gt;
+    &lt;li&gt;Italy&lt;/li&gt;
+    &lt;/ul&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../setup/custom.py" line="162"/>
         <source>Russian notice for Wii Room</source>
         <translation>Megjegyzés az orosz Wii Roomhoz</translation>
     </message>
     <message>
-        <location filename="../setup/custom.py" line="147"/>
+        <location filename="../setup/custom.py" line="166"/>
         <source>You have selected the Russian translation for Wii Room&lt;br&gt;
 Proper functionality is not guaranteed for systems without the Russian Wii Menu.&lt;br&gt;
 Follow the installation guide at &lt;a href=&apos;https://wii.zazios.ru/rus_menu&apos;&gt;https://wii.zazios.ru/rus_menu&lt;/a&gt; if you have not already done so.&lt;br&gt;
@@ -276,22 +295,22 @@ Ha még nem rendelkezik a Wii-menü orosz fordításával, akkor a telepítési 
 <context>
     <name>ExpressPlatformConfiguration</name>
     <message>
-        <location filename="../setup/express.py" line="360"/>
+        <location filename="../setup/express.py" line="379"/>
         <source>Step 5: Express Setup</source>
         <translation>5. lépés: Gyors telepítés</translation>
     </message>
     <message>
-        <location filename="../setup/express.py" line="361"/>
+        <location filename="../setup/express.py" line="380"/>
         <source>Choose console platform.</source>
         <translation>Környezet megadása.</translation>
     </message>
     <message>
-        <location filename="../setup/express.py" line="365"/>
+        <location filename="../setup/express.py" line="384"/>
         <source>Which platform will you be installing WiiLink onto?</source>
         <translation>Milyen eszközre végzed a telepítést?</translation>
     </message>
     <message>
-        <location filename="../setup/express.py" line="371"/>
+        <location filename="../setup/express.py" line="390"/>
         <source>Dolphin Emulator</source>
         <translation>Dolphin Emulátor</translation>
     </message>
@@ -345,6 +364,25 @@ Ha még nem rendelkezik a Wii-menü orosz fordításával, akkor a telepítési 
         <location filename="../setup/express.py" line="289"/>
         <source>Select the regional channels you&apos;d like to install from the list below:</source>
         <translation>Telepítendő régiós csatornák megadása:</translation>
+    </message>
+    <message>
+        <location filename="../setup/express.py" line="307"/>
+        <source>Just Eat country support</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../setup/express.py" line="317"/>
+        <source>You have selected the Just Eat variant of the Food Channel.&lt;br&gt;
+It is available in the following countries:
+&lt;ul&gt;
+&lt;li&gt;United Kingdom&lt;/li&gt;
+&lt;li&gt;Ireland&lt;/li&gt;
+&lt;li&gt;Spain&lt;/li&gt;
+&lt;li&gt;Germany&lt;/li&gt;
+&lt;li&gt;Austria&lt;/li&gt;
+&lt;li&gt;Italy&lt;/li&gt;
+&lt;/ul&gt;</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -460,72 +498,72 @@ Ha még nem rendelkezik a Wii-menü orosz fordításával, akkor a telepítési 
 <context>
     <name>FactWorker</name>
     <message>
-        <location filename="../modules/widgets.py" line="133"/>
+        <location filename="../modules/widgets.py" line="152"/>
         <source>The Wii was the best selling game-console of 2006!</source>
         <translation>2006-ban a Wii volt a legtöbbet eladott játékkonzol.</translation>
     </message>
     <message>
-        <location filename="../modules/widgets.py" line="134"/>
+        <location filename="../modules/widgets.py" line="153"/>
         <source>The Wii was called &quot;Revolution&quot; during development!</source>
         <translation>A Wii fejlesztés alatii neve „Revolution” (forradalom) volt.</translation>
     </message>
     <message>
-        <location filename="../modules/widgets.py" line="137"/>
+        <location filename="../modules/widgets.py" line="156"/>
         <source>The music used in many of the Wii&apos;s channels (including the Wii Shop, Mii, Check Mii Out, and Forecast Channel) was composed by Kazumi Totaka.</source>
         <translation>A Wii csatornáin előforduló számos zeneszámot (beleértve a Wii Áruházcsatornát, a Miiversenycsatornát és az Időjáráscsatornát is) Totaka Kazumi szerezte.</translation>
     </message>
     <message>
-        <location filename="../modules/widgets.py" line="140"/>
+        <location filename="../modules/widgets.py" line="159"/>
         <source>The Internet Channel was initially a paid channel for 500 Wii Points.</source>
         <translation>Az Internetcsatorna eredetileg fizetős volt: 500 Wii-pontért lehetett megvásárolni.</translation>
     </message>
     <message>
-        <location filename="../modules/widgets.py" line="141"/>
+        <location filename="../modules/widgets.py" line="160"/>
         <source>You can use candles instead of a Wii sensor bar.</source>
         <translation>Egy Wii Remote Wii Sensor Bar hiányában gyertyákkal is működik.</translation>
     </message>
     <message>
-        <location filename="../modules/widgets.py" line="144"/>
+        <location filename="../modules/widgets.py" line="163"/>
         <source>The blinking blue light that indicates Wii Mail has been received is actually synced to the bird call of the Japanese bush warbler!</source>
         <translation>Az olvasatlan üzenetet jelző lemezolvasófény a japán berkiposzáta csiripelését követi.</translation>
     </message>
     <message>
-        <location filename="../modules/widgets.py" line="147"/>
+        <location filename="../modules/widgets.py" line="166"/>
         <source>Wii Sports is the most sold Wii game released, at a staggering 82.9 million copies sold!</source>
         <translation>A legtöbbet eladott Wii-játék a Wii Sports. 82,9 millió másolatot vásároltak meg belőle!</translation>
     </message>
     <message>
-        <location filename="../modules/widgets.py" line="150"/>
+        <location filename="../modules/widgets.py" line="169"/>
         <source>We have a forum you can check out at &lt;a href=&apos;https://forum.wiilink.ca&apos;&gt;forum.wiilink.ca&lt;/a&gt;!</source>
         <translation>A fórumunk a &lt;a href=&apos;https://forum.wiilink.ca&apos;&gt;forum.wiilink.ca&lt;/a&gt; címen található meg.</translation>
     </message>
     <message>
-        <location filename="../modules/widgets.py" line="153"/>
+        <location filename="../modules/widgets.py" line="172"/>
         <source>Japanese regions in the Forecast Channel uses different weather icons to other regions!</source>
         <translation>A japán régiójú Időjáráscsatorna a többitől eltérő ikonokat használ.</translation>
     </message>
     <message>
-        <location filename="../modules/widgets.py" line="156"/>
+        <location filename="../modules/widgets.py" line="175"/>
         <source>The WiiLink project began in 2020 under the name &quot;Rii no Ma&quot;, with the goal of reviving Wii no Ma and the other Japan-exclusive channels.</source>
         <translation>A WiiLink projekt 2020-ban indult „Rii no Ma”-néven, a Wii no Ma és egyéb kizárólag Japánban üzemelt csatornák újraélesztésére.</translation>
     </message>
     <message>
-        <location filename="../modules/widgets.py" line="159"/>
+        <location filename="../modules/widgets.py" line="178"/>
         <source>RiiConnect24, the first WiiConnect24 revival project, was established in 2015, releasing the first News Channel revival in 2016!</source>
         <translation>A WiiConnect24 első feltámasztóprojektjét RiiConnect24-nek hívták, 2015-ben indult és a Hírcsatorna első használható változatát egy évvel később tették közzé.</translation>
     </message>
     <message>
-        <location filename="../modules/widgets.py" line="162"/>
+        <location filename="../modules/widgets.py" line="181"/>
         <source>Before 2024, there were 2 separate services reviving WiiConnect24 channels - WiiLink and RiiConnect24. The two services were merged at the end of 2023.</source>
         <translation>2024 előtt két különböző szolgáltatás is a WiiConnect24-csatornák feltámasztásán dolgozott: a WiiLink és a RiiConnect24. Ez a két projekt 2023 végén összeolvadt.</translation>
     </message>
     <message>
-        <location filename="../modules/widgets.py" line="165"/>
+        <location filename="../modules/widgets.py" line="184"/>
         <source>The globe used in the News and Forecast Channels is based on NASA imagery, and is also used in Mario Kart Wii.</source>
         <translation>A Hír- és Időjáráscsatornán használt földgömb a NASA fényképeit használja, illetve a Mario Kart Wiiben is előfordul.</translation>
     </message>
     <message>
-        <location filename="../modules/widgets.py" line="168"/>
+        <location filename="../modules/widgets.py" line="187"/>
         <source>You can press the Reset button while the Wii is in standby mode to turn off the disc drive light indicating that you have a new message.</source>
         <translation>Ha zavar a készenléti módban világító – olvasatlan üzenetet jelző – lemezolvasófény, akkor a Reset gomb megnyomásával kikapcsolhatod azt.</translation>
     </message>
@@ -533,7 +571,7 @@ Ha még nem rendelkezik a Wii-menü orosz fordításával, akkor a telepítési 
 <context>
     <name>FunFacts</name>
     <message>
-        <location filename="../modules/widgets.py" line="124"/>
+        <location filename="../modules/widgets.py" line="134"/>
         <source>&lt;h3&gt;Did you know?&lt;/h3&gt;
 {}</source>
         <translation>&lt;h3&gt;Érdekesség!&lt;/h3&gt;
@@ -589,34 +627,34 @@ Dokodemo ROM foltozása Wii Roomos használathoz</translation>
 <context>
     <name>PatchingComplete</name>
     <message>
-        <location filename="../__main__.py" line="541"/>
+        <location filename="../__main__.py" line="544"/>
         <source>Success!</source>
         <translation>Kész!</translation>
     </message>
     <message>
-        <location filename="../__main__.py" line="542"/>
+        <location filename="../__main__.py" line="545"/>
         <source>Everything has been patched successfully</source>
         <translation>A csatornák foltozása sikeresen befejeződött</translation>
     </message>
     <message>
-        <location filename="../__main__.py" line="565"/>
+        <location filename="../__main__.py" line="568"/>
         <source>&lt;h1&gt;Patching completed!&lt;/h1&gt;</source>
         <translation>&lt;h2&gt;A folyamat sikeresen befejeződött.&lt;/h2&gt;</translation>
     </message>
     <message>
-        <location filename="../__main__.py" line="575"/>
+        <location filename="../__main__.py" line="578"/>
         <source>&lt;p&gt;You can find the relevant files by clicking the button below.
 Please open a support ticket on our &lt;a href=&apos;https://discord.gg/wiilink&apos; style=&apos;color: #4a86e8; text-decoration: none;&apos;&gt;Discord server&lt;/a&gt; if you have any issues.&lt;/p&gt;</source>
         <translation>&lt;p&gt;A szükséges fájlokat az alábbi gomb megnyomásával érheted el.
 Ha bármilyen problémába ütköznél, akkor a &lt;a href=&apos;https://discord.gg/wiilink&apos; style=&apos;color: #4a86e8; text-decoration: none;&apos;&gt;Discord-szerverünkön&lt;/a&gt; hibajegyet indíthatsz.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../__main__.py" line="588"/>
+        <location filename="../__main__.py" line="591"/>
         <source>See the files!</source>
         <translation>Fájlok megtekintése</translation>
     </message>
     <message>
-        <location filename="../__main__.py" line="604"/>
+        <location filename="../__main__.py" line="607"/>
         <source>Open the WiiLink installation guide in your web browser</source>
         <translation>A WiiLink-telepítési útmutató megnyitása böngészőben</translation>
     </message>
@@ -640,12 +678,12 @@ Ha bármilyen problémába ütköznél, akkor a &lt;a href=&apos;https://discord
     </message>
     <message>
         <location filename="../setup/patch.py" line="241"/>
-        <location filename="../setup/patch.py" line="348"/>
+        <location filename="../setup/patch.py" line="354"/>
         <source>Show Details</source>
         <translation>Részletek megjelenítése</translation>
     </message>
     <message>
-        <location filename="../setup/patch.py" line="350"/>
+        <location filename="../setup/patch.py" line="356"/>
         <source>Hide Details</source>
         <translation>Részletek elrejtése</translation>
     </message>
@@ -653,12 +691,12 @@ Ha bármilyen problémába ütköznél, akkor a &lt;a href=&apos;https://discord
 <context>
     <name>PatchingWorker</name>
     <message>
-        <location filename="../setup/patch.py" line="394"/>
+        <location filename="../setup/patch.py" line="400"/>
         <source>Patching {}...</source>
         <translation>A(z) {} foltozása…</translation>
     </message>
     <message>
-        <location filename="../setup/patch.py" line="398"/>
+        <location filename="../setup/patch.py" line="404"/>
         <source>Downloading {}...</source>
         <translation>A(z) {} letöltése…</translation>
     </message>
@@ -692,22 +730,22 @@ Egyéb esetben add meg a konzoloddal használatos SD kártya vagy USB-eszköz gy
         <translation>Könyvtár kiválasztása…</translation>
     </message>
     <message>
-        <location filename="../__main__.py" line="385"/>
+        <location filename="../__main__.py" line="387"/>
         <source>Browse</source>
         <translation>Tallózás</translation>
     </message>
     <message>
-        <location filename="../__main__.py" line="409"/>
+        <location filename="../__main__.py" line="411"/>
         <source>Select output location...</source>
         <translation>Kimeneti könyvtár megadása…</translation>
     </message>
     <message>
-        <location filename="../__main__.py" line="428"/>
+        <location filename="../__main__.py" line="431"/>
         <source>Invalid location!</source>
         <translation>Érvénytelen elérési út!</translation>
     </message>
     <message>
-        <location filename="../__main__.py" line="429"/>
+        <location filename="../__main__.py" line="432"/>
         <source>The location you have selected is invalid.</source>
         <translation>A megadott elérési út nem érvényes.</translation>
     </message>
@@ -715,17 +753,17 @@ Egyéb esetben add meg a konzoloddal használatos SD kártya vagy USB-eszköz gy
 <context>
     <name>WADCleanup</name>
     <message>
-        <location filename="../__main__.py" line="451"/>
+        <location filename="../__main__.py" line="454"/>
         <source>Choose what to do with existing WAD folder.</source>
         <translation>A WAD mappa sorsának megadása.</translation>
     </message>
     <message>
-        <location filename="../__main__.py" line="450"/>
+        <location filename="../__main__.py" line="453"/>
         <source>WAD folder detected</source>
         <translation>WAD mappa észlelve</translation>
     </message>
     <message>
-        <location filename="../__main__.py" line="464"/>
+        <location filename="../__main__.py" line="467"/>
         <source>The patcher has detected a directory called &apos;WAD&apos; in your selected output location.
 The &apos;WAD&apos; directory is used to store channels you install on your Wii, therefore this directory causes a conflict.
 
@@ -736,19 +774,19 @@ A WAD könyvtár a Wiire telepített csatornák tárolására szolgál, ezért e
 Hogyan szeretnél cselekedni?</translation>
     </message>
     <message>
-        <location filename="../__main__.py" line="472"/>
+        <location filename="../__main__.py" line="475"/>
         <source>Rename the existing &apos;WAD&apos; directory to &apos;WAD.bak&apos;
 (Recommended)</source>
         <translation>A létező WAD könyvtár átnevezése „WAD.bak”-ra
 (ajánlott)</translation>
     </message>
     <message>
-        <location filename="../__main__.py" line="473"/>
+        <location filename="../__main__.py" line="476"/>
         <source>Delete the existing &apos;WAD&apos; directory</source>
         <translation>A létező WAD könyvtár törlése</translation>
     </message>
     <message>
-        <location filename="../__main__.py" line="476"/>
+        <location filename="../__main__.py" line="479"/>
         <source>Leave the existing &apos;WAD&apos; directory as-is
 NOT RECOMMENDED</source>
         <translation>A létező WAD könyvtár figyelmen kívül hagyása
@@ -758,17 +796,17 @@ NEM AJÁNLOTT</translation>
 <context>
     <name>WiiLinkPatcherGUI</name>
     <message>
-        <location filename="../__main__.py" line="696"/>
+        <location filename="../__main__.py" line="703"/>
         <source>WiiLink Patcher</source>
         <translation>WiiLink Patcher</translation>
     </message>
     <message>
-        <location filename="../__main__.py" line="704"/>
+        <location filename="../__main__.py" line="711"/>
         <source>Next</source>
         <translation>Tovább</translation>
     </message>
     <message>
-        <location filename="../__main__.py" line="705"/>
+        <location filename="../__main__.py" line="712"/>
         <source>Back</source>
         <translation>Vissza</translation>
     </message>

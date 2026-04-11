@@ -121,6 +121,8 @@ class CustomRegionalChannels(QWizardPage):
                 self.checkboxes[f"{category["category_id"]}_{channel["item_id"]}"] = (
                     checkbox
                 )
+                if category["category_id"] == 17:
+                    checkbox.clicked.connect(self.eater_notice)
                 checkbox.clicked.connect(self.completeChanged.emit)
             container_layout.addWidget(box)
 
@@ -135,6 +137,23 @@ class CustomRegionalChannels(QWizardPage):
         layout.addWidget(scroll_area)
 
         self.setLayout(layout)
+
+    def eater_notice(self):
+        if self.checkboxes["17_1"].isChecked():
+            QMessageBox.warning(
+                self,
+                self.tr("Just Eat country support"),
+                self.tr("""You have selected the Just Eat variant of the Food Channel.<br>
+    It is available in the following countries:
+    <ul>
+    <li>United Kingdom</li>
+    <li>Ireland</li>
+    <li>Spain</li>
+    <li>Germany</li>
+    <li>Austria</li>
+    <li>Italy</li>
+    </ul>"""),
+            )
 
     def russian_notice(self):
         if self.checkboxes["7_9"].isChecked():

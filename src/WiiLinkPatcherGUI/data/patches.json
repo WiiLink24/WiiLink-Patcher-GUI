@@ -1113,5 +1113,43 @@
         "additional_files": null
       }
     ]
+  },
+  {
+    "category_id": 17,
+    "name": "Food Channel (Just Eat) - Limited European countries",
+    "type": "regional",
+    "network": "WiiLink",
+    "channels": [
+      {
+        "item_id": 1,
+        "language": "English",
+        "region": null,
+        "latest_version": 512,
+        "patch_folder": "eater",
+        "name": "Food Channel (Just Eat) (English)",
+        "patches": [
+          {
+            "patch_name": "JustEat_0_English",
+            "content_id": 0
+          },
+          {
+            "patch_name": "JustEat_1_English",
+            "content_id": 1
+          },
+          {
+            "patch_name": "JustEat_2_English",
+            "content_id": 2
+          }
+        ],
+        "title_id": "000100014843484a",
+        "additional_apps": [
+          "wiilink-account-linker"
+        ],
+        "additional_channels": null,
+        "additional_files": [
+          "tmd"
+        ]
+      }
+    ]
   }
 ]

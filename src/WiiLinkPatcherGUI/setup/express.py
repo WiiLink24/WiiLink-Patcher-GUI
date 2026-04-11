@@ -298,6 +298,25 @@ class ExpressRegionalChannels(QWizardPage):
 
         self.setLayout(layout)
 
+        self.checkboxes[17].clicked.connect(self.eater_notice)
+
+    def eater_notice(self):
+        if self.checkboxes[17].isChecked():
+            QMessageBox.warning(
+                self,
+                self.tr("Just Eat country support"),
+                self.tr("""You have selected the Just Eat variant of the Food Channel.<br>
+It is available in the following countries:
+<ul>
+<li>United Kingdom</li>
+<li>Ireland</li>
+<li>Spain</li>
+<li>Germany</li>
+<li>Austria</li>
+<li>Italy</li>
+</ul>"""),
+            )
+
     def isComplete(self):
         if len(self.wizard().property("wc24_channels")) > 0:
             return True

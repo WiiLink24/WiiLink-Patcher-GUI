@@ -77,22 +77,22 @@
 <context>
     <name>CustomPlatformConfiguration</name>
     <message>
-        <location filename="../setup/custom.py" line="183"/>
+        <location filename="../setup/custom.py" line="202"/>
         <source>Step 3: Custom Setup</source>
         <translation>3 단계: 커스텀 설정</translation>
     </message>
     <message>
-        <location filename="../setup/custom.py" line="184"/>
+        <location filename="../setup/custom.py" line="203"/>
         <source>Choose console platform</source>
         <translation>콘솔 플랫폼 선택</translation>
     </message>
     <message>
-        <location filename="../setup/custom.py" line="188"/>
+        <location filename="../setup/custom.py" line="207"/>
         <source>Which platform will you be installing WiiLink onto?</source>
         <translation>어떤 플랫폼에 WiiLink를 설치할 예정인가요?</translation>
     </message>
     <message>
-        <location filename="../setup/custom.py" line="194"/>
+        <location filename="../setup/custom.py" line="213"/>
         <source>Dolphin Emulator</source>
         <translation>돌핀 에뮬레이터</translation>
     </message>
@@ -100,32 +100,32 @@
 <context>
     <name>CustomRegionConfiguration</name>
     <message>
-        <location filename="../setup/custom.py" line="230"/>
+        <location filename="../setup/custom.py" line="249"/>
         <source>Step 4: Custom Setup</source>
         <translation>4 단계: 커스텀 설정</translation>
     </message>
     <message>
-        <location filename="../setup/custom.py" line="231"/>
+        <location filename="../setup/custom.py" line="250"/>
         <source>Choose console region</source>
         <translation>콘솔 지역 선택</translation>
     </message>
     <message>
-        <location filename="../setup/custom.py" line="233"/>
+        <location filename="../setup/custom.py" line="252"/>
         <source>Which region is your console?</source>
         <translation>사용하는 콘솔의 지역 코드는 무엇인가요?</translation>
     </message>
     <message>
-        <location filename="../setup/custom.py" line="237"/>
+        <location filename="../setup/custom.py" line="256"/>
         <source>North America (NTSC-U)</source>
         <translation>북미 (NTSC-U)</translation>
     </message>
     <message>
-        <location filename="../setup/custom.py" line="238"/>
+        <location filename="../setup/custom.py" line="257"/>
         <source>Europe (PAL)</source>
         <translation>유럽 (PAL)</translation>
     </message>
     <message>
-        <location filename="../setup/custom.py" line="239"/>
+        <location filename="../setup/custom.py" line="258"/>
         <source>Japan (NTSC-J)</source>
         <translation>일본 (NTSC-J)</translation>
     </message>
@@ -148,12 +148,31 @@
         <translation>아래 목록에서 설치하려는 채널을 선택하세요:</translation>
     </message>
     <message>
-        <location filename="../setup/custom.py" line="143"/>
+        <location filename="../setup/custom.py" line="145"/>
+        <source>Just Eat country support</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../setup/custom.py" line="155"/>
+        <source>You have selected the Just Eat variant of the Food Channel.&lt;br&gt;
+    It is available in the following countries:
+    &lt;ul&gt;
+    &lt;li&gt;United Kingdom&lt;/li&gt;
+    &lt;li&gt;Ireland&lt;/li&gt;
+    &lt;li&gt;Spain&lt;/li&gt;
+    &lt;li&gt;Germany&lt;/li&gt;
+    &lt;li&gt;Austria&lt;/li&gt;
+    &lt;li&gt;Italy&lt;/li&gt;
+    &lt;/ul&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../setup/custom.py" line="162"/>
         <source>Russian notice for Wii Room</source>
         <translation>Wii Room에 대한 러시아어 공지</translation>
     </message>
     <message>
-        <location filename="../setup/custom.py" line="147"/>
+        <location filename="../setup/custom.py" line="166"/>
         <source>You have selected the Russian translation for Wii Room&lt;br&gt;
 Proper functionality is not guaranteed for systems without the Russian Wii Menu.&lt;br&gt;
 Follow the installation guide at &lt;a href=&apos;https://wii.zazios.ru/rus_menu&apos;&gt;https://wii.zazios.ru/rus_menu&lt;/a&gt; if you have not already done so.&lt;br&gt;
@@ -276,22 +295,22 @@ Follow the installation guide at &lt;a href=&apos;https://wii.zazios.ru/rus_menu
 <context>
     <name>ExpressPlatformConfiguration</name>
     <message>
-        <location filename="../setup/express.py" line="360"/>
+        <location filename="../setup/express.py" line="379"/>
         <source>Step 5: Express Setup</source>
         <translation>5 단계: 빠른 설정</translation>
     </message>
     <message>
-        <location filename="../setup/express.py" line="361"/>
+        <location filename="../setup/express.py" line="380"/>
         <source>Choose console platform.</source>
         <translation>콘솔 플랫폼을 선택하세요.</translation>
     </message>
     <message>
-        <location filename="../setup/express.py" line="365"/>
+        <location filename="../setup/express.py" line="384"/>
         <source>Which platform will you be installing WiiLink onto?</source>
         <translation>어떤 플랫폼에 WiiLink를 설치하실 예정인가요?</translation>
     </message>
     <message>
-        <location filename="../setup/express.py" line="371"/>
+        <location filename="../setup/express.py" line="390"/>
         <source>Dolphin Emulator</source>
         <translation>돌핀 에뮬레이터</translation>
     </message>
@@ -345,6 +364,25 @@ Follow the installation guide at &lt;a href=&apos;https://wii.zazios.ru/rus_menu
         <location filename="../setup/express.py" line="289"/>
         <source>Select the regional channels you&apos;d like to install from the list below:</source>
         <translation>아래 목록에서 설치하려는 지역 채널을 선택하세요:</translation>
+    </message>
+    <message>
+        <location filename="../setup/express.py" line="307"/>
+        <source>Just Eat country support</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../setup/express.py" line="317"/>
+        <source>You have selected the Just Eat variant of the Food Channel.&lt;br&gt;
+It is available in the following countries:
+&lt;ul&gt;
+&lt;li&gt;United Kingdom&lt;/li&gt;
+&lt;li&gt;Ireland&lt;/li&gt;
+&lt;li&gt;Spain&lt;/li&gt;
+&lt;li&gt;Germany&lt;/li&gt;
+&lt;li&gt;Austria&lt;/li&gt;
+&lt;li&gt;Italy&lt;/li&gt;
+&lt;/ul&gt;</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
