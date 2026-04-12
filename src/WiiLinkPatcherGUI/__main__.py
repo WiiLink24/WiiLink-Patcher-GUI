@@ -3,7 +3,7 @@
 #    nuitka-project: --standalone
 #    nuitka-project: --macos-create-app-bundle
 #    nuitka-project: --macos-app-icon={MAIN_DIRECTORY}/assets/logo.webp
-#    nuitka-project: --macos-app-version=1.5.0
+#    nuitka-project: --macos-app-version=1.5.1
 #    nuitka-project: --include-data-dir={MAIN_DIRECTORY}/assets=assets
 #    nuitka-project: --include-data-dir={MAIN_DIRECTORY}/data=data
 #    nuitka-project: --include-data-file={MAIN_DIRECTORY}/style.qss=style.qss
@@ -22,7 +22,7 @@
 #    nuitka-project: --onefile
 
 # These are standard options that are needed on all platforms.
-# nuitka-project: --product-version=1.5.0
+# nuitka-project: --product-version=1.5.1
 # nuitka-project: --copyright="© 2020-2026 WiiLink Team. All rights reserved."
 # nuitka-project: --plugin-enable=pyside6
 # nuitka-project: --include-package-data=PySide6:*.qm
@@ -646,6 +646,13 @@ class WiiLinkPatcherGUI(QWizard):
         # Load in icon and banner images
         icon = QIcon(
             pathlib.Path()
+            .joinpath(file_path, "assets", "logo.webp")
+            .resolve()
+            .as_posix()
+        )
+
+        logo_box = QIcon(
+            pathlib.Path()
             .joinpath(file_path, "assets", "logo-box.webp")
             .resolve()
             .as_posix()
@@ -672,7 +679,7 @@ class WiiLinkPatcherGUI(QWizard):
                     .as_posix()
                 )
 
-        logo = icon.pixmap(64, 64)
+        logo = logo_box.pixmap(64, 64)
         banner = background.pixmap(700, 120)
         self.setPixmap(QWizard.WizardPixmap.LogoPixmap, logo)
         self.setPixmap(QWizard.WizardPixmap.BannerPixmap, banner)
