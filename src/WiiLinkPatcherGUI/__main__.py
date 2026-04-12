@@ -646,6 +646,13 @@ class WiiLinkPatcherGUI(QWizard):
         # Load in icon and banner images
         icon = QIcon(
             pathlib.Path()
+            .joinpath(file_path, "assets", "logo.webp")
+            .resolve()
+            .as_posix()
+        )
+
+        logo_box = QIcon(
+            pathlib.Path()
             .joinpath(file_path, "assets", "logo-box.webp")
             .resolve()
             .as_posix()
@@ -672,7 +679,7 @@ class WiiLinkPatcherGUI(QWizard):
                     .as_posix()
                 )
 
-        logo = icon.pixmap(64, 64)
+        logo = logo_box.pixmap(64, 64)
         banner = background.pixmap(700, 120)
         self.setPixmap(QWizard.WizardPixmap.LogoPixmap, logo)
         self.setPixmap(QWizard.WizardPixmap.BannerPixmap, banner)
