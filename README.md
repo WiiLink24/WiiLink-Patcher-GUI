@@ -8,7 +8,7 @@ You can download the latest release from the [Releases Page](https://github.com/
 | Operating System | Minimum Version              |
 |------------------|------------------------------|
 | Windows          | Windows 10 1809             |
-| macOS            | macOS Monterey           |
+| macOS            | macOS Big Sur           |
 | Linux            | Ubuntu 22.04 (or equivalent) |
 
 > [!TIP]
