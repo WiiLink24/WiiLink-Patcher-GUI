@@ -3,7 +3,7 @@
 #    nuitka-project: --standalone
 #    nuitka-project: --macos-create-app-bundle
 #    nuitka-project: --macos-app-icon={MAIN_DIRECTORY}/assets/logo.webp
-#    nuitka-project: --macos-app-version=1.5.1
+#    nuitka-project: --macos-app-version=1.5.2
 #    nuitka-project: --include-data-dir={MAIN_DIRECTORY}/assets=assets
 #    nuitka-project: --include-data-dir={MAIN_DIRECTORY}/data=data
 #    nuitka-project: --include-data-file={MAIN_DIRECTORY}/style.qss=style.qss
@@ -22,7 +22,7 @@
 #    nuitka-project: --onefile
 
 # These are standard options that are needed on all platforms.
-# nuitka-project: --product-version=1.5.1
+# nuitka-project: --product-version=1.5.2
 # nuitka-project: --copyright="© 2020-2026 WiiLink Team. All rights reserved."
 # nuitka-project: --plugin-enable=pyside6
 # nuitka-project: --include-package-data=PySide6:*.qm
@@ -413,10 +413,13 @@ Otherwise, we recommend selecting your SD card or USB drive that you use in your
         self.wizard().setProperty("path", pathlib.Path(directory))
 
         if pathlib.Path("/.flatpak-info").exists():
-            # Get the host path if we're running in a Flatpak
-            directory = os.getxattr(
-                directory, "user.document-portal.host-path"
-            ).decode()
+            # Try to get the host path if we're running in a Flatpak
+            try:
+                directory = os.getxattr(
+                    directory, "user.document-portal.host-path"
+                ).decode()
+            except:
+                pass
 
         self.path.setText(directory)
         self.completeChanged.emit()
