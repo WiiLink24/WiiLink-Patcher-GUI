@@ -173,3 +173,25 @@ jobs:
         path: .\WiiLinkPatcherGUI.dist
         name: WiiLinkPatcherGUI-Windows-x64
 
+  flatpak:
+    name: "Flatpak"
+    container:
+      image: ghcr.io/flathub-infra/flatpak-github-actions:kde-6.10
+      options: --privileged
+    strategy:
+      matrix:
+        variant:
+          - arch: x86_64
+            runner: ubuntu-latest
+          - arch: aarch64
+            runner: ubuntu-latest-arm
+    runs-on: ${{ matrix.variant.runner }}
+    steps:
+      - uses: actions/checkout@v6
+      - uses: flatpak/flatpak-github-actions/flatpak-builder@v6
+        with:
+          bundle: ca.wiilink.Patcher_${{ matrix.variant.arch }}.flatpak
+          manifest-path: flatpak/ca.wiilink.Patcher.json
+          cache-key: flatpak-builder-${{ github.sha }}
+          arch: ${{ matrix.variant.arch }}
+          verbose: true
