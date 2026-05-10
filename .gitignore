@@ -24,5 +24,4 @@ __pycache__/
 # Flatpak things
 flatpak/.flatpak-builder
 flatpak/flatpak-build-dir
-flatpak/python3-requirements.json
 flatpak/flatpak-pip-generator.py
