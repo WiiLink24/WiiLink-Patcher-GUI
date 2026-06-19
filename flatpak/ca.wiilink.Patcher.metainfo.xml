@@ -3,7 +3,7 @@
   <id>ca.wiilink.Patcher</id>
 
   <name>WiiLink Patcher</name>
-  <summary>Get easily up and running with WiiLink!</summary>
+  <summary>Revive WiiConnect24 channels</summary>
 
   <developer id="ca.wiilink">
     <name>WiiLink</name>
@@ -33,9 +33,14 @@
 
   <description>
     <p>
-      WiiLink Patcher GUI is a Python application that helps you to get up and running with the WiiLink service. It automatically downloads and patches Wii channels from Nintendo’s servers to make them ready to install and use on a modded console.
+      This app helps you to get up and running with WiiLink, the free and open source WiiConnect24 revival service. It automatically downloads and patches Wii channels from Nintendo’s servers, making them ready to install and use on a modded console.
     </p>
   </description>
+
+  <branding>
+    <color type="primary" scheme_preference="light">#9eeace</color>
+    <color type="primary" scheme_preference="dark">#0e998d</color>
+  </branding>
 
   <launchable type="desktop-id">ca.wiilink.Patcher.desktop</launchable>
 
@@ -59,6 +64,17 @@
   </screenshots>
 
   <releases>
+    <release version="1.5.2" date="2026-06-19">
+      <url type="details">https://github.com/WiiLink24/WiiLink-Patcher-GUI/releases/tag/v1.5.2</url>
+      <description>
+        <p>Release description:</p>
+        <ul>
+          <li>Improved metadata for Flatpak release!</li>
+          <li>Fixed a bug with selecting the output location</li>
+          <li>Updated upstream dependencies</li>
+        </ul>
+      </description>
+    </release>
     <release version="1.5.1" date="2026-04-12">
       <url type="details">https://github.com/WiiLink24/WiiLink-Patcher-GUI/releases/tag/v1.5.1</url>
       <description>
