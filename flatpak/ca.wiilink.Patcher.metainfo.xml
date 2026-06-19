@@ -64,13 +64,14 @@
   </screenshots>
 
   <releases>
-    <release version="1.5.2" date="2026-05-10">
+    <release version="1.5.2" date="2026-06-19">
       <url type="details">https://github.com/WiiLink24/WiiLink-Patcher-GUI/releases/tag/v1.5.2</url>
       <description>
         <p>Release description:</p>
         <ul>
           <li>Improved metadata for Flatpak release!</li>
           <li>Fixed a bug with selecting the output location</li>
+          <li>Updated upstream dependencies</li>
         </ul>
       </description>
     </release>
