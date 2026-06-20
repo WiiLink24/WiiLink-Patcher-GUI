@@ -64,6 +64,15 @@
   </screenshots>
 
   <releases>
+    <release version="1.5.3" date="2026-06-20">
+      <url type="details">https://github.com/WiiLink24/WiiLink-Patcher-GUI/releases/tag/v1.5.3</url>
+      <description>
+        <p>Release description:</p>
+        <ul>
+          <li>Remove "Nightly" label from version info</li>
+        </ul>
+      </description>
+    </release>
     <release version="1.5.2" date="2026-06-19">
       <url type="details">https://github.com/WiiLink24/WiiLink-Patcher-GUI/releases/tag/v1.5.2</url>
       <description>
